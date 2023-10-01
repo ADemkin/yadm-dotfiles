@@ -459,7 +459,7 @@ autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
 autocmd FileType python iabbrev init_ def __init__(self) -> None:<CR>pass
 
 " Go settings
-autocmd FileType go setlocal ts=2 sw=2 sts=2 nolist expandtab
+autocmd FileType go setlocal ts=4 sw=4 sts=4 nolist expandtab
 " autocmd FileType go iabbrev iferr if err != nil {<cr>panic(err)
 autocmd FileType go iabbrev iferr if err != nil {<cr>log.Fatal(err)
 " autocmd FileType go syn match goStatement "\(:\?[<>=\-%+\*!|&^]\)"

@@ -135,6 +135,45 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Swap Command and Ctrl keys for Alacritty.app",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                        "key_code": "left_control"
+                                },
+                                "to": [
+                                        {
+                                            "key_code": "left_command"
+                                        }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": ["^org\\.alacritty$"]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                        "key_code": "left_command"
+                                },
+                                "to": [
+                                        {
+                                            "key_code": "left_control"
+                                        }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": ["^org\\.alacritty$"]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },

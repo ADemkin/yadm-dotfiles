@@ -27,6 +27,9 @@ set number
 set relativenumber
 set numberwidth=1
 
+" show cursor line
+set cursorline
+
 " highlight errors with red bg
 highlight SpellBad ctermbg=52 cterm=none
 

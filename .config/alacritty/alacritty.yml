@@ -29,11 +29,11 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 4
+    x: 2
     y: 0
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Background opacity
   #
@@ -109,11 +109,6 @@ font:
   # Normal (roman) font face
   normal:
     # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
     family: VictorMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
@@ -127,7 +122,8 @@ font:
     family: VictorMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Medium
+    style: Light
+    # style: Medium
 
   # Italic font face
   italic:
@@ -156,25 +152,11 @@ font:
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
   # increasing `y` moves the glyph upwards.
-  #glyph_offset:
-  #  x: 0
-  #  y: 0
-
-  # Thin stroke font rendering (macOS only)
-  #
-  # Thin strokes are suitable for retina displays, but for non-retina screens
-  # it is recommended to set `use_thin_strokes` to `false`
-  #
-  # macOS >= 10.14.x:
-  #
-  # If the font quality on non-retina display looks bad then set
-  # `use_thin_strokes` to `true` and enable font smoothing by running the
-  # following command:
-  #   `defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
-  #
-  # This is a global setting and will require a log out or restart to take
-  # effect.
-  #use_thin_strokes: true
+  # Alacritty on macOS require emoji font to be installed:
+  # % brew install font-noto-emoji
+  glyph_offset:
+    x: 0
+    y: 0
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -520,7 +502,7 @@ key_bindings:
     # tmux alt-tab
   - { key: Tab,       mods: Alt,           chars: "\x02\x01"                   }
     # tmux rerame window
-  - { key: R,         mods: Alt,           chars: "\x02\x2c"                   }
+  - { key: Apostrophe,mods: Alt,           chars: "\x02\x2c"                   }
     # tmux C-{1,2,3,4,5,6,7,8,9}
   - { key: Key1,       mods: Control,      chars: "\x02\x31"                   }
   - { key: Key2,       mods: Control,      chars: "\x02\x32"                   }

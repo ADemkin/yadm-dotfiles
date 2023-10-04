@@ -79,6 +79,9 @@ window:
   # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
   # Set this to `None` to use the default theme variant.
   #gtk_theme_variant: None
+  
+  # Fix Option key in macOS
+  option_as_alt: OnlyLeft # other values are None, OnlyRight, Both
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.

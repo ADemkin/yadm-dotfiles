@@ -29,7 +29,7 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
+    x: 4
     y: 0
 
   # Spread additional padding evenly around the terminal content.
@@ -514,3 +514,32 @@ key_bindings:
   - { key: Minus,     mods: Control,       action: DecreaseFontSize            }
   - { key: Paste,     mods: None,          action: Paste                       }
   - { key: Copy,      mods: None,          action: Copy                        }
+    # working:
+    # tmux new window
+  - { key: T,         mods: Control,       chars: "\x02\x63"                   }
+    # tmux alt-tab
+  - { key: Tab,       mods: Alt,           chars: "\x02\x01"                   }
+    # tmux rerame window
+  - { key: R,         mods: Alt,           chars: "\x02\x2c"                   }
+    # tmux C-{1,2,3,4,5,6,7,8,9}
+  - { key: Key1,       mods: Control,      chars: "\x02\x31"                   }
+  - { key: Key2,       mods: Control,      chars: "\x02\x32"                   }
+  - { key: Key3,       mods: Control,      chars: "\x02\x33"                   }
+  - { key: Key4,       mods: Control,      chars: "\x02\x34"                   }
+  - { key: Key5,       mods: Control,      chars: "\x02\x35"                   }
+  - { key: Key6,       mods: Control,      chars: "\x02\x36"                   }
+  - { key: Key7,       mods: Control,      chars: "\x02\x37"                   }
+  - { key: Key8,       mods: Control,      chars: "\x02\x38"                   }
+  - { key: Key9,       mods: Control,      chars: "\x02\x39"                   }
+    # tmux vertical split
+  - { key: Key1,       mods: Control|Alt,  chars: "\x02\x25"                   }
+    # tmux horisontal split
+  - { key: Key2,       mods: Control|Alt,  chars: "\x02\x22"                   }
+    # tmux resize horisontal split
+  - { key: Key7,       mods: Control|Alt,  chars: "\x02\x26"                   }
+  - { key: Key8,       mods: Control|Alt,  chars: "\x02\x2a"                   }
+  - { key: Key9,       mods: Control|Alt,  chars: "\x02\x28"                   }
+  - { key: Key0,       mods: Control|Alt,  chars: "\x02\x29"                   }
+    # tmux scroll / select
+  - { key: LBracket,   mods: Alt,          chars: "\x02\x5b"                   }
+  - { key: RBracket,   mods: Alt,          chars: "\x02\x5d"                   }

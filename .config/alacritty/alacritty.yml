@@ -528,3 +528,8 @@ key_bindings:
   - { key: RBracket,   mods: Alt,          chars: "\x02\x5d"                   }
     # Alt + E to edit history in vim
   - { key: E,          mods: Alt,          chars: "\x02\x05"                   }
+    # Alt + HJKL to resize pane
+  - { key: H,          mods: Alt,          chars: "\x02\x48"                   }
+  - { key: J,          mods: Alt,          chars: "\x02\x4a"                   }
+  - { key: K,          mods: Alt,          chars: "\x02\x4b"                   }
+  - { key: L,          mods: Alt,          chars: "\x02\x4c"                   }

@@ -245,9 +245,9 @@ colors: *Monokai
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-#visual_bell:
+visual_bell:
 #  animation: EaseOutExpo
-#  duration: 0
+  duration: 0
 #  color: '#ffffff'
 
 selection:
@@ -332,7 +332,7 @@ live_config_reload: true
   # Record all characters and escape sequences as test data.
   #ref_test: false
 
-# mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -342,7 +342,7 @@ live_config_reload: true
   #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: false
 
   #url:
     # URL launcher

@@ -102,7 +102,7 @@ let s:changebg    = { "gui": "#5f5f87", "cterm": "60" }
 call s:h("Normal",        { "fg": s:white,      "bg": s:black })
 call s:h("ColorColumn",   {                     "bg": s:lightblack })
 call s:h("CursorColumn",  {                     "bg": s:lightblack2 })
-call s:h("CursorLine",    {                     "bg": s:lightblack2 })
+call s:h("CursorLine",    {                     "bg": s:lightblack })
 call s:h("NonText",       { "fg": s:lightgrey })
 call s:h("StatusLine",    { "fg": s:lightblack,   "bg": s:white,        "format": "reverse" })
 call s:h("StatusLineNC",  { "fg": s:lightblack,  "bg": s:warmgrey,     "format": "reverse" })

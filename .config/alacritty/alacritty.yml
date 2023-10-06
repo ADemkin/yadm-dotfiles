@@ -488,6 +488,7 @@ mouse_bindings:
 # binding with the same triggers is defined. To unset a default binding, it can
 # be mapped to the `ReceiveChar` action. Alternatively, you can use `None` for
 # a no-op if you do not wish to receive input characters for that binding.
+# use xxd -ps to get hex codes
 key_bindings:
     # (Windows, Linux, and BSD only)
   - { key: V,         mods: Control|Shift, action: Paste                       }
@@ -525,3 +526,5 @@ key_bindings:
     # tmux scroll / select
   - { key: LBracket,   mods: Alt,          chars: "\x02\x5b"                   }
   - { key: RBracket,   mods: Alt,          chars: "\x02\x5d"                   }
+    # Alt + E to edit history in vim
+  - { key: E,          mods: Alt,          chars: "\x02\x05"                   }

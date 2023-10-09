@@ -136,6 +136,7 @@ nnoremap <Return> i
 " Do not show line number in terminal in any mode
 " autocmd TerminalOpen * setlocal listchars= nonumber norelativenumber
 autocmd TerminalOpen * startinsert
+autocmd TerminalOpen * setlocal nonumber norelativenumber
 " selected terminal statusline
 highlight StatusLineTerm ctermbg=black ctermfg=white
 " unselected terminal statusline

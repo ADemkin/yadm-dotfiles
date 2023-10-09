@@ -90,7 +90,9 @@ scrolling:
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
-  #multiplier: 3
+  # 
+  # Totally disable scrolling with mouse
+  multiplier: 0
 
   # Scroll to the bottom when new text is written to the terminal.
   #auto_scroll: false

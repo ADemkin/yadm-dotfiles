@@ -15,7 +15,7 @@ else
             echo $PERCENTAGE "$(echo $BATT | grep -oE '\d+:\d+')"
         fi
     else
-        if [ "$PERCENTAGE" -eq "100%" ]; then
+        if [ "$PERCENTAGE" = "100%" ]; then
             echo $PERCENTAGE "charged"
         else
             # WTF?

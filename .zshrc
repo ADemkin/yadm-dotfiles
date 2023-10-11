@@ -212,8 +212,12 @@ alias python="python3"
 alias pip="pip3"
 # venv workflow enhances
 export PYTHON="python3"
-alias mkvenv="$PYTHON -m venv venv && . ./venv/bin/activate; [ -r 'requirements.txt' ] && pip install -r requirements.txt "
 alias act='. $(find . -name "activate" -type f -depth 3)'
+# alias mkvenv="$PYTHON -m venv venv && . ./venv/bin/activate; [ -r 'requirements.txt' ] && pip install -r requirements.txt "
+mkvenv() {
+    $PYTHON -m venv venv &&
+    ./venv/bin/python -m pip install --upgrade pip
+}
 
 # Go
 export GOPATH="$HOME/go"

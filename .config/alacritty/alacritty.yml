@@ -535,3 +535,5 @@ key_bindings:
   - { key: J,          mods: Alt,          chars: "\x02\x4a"                   }
   - { key: K,          mods: Alt,          chars: "\x02\x4b"                   }
   - { key: L,          mods: Alt,          chars: "\x02\x4c"                   }
+    # Alt + Z to zoom pane
+  - { key: Z,          mods: Alt,          chars: "\x02\x7a"                   }

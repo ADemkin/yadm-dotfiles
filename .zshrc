@@ -275,7 +275,6 @@ alias "%dcf"="cd ~/code/service-dataset-collector-frontend; tmux rename-window '
 alias "%avio"="cd ~/code/avio && act && tmux rename-window '#avio'"
 alias flint="avito fmt && avito lint"
 alias astart="avito devenv start --use-docker-desktop"
-alias astart="avito devenv start --use-docker-desktop"
 alias adebug="avito service debug"
 alias arun="avito service run"
 alias atest="avito service test --ci"

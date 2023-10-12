@@ -1,13 +1,9 @@
 # History
 HISTFILE=~/.zhistory
-HISTSIZE=32768
-SAVEHIST=32768
+HISTSIZE=131072
+SAVEHIST=131072
 
 # Terminal
-# export COLORFGBG="default;default;0"
-# export COLORTERM="xterm-256color"
-# [ "$TERM" = "screen-256color" ] || TERM=xterm-256color
-# export TERM
 export TERM=xterm-256color
 
 # Basic envs

@@ -63,7 +63,7 @@ set t_Co=256
 " set termguicolors
 
 " vertical split appearance
-set fillchars+=vert:\┊
+set fillchars+=vert:\│
 
 " Set scolorscheme
 colorscheme monokai

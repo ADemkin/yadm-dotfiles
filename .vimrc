@@ -136,7 +136,7 @@ nnoremap <Return> i
 " Do not show line number in terminal in any mode
 " autocmd TerminalOpen * setlocal listchars= nonumber norelativenumber
 autocmd TerminalOpen * startinsert
-autocmd TerminalOpen * setlocal nonumber norelativenumber
+" autocmd TerminalOpen * setlocal nonumber norelativenumber
 " selected terminal statusline
 highlight StatusLineTerm ctermbg=black ctermfg=white
 " unselected terminal statusline
@@ -416,6 +416,14 @@ nmap tk :GitGutterPrevHunk<CR>
 highlight GitGutterAdd    ctermbg=235 ctermfg=2
 highlight GitGutterChange ctermbg=235 ctermfg=3
 highlight GitGutterDelete ctermbg=235 ctermfg=1
+" may look different depending on font
+" nice signs to copy-paste: ● ○ ◉ ◉ ◎ ⦿
+let g:gitgutter_sign_added = '●'
+let g:gitgutter_sign_modified = '●'
+let g:gitgutter_sign_removed = '●'
+let g:gitgutter_sign_removed_first_line = '●'
+let g:gitgutter_sign_removed_above_and_below = '●'
+let g:gitgutter_sign_modified_removed = '●'
 
 " Fugitive: Settings
 nmap td :Git diff<CR>
@@ -425,7 +433,7 @@ nmap tb :Git blame<CR>
 let g:indentLine_color_term = 239
 let g:indentLine_fileTypeExclude = ['markdown']
 
-" Mark settings
+" Mark: settings
 let g:mwDefaultHighlightingPalette = 'extended'
 " let g:mwDefaultHighlightingPalette = 'maximum'
 " clear screen for search and mark

@@ -560,7 +560,7 @@ let g:user_emmet_leader_key='<C-e>'
 " Undotree: settings
 let g:undotree_WindowLayout = 3
 let g:undotree_HelpLine = 1
-nnoremap <leader>u :UndotreeToggle<cr>
+nnoremap <leader>u :UndotreeShow<cr>:UndotreeFocus<CR>
 
 " VimMarkdown: settings
 let g:vim_markdown_folding_disabled = 1
@@ -575,4 +575,4 @@ let g:mkdp_auto_start = 0
 " VimSneak: settings
 let g:sneak#label = 1
 map <Leader>s <Plug>Sneak_s
-highlight Sneak ctermfg=16 ctermbg=11
+highlight Sneak ctermfg=16 ctermbg=red

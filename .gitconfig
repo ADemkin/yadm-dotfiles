@@ -3,6 +3,8 @@
 	; email = antondemkin@yandex.ru
     email = avdemkin@avito.ru
 [alias]
+    ch = checkout
+    st = status
 	graph = log --graph --date-order --pretty=format:\"%h %ad %Cgreen%d%Creset %s [%an]\" --date=short --all
 [core]
 	excludesfile = ~/.gitignore

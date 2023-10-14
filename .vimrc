@@ -575,4 +575,4 @@ let g:mkdp_auto_start = 0
 " VimSneak: settings
 let g:sneak#label = 1
 map <Leader>s <Plug>Sneak_s
-highlight Sneak ctermfg=16 ctermbg=red
+highlight Sneak ctermfg=16 ctermbg=11

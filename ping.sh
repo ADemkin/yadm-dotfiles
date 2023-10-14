@@ -10,7 +10,7 @@ main() {
         if [ -n "$(grep -o '0 packets received')" ]; then
             echo "lost"
         else
-            local ping_ms="$(echo $ping_result | grep -oE "\d{2}\.\d{3}" | sed -n "2p" | cut -d"." -f1)"
+            local ping_ms="$(echo $ping_result | grep -oE "\d+\.\d{3}" | sed -n "2p" | cut -d"." -f1)"
             # echo "ms: $ping_ms" >> debug-ping.log
             if [ -z $ping_ms ]; then
                 echo "offline"

@@ -235,9 +235,6 @@ Plug 'natebosch/vim-lsc'
 " VimCompletesMe: Use Tab for autocomplete
 Plug 'vim-scripts/VimCompletesMe'
 
-" SQL: highlight SQL inside python strings
-" Plug 'MathSquared/vim-python-sql'
-
 " FZF: Search files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -253,18 +250,11 @@ endif
 " VimAutoFormat: format file automatically
 Plug 'vim-autoformat/vim-autoformat'
 
-" VimAirline: custom status line
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-
 " Emmet: html plugin
 Plug 'mattn/emmet-vim'
 
 " Undotree: visualise undo history
 Plug 'mbbill/undotree'
-
-" OceanicNext: nice warm them
-" Plug 'mhartington/oceanic-next'
 
 " Markdown: syntax, tabs and render
 Plug 'godlygeek/tabular'
@@ -275,27 +265,8 @@ Plug 'preservim/vim-markdown'
 " run :MarkdownPreview to run web browser in sync with vim
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" VimJSON: A better JSON for VIM
-" Plug 'elzr/vim-json'
-
-" Color schemes
-" OceanicMaterial: cal retro theme
-Plug 'glepnir/oceanic-material'
-"
-" Gruvbox: retro theme
-Plug 'morhetz/gruvbox'
-
-" CatPuccin: easy on eyes like tomorrownight
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-
 " VimSneak: Easy and smart movements with s key
 Plug 'justinmk/vim-sneak'
-
-" EasyMotion: Even more easy and smart motion
-" Plug 'easymotion/vim-easymotion'
-
-" AutoImport: easy automatic imports for python -- not working
-" Plug 'wookayin/vim-autoimport'
 
 call plug#end()
 
@@ -558,17 +529,14 @@ let g:lsc_auto_map = {
 highlight Warning ctermbg=52 cterm=none
 
 " FZF: settings
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 " search only inside project files (respect .gitignore)
 nnoremap <Leader>f :GFiles<CR>
 nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
-nnoremap <leader>b :Buffers<cr>
-
-" TabBar: settings
-" hi TabLineFill cterm=none ctermfg=grey  ctermbg=black
-" hi TabLine     cterm=none ctermfg=white ctermbg=black
-" hi TabLineSel  cterm=none ctermfg=green ctermbg=black
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>h :Commands<CR>
+nnoremap <leader>k :Maps<CR>
 
 " VimTmuxNavigator: settings
 " Disable tmux navigator when zooming the Vim pane
@@ -586,18 +554,8 @@ let g:formatdef_jq = '"jq ."'
 let g:formatters_json = ['jq']
 let g:autoformat_verbosemode=1
 
-" VimAirline: settings
-" let g:airline_theme='distinguished'
-" let g:airline_theme='molokai'
-" more themes here https://github.com/vim-airline/vim-airline/wiki/Screenshots
-
 " VimEmmet: settings
 let g:user_emmet_leader_key='<C-e>'
-
-" Gruvbox: settings
-" colorscheme gruvbox
-let g:gruvbox_contrast_dark='soft'
-let g:gruvbox_termcolors=16
 
 " Undotree: settings
 let g:undotree_WindowLayout = 3
@@ -608,16 +566,13 @@ nnoremap <leader>u :UndotreeToggle<cr>
 let g:vim_markdown_folding_disabled = 1
 
 " MarkdownPreview: settings
-" let g:mkdp_browser = 'firefox'
-" let g:mkdp_echo_preview_url = 1
+let g:mkdp_browser = 'firefox'
+let g:mkdp_echo_preview_url = 1
 " autocmd BufEnter *.md echomsg ":MarkdownPreview to open preview in firefox"
 " start automatically when open .md file instead of manually with :MarkdownPreview
-" let g:mkdp_auto_start = 0
+let g:mkdp_auto_start = 0
 
 " VimSneak: settings
 let g:sneak#label = 1
 map <Leader>s <Plug>Sneak_s
 highlight Sneak ctermfg=16 ctermbg=red
-
-" AutoImport: settings
-" nnoremap <Leader>i :ImportSymbol<CR>

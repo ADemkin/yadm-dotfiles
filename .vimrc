@@ -103,12 +103,15 @@ map <Space> <Leader>
 " easy paste with Control-V (safe for macOS)
 " nnoremap <C-v> :set paste<CR>"+p:set nopaste<CR>
 
+" paste without loosing current buffer
+vnoremap ‹leader>p "\"_d
+
 " move visual selection up and down with J/K
 vnoremap J :move '>+1<CR>gv=gv
 vnoremap K :move '<-2<CR>gv=gv
 
 " p not overwrite current buffer with visual selection
-" vnoremap p "_dp
+vnoremap <leader>p "_dP
 
 " do not require shift for :
 nmap ; :

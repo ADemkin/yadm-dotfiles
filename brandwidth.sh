@@ -21,7 +21,8 @@ get_bandwidth_for_macos() {
 
 format_speed() {
     local padding=7
-    numfmt --to=iec-i --suffix "B/s" --format "%f" --padding=$padding $1
+    # numfmt --to=iec-i --suffix "B/s" --format "%f" --padding=$padding $1
+    numfmt --to=iec --suffix "B/s" --format "%f" --padding=$padding $1
 }
 
 main() {
@@ -31,7 +32,7 @@ main() {
     local second_measure=( $(get_bandwidth_for_macos) )
     local download_speed=$(((${second_measure[0]} - ${first_measure[0]}) / $sleep_time))
     local upload_speed=$(((${second_measure[1]} - ${first_measure[1]}) / $sleep_time))
-    echo "↓$(format_speed $download_speed) ↑$(format_speed $upload_speed)"
+    echo "↑$(format_speed $upload_speed) ↓$(format_speed $download_speed)"
 }
 
 

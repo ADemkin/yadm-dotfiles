@@ -553,3 +553,7 @@ key_bindings:
   - { key: Z,          mods: Alt,          chars: "\x02\x7a"                   }
     # tmux: Alt + G to run C-b g in tmux to run gping.sh
   - { key: G,          mods: Alt,          chars: "\x02\x67"                   }
+    # tmux: Alt + Shift + P to start Pomodoro in tmux
+  - { key: P,          mods: Alt|Shift,    chars: "\x02\x10"                   }
+    # tmux: Alt + P to pause/continue Pomodoro in tmux
+  - { key: P,          mods: Alt,          chars: "\x02\x70"                   }

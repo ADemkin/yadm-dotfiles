@@ -271,6 +271,12 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " VimSneak: Easy and smart movements with s key
 Plug 'justinmk/vim-sneak'
 
+" Signify: show diff with style
+Plug 'mhinz/vim-signify'
+
+" Copilot: AI completion tool
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 " After first vim load you need to run :PlugInstall manually
@@ -360,23 +366,23 @@ highlight SpellCap ctermbg=52 cterm=none
 let g:vim_isort_python_version = 'python3'
 " let g:vim_isort_map = '<C-s>'
 " force single line import:
-" let g:vim_isort_config_overrides = {
-"     \'force_single_line': 2,
-"     \'from_first': 1,
-"     \'lexicographical': 1,
-"     \'atomic': 1,
-"     \'lines_after_imports': 2,
-" \}
+let g:vim_isort_config_overrides = {
+    \'force_single_line': 2,
+    \'from_first': 1,
+    \'lexicographical': 1,
+    \'atomic': 1,
+    \'lines_after_imports': 2,
+\}
 " Avito style:
 " http://stash.msk.avito.ru/projects/PYTHON/repos/pystyle/browse/lib/default.toml
-let g:vim_isort_config_overrides = {
-    \'profile': 'black',
-    \'line_length': 99,
-    \'atomic': 1,
-    \'default_section': 'THIRDPARTY',
-    \'known_first_party': ['src', 'lib', 'tests'],
-    \'include_trailing_comma': 1,
-\}
+" let g:vim_isort_config_overrides = {
+"     \'profile': 'black',
+"     \'line_length': 99,
+"     \'atomic': 1,
+"     \'default_section': 'THIRDPARTY',
+"     \'known_first_party': ['src', 'lib', 'tests'],
+"     \'include_trailing_comma': 1,
+" \}
 noremap si :Isort<CR>
 
 
@@ -392,9 +398,11 @@ highlight GitGutterChange ctermbg=235 ctermfg=3
 highlight GitGutterDelete ctermbg=235 ctermfg=1
 " may look different depending on font
 " nice signs to copy-paste: ● ○ ◉ ◉ ◎ ⦿
-let g:gitgutter_sign_added = '●'
+let g:gitgutter_sign_added = '+'
+" let g:gitgutter_sign_added = '●'
 let g:gitgutter_sign_modified = '●'
-let g:gitgutter_sign_removed = '●'
+" let g:gitgutter_sign_removed = '●'
+let g:gitgutter_sign_removed = '-'
 let g:gitgutter_sign_removed_first_line = '●'
 let g:gitgutter_sign_removed_above_and_below = '●'
 let g:gitgutter_sign_modified_removed = '●'
@@ -443,6 +451,7 @@ autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
 autocmd FileType python iabbrev spdb import sys, pdb; pdb.Pdb(stdout=sys.__stdout__).set_trace()
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
 autocmd FileType python iabbrev init_ def __init__(self) -> None:<CR>pass
+autocmd FileType python nnoremap <leader>i :!autoimport %<CR>
 
 " Go settings
 autocmd FileType go setlocal ts=4 sw=4 sts=4 nolist expandtab
@@ -538,8 +547,9 @@ nnoremap <Leader>f :GFiles<CR>
 nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :Commands<CR>
-nnoremap <leader>k :Maps<CR>
+nnoremap <leader>h :Help<CR>
+nnoremap <leader>hc :Commands<CR>
+nnoremap <leader>hk :Maps<CR>
 
 " VimTmuxNavigator: settings
 " Disable tmux navigator when zooming the Vim pane

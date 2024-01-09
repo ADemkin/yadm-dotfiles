@@ -161,7 +161,7 @@ autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
 
 " simple import sort
-nmap ss :set lazyredraw<CR>vip:sort u<CR>:'<,'>sort i<CR>:set nolazyredraw<CR>
+" nmap ss :set lazyredraw<CR>vip:sort u<CR>:'<,'>sort i<CR>:set nolazyredraw<CR>
 
 " additional error highlight
 call matchadd('Error', '\s+$')

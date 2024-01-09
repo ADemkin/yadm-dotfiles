@@ -77,8 +77,8 @@ highlight MatchParen ctermbg=yellow
 
 
 " (re)store session on exit
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview
 
 " Let menu act like shell
 set wildmenu

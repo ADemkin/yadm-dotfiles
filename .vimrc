@@ -54,7 +54,7 @@ set nofoldenable  " disable code folding
 
 " Paste mode settings
 set showmode  " show if paste mode is on
-set pastetoggle=<leader>i  " switch paste mode with space-i
+" set pastetoggle=<leader>i  " switch paste mode with space-i
 
 " set true colors or 256 colors
 set t_Co=256

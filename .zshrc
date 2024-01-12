@@ -100,6 +100,7 @@ alias gdiff="git diff"
 alias greset="git reset --hard"
 alias ggrep="git grep"
 alias gg="git graph"
+alias gchom="git checkout origin/master"
 
 # ssh and attach tmux with compression:
 ssht() {

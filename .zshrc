@@ -21,17 +21,18 @@ export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 # # Prompt
 # # Find and set branch name var if in git repository.
-function git_branch_name()
-{
-    _branch=$(git branch --show-current 2>&-)
-    export GIT_BRANCH=_branch
+function git_branch() {
+    git branch --show-current 2>&-
+}
+function format_git_branch() {
+    _branch=$(git_branch)
     [[ $_branch != "" ]] && echo "%F{green}>%f $_branch" || echo ""
 }
 
 # Config for prompt. PS1 synonym.
 # autoload -U colors && colors
 setopt prompt_subst
-export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(git_branch_name)
+export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(format_git_branch)
 %F{red}%#%f '
 
 # Basic options
@@ -208,17 +209,28 @@ export LSCOLORS="BxGxcxdxCxegDxabagacad"
 export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.12/bin:$PATH"
 # export PYTHONPATH=$(which python3)
 alias python="python3"
 alias pip="pip3"
 # venv workflow enhances
 export PYTHON="python3"
-alias act='. $(find . -name "activate" -type f -depth 3)'
+# alias act='. $(find . -name "activate" -type f -depth 3)'
 # alias mkvenv="$PYTHON -m venv venv && . ./venv/bin/activate; [ -r 'requirements.txt' ] && pip install -r requirements.txt "
 mkvenv() {
     $PYTHON -m venv venv &&
     ./venv/bin/python -m pip install --upgrade pip
 }
+_activate_venv() {
+    local _activate=$(find . -name "activate" -type f -depth 3)
+    if [[ -z $_activate ]]; then
+        echo "no venv found"
+        return 1
+    fi
+    . $_activate
+    export PYTHONPATH=$(pwd)
+}
+alias act="_activate_venv"
 
 # Go
 export GOPATH="$HOME/go"

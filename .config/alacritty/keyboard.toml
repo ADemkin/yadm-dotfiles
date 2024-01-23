@@ -1,0 +1,175 @@
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+mods = "None"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+mods = "None"
+
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0002\u0001"
+key = "Tab"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002!"
+key = "T"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00021"
+key = "Key1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00022"
+key = "Key2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00023"
+key = "Key3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00024"
+key = "Key4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00025"
+key = "Key5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00026"
+key = "Key6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00027"
+key = "Key7"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00028"
+key = "Key8"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u00029"
+key = "Key9"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u0002%"
+key = "Key1"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002\""
+key = "Key2"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002&"
+key = "Key7"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002*"
+key = "Key8"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002("
+key = "Key9"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002)"
+key = "Key0"
+mods = "Control|Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002["
+key = "LBracket"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002]"
+key = "RBracket"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002\u0005"
+key = "E"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002H"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002J"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002K"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002L"
+key = "L"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002z"
+key = "Z"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002g"
+key = "G"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002\u0010"
+key = "P"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0002p"
+key = "P"
+mods = "Alt"
+

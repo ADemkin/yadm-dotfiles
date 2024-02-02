@@ -56,7 +56,7 @@ set nofoldenable  " disable code folding
 set showmode  " show if paste mode is on
 " set pastetoggle=<leader>i  " switch paste mode with space-i
 
-" set true colors or 256 colors
+" Set true colors or 256 colors
 set t_Co=256
 " let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -64,6 +64,9 @@ set t_Co=256
 
 " vertical split appearance
 set fillchars+=vert:\│
+
+" Setting dark mode
+set background=dark
 
 " Set scolorscheme
 colorscheme monokai
@@ -141,9 +144,9 @@ nnoremap <Return> i
 autocmd TerminalOpen * startinsert
 " autocmd TerminalOpen * setlocal nonumber norelativenumber
 " selected terminal statusline
-highlight StatusLineTerm ctermbg=black ctermfg=white
+" highlight StatusLineTerm ctermbg=black ctermfg=white
 " unselected terminal statusline
-highlight StatusLineTermNC ctermbg=black ctermfg=grey
+" highlight StatusLineTermNC ctermbg=black ctermfg=grey
 
 
 " Dark style for popup window
@@ -272,10 +275,25 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'justinmk/vim-sneak'
 
 " Signify: show diff with style
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 
 " Copilot: AI completion tool
 Plug 'github/copilot.vim'
+
+" CtrlSF: Async search in project in separate window
+" Plug 'dyng/ctrlsf.vim'
+" :CtrlSF to search in project
+" M to toggle compact mode
+" O/Enter to move cursor to current match
+
+" GruvBox: depressive colorscheme
+" Plug 'morhetz/gruvbox'
+
+" Lightline: fast configurable statusline
+Plug 'itchyny/lightline.vim'
+
+" VimVue: Vue syntax
+Plug 'posva/vim-vue'
 
 call plug#end()
 
@@ -284,29 +302,28 @@ call plug#end()
 "##############################################################################
 " STATUSLINE
 "##############################################################################
-hi User1 ctermfg=blue ctermbg=black
-hi User2 ctermfg=green ctermbg=black
-hi User3 ctermfg=yellow ctermbg=black
-hi User4 ctermfg=red ctermbg=black
-hi User5 ctermfg=grey ctermbg=black
-set laststatus=2
-" use :help statusline to decrypt all those %
-set statusline=%n:%F%m%r%h%w%q\ %=
-set statusline+=%1*%Y[%{strlen(&fenc)?&fenc:&enc},%{&ff}]
-set statusline+=%2*[%l:%c%V/%L]
-set statusline+=%3*[0x%B]
-set statusline+=%4*[%{GetLspStatus()}]
-set statusline+=%*\ %P
-set titleold = ""
-function! GetLspStatus() abort
-    return LSCServerStatus()
-    " return lsp#get_server_status()
-endfunction
+" hi User1 ctermfg=blue ctermbg=black
+" hi User2 ctermfg=green ctermbg=black
+" hi User3 ctermfg=yellow ctermbg=black
+" hi User4 ctermfg=red ctermbg=black
+" hi User5 ctermfg=grey ctermbg=black
+" set laststatus=2
+" " use :help statusline to decrypt all those %
+" set statusline=%n:%F%m%r%h%w%q\ %=
+" set statusline+=%1*%Y[%{strlen(&fenc)?&fenc:&enc},%{&ff}]
+" set statusline+=%2*[%l:%c%V/%L]
+" set statusline+=%3*[0x%B]
+" set statusline+=%4*[%{GetLspStatus()}]
+" set statusline+=%*\ %P
+" set titleold = ""
+" function! GetLspStatus() abort
+"     return LSCServerStatus()
+"     " return lsp#get_server_status()
+" endfunction
 
 " Defstplit by Stargrave
 " http://www.git.stargrave.org/?p=dotfiles.git;a=tree;f=vim/.vim/pack/stargrave/start/defsplit;hb=HEAD
-noremap ds :Defsplit<CR>
-noremap du :Undefsplit<CR>
+nnoremap <Leader>s :Defsplit<CR>
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -342,7 +359,12 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \   'javascript': ['eslint'],
 \   'go': ['gopls'],
+\  'markdown': ['markdownlint', 'writegood', 'alex', 'proselint'],
+\  'json': ['jsonlint'],
 \ }
+let g:ale_fixers = {
+\   'python': ['isort', 'autoimport', 'black'],
+\}
 let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1500
 " highlight clear ALEErrorSign
@@ -589,3 +611,67 @@ let g:mkdp_auto_start = 0
 let g:sneak#label = 1
 map <Leader>s <Plug>Sneak_s
 highlight Sneak ctermfg=16 ctermbg=red
+
+" GruvBox: settings
+" set termguicolors
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox
+
+" Lightline: settings
+function! IsWide()
+    return winwidth(0) > 78
+endfunction
+function! IsTerminal()
+    return lightline#mode() == 'TERMINAL'
+endfunction
+" LSC only shown in non terminal
+function! LightlineLSCServerStatus()
+    if !IsTerminal()
+        return LSCServerStatus()
+    else
+        return ''
+endfunction
+" branch is only shown in wide
+function! LightlineFugitiveHead()
+    if IsWide()
+        return FugitiveHead()
+    else
+        return ''
+endfunction
+" enc is only shown in wide and non terminal
+" hex is only shown in wide and non terminal
+let g:lightline = {
+\    'colorscheme': 'srcery_drk',
+\    'active': {
+\        'left': [
+\            [ 'mode', 'paste' ],
+\            [ 'filename', 'readonly', 'modified' ],
+\            [ 'gitbranch' ],
+\        ],
+\        'right': [
+\            [ 'percent', 'line' ],
+\            [ 'lscstatus', 'filetype' ],
+\            [ 'fileencoding', 'charvaluehex' ],
+\        ],
+\    },
+\    'inactive': {
+\        'right': [
+\            [ 'percent', 'line' ],
+\            [ 'filetype' ],
+\        ],
+\    },
+\    'component': {
+\        'charvaluehex': '0x%B',
+\        'filetype': '%{&ft!=#""?&ft:""}',
+\    },
+\    'component_visible_condition': {
+\        'modified': '&modified||!&modifiable',
+\        'readony': '&readonly"',
+\    },
+\    'component_function': {
+\       'gitbranch': 'LightlineFugitiveHead',
+\       'lscstatus': 'LightlineLSCServerStatus',
+\    },
+\ }

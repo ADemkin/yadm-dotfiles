@@ -640,6 +640,7 @@ function! LightlineFugitiveHead()
     else
         return ''
 endfunction
+" modified is only shown in non terminal
 " enc is only shown in wide and non terminal
 " hex is only shown in wide and non terminal
 let g:lightline = {
@@ -667,11 +668,11 @@ let g:lightline = {
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \    },
 \    'component_visible_condition': {
-\        'modified': '&modified||!&modifiable',
-\        'readony': '&readonly"',
+\        'readony': '!&modifiable && &readonly',
+\        'modified': '&modifiable && &modified',
 \    },
 \    'component_function': {
-\       'gitbranch': 'LightlineFugitiveHead',
-\       'lscstatus': 'LightlineLSCServerStatus',
+\        'gitbranch': 'LightlineFugitiveHead',
+\        'lscstatus': 'LightlineLSCServerStatus',
 \    },
 \ }

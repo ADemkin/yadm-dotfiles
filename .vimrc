@@ -19,6 +19,7 @@ set nojoinspaces
 set ttyfast
 set isfname-=:
 set noswapfile  " do not create *.sw[op] files
+set autoread  " auto reload file when it's updated
 
 " relative number for all but current line
 set signcolumn=number  " replace numbers with lint info, require vim >= 8.1.1564 (was number)
@@ -80,8 +81,8 @@ highlight MatchParen ctermbg=yellow
 
 
 " (re)store session on exit
-" autocmd BufWinLeave *.* mkview
-" autocmd BufWinEnter *.* silent loadview
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " Let menu act like shell
 set wildmenu

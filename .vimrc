@@ -668,10 +668,6 @@ let g:lightline = {
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \    },
-\    'component_visible_condition': {
-\        'readony': '!&modifiable && &readonly',
-\        'modified': '&modifiable && &modified',
-\    },
 \    'component_function': {
 \        'gitbranch': 'LightlineFugitiveHead',
 \        'lscstatus': 'LightlineLSCServerStatus',

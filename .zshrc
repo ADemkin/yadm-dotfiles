@@ -296,3 +296,4 @@ alias apurge="avito devenv stop --purge"
 alias arestart="avito devenv stop && avito devenv start"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# eval "$(starship init zsh)"

@@ -667,6 +667,10 @@ let g:lightline = {
 \    'component': {
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
+\        'fileencoding': '%{IsTerminal()?"":&fenc!=#""?&fenc:&enc}',
+\    },
+\    'component_visible_condition': {
+\        'fileencoding': '(!IsTerminal())',
 \    },
 \    'component_function': {
 \        'gitbranch': 'LightlineFugitiveHead',

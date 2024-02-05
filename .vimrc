@@ -668,7 +668,7 @@ let g:lightline = {
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \        'fileencoding': '%{IsTerminal()?"":&fenc!=#""?&fenc:&enc}',
-\        'filename': '%{IsTerminal()?"":expand("%t")}',
+\        'filename': '%{IsTerminal()?"":expand("%:t")}',
 \    },
 \    'component_visible_condition': {
 \        'modified': '(!IsTerminal() && &modified)',

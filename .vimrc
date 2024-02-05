@@ -641,7 +641,6 @@ function! LightlineFugitiveHead()
     else
         return ''
 endfunction
-" modified is only shown in non terminal
 " enc is only shown in wide and non terminal
 " hex is only shown in wide and non terminal
 let g:lightline = {
@@ -665,10 +664,11 @@ let g:lightline = {
 \        ],
 \    },
 \    'component': {
-\        'modified': '%{IsTerminal()?"":&modified?"+":""}',
+\        'modified': '%{IsTerminal()?"":&modified?"[+]":""}',
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \        'fileencoding': '%{IsTerminal()?"":&fenc!=#""?&fenc:&enc}',
+\        'filename': '%{IsTerminal()?"":expand("%t")}',
 \    },
 \    'component_visible_condition': {
 \        'modified': '(!IsTerminal() && &modified)',

@@ -173,3 +173,12 @@ chars = "\u0002p"
 key = "P"
 mods = "Alt"
 
+[[keyboard.bindings]]
+chars = "\u0002\u002c"
+key = "R"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002\u002c"
+key = "'"
+mods = "Alt"

@@ -665,11 +665,13 @@ let g:lightline = {
 \        ],
 \    },
 \    'component': {
+\        'modified': '%{IsTerminal()?"":&modified?"+":""}',
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \        'fileencoding': '%{IsTerminal()?"":&fenc!=#""?&fenc:&enc}',
 \    },
 \    'component_visible_condition': {
+\        'modified': '(!IsTerminal() && &modified)',
 \        'fileencoding': '(!IsTerminal())',
 \    },
 \    'component_function': {

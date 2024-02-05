@@ -641,7 +641,6 @@ function! LightlineFugitiveHead()
     else
         return ''
 endfunction
-" enc is only shown in wide and non terminal
 " hex is only shown in wide and non terminal
 let g:lightline = {
 \    'colorscheme': 'srcery_drk',
@@ -667,15 +666,15 @@ let g:lightline = {
 \        'modified': '%{IsTerminal()?"":&modified?"[+]":""}',
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
-\        'fileencoding': '%{IsTerminal()?"":&fenc!=#""?&fenc:&enc}',
-\        'filename': '%{IsTerminal()?"":expand("%:t")}',
+\        'fileencoding': '%{(IsTerminal()||!IsWide())?"":&fenc!=#""?&fenc:&enc}',
 \    },
 \    'component_visible_condition': {
 \        'modified': '(!IsTerminal() && &modified)',
-\        'fileencoding': '(!IsTerminal())',
+\        'fileencoding': '(!IsTerminal() && IsWide())',
 \    },
 \    'component_function': {
 \        'gitbranch': 'LightlineFugitiveHead',
 \        'lscstatus': 'LightlineLSCServerStatus',
 \    },
 \ }
+set noshowmode

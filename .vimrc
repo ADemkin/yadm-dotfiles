@@ -622,7 +622,7 @@ highlight Sneak ctermfg=16 ctermbg=red
 
 " Lightline: settings
 function! IsWide()
-    return winwidth(0) > 78
+    return winwidth(0) > 100
 endfunction
 function! IsTerminal()
     return lightline#mode() == 'TERMINAL'
@@ -642,6 +642,7 @@ function! LightlineFugitiveHead()
         return ''
 endfunction
 " hex is only shown in wide and non terminal
+" \        'filename': '%{IsTerminal()?"":expand("%:t")}',
 let g:lightline = {
 \    'colorscheme': 'srcery_drk',
 \    'active': {

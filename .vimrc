@@ -642,7 +642,6 @@ function! LightlineFugitiveHead()
         return ''
 endfunction
 " hex is only shown in wide and non terminal
-" \        'filename': '%{IsTerminal()?"":expand("%:t")}',
 let g:lightline = {
 \    'colorscheme': 'srcery_drk',
 \    'active': {
@@ -668,6 +667,7 @@ let g:lightline = {
 \        'charvaluehex': '0x%B',
 \        'filetype': '%{&ft!=#""?&ft:""}',
 \        'fileencoding': '%{(IsTerminal()||!IsWide())?"":&fenc!=#""?&fenc:&enc}',
+\        'filename': '%{IsTerminal()?"":expand("%t")}',
 \    },
 \    'component_visible_condition': {
 \        'modified': '(!IsTerminal() && &modified)',

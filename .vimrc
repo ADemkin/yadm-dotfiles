@@ -67,7 +67,7 @@ set t_Co=256
 set fillchars+=vert:\│
 
 " Setting dark mode
-set background=dark
+" set background=dark
 
 " Set scolorscheme
 colorscheme monokai
@@ -295,6 +295,9 @@ Plug 'itchyny/lightline.vim'
 
 " VimVue: Vue syntax
 Plug 'posva/vim-vue'
+
+" CssColor: css colors inline
+Plug 'ap/vim-css-color'
 
 call plug#end()
 

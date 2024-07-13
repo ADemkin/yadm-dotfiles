@@ -5,15 +5,6 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="/Users/$USER/.npm-global/bin/:$PATH"
 # Homebrew
 export PATH="/opt/homebrew/bin:$PATH"
-# Node
-# export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
-# export LDFLAGS="-L/opt/homebrew/opt/node@14/lib $LDFLAGS"
-# export CPPFLAGS="-I/opt/homebrew/opt/node@14/include $CPPFLAGS"
-# export PATH="$HOME/node@10/bin:$PATH"
-# alias "node"="$HOME/node@10/bin/node"
-# alias "npm"="$HOME/node@10/bin/npm"
-# alias "npx"="$HOME/node@10/bin/npx"
-# alias "eslint"="$HOME/node@10/bin/npx"
 export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 
 # Homebrew keys
@@ -223,6 +214,10 @@ mkvenv() {
 }
 _activate_venv() {
     local _activate=$(find . -name "activate" -type f -depth 3)
+    if [[ $(wc -l <<< $_activate) -gt 1 ]]; then
+        echo "multiple venvs found:\n$_activate"
+        return 1
+    fi
     if [[ -z $_activate ]]; then
         echo "no venv found"
         return 1
@@ -247,7 +242,7 @@ print256colors() {
 
 alias zshrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
-alias nvimrc="nvim ~/.config/nvim/init.lua"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
 
 replace() {
     _from=$1
@@ -285,7 +280,6 @@ alias fuzz="nms"
 # avito
 alias "%dc"="cd ~/code/service-dataset-collector && act && tmux rename-window '#dc' && export PYTHONPATH='.'"
 alias "%dcf"="cd ~/code/service-dataset-collector-frontend; tmux rename-window '#frontend'"
-alias "%avio"="cd ~/code/avio && act && tmux rename-window '#avio'"
 alias flint="avito fmt && avito lint"
 alias astart="avito devenv start"
 alias adebug="avito service debug"
@@ -295,5 +289,8 @@ alias astop="avito devenv stop"
 alias apurge="avito devenv stop --purge"
 alias arestart="avito devenv stop && avito devenv start"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# eval "$(starship init zsh)"
+alias psql=pgcli
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+source ~/.avito_completion.sh

@@ -57,20 +57,26 @@ set nofoldenable  " disable code folding
 set showmode  " show if paste mode is on
 " set pastetoggle=<leader>i  " switch paste mode with space-i
 
-" Set true colors or 256 colors
-set t_Co=256
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" set termguicolors
-
 " vertical split appearance
 set fillchars+=vert:\│
 
-" Setting dark mode
-" set background=dark
+" Set true colors or 256 colors
+" set t_Co=256
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set scolorscheme
+" set background=dark
+set termguicolors
 colorscheme monokai
+let g:terminal_ansi_colors = [
+    \ '#272822', '#f92672', '#a6e22e', '#f4bf75',
+    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2',
+    \ '#75715e', '#f92672', '#a6e22e', '#f4bf75',
+    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2'
+\]
+
+
 
 " ignore case while searching
 set ignorecase
@@ -127,27 +133,40 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
 " Terminal settings
-nmap <leader>t :vert term<CR>
-" easy movement for terminal
-tnoremap <C-j> <C-w>j
-tnoremap <C-k> <C-w>k
-tnoremap <C-l> <C-w>l
-tnoremap <C-h> <C-w>h
-" C-u like regular terminal
-" for some reason autocommand with nonu nornu sometimes will also
-" affect other buffer, which is unwanted behaviour. Ti fix that manually set
-" nonu nornu when star scroll
-tnoremap <C-u> <C-w>:set nonu nornu<CR><C-w><S-n><C-u>
-" Leave Terminal Normal mode my enter
-nnoremap <Return> i
-" Do not show line number in terminal in any mode
-" autocmd TerminalOpen * setlocal listchars= nonumber norelativenumber
-autocmd TerminalOpen * startinsert
-" autocmd TerminalOpen * setlocal nonumber norelativenumber
-" selected terminal statusline
-" highlight StatusLineTerm ctermbg=black ctermfg=white
-" unselected terminal statusline
-" highlight StatusLineTermNC ctermbg=black ctermfg=grey
+" nvim and vim configs are different
+if !has('nvim')
+    " vim9 config
+    nmap <leader>t :vert term<CR>
+    " easy movement for terminal
+    tnoremap <C-j> <C-w>j
+    tnoremap <C-k> <C-w>k
+    tnoremap <C-l> <C-w>l
+    tnoremap <C-h> <C-w>h
+    " C-u like regular terminal
+    " for some reason autocommand with nonu nornu sometimes will also
+    " affect other buffer, which is unwanted behaviour. Ti fix that manually set
+    " nonu nornu when star scroll
+    tnoremap <C-u> <C-w>:set nonu nornu<CR><C-w><S-n><C-u>
+    " Leave Terminal Normal mode my enter
+    nnoremap <Return> i
+    " Do not show line number in terminal in any mode
+    " autocmd TerminalOpen * setlocal listchars= nonumber norelativenumber
+    autocmd TerminalOpen * startinsert
+    " autocmd TerminalOpen * setlocal nonumber norelativenumber
+    " selected terminal statusline
+    " highlight StatusLineTerm ctermbg=black ctermfg=white
+    " unselected terminal statusline
+    " highlight StatusLineTermNC ctermbg=black ctermfg=grey
+else
+    " nterm
+    " nvim has differen terminal binding
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <C-h> <C-\><C-N><C-w>h
+    tnoremap <C-j> <C-\><C-N><C-w>j
+    tnoremap <C-k> <C-\><C-N><C-w>k
+    tnoremap <C-l> <C-\><C-N><C-w>l
+    autocmd TerminalOpen * startinsert
+endif
 
 
 " Dark style for popup window
@@ -287,9 +306,6 @@ Plug 'github/copilot.vim'
 " M to toggle compact mode
 " O/Enter to move cursor to current match
 
-" GruvBox: depressive colorscheme
-" Plug 'morhetz/gruvbox'
-
 " Lightline: fast configurable statusline
 Plug 'itchyny/lightline.vim'
 
@@ -298,6 +314,9 @@ Plug 'posva/vim-vue'
 
 " CssColor: css colors inline
 Plug 'ap/vim-css-color'
+
+" ColorTemplate: convert colorscheme to template
+Plug 'lifepillar/vim-colortemplate'
 
 call plug#end()
 

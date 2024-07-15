@@ -458,6 +458,7 @@ nmap tb :Git blame<CR>
 
 " IndentLine: settings
 let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#75715e'
 let g:indentLine_fileTypeExclude = ['markdown']
 
 " Mark: settings

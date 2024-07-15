@@ -1,6 +1,7 @@
 [font.bold]
 family = "VictorMono Nerd Font"
 style = "Light"
+# style = "ExtraLight"
 
 [font.bold_italic]
 family = "VictorMono Nerd Font"
@@ -16,7 +17,10 @@ style = "Light Italic"
 
 [font.normal]
 family = "VictorMono Nerd Font"
-style = "Light"
+# style = "Medium"
+style = "Regular"
+# style = "Light"
+# style = "ExtraLight"
 
 [font.offset]
 x = 0

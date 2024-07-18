@@ -6,6 +6,7 @@
     ch = checkout
     st = status
 	graph = log --graph --date-order --pretty=format:\"%h %ad %Cgreen%d%Creset %s [%an]\" --date=short --all
+    retag = tag -f
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]
@@ -23,6 +24,9 @@
 
 [delta]
     features = decorations
+    syntax-theme = Monokai Extended
+    minus-style = syntax "#330011"
+    plus-style = syntax "#0c2705"
 
 [delta "interactive"]
     keep-plus-minus-markers = false

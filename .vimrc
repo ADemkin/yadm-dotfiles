@@ -66,16 +66,15 @@ set fillchars+=vert:\│
 " let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set scolorscheme
-" set background=dark
+set background=dark
 set termguicolors
 colorscheme monokai
 let g:terminal_ansi_colors = [
     \ '#272822', '#f92672', '#a6e22e', '#f4bf75',
     \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2',
-    \ '#75715e', '#f92672', '#a6e22e', '#f4bf75',
-    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2'
+    \ '#272822', '#f92672', '#a6e22e', '#f4bf75',
+    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2',
 \]
-
 
 
 " ignore case while searching

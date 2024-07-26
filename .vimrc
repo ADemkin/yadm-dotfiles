@@ -68,13 +68,6 @@ set fillchars+=vert:\│
 " Set scolorscheme
 set background=dark
 set termguicolors
-colorscheme monokai
-let g:terminal_ansi_colors = [
-    \ '#272822', '#f92672', '#a6e22e', '#f4bf75',
-    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2',
-    \ '#272822', '#f92672', '#a6e22e', '#f4bf75',
-    \ '#66d9ef', '#ae81ff', '#a1efe4', '#f8f8f2',
-\]
 
 
 " ignore case while searching
@@ -664,8 +657,9 @@ function! LightlineFugitiveHead()
         return ''
 endfunction
 " hex is only shown in wide and non terminal
-let g:lightline = {
 \    'colorscheme': 'srcery_drk',
+let g:lightline = {
+\    'colorscheme': 'monokai',
 \    'active': {
 \        'left': [
 \            [ 'mode', 'paste' ],
@@ -701,3 +695,6 @@ let g:lightline = {
 \    },
 \ }
 set noshowmode
+
+" colorscheme
+colorscheme monokai

@@ -95,8 +95,17 @@ let s:delbg       = { "gui": "#f75f5f", "cterm": "167" }
 let s:changefg    = { "gui": "#d7d7ff", "cterm": "189" }
 let s:changebg    = { "gui": "#5f5f87", "cterm": "60" }
 
+let s:lightblue   = { "gui": "#a1efe4", "cterm": "117" }
+
 " Highlighting
 " ------------
+
+let g:terminal_ansi_colors = [
+    \ s:black.gui, s:pink.gui, s:green.gui, s:yellow.gui,
+    \ s:aqua.gui, s:purple.gui, s:lightblue.gui, s:white.gui,
+    \ s:black.gui, s:pink.gui, s:green.gui, s:yellow.gui,
+    \ s:aqua.gui, s:purple.gui, s:lightblue.gui, s:white.gui,
+\ ]
 
 " editor
 call s:h("Normal",        { "fg": s:white,      "bg": s:black })
@@ -421,3 +430,45 @@ call s:h("sqlSnippet",                  { "fg": s:white })
 call s:h("sqlStatement",                { "fg": s:purple })
 call s:h("sqlKeyword",                  { "fg": s:purple })
 call s:h("sqlSpecial",                  { "fg": s:purple })
+
+
+" lightline
+if !exists("g:lightline")
+    finish
+endif
+
+function! s:unpack2ll(color)
+    return [a:color.gui, a:color.cterm]
+endfunction
+
+let s:ll_black   = [ '#30302c', 236 ]
+let s:ll_grey1  = [ '#4e4e43', 239 ]
+let s:ll_grey2  = [ '#666656', 242 ]
+let s:ll_grey3   = [ '#808070', 244 ]
+let s:ll_grey4   = [ '#949484', 246 ]
+let s:ll_white   = s:unpack2ll(s:white)
+let s:ll_yellow  = s:unpack2ll(s:yellow)
+let s:ll_purple  = s:unpack2ll(s:purple)
+let s:ll_red     = s:unpack2ll(s:red)
+let s:ll_pink    = s:unpack2ll(s:pink)
+let s:ll_aqua    = s:unpack2ll(s:aqua)
+let s:ll_green   = s:unpack2ll(s:green)
+
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p.normal.left = [ [ s:ll_black, s:ll_aqua ], [ s:ll_white, s:ll_grey1 ] ]
+let s:p.normal.right = [ [ s:ll_black, s:ll_grey4 ], [ s:ll_grey4, s:ll_grey1 ] ]
+let s:p.inactive.right = [ [ s:ll_black, s:ll_grey2 ], [ s:ll_grey3, s:ll_black ] ]
+let s:p.inactive.left =  [ [ s:ll_grey3, s:ll_black ], [ s:ll_grey2, s:ll_black ] ]
+let s:p.insert.left = [ [ s:ll_black, s:ll_green ], [ s:ll_white, s:ll_grey1 ] ]
+let s:p.replace.left = [ [ s:ll_black, s:ll_yellow ], [ s:ll_white, s:ll_grey1 ] ]
+let s:p.visual.left = [ [ s:ll_black, s:ll_purple ], [ s:ll_white, s:ll_grey1 ] ]
+let s:p.normal.middle = [ [ s:ll_grey3, s:ll_black ] ]
+let s:p.inactive.middle = [ [ s:ll_grey2, s:ll_black ] ]
+let s:p.tabline.left = [ [ s:ll_white, s:ll_grey2] ]
+let s:p.tabline.tabsel = [ [ s:ll_white, s:ll_black ] ]
+let s:p.tabline.middle = [ [ s:ll_grey1, s:ll_grey4 ] ]
+let s:p.tabline.right = copy(s:p.normal.right)
+let s:p.normal.error = [ [ s:ll_red, s:ll_black ] ]
+let s:p.normal.warning = [ [ s:ll_yellow, s:ll_grey1 ] ]
+
+let g:lightline#colorscheme#monokai#palette = lightline#colorscheme#flatten(s:p)

@@ -137,6 +137,32 @@
                         ]
                     },
                     {
+                        "description": "Change caps_lock to left_control if pressed with other keys, change caps_lock to escape if pressed alone.",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Swap Command and Ctrl keys for Alacritty.app",
                         "manipulators": [
                             {
@@ -417,7 +443,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "dictation"
+                            "key_code": "f5"
                         }
                     ]
                 },
@@ -497,28 +523,7 @@
                 "delay_milliseconds_before_open_device": 1000
             },
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "caps_lock"
-                    },
-                    "to": [
-                        {
-                            "key_code": "escape"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "escape"
-                    },
-                    "to": [
-                        {
-                            "key_code": "caps_lock"
-                        }
-                    ]
-                }
-            ],
+            "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,

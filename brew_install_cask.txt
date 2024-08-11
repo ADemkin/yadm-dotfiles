@@ -1,0 +1,16 @@
+alacritty
+appcleaner
+battle-net
+docker
+dropbox
+firefox
+font-victor-mono
+font-victor-mono-nerd-font
+iina
+monitorcontrol
+sublime-text
+telegram
+transmission
+vlc
+whisky
+zwift

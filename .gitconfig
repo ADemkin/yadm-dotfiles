@@ -7,6 +7,7 @@
     st = status
 	graph = log --graph --date-order --pretty=format:\"%h %ad %Cgreen%d%Creset %s [%an]\" --date=short --all
     retag = tag -f
+    br = "!git branch --show-current 2>/dev/null"
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]

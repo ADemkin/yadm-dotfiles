@@ -13,10 +13,10 @@ export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
 # # Prompt
 # # Find and set branch name var if in git repository.
 function git_branch() {
-    git branch --show-current 2>&-
+    git br
 }
 function format_git_branch() {
-    _branch=$(git_branch)
+    _branch=$(git br)
     [[ $_branch != "" ]] && echo "%F{green}>%f $_branch" || echo ""
 }
 
@@ -279,18 +279,18 @@ alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window '#moscowli
 alias fuzz="nms"
 # avito
 alias "%dc"="cd ~/code/service-dataset-collector && act && tmux rename-window '#dc' && export PYTHONPATH='.'"
-alias "%dcf"="cd ~/code/service-dataset-collector-frontend; tmux rename-window '#frontend'"
+alias "%dcf"="cd ~/code/service-dataset-collector-frontend; tmux rename-window '#dcf'"
 alias flint="avito fmt && avito lint"
 alias astart="avito devenv start"
 alias adebug="avito service debug"
 alias arun="avito service run"
 alias atest="avito service test --ci"
-alias astop="avito devenv stop"
-alias apurge="avito devenv stop --purge"
+alias astop="avito devenv stop; limactl stop -f avito"
 alias arestart="avito devenv stop && avito devenv start"
 
 alias psql=pgcli
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
+bindkey '^f' fzf-file-widget
 source ~/.avito_completion.sh

@@ -88,51 +88,37 @@ chars = "\u00029"
 key = "Key9"
 mods = "Control"
 
+# v split
 [[keyboard.bindings]]
 chars = "\u0002%"
 key = "Key1"
 mods = "Control|Alt"
 
+# h split
 [[keyboard.bindings]]
 chars = "\u0002\""
 key = "Key2"
 mods = "Control|Alt"
 
-[[keyboard.bindings]]
-chars = "\u0002&"
-key = "Key7"
-mods = "Control|Alt"
-
-[[keyboard.bindings]]
-chars = "\u0002*"
-key = "Key8"
-mods = "Control|Alt"
-
-[[keyboard.bindings]]
-chars = "\u0002("
-key = "Key9"
-mods = "Control|Alt"
-
-[[keyboard.bindings]]
-chars = "\u0002)"
-key = "Key0"
-mods = "Control|Alt"
-
+# enter select mode
 [[keyboard.bindings]]
 chars = "\u0002["
 key = "LBracket"
 mods = "Alt"
 
+# ?
 [[keyboard.bindings]]
 chars = "\u0002]"
 key = "RBracket"
 mods = "Alt"
 
+# edit current buffer in vim
 [[keyboard.bindings]]
 chars = "\u0002\u0005"
 key = "E"
 mods = "Alt"
 
+# resize splits
 [[keyboard.bindings]]
 chars = "\u0002H"
 key = "H"
@@ -153,26 +139,25 @@ chars = "\u0002L"
 key = "L"
 mods = "Alt"
 
+# zoom
 [[keyboard.bindings]]
 chars = "\u0002z"
 key = "Z"
 mods = "Alt"
 
+# network graph
 [[keyboard.bindings]]
 chars = "\u0002g"
 key = "G"
 mods = "Alt"
 
-[[keyboard.bindings]]
-chars = "\u0002\u0010"
-key = "P"
-mods = "Alt|Shift"
-
+# switch to prev window
 [[keyboard.bindings]]
 chars = "\u0002p"
 key = "P"
 mods = "Alt"
 
+# rename window
 [[keyboard.bindings]]
 chars = "\u0002\u002c"
 key = "R"
@@ -182,3 +167,45 @@ mods = "Alt"
 chars = "\u0002\u002c"
 key = "'"
 mods = "Alt"
+
+# new splits
+[[keyboard.bindings]]
+chars = "\u0002V"
+key = "H"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0002s"
+key = "J"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0002S"
+key = "K"
+mods = "Alt|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0002v"
+key = "L"
+mods = "Alt|Shift"
+
+# new splits - alternavie binding
+[[keyboard.bindings]]
+chars = "\u0002V"
+key = "H"
+mods = "Alt|Control"
+
+[[keyboard.bindings]]
+chars = "\u0002s"
+key = "J"
+mods = "Alt|Control"
+
+[[keyboard.bindings]]
+chars = "\u0002S"
+key = "K"
+mods = "Alt|Control"
+
+[[keyboard.bindings]]
+chars = "\u0002v"
+key = "L"
+mods = "Alt|Control"

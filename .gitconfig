@@ -8,7 +8,7 @@
 	graph = log --graph --date-order --pretty=format:\"%h %ad %Cgreen%d%Creset %s [%an]\" --date=short --all
     retag = tag -f
     br = "!git branch --show-current 2>/dev/null"
-    fa = "!git add $(git ls-files --modified --deleted --other --exclude-standard --deduplicate | fzf --multi --reverse --no-sort --height=40 --border --border-label='git add' --border-label-pos=5 --no-info --highlight-line --bind=a:toggle,j:down,k:up) 2>/dev/null"
+    fa = "!git add $(git ls-files --modified --deleted --other --exclude-standard --deduplicate | fzf --multi --reverse --no-sort --height=40 --border --border-label='git add' --border-label-pos=5 --no-info --highlight-line --bind=a:toggle,j:down,k:up --preview='git diff --color=always {+} | delta --hunk-header-style=omit') 2>/dev/null"
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]

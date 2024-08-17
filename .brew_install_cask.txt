@@ -4,8 +4,11 @@ battle-net
 docker
 dropbox
 firefox
+flux
 font-victor-mono
 font-victor-mono-nerd-font
+garmin-express
+google-chrome
 iina
 karabiner-elements
 monitorcontrol
@@ -13,5 +16,6 @@ sublime-text
 telegram
 transmission
 vlc
+whatsapp
 whisky
 zwift

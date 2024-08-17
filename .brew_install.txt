@@ -12,6 +12,8 @@ lsd
 neovim
 node
 pgcli
+python@3.10
+python@3.11
 python@3.12
 redis
 ripgrep
@@ -24,3 +26,4 @@ vim
 wget
 yadm
 youtube-dl
+zsh

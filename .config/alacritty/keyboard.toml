@@ -209,3 +209,20 @@ mods = "Alt|Control"
 chars = "\u0002v"
 key = "L"
 mods = "Alt|Control"
+
+# unbind default
+[[keyboard.bindings]]
+action = "None"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "T"
+mods = "Command"
+
+# allow to create a new window with septaccord
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Command|Control|Alt|Shift"

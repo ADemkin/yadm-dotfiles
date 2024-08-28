@@ -211,6 +211,7 @@ key = "L"
 mods = "Alt|Control"
 
 # unbind default
+# https://alacritty.org/config-alacritty-bindings.html
 [[keyboard.bindings]]
 action = "None"
 key = "N"

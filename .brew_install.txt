@@ -17,6 +17,7 @@ python@3.11
 python@3.12
 redis
 ripgrep
+selecta
 speedtest-cli
 tldr
 tree

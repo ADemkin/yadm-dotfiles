@@ -276,19 +276,36 @@ alias tmuxs="~/.tmux.sh"
 
 # workflow
 alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window '#moscowliuda'"
-alias fuzz="nms"
-# avito
-alias "%dc"="cd ~/code/service-dataset-collector && act && tmux rename-window '#dc' && export PYTHONPATH='.'"
-alias "%dcf"="cd ~/code/service-dataset-collector-frontend; tmux rename-window '#dcf'"
-alias flint="avito fmt && avito lint"
-alias astart="avito devenv start"
-alias adebug="avito service debug"
-alias arun="avito service run"
-alias atest="avito service test --ci"
-alias astop="avito devenv stop; limactl stop -f avito"
-alias arestart="avito devenv stop && avito devenv start"
 
 alias psql=pgcli
+
+# fzf
+fkill() {
+    ps aux |\
+    sed 1d |\
+    fzf \
+    --reverse \
+    --preview='echo {}' \
+    --preview-window=top:3:wrap \
+    --border --border-label='kill (enter to kill, C-c to exit)' --border-label-pos=5 \
+    --no-info |\
+    awk '{print $2}' |\
+    xargs kill -9
+}
+
+fadd() {
+    git status --short | sed -e "s/^M /$(printf '\033[32m')M $(printf '\033[m')/" \
+                             -e "s/^A /$(printf '\033[32m')S $(printf '\033[m')/" \
+                             -e "s/^D /$(printf '\033[31m')D $(printf '\033[m')/" \
+                             -e "s/^ M/$(printf '\033[33m')M $(printf '\033[m')/" \
+    | fzf --multi --ansi --reverse --height=40 --border \
+        --preview="(echo {} | grep -q 'Staged' && git diff --cached --color=always -- {-1} | delta) || git diff --color=always -- {-1} | delta" \
+        --bind="a:toggle" \
+        --header="Select files to stage (press enter to stage selected files)" \
+        --prompt="Git files> " \
+    | echo
+}
+
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)

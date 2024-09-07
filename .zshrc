@@ -310,4 +310,3 @@ fadd() {
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
-source ~/.avito_completion.sh

@@ -1,0 +1,22 @@
+#!/bin/sh -e
+# vim: ft=sh
+
+echo "Starting bootstrap"
+
+echo "1. Install Homebrew"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+echo "2. Install Homebrew packages"
+brew install -f ~/.brew_install.txt
+
+echo "3. Install Homebrew casks"
+brew install -f ~/.brew_install_cask.txt
+
+echo "4. Prepare tmux tpm"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
+
+echo "5. Install vim plugins"
+vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+
+echo 'done'

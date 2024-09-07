@@ -310,3 +310,6 @@ fadd() {
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
+
+# completions for brew installed apps
+source /usr/local/share/zsh/site-functions

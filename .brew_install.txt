@@ -1,6 +1,7 @@
 bash
 bat
 cmatrix
+docker
 ffmpeg
 fzf
 git-delta
@@ -22,11 +23,13 @@ ripgrep
 selecta
 speedtest-cli
 tldr
+tmux
 tree
 typespeed
 typos-cli
 vim
 wget
 yadm
-youtube-dl
+yt-dlp
 zsh
+zsh-syntax-highlighting

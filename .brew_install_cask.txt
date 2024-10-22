@@ -1,6 +1,5 @@
 alacritty
 appcleaner
-battle-net
 docker
 dropbox
 firefox

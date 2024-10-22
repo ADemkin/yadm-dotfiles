@@ -3,14 +3,22 @@
 
 echo "Starting bootstrap"
 
-echo "1. Install Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo "1. Find homebrew"
+_brew=$(which brew)
+if [ $? != 0 ]; then
+    echo "brew not in path"
+    _brew="/opt/homebrew/bin/brew"
+    ls $_brew
+    if [ $? != 0]; then
+        echo "ERROR: homebrew not installed"
+        exit 1
+    fi
+fi
+echo "homebrew is installed"
 
 echo "2. Install Homebrew packages"
-brew install -f ~/.brew_install.txt
-
-echo "3. Install Homebrew casks"
-brew install -f ~/.brew_install_cask.txt
+echo "this may require password"
+$_brew bundle install
 
 echo "4. Prepare tmux tpm"
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -18,5 +26,9 @@ $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 echo "5. Install vim plugins"
 vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+
+echo "6. Update macOS settings"
+echo "text edit open empty file by default"
+defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 
 echo 'done'

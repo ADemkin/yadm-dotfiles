@@ -1,7 +1,7 @@
 # History
-HISTFILE=~/.zhistory
-HISTSIZE=131072
-SAVEHIST=131072
+export HISTFILE=$HOME/.zhistory
+export HISTSIZE=64000
+export SAVEHIST=64000
 
 # Terminal
 export TERM=xterm-256color
@@ -27,3 +27,6 @@ export PYTHONWARNINGS=ignore
 # set default chmod to 077:
 umask 077
 # startup fun
+
+# update PATH with homebrew paths
+eval "$(/opt/homebrew/bin/brew shellenv)"

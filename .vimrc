@@ -520,23 +520,25 @@ let g:lsc_trace_level = 'verbose'  " 'off', 'messages', or 'verbose'
 let g:lsc_hover_popup = 0
 let g:lsc_reference_highlights = v:false  " conflict with Mark plugin
 " let g:lsc_enable_autocomplete = v:false  " disable autosomplete
-let g:lsc_enable_autocomplete = 1
-let g:lsc_server_commands = {
-    \'python': {
-    \   'command': 'pylsp',
-    \   'log_level': 1,
-    \   'suppress_stderr': v:true,
-    \   'workspace_config': {
-        \'pyls': {
-            \'configurationSources': ['flake8'],
-            \'plugins': {
-                \'flake8': {'enabled': v:true},
-                \'pyflakes': {'enabled': v:true},
-                \'pycodestyle': {'enabled': v:true},
-                \},
+" use path lsc server config in separate local variable
+let g:pylsp_config = {
+\   'command': 'pylsp',
+\   'log_level': 1,
+\   'suppress_stderr': v:true,
+\   'workspace_config': {
+    \'pyls': {
+        \'configurationSources': ['flake8'],
+        \'plugins': {
+            \'flake8': {'enabled': v:true},
+            \'pyflakes': {'enabled': v:true},
+            \'pycodestyle': {'enabled': v:true},
             \},
         \},
     \},
+\}
+let g:lsc_enable_autocomplete = 1
+let g:lsc_server_commands = {
+    \'python': g:pylsp_config,
     \'javascript': {
     \    'command': 'javascript-typescript-stdio',
     \    'log_level': -1,

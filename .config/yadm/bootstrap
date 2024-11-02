@@ -3,6 +3,8 @@
 
 echo "Starting bootstrap"
 
+echo "assume brew and yadm already installed, ssh keys already exist"
+
 echo "1. Find homebrew"
 _brew=$(which brew)
 if [ $? != 0 ]; then
@@ -30,5 +32,11 @@ vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
 echo "6. Update macOS settings"
 echo "text edit open empty file by default"
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+
+echo "7. Login in Github"
+echo "github and copilot itself"
+gh auth login
+echo "vim copilot"
+vim '+Copilot setup'
 
 echo 'done'

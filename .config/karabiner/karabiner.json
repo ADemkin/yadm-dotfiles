@@ -54,7 +54,7 @@
                         ]
                     },
                     {
-                        "description": "Left and right shifts pressed togerher to fn",
+                        "description": "Left and right shifts pressed together to fn",
                         "manipulators": [
                             {
                                 "from": {

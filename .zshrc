@@ -1,14 +1,5 @@
 # PATH
-# MacPort
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# NPM
 export PATH="/Users/$USER/.npm-global/bin/:$PATH"
-# Homebrew
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/node@18/bin:$PATH"
-
-# Homebrew keys
-# export HOMEBREW_GITHUB_API_TOKEN="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"
 
 # # Prompt
 # # Find and set branch name var if in git repository.
@@ -37,8 +28,6 @@ setopt NO_NOMATCH
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
 # additional stuff
 # setopt CORRECT  # auto correct command, not arguments
-
-export HISTFILE=$HOME/.zhistory
 
 # EMACS mode
 bindkey -e
@@ -135,7 +124,8 @@ autoload -U complist
 
 # Highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-. $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# . $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]="fg=yellow"
 ZSH_HIGHLIGHT_STYLES[globbing]="fg=magenta"
@@ -275,7 +265,8 @@ alias p="poetry"
 alias tmuxs="~/.tmux.sh"
 
 # workflow
-alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window '#moscowliuda'"
+alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window 'moscowliuda'"
+alias "%lsb"="cd ~/code/lionsoul-backend && act && tmux rename-window 'lsb'"
 
 alias psql=pgcli
 
@@ -306,10 +297,23 @@ fadd() {
     | echo
 }
 
+# Copilot
+alias copilot=" gh copilot explain"
+
+# Docker
+export DOCKER_CLI_HINTS=false
+
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
 
+
+# secrets
+if [ -f ~/.secrets ]; then
+    source ~/.secrets
+fi
+
 # completions for brew installed apps
-source /usr/local/share/zsh/site-functions
+# installed with docker, etc...
+source $(brew --prefix)/share/zsh/site-functions

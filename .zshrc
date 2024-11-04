@@ -125,7 +125,6 @@ autoload -U complist
 # Highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# . $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]="fg=yellow"
 ZSH_HIGHLIGHT_STYLES[globbing]="fg=magenta"
@@ -187,39 +186,37 @@ export CLICOLOR=1
 export LSCOLORS="BxGxcxdxCxegDxabagacad"
 
 # Python
-export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.12/bin:$PATH"
-# export PYTHONPATH=$(which python3)
 alias python="python3"
 alias pip="pip3"
 # venv workflow enhances
 export PYTHON="python3"
-# alias act='. $(find . -name "activate" -type f -depth 3)'
-# alias mkvenv="$PYTHON -m venv venv && . ./venv/bin/activate; [ -r 'requirements.txt' ] && pip install -r requirements.txt "
 mkvenv() {
     $PYTHON -m venv venv &&
     ./venv/bin/python -m pip install --upgrade pip
 }
 _activate_venv() {
-    local _activate=$(find . -name "activate" -type f -depth 3)
+    # get optional basepath
+    local _basepath="."
+    if [[ -n $1 ]]; then
+        _basepath=$1
+    fi
+    # find activate script
+    local _activate=$(find $_basepath -name "activate" -type f -depth 3)
+    # case: multiple venvs found
     if [[ $(wc -l <<< $_activate) -gt 1 ]]; then
         echo "multiple venvs found:\n$_activate"
         return 1
     fi
+    # case: no venv found
     if [[ -z $_activate ]]; then
         echo "no venv found"
         return 1
     fi
     . $_activate
+    # set PYTHONPATH
     export PYTHONPATH=$(pwd)
 }
 alias act="_activate_venv"
-
-# Go
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
 
 print256colors() {
     for i in {0..255} ; do
@@ -235,8 +232,8 @@ alias vimrc="vim ~/.vimrc"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 
 replace() {
-    _from=$1
-    _to=$2
+    local _from=$1
+    local _to=$2
     echo "called with args from='$_from' to='$_to'"
     if [[ -z $_from ]]; then
         echo "usage: replace [FROM] [TO]"
@@ -266,7 +263,7 @@ alias tmuxs="~/.tmux.sh"
 
 # workflow
 alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window 'moscowliuda'"
-alias "%lsb"="cd ~/code/lionsoul-backend && act && tmux rename-window 'lsb'"
+alias "%lsb"="cd ~/code/lionsoul-backend && act export PYTHONPATH='src' && tmux rename-window 'lsb'"
 
 alias psql=pgcli
 
@@ -299,9 +296,6 @@ fadd() {
 
 # Copilot
 alias copilot=" gh copilot explain"
-
-# Docker
-export DOCKER_CLI_HINTS=false
 
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

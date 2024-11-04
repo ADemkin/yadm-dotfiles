@@ -1,3 +1,5 @@
+umask 077
+
 # History
 export HISTFILE=$HOME/.zhistory
 export HISTSIZE=64000
@@ -21,12 +23,17 @@ export LESS=RXi
 # export PIP_RESPECT_VIRTUALENV=true
 # export PIP_VIRTUALENV_BASE=~/.virtualenvs
 export PYTHONDONTWRITEBYTECODE=1
-export PYTHONSTARTUP=~/.pythonstartup.py
+export PYTHONSTARTUP="$HOME/.pythonstartup.py"
 export PYTHONWARNINGS=ignore
 
-# set default chmod to 077:
-umask 077
-# startup fun
+# Go
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 
+# Docker options
+export DOCKER_CLI_HINTS=false
+
+# Homebrew
 # update PATH with homebrew paths
+export HOMEBREW_NO_ENV_HINTS=1
 eval "$(/opt/homebrew/bin/brew shellenv)"

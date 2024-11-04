@@ -89,16 +89,16 @@ key = "Key9"
 mods = "Control"
 
 # v split
-[[keyboard.bindings]]
-chars = "\u0002%"
-key = "Key1"
-mods = "Control|Alt"
+# [[keyboard.bindings]]
+# chars = "\u0002%"
+# key = "Key1"
+# mods = "Control|Alt"
 
 # h split
-[[keyboard.bindings]]
-chars = "\u0002\""
-key = "Key2"
-mods = "Control|Alt"
+# [[keyboard.bindings]]
+# chars = "\u0002\""
+# key = "Key2"
+# mods = "Control|Alt"
 
 # enter select mode
 [[keyboard.bindings]]
@@ -118,7 +118,7 @@ chars = "\u0002\u0005"
 key = "E"
 mods = "Alt"
 
-# resize splits
+# Resize splits with Opt + HJKL
 [[keyboard.bindings]]
 chars = "\u0002H"
 key = "H"
@@ -145,7 +145,7 @@ chars = "\u0002z"
 key = "Z"
 mods = "Alt"
 
-# network graph
+# Run TMUX command - gping in a new window
 [[keyboard.bindings]]
 chars = "\u0002g"
 key = "G"
@@ -168,7 +168,7 @@ chars = "\u0002\u002c"
 key = "'"
 mods = "Alt"
 
-# new splits
+# Split TMUX with Opt + Shift + HJKL
 [[keyboard.bindings]]
 chars = "\u0002V"
 key = "H"
@@ -189,7 +189,7 @@ chars = "\u0002v"
 key = "L"
 mods = "Alt|Shift"
 
-# new splits - alternavie binding
+# Split TMUX with Opt + Ctrl + HJKL
 [[keyboard.bindings]]
 chars = "\u0002V"
 key = "H"

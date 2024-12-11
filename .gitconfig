@@ -1,7 +1,6 @@
 [user]
 	name = Anton Demkin
-	; email = antondemkin@yandex.ru
-    email = avdemkin@avito.ru
+	email = antondemkin@yandex.ru
 [alias]
     ch = checkout
     st = status

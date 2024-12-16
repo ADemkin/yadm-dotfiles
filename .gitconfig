@@ -8,6 +8,7 @@
     retag = tag -f
     br = "!git branch --show-current 2>/dev/null"
     fa = "!git add $(git ls-files --modified --deleted --other --exclude-standard --deduplicate | fzf --multi --reverse --no-sort --height=40 --border --border-label=' git add ' --info-command='echo C-j/k to move, C-a to select, C-f to select all' --border-label-pos=4 --highlight-line --bind=ctrl-a:toggle,ctrl-f:toggle-all --preview='git diff --color=always {+} | delta --hunk-header-style=omit') 2>/dev/null"
+    brcl = "!git branch --merged | grep -Ev '(^\\*|^\\+|master|main|dev|stage|staging)' | xargs -n 1 git branch -d"
 [core]
 	excludesfile = ~/.gitignore
 [filter "lfs"]

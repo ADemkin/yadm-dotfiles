@@ -73,15 +73,14 @@ alias timer="python ~/code/pytimer/timer.py"
 
 # Git workflow
 alias grup="git remote update"
-alias greb="git rebase origin/master"
 alias grib="git rebase -i origin/master"
+alias grid="git rebase -i origin/dev"
 alias gch="git checkout"
 alias gst="git status"
 alias gdiff="git diff"
-alias greset="git reset --hard"
-alias ggrep="git grep"
 alias gg="git graph"
 alias gchom="git checkout origin/master"
+alias gchod="git checkout origin/dev"
 
 # ssh and attach tmux with compression:
 ssht() {
@@ -214,9 +213,13 @@ _activate_venv() {
     fi
     . $_activate
     # set PYTHONPATH
-    export PYTHONPATH=$(pwd)
+    if [[ -z $PYTHONPATH ]]; then
+        export PYTHONPATH=$_basepath
+    fi
 }
 alias act="_activate_venv"
+# auto activate venv from current path
+# [[ -f ./venv/bin/activate ]] && act
 
 print256colors() {
     for i in {0..255} ; do
@@ -262,8 +265,8 @@ alias p="poetry"
 alias tmuxs="~/.tmux.sh"
 
 # workflow
-alias "%ml"="cd ~/code/moscowliuda-webinar && act; tmux rename-window 'moscowliuda'"
-alias "%lsb"="cd ~/code/lionsoul-backend && act export PYTHONPATH='src' && tmux rename-window 'lsb'"
+alias "%ml"="cd ~/code/moscowliuda-webinar-utils && act; tmux rename-window 'moscowliuda'"
+alias "%lsb"="cd ~/code/lionsoul-backend && act && tmux rename-window 'lsb'"
 
 alias psql=pgcli
 

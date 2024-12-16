@@ -100,6 +100,7 @@ let s:lightblue   = { "gui": "#a1efe4", "cterm": "117" }
 " Highlighting
 " ------------
 
+set termguicolors
 let g:terminal_ansi_colors = [
     \ s:black.gui, s:pink.gui, s:green.gui, s:yellow.gui,
     \ s:aqua.gui, s:purple.gui, s:lightblue.gui, s:white.gui,

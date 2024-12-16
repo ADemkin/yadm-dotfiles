@@ -48,7 +48,7 @@ function! s:defsplit(...)
             if line[i : i+3] ==# "def " ||
                 \line[i : i+5] ==# "class " ||
                 \line[i : i+9] ==# "async def "
-                let shift .= shift
+                " let shift .= shift
             endif
             break
         endif

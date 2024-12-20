@@ -310,6 +310,15 @@ Plug 'ap/vim-css-color'
 " ColorTemplate: convert colorscheme to template
 Plug 'lifepillar/vim-colortemplate'
 
+" VimRepeat: repeat surround and other stuff with .
+Plug 'tpope/vim-repeat'
+
+" VimCutlass: do not copy deleted text
+Plug 'svermeulen/vim-cutlass'
+
+" Argwrap: Split/Unsplit text in brackets
+Plug 'FooSoft/vim-argwrap'
+
 call plug#end()
 
 " After first vim load you need to run :PlugInstall manually
@@ -387,7 +396,6 @@ let g:ale_sign_error = '!'
 " highlight clear ALEWarningSign
 let g:ale_sign_warning = '?'
 nmap <leader>l :ALEToggle<CR>
-nmap <leader>a :ALEToggle<CR>
 noremap g] :ALENext<cr>
 noremap gn :ALENext<cr>
 noremap g[ :ALEPrevious<cr>
@@ -630,13 +638,6 @@ let g:sneak#label = 1
 map <Leader>s <Plug>Sneak_s
 highlight Sneak ctermfg=16 ctermbg=red
 
-" GruvBox: settings
-" set termguicolors
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" let g:gruvbox_contrast_dark = 'hard'
-" colorscheme gruvbox
-
 " Lightline: settings
 function! IsWide()
     return winwidth(0) > 100
@@ -700,3 +701,7 @@ set noshowmode
 
 " colorscheme
 colorscheme monokai
+
+" Argwap: settings
+nnoremap <silent> <leader>a :ArgWrap<CR>
+let g:argwrap_tail_comma = 1

@@ -78,22 +78,22 @@ let s:darkblack   = { "gui": "#211F1C", "cterm": "233" }
 let s:grey        = { "gui": "#8F908A", "cterm": "243" }
 let s:lightgrey   = { "gui": "#575b61", "cterm": "237" }
 let s:darkgrey    = { "gui": "#64645e", "cterm": "239" }
-let s:warmgrey    = { "gui": "#75715E", "cterm": "59" }
+let s:warmgrey    = { "gui": "#75715E", "cterm": "59"  }
 
 let s:pink        = { "gui": "#F92772", "cterm": "197" }
 let s:green       = { "gui": "#A6E22D", "cterm": "148" }
-let s:aqua        = { "gui": "#66d9ef", "cterm": "81" }
+let s:aqua        = { "gui": "#66d9ef", "cterm": "81"  }
 let s:yellow      = { "gui": "#E6DB74", "cterm": "186" }
 let s:orange      = { "gui": "#FD9720", "cterm": "208" }
 let s:purple      = { "gui": "#ae81ff", "cterm": "141" }
 let s:red         = { "gui": "#e73c50", "cterm": "196" }
-let s:darkred     = { "gui": "#5f0000", "cterm": "52" }
+let s:darkred     = { "gui": "#5f0000", "cterm": "52"  }
 
 let s:addfg       = { "gui": "#d7ffaf", "cterm": "193" }
-let s:addbg       = { "gui": "#5f875f", "cterm": "65" }
+let s:addbg       = { "gui": "#5f875f", "cterm": "65"  }
 let s:delbg       = { "gui": "#f75f5f", "cterm": "167" }
 let s:changefg    = { "gui": "#d7d7ff", "cterm": "189" }
-let s:changebg    = { "gui": "#5f5f87", "cterm": "60" }
+let s:changebg    = { "gui": "#5f5f87", "cterm": "60"  }
 
 let s:lightblue   = { "gui": "#a1efe4", "cterm": "117" }
 
@@ -109,37 +109,37 @@ let g:terminal_ansi_colors = [
 \ ]
 
 " editor
-call s:h("Normal",        { "fg": s:white,      "bg": s:black })
-call s:h("ColorColumn",   {                     "bg": s:lightblack })
-call s:h("CursorColumn",  {                     "bg": s:lightblack2 })
-call s:h("CursorLine",    {                     "bg": s:lightblack })
-call s:h("NonText",       { "fg": s:lightgrey })
-call s:h("StatusLine",    { "fg": s:lightblack,   "bg": s:white,        "format": "reverse" })
-call s:h("StatusLineNC",  { "fg": s:lightblack,  "bg": s:warmgrey,     "format": "reverse" })
-call s:h("TabLine",       { "fg": s:white,      "bg": s:darkblack,    "format": "reverse" })
-call s:h("Visual",        {                     "bg": s:lightgrey })
-call s:h("Search",        { "fg": s:black,      "bg": s:yellow })
-call s:h("MatchParen",    { "fg": s:black,      "bg": s:purple })
-call s:h("Question",      { "fg": s:yellow })
-call s:h("ModeMsg",       { "fg": s:yellow })
-call s:h("MoreMsg",       { "fg": s:yellow })
-call s:h("ErrorMsg",      { "fg": s:black,      "bg": s:red,          "format": "standout" })
-call s:h("WarningMsg",    { "fg": s:red })
-call s:h("VertSplit",     { "fg": s:darkgrey,   "bg": s:black })
-call s:h("LineNr",        { "fg": s:grey,       "bg": s:lightblack })
-call s:h("CursorLineNr",  { "fg": s:orange,     "bg": s:lightblack })
-call s:h("SignColumn",    {                     "bg": s:lightblack })
+call s:h("Normal",       { "fg": s:white,      "bg": s:black                           })
+call s:h("ColorColumn",  { "bg": s:lightblack                                          })
+call s:h("CursorColumn", { "bg": s:lightblack2                                         })
+call s:h("CursorLine",   { "bg": s:lightblack                                          })
+call s:h("NonText",      { "fg": s:lightgrey                                           })
+call s:h("StatusLine",   { "fg": s:lightblack, "bg": s:white,     "format": "reverse"  })
+call s:h("StatusLineNC", { "fg": s:lightblack, "bg": s:warmgrey,  "format": "reverse"  })
+call s:h("TabLine",      { "fg": s:white,      "bg": s:darkblack, "format": "reverse"  })
+call s:h("Visual",       { "bg": s:lightgrey                                           })
+call s:h("Search",       { "fg": s:black,      "bg": s:yellow                          })
+call s:h("MatchParen",   { "fg": s:black,      "bg": s:purple                          })
+call s:h("Question",     { "fg": s:yellow                                              })
+call s:h("ModeMsg",      { "fg": s:yellow                                              })
+call s:h("MoreMsg",      { "fg": s:yellow                                              })
+call s:h("ErrorMsg",     { "fg": s:black,      "bg": s:red,       "format": "standout" })
+call s:h("WarningMsg",   { "fg": s:red                                                 })
+call s:h("VertSplit",    { "fg": s:darkgrey,   "bg": s:black                           })
+call s:h("LineNr",       { "fg": s:grey,       "bg": s:lightblack                      })
+call s:h("CursorLineNr", { "fg": s:orange,     "bg": s:lightblack                      })
+call s:h("SignColumn",   { "bg": s:lightblack                                          })
 
 " misc
-call s:h("SpecialKey",    { "fg": s:pink })
+call s:h("SpecialKey",    { "fg": s:pink   })
 call s:h("Title",         { "fg": s:yellow })
-call s:h("Directory",     { "fg": s:aqua })
+call s:h("Directory",     { "fg": s:aqua   })
 
 " diff
-call s:h("DiffAdd",       { "fg": s:addfg,      "bg": s:addbg })
-call s:h("DiffDelete",    { "fg": s:black,      "bg": s:delbg })
+call s:h("DiffAdd",       { "fg": s:addfg,      "bg": s:addbg    })
+call s:h("DiffDelete",    { "fg": s:black,      "bg": s:delbg    })
 call s:h("DiffChange",    { "fg": s:changefg,   "bg": s:changebg })
-call s:h("DiffText",      { "fg": s:black,      "bg": s:aqua })
+call s:h("DiffText",      { "fg": s:black,      "bg": s:aqua     })
 
 " fold
 call s:h("Folded",        { "fg": s:warmgrey,   "bg": s:darkblack })
@@ -147,9 +147,9 @@ call s:h("FoldColumn",    {                     "bg": s:darkblack })
 "        Incsearch"
 
 " popup menu
-call s:h("Pmenu",         { "fg": s:lightblack, "bg": s:white })
-call s:h("PmenuSel",      { "fg": s:aqua,       "bg": s:black,        "format": "reverse,bold" })
-call s:h("PmenuThumb",    { "fg": s:lightblack, "bg": s:grey })
+call s:h("Pmenu",      { "fg": s:lightblack, "bg": s:white                           })
+call s:h("PmenuSel",   { "fg": s:aqua,       "bg": s:black, "format": "reverse,bold" })
+call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey                            })
 "        PmenuSbar"
 
 " Generic Syntax Highlighting
@@ -162,51 +162,51 @@ call s:h("Boolean",       { "fg": s:purple })
 call s:h("Character",     { "fg": s:yellow })
 call s:h("String",        { "fg": s:yellow })
 
-call s:h("Type",          { "fg": s:aqua })
+call s:h("Type",          { "fg": s:aqua  })
 call s:h("Structure",     { "fg": s:green })
-call s:h("StorageClass",  { "fg": s:aqua })
+call s:h("StorageClass",  { "fg": s:aqua  })
 call s:h("Typedef",       { "fg": s:green })
 call s:h("Identifier",    { "fg": s:white })
 call s:h("Function",      { "fg": s:green })
 
-call s:h("Statement",     { "fg": s:aqua })
-call s:h("Operator",      { "fg": s:aqua })
+call s:h("Statement",     { "fg": s:aqua   })
+call s:h("Operator",      { "fg": s:aqua   })
 call s:h("Label",         { "fg": s:purple })
-call s:h("Keyword",       { "fg": s:aqua })
+call s:h("Keyword",       { "fg": s:aqua   })
 "        Conditional"
 "        Repeat"
 "        Exception"
 
-call s:h("PreProc",       { "fg": s:green })
-call s:h("Include",       { "fg": s:pink })
-call s:h("Define",        { "fg": s:pink })
-call s:h("Macro",         { "fg": s:green })
-call s:h("PreCondit",     { "fg": s:green })
+call s:h("PreProc",       { "fg": s:green  })
+call s:h("Include",       { "fg": s:pink   })
+call s:h("Define",        { "fg": s:pink   })
+call s:h("Macro",         { "fg": s:green  })
+call s:h("PreCondit",     { "fg": s:green  })
 call s:h("Special",       { "fg": s:purple })
-call s:h("SpecialChar",   { "fg": s:pink })
-call s:h("Delimiter",     { "fg": s:pink })
-call s:h("SpecialComment",{ "fg": s:aqua })
-call s:h("Tag",           { "fg": s:pink })
+call s:h("SpecialChar",   { "fg": s:pink   })
+call s:h("Delimiter",     { "fg": s:pink   })
+call s:h("SpecialComment",{ "fg": s:aqua   })
+call s:h("Tag",           { "fg": s:pink   })
 "        Debug"
 
 call s:h("Todo",          { "fg": s:orange,   "format": "bold,italic" })
-call s:h("Comment",       { "fg": s:warmgrey, "format": "italic" })
-call s:h("Underlined",    { "fg": s:green })
-call s:h("Ignore",        {})
-call s:h("Error",         { "fg": s:red, "bg": s:darkred })
+call s:h("Comment",       { "fg": s:warmgrey, "format": "italic"      })
+call s:h("Underlined",    { "fg": s:green                             })
+call s:h("Ignore",        {                                           })
+call s:h("Error",         { "fg": s:red, "bg": s:darkred              })
 
 " NerdTree
 " --------
 call s:h("NERDTreeOpenable",        { "fg": s:yellow })
 call s:h("NERDTreeClosable",        { "fg": s:yellow })
 call s:h("NERDTreeHelp",            { "fg": s:yellow })
-call s:h("NERDTreeBookmarksHeader", { "fg": s:pink })
-call s:h("NERDTreeBookmarksLeader", { "fg": s:black })
+call s:h("NERDTreeBookmarksHeader", { "fg": s:pink   })
+call s:h("NERDTreeBookmarksLeader", { "fg": s:black  })
 call s:h("NERDTreeBookmarkName",    { "fg": s:yellow })
-call s:h("NERDTreeCWD",             { "fg": s:pink })
-call s:h("NERDTreeUp",              { "fg": s:white })
-call s:h("NERDTreeDirSlash",        { "fg": s:grey })
-call s:h("NERDTreeDir",             { "fg": s:grey })
+call s:h("NERDTreeCWD",             { "fg": s:pink   })
+call s:h("NERDTreeUp",              { "fg": s:white  })
+call s:h("NERDTreeDirSlash",        { "fg": s:grey   })
+call s:h("NERDTreeDir",             { "fg": s:grey   })
 
 " Syntastic
 " ---------
@@ -390,35 +390,46 @@ call s:h("vimParenSep",                 { "fg": s:white })
 call s:h("vimVar",                      { "fg": s:white })
 
 " golang
-call s:h("goKeywords",         { "fg": s:pink   })
-call s:h("goParens",           { "fg": s:white  })
-call s:h("goBraces",           { "fg": s:white  })
-call s:h("goif",               { "fg": s:pink   })
-call s:h("goBrackets",         { "fg": s:white  })
+" to use with: 'charlespascoe/vim-go-syntax'
+call s:h("goKeywords",            { "fg": s:pink   })
+call s:h("goParens",              { "fg": s:white  })
+call s:h("goBraces",              { "fg": s:white  })
+call s:h("goIf",                  { "fg": s:pink   })
+call s:h("goFor",                 { "fg": s:pink   })
+call s:h("goSliceOrArrayLiteral", { "fg": s:white  })
+call s:h("goForRange",            { "fg": s:pink   })
+call s:h("goUnderscore",          { "fg": s:white  })
+call s:h("goBrackets",            { "fg": s:white  })
 call s:h("goMapBrackets",         { "fg": s:white  })
-call s:h("goImportedPackages", { "fg": s:white })
-call s:h("goPackageName",      { "fg": s:white  })
-call s:h("goType",             { "fg": s:orange })
-call s:h("goTypeDeclName",     { "fg": s:orange })
-call s:h("goNonPrimitiveType", { "fg": s:white  })
-call s:h("goNonPrimitiveType", { "fg": s:orange  })
-call s:h("goSliceOrArrayType", { "fg": s:white  })
-call s:h("goBuiltins",         { "fg": s:aqua   })
-call s:h("goPointer",          { "fg": s:pink   })
-call s:h("goOperator",         { "fg": s:pink   })
-call s:h("goDot",              { "fg": s:white  })
-call s:h("goNil",              { "fg": s:white  })
-call s:h("goStringFormat",     { "fg": s:purple })
-call s:h("goStringEscape",     { "fg": s:purple })
-call s:h("goFuncCall",         { "fg": s:aqua  })
-call s:h("goReturn",         { "fg": s:pink  })
-call s:h("goSwitch",         { "fg": s:pink  })
-call s:h("goCase",         { "fg": s:pink  })
-call s:h("goLabel",         { "fg": s:white  })
-call s:h("goVarDecl",         { "fg": s:pink  })
-call s:h("goStructTypeTag",         { "fg": s:yellow  })
-call s:h("goInterfaceType",         { "fg": s:orange  })
-call s:h("goStructType",         { "fg": s:orange  })
+call s:h("goImportedPackages",    { "fg": s:white  })
+call s:h("goPackage",             { "fg": s:pink   })
+call s:h("goImport",              { "fg": s:pink   })
+call s:h("goPackageName",         { "fg": s:white  })
+call s:h("goType",                { "fg": s:orange })
+call s:h("goTypeDeclName",        { "fg": s:green  })
+call s:h("goNonPrimitiveType",    { "fg": s:white  })
+call s:h("goNonPrimitiveType",    { "fg": s:orange })
+call s:h("goSliceOrArrayType",    { "fg": s:white  })
+call s:h("goBuiltins",            { "fg": s:aqua   })
+call s:h("goPointer",             { "fg": s:pink   })
+call s:h("goOperator",            { "fg": s:pink   })
+call s:h("goDot",                 { "fg": s:white  })
+call s:h("goNil",                 { "fg": s:purple })
+call s:h("goStringFormat",        { "fg": s:purple })
+call s:h("goStringEscape",        { "fg": s:purple })
+call s:h("goFuncCall",            { "fg": s:aqua   })
+call s:h("goFuncReturnType",      { "fg": s:orange })
+call s:h("goReturn",              { "fg": s:pink   })
+call s:h("goSwitch",              { "fg": s:pink   })
+call s:h("goSwitchTypeBlock",     { "fg": s:pink   })
+call s:h("goCase",                { "fg": s:pink   })
+call s:h("goLabel",               { "fg": s:white  })
+call s:h("goVarDecl",             { "fg": s:pink   })
+call s:h("goStructTypeTag",       { "fg": s:yellow })
+call s:h("goTypeDeclName",        { "fg": s:green  })
+call s:h("goStructType",          { "fg": s:purple })
+call s:h("goInterfaceType",       { "fg": s:purple })
+call s:h("goInterfaceMethod",     { "fg": s:white  })
 
 " toml
 call s:h("tomlKey",                     { "fg": s:white  })
@@ -443,6 +454,10 @@ call s:h("sqlSnippet",                  { "fg": s:white  })
 call s:h("sqlStatement",                { "fg": s:purple })
 call s:h("sqlKeyword",                  { "fg": s:purple })
 call s:h("sqlSpecial",                  { "fg": s:purple })
+
+" zsh
+call s:h("zshConditional", { "fg": s:pink })
+call s:h("zshCommands",    { "fg": s:pink })
 
 
 " lightline

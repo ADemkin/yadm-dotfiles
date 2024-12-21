@@ -59,7 +59,7 @@ set autoread  " auto reload file when it's updated
 
 " Automatically split or merge signcolumn depending on the window width
 function! UpdateSignColumn() abort
-    if winwidth(winnr()) > 80
+    if winwidth(winnr()) > &colorcolumn
         setlocal signcolumn=auto
     else
         setlocal signcolumn=number

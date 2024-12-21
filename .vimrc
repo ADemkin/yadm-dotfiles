@@ -19,6 +19,39 @@ set nojoinspaces
 set list
 set listchars=tab:\¦\ ,trail:·
 
+" #################### LANGUAGES CUSTOM SETTINGS ###############################
+"
+" ts = tabstop - number of spaces to count as tab
+" sw = shiftwidth - number of spaces used as autoindent
+" sts = softtabstop
+" nolist = do not draw | as tab
+" expandtab = replace tab with spaces
+"
+" HTML settings
+autocmd Filetype html,vue,htmldjango setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
+
+" Shell settings
+autocmd FileType sh iabbrev #! #!/bin/sh
+
+" Javascript settings
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+
+" Python Settings
+autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
+" Additional python highlight for monokai
+autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)]\)\@="
+autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
+autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
+" autocomplete
+autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
+autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
+
+" Go settings
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
+
+" Markdown Settings
+autocmd FileType markdown setlocal conceallevel=0
+
 set ttyfast
 set isfname-=:
 set noswapfile  " do not create *.sw[op] files
@@ -65,27 +98,17 @@ set showmode  " show if paste mode is on
 " vertical split appearance
 set fillchars+=vert:\│
 
-" Set true colors or 256 colors
-" set t_Co=256
-" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-" Set scolorscheme
+" set colors
 set background=dark
 set termguicolors
-
 
 " ignore case while searching
 set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+" highlight with yellow on black
 highlight MatchParen ctermbg=yellow
-
-
-" (re)store session on exit
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
 
 " Let menu act like shell
 set wildmenu
@@ -99,31 +122,18 @@ set wildignore+=**/__pychache__
 " set rtp+=/opt/homebrew/opt/fzf
 
 
-" ######
-" REMAPS
-" ######
-
 " Map Space as Leader
 nnoremap <SPACE> <Nop>
 map <Space> <Leader>
-
-" easy paste with Control-V (safe for macOS)
-" nnoremap <C-v> :set paste<CR>"+p:set nopaste<CR>
-
-" paste without loosing current buffer
-vnoremap ‹leader>p "\"_d
 
 " move visual selection up and down with J/K
 vnoremap J :move '>+1<CR>gv=gv
 vnoremap K :move '<-2<CR>gv=gv
 
-" p not overwrite current buffer with visual selection
-vnoremap <leader>p "_dP
-
 " do not require shift for :
 nmap ; :
 
-" easy movement
+" easy movement between panes
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
@@ -249,8 +259,9 @@ Plug 'dense-analysis/ale'
 
 " LSC: Fastest LSP client
 Plug 'natebosch/vim-lsc'
+
 " VimCompletesMe: Use Tab for autocomplete
-Plug 'vim-scripts/VimCompletesMe'
+" Plug 'vim-scripts/VimCompletesMe'
 
 " FZF: Search files
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -318,33 +329,11 @@ Plug 'google/vim-codefmt'
 " " `:help :Glaive` for usage.
 Plug 'google/vim-glaive'
 
-" GoSyntax: treesitter go syntax
+" GoSyntax: enhance go syntax
 Plug 'charlespascoe/vim-go-syntax'
 
 call plug#end()
 call glaive#Install()
-
-"##############################################################################
-" STATUSLINE
-"##############################################################################
-" hi User1 ctermfg=blue ctermbg=black
-" hi User2 ctermfg=green ctermbg=black
-" hi User3 ctermfg=yellow ctermbg=black
-" hi User4 ctermfg=red ctermbg=black
-" hi User5 ctermfg=grey ctermbg=black
-" set laststatus=2
-" " use :help statusline to decrypt all those %
-" set statusline=%n:%F%m%r%h%w%q\ %=
-" set statusline+=%1*%Y[%{strlen(&fenc)?&fenc:&enc},%{&ff}]
-" set statusline+=%2*[%l:%c%V/%L]
-" set statusline+=%3*[0x%B]
-" set statusline+=%4*[%{GetLspStatus()}]
-" set statusline+=%*\ %P
-" set titleold = ""
-" function! GetLspStatus() abort
-"     return LSCServerStatus()
-"     " return lsp#get_server_status()
-" endfunction
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -403,40 +392,6 @@ let g:mwDefaultHighlightingPalette = 'extended'
 " clear screen for search and mark
 noremap <C-c> :nohlsearch<CR>:MarkClear<CR>
 
-" #################### LANGUAGES CUSTOM SETTINGS ###############################
-"
-" ts = tabstop - number of spaces to count as tab
-" sw = shiftwidth - number of spaces used as autoindent
-" sts = softtabstop
-" nolist = do not draw | as tab
-" expandtab = replace tab with spaces
-"
-" HTML settings
-autocmd Filetype htmldjango setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
-autocmd Filetype html setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
-
-" Shell settings
-autocmd FileType sh iabbrev #! #!/bin/sh
-
-" Javascript settings
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd Filetype html,vue setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
-
-" Python Settings
-autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
-" Additional python highlight for monokai
-autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)]\)\@="
-autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
-autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
-" autocomplete
-autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
-autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
-
-" Go settings
-autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
-
-" Markdown Settings
-autocmd FileType markdown setlocal conceallevel=0
 
 
 " ##############################################################################
@@ -446,7 +401,7 @@ autocmd FileType markdown setlocal conceallevel=0
 " Javascript: npm install -g javascript-typescript-langserver
 " HTML: npm install -g vscode-html-languageserver-bin
 
-" LSC settings
+" LSC: settings
 let g:lsc_trace_level = 'verbose'  " 'off', 'messages', or 'verbose'
 let g:lsc_hover_popup = 0
 let g:lsc_reference_highlights = v:false  " conflict with Mark plugin
@@ -467,39 +422,40 @@ let g:pylsp_config = {
         \},
     \},
 \}
+let g:gopls_config = {
+    \'command': 'gopls',
+    \'log_level': -1,
+    \'suppress_stderr': v:true,
+\}
 let g:lsc_enable_autocomplete = 1
 let g:lsc_server_commands = {
     \'python': g:pylsp_config,
     \'javascript': {
-    \    'command': 'javascript-typescript-stdio',
-    \    'log_level': -1,
-    \    'suppress_stderr': v:true,
+        \'command': 'javascript-typescript-stdio',
+        \'log_level': -1,
+        \'suppress_stderr': v:true,
     \},
     \'html': {
         \'command': 'html-languageserver --stdio',
         \'log_level': -1,
         \'suppress_stderr': v:true,
     \},
-    \'go': {
-        \'command': 'gopls serve',
-        \'log_level': -1,
-        \'suppress_stderr': v:true,
-    \},
+    \'go': g:gopls_config,
 \}
 let g:lsc_auto_map = {
-    \ 'GoToDefinition': 'gd',
-    \ 'GoToDefinitionSplit': 'gD',
-    \ 'FindReferences': 'gu',
-    \ 'NextReference': '<C-n>',
-    \ 'PreviousReference': '<C-p>',
-    \ 'FindImplementations': 'gI',
-    \ 'FindCodeActions': 'ga',
-    \ 'Rename': 'gr',
-    \ 'ShowHover': 'K',
-    \ 'DocumentSymbol': 'go',
-    \ 'WorkspaceSymbol': 'gS',
-    \ 'SignatureHelp': 'gm',
-    \ 'Completion': 'completefunc',
+    \'GoToDefinition': 'gd',
+    \'GoToDefinitionSplit': 'gD',
+    \'FindReferences': 'gu',
+    \'NextReference': '<C-n>',
+    \'PreviousReference': '<C-p>',
+    \'FindImplementations': 'gI',
+    \'FindCodeActions': 'ga',
+    \'Rename': 'gr',
+    \'ShowHover': 'K',
+    \'DocumentSymbol': 'go',
+    \'WorkspaceSymbol': 'gS',
+    \'SignatureHelp': 'gm',
+    \'Completion': 'completefunc',
 \}
 " let g:lsc_enable_autocomplete = 0
 " set completeopt=menu,menuone,noinsert,noselect

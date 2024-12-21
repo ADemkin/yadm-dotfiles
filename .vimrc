@@ -2,29 +2,37 @@
 set nocompatible
 syntax on
 set encoding=utf-8
-set ruler
 set colorcolumn=80
 
 " allow to auto indent and auto tab
 filetype on
 filetype indent on
 filetype plugin on
+
+" tabs and spaces
 set autoindent
 set tabstop=4
-set shiftwidth=4
+set shiftwidth=0
 set smarttab
 set expandtab
 set nojoinspaces
+set list
+set listchars=tab:\¦\ ,trail:·
 
 set ttyfast
 set isfname-=:
 set noswapfile  " do not create *.sw[op] files
 set autoread  " auto reload file when it's updated
 
-" relative number for all but current line
-set signcolumn=number  " replace numbers with lint info, require vim >= 8.1.1564 (was number)
-" set signcolumn=yes
-set number
+" Automatically split or merge signcolumn depending on the window width
+function! UpdateSignColumn() abort
+    if winwidth(winnr()) > 80
+        setlocal signcolumn=auto
+    else
+        setlocal signcolumn=number
+    endif
+endfunction
+autocmd WinResized * call UpdateSignColumn()
 set relativenumber
 set numberwidth=1
 
@@ -39,8 +47,6 @@ set showcmd " display incomplete command
 " set completeopt=longest,menuone
 " recomended settings for LSC, :help completeopt
 set completeopt=menu,menuone,noinsert,noselect
-set listchars=tab:\|\ ,trail:·
-set list
 set gdefault  " g is not required by default in :s/old/new/ command
 set scrolloff=3
 set undodir=~/.vim/undo
@@ -55,7 +61,6 @@ set nofoldenable  " disable code folding
 
 " Paste mode settings
 set showmode  " show if paste mode is on
-" set pastetoggle=<leader>i  " switch paste mode with space-i
 
 " vertical split appearance
 set fillchars+=vert:\│
@@ -91,7 +96,7 @@ set wildignore+=**/*.egg-info,**/.*_cache
 set wildignore+=**/__pychache__
 
 " Add fzf to completions
-set rtp+=/opt/homebrew/opt/fzf
+" set rtp+=/opt/homebrew/opt/fzf
 
 
 " ######
@@ -222,17 +227,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Fugitive: do git blame and git diff from vim directly
 Plug 'tpope/vim-fugitive'
 
-" GitGutter: track git changes from line number
-Plug 'airblade/vim-gitgutter'
-
 " Commentary: comment code with ease
 Plug 'tpope/vim-commentary'
 
 " Abolish: swap case with cr* and use smart :S instead of :s
 Plug 'tpope/vim-abolish'
-
-" Isort: sort python imports
-Plug 'fisadev/vim-isort', { 'for': 'python' }
 
 " IndentLine: add vertical line on on indent
 Plug 'Yggdroot/indentLine'
@@ -286,26 +285,11 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " VimSneak: Easy and smart movements with s key
 Plug 'justinmk/vim-sneak'
 
-" Signify: show diff with style
-" Plug 'mhinz/vim-signify'
-
 " Copilot: AI completion tool
 Plug 'github/copilot.vim'
 
-" CtrlSF: Async search in project in separate window
-" Plug 'dyng/ctrlsf.vim'
-" :CtrlSF to search in project
-" M to toggle compact mode
-" O/Enter to move cursor to current match
-
 " Lightline: fast configurable statusline
 Plug 'itchyny/lightline.vim'
-
-" VimVue: Vue syntax
-Plug 'posva/vim-vue'
-
-" CssColor: css colors inline
-Plug 'ap/vim-css-color'
 
 " ColorTemplate: convert colorscheme to template
 Plug 'lifepillar/vim-colortemplate'
@@ -313,15 +297,32 @@ Plug 'lifepillar/vim-colortemplate'
 " VimRepeat: repeat surround and other stuff with .
 Plug 'tpope/vim-repeat'
 
-" VimCutlass: do not copy deleted text
-Plug 'svermeulen/vim-cutlass'
-
 " Argwrap: Split/Unsplit text in brackets
 Plug 'FooSoft/vim-argwrap'
 
-call plug#end()
+" EasyAlign: align text with ease
+Plug 'junegunn/vim-easy-align'
 
-" After first vim load you need to run :PlugInstall manually
+" Timelapse: git history fun
+Plug 'vim-scripts/git-time-lapse'
+
+" Signify: show diff in gutter, jump and undo hunks
+Plug 'mhinz/vim-signify'
+
+" Codefmt: format code with google codefmt
+" " Add maktaba and codefmt to the runtimepath.
+" " (The latter must be installed before it can be used.)
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+" " Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" " `:help :Glaive` for usage.
+Plug 'google/vim-glaive'
+
+" GoSyntax: treesitter go syntax
+Plug 'charlespascoe/vim-go-syntax'
+
+call plug#end()
+call glaive#Install()
 
 "##############################################################################
 " STATUSLINE
@@ -344,10 +345,6 @@ call plug#end()
 "     return LSCServerStatus()
 "     " return lsp#get_server_status()
 " endfunction
-
-" Defstplit by Stargrave
-" http://www.git.stargrave.org/?p=dotfiles.git;a=tree;f=vim/.vim/pack/stargrave/start/defsplit;hb=HEAD
-nnoremap <Leader>s :Defsplit<CR>
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -386,9 +383,6 @@ let g:ale_linters = {
 \  'markdown': ['markdownlint', 'writegood', 'alex', 'proselint'],
 \  'json': ['jsonlint'],
 \ }
-let g:ale_fixers = {
-\   'python': ['isort', 'autoimport', 'black'],
-\}
 let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1500
 " highlight clear ALEErrorSign
@@ -396,65 +390,7 @@ let g:ale_sign_error = '!'
 " highlight clear ALEWarningSign
 let g:ale_sign_warning = '?'
 nmap <leader>l :ALEToggle<CR>
-noremap g] :ALENext<cr>
-noremap gn :ALENext<cr>
-noremap g[ :ALEPrevious<cr>
-noremap gp :ALEPrevious<cr>
 highlight SpellCap ctermbg=52 cterm=none
-
-" Isort settings
-" isort must be installed in vim's python:
-" $ pip install isort
-" $ pip install pyls-isort
-" :python3 import sys; print(sys.path)  # to get python path
-" $PYTHON_PATH -m pip install isort
-let g:vim_isort_python_version = 'python3'
-" let g:vim_isort_map = '<C-s>'
-" force single line import:
-let g:vim_isort_config_overrides = {
-    \'force_single_line': 2,
-    \'from_first': 1,
-    \'lexicographical': 1,
-    \'atomic': 1,
-    \'lines_after_imports': 2,
-\}
-" Avito style:
-" http://stash.msk.avito.ru/projects/PYTHON/repos/pystyle/browse/lib/default.toml
-" let g:vim_isort_config_overrides = {
-"     \'profile': 'black',
-"     \'line_length': 99,
-"     \'atomic': 1,
-"     \'default_section': 'THIRDPARTY',
-"     \'known_first_party': ['src', 'lib', 'tests'],
-"     \'include_trailing_comma': 1,
-" \}
-noremap si :Isort<CR>
-
-
-" GitGutter: settings
-nmap tu :GitGutterUndoHunk<CR>
-nmap tj :GitGutterNextHunk<CR>
-nmap tk :GitGutterPrevHunk<CR>
-" highlight SignColumn ctermbg=8
-" highlight SignColumn ctermbg=22
-" highlight SignColumn ctermbg=58
-highlight GitGutterAdd    ctermbg=235 ctermfg=2
-highlight GitGutterChange ctermbg=235 ctermfg=3
-highlight GitGutterDelete ctermbg=235 ctermfg=1
-" may look different depending on font
-" nice signs to copy-paste: ● ○ ◉ ◉ ◎ ⦿
-let g:gitgutter_sign_added = '+'
-" let g:gitgutter_sign_added = '●'
-let g:gitgutter_sign_modified = '●'
-" let g:gitgutter_sign_removed = '●'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '●'
-let g:gitgutter_sign_removed_above_and_below = '●'
-let g:gitgutter_sign_modified_removed = '●'
-
-" Fugitive: Settings
-nmap td :Git diff<CR>
-nmap tb :Git blame<CR>
 
 " IndentLine: settings
 let g:indentLine_color_term = 239
@@ -484,27 +420,20 @@ autocmd FileType sh iabbrev #! #!/bin/sh
 
 " Javascript settings
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd Filetype vue setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
+autocmd Filetype html,vue setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
 
 " Python Settings
-autocmd FileType python setlocal ts=4 sw=4 sts=4 nolist expandtab
+autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
 " Additional python highlight for monokai
 autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)]\)\@="
 autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
 autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
 " autocomplete
 autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
-autocmd FileType python iabbrev spdb import sys, pdb; pdb.Pdb(stdout=sys.__stdout__).set_trace()
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
-autocmd FileType python iabbrev init_ def __init__(self) -> None:<CR>pass
-autocmd FileType python nnoremap <leader>i :!autoimport %<CR>
 
 " Go settings
-autocmd FileType go setlocal ts=4 sw=4 sts=4 nolist expandtab
-" autocmd FileType go iabbrev iferr if err != nil {<cr>panic(err)
-autocmd FileType go iabbrev iferr if err != nil {<cr>log.Fatal(err)
-" autocmd FileType go syn match goStatement "\(:\?[<>=\-%+\*!|&^]\)"
-autocmd FileType go syn match goStatement "\(:=\)"
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
 
 " Markdown Settings
 autocmd FileType markdown setlocal conceallevel=0
@@ -513,15 +442,9 @@ autocmd FileType markdown setlocal conceallevel=0
 " ##############################################################################
 " LSC SETTINGS
 " ##############################################################################
-
-" install LSP servers:
 " language server executable MUST be in $PATH
-" Python: python -m pip install 'python-lsp-server[all]'
 " Javascript: npm install -g javascript-typescript-langserver
-" Vue: npm install -g vls
 " HTML: npm install -g vscode-html-languageserver-bin
-" Go: go install golang.org/x/tools/gopls@latest
-" https://cs.opensource.google/go/x/tools/+/refs/tags/gopls/v0.8.3:gopls/doc/vim.md
 
 " LSC settings
 let g:lsc_trace_level = 'verbose'  " 'off', 'messages', or 'verbose'
@@ -549,11 +472,6 @@ let g:lsc_server_commands = {
     \'python': g:pylsp_config,
     \'javascript': {
     \    'command': 'javascript-typescript-stdio',
-    \    'log_level': -1,
-    \    'suppress_stderr': v:true,
-    \},
-    \'vue': {
-    \    'command': 'vls --stdio',
     \    'log_level': -1,
     \    'suppress_stderr': v:true,
     \},
@@ -589,15 +507,11 @@ let g:lsc_auto_map = {
 highlight Warning ctermbg=52 cterm=none
 
 " FZF: settings
-" command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 " search only inside project files (respect .gitignore)
 nnoremap <Leader>f :GFiles<CR>
 nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>h :Help<CR>
-nnoremap <leader>hc :Commands<CR>
-nnoremap <leader>hk :Maps<CR>
 
 " VimTmuxNavigator: settings
 " Disable tmux navigator when zooming the Vim pane
@@ -606,9 +520,6 @@ let g:tmux_navigator_no_wrap = 1
 
 " VimAutoFormat: settings
 command Fmt :Autoformat
-" black must be in $PATH
-" pip install black
-let g:formatters_python = ['black']
 " jq must be in $PATH
 " brew install jq
 let g:formatdef_jq = '"jq ."'
@@ -629,8 +540,6 @@ let g:vim_markdown_folding_disabled = 1
 " MarkdownPreview: settings
 let g:mkdp_browser = 'firefox'
 let g:mkdp_echo_preview_url = 1
-" autocmd BufEnter *.md echomsg ":MarkdownPreview to open preview in firefox"
-" start automatically when open .md file instead of manually with :MarkdownPreview
 let g:mkdp_auto_start = 0
 
 " VimSneak: settings
@@ -640,7 +549,7 @@ highlight Sneak ctermfg=16 ctermbg=red
 
 " Lightline: settings
 function! IsWide()
-    return winwidth(0) > 100
+    return winwidth(winnr()) > 100
 endfunction
 function! IsTerminal()
     return lightline#mode() == 'TERMINAL'
@@ -652,22 +561,12 @@ function! LightlineLSCServerStatus()
     else
         return ''
 endfunction
-" branch is only shown in wide
-function! LightlineFugitiveHead()
-    if IsWide()
-        return FugitiveHead()
-    else
-        return ''
-endfunction
-" hex is only shown in wide and non terminal
-\    'colorscheme': 'srcery_drk',
 let g:lightline = {
 \    'colorscheme': 'monokai',
 \    'active': {
 \        'left': [
 \            [ 'mode', 'paste' ],
 \            [ 'filename', 'readonly', 'modified' ],
-\            [ 'gitbranch' ],
 \        ],
 \        'right': [
 \            [ 'percent', 'line' ],
@@ -693,7 +592,6 @@ let g:lightline = {
 \        'fileencoding': '(!IsTerminal() && IsWide())',
 \    },
 \    'component_function': {
-\        'gitbranch': 'LightlineFugitiveHead',
 \        'lscstatus': 'LightlineLSCServerStatus',
 \    },
 \ }
@@ -703,5 +601,37 @@ set noshowmode
 colorscheme monokai
 
 " Argwap: settings
-nnoremap <silent> <leader>a :ArgWrap<CR>
+nnoremap <silent> <leader>d :ArgWrap<CR>
+nnoremap <silent> <leader>j :ArgWrap<CR>
 let g:argwrap_tail_comma = 1
+
+" EasyAlign: settings
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Timelapse: settings
+map <leader>tl :call TimeLapse() <cr>
+
+" Signify: settings
+set updatetime=100
+nmap tj <plug>(signify-next-hunk)
+nmap tk <plug>(signify-prev-hunk)
+nmap tu :SignifyHunkUndo<CR>
+highlight SignifySignAdd    ctermbg=236 ctermfg=2
+" highlight SignifySignChange ctermbg=236 ctermfg=3
+" highlight SignifySignDelete ctermbg=52  ctermfg=1
+
+" Codefmt: settings
+function! s:FormatPython() abort
+    FormatCode isort
+    FormatCode ruff
+endfunction
+augroup autoformat_settings
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType json AutoFormatBuffer js-beautify
+    autocmd FileType html,css,sass,scss,less AutoFormatBuffer js-beautify
+    autocmd FileType python AutoFormatBuffer isort
+    autocmd FileType python command! Fmt :call s:FormatPython()
+augroup END

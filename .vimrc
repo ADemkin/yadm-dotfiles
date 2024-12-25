@@ -57,17 +57,21 @@ set isfname-=:
 set noswapfile  " do not create *.sw[op] files
 set autoread  " auto reload file when it's updated
 
+" number column
+set number
+set relativenumber
+set numberwidth=1
 " Automatically split or merge signcolumn depending on the window width
 function! UpdateSignColumn() abort
-    if winwidth(winnr()) > &colorcolumn
+    if &buftype == 'terminal'
+        setlocal signcolumn=no nonumber norelativenumber
+    elseif winwidth(winnr()) > &colorcolumn + 10
         setlocal signcolumn=auto
     else
         setlocal signcolumn=number
     endif
 endfunction
 autocmd WinResized * call UpdateSignColumn()
-set relativenumber
-set numberwidth=1
 
 " show cursor line
 set cursorline
@@ -76,9 +80,6 @@ set cursorline
 highlight SpellBad ctermbg=52 cterm=none
 
 set showcmd " display incomplete command
-" act like IDE completion, :help completeopt
-" set completeopt=longest,menuone
-" recomended settings for LSC, :help completeopt
 set completeopt=menu,menuone,noinsert,noselect
 set gdefault  " g is not required by default in :s/old/new/ command
 set scrolloff=3
@@ -120,7 +121,6 @@ set wildignore+=**/__pychache__
 
 " Add fzf to completions
 " set rtp+=/opt/homebrew/opt/fzf
-
 
 " Map Space as Leader
 nnoremap <SPACE> <Nop>
@@ -332,6 +332,18 @@ Plug 'google/vim-glaive'
 " GoSyntax: enhance go syntax
 Plug 'charlespascoe/vim-go-syntax'
 
+" AutoPairs: auto close brackets
+Plug 'jiangmiao/auto-pairs'
+
+" Endwise: auto close end in vim and sh
+Plug 'tpope/vim-endwise'
+
+" Dadbod: database client
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion' "Optional
+Plug 'tpope/vim-dotenv'
+
 call plug#end()
 call glaive#Install()
 
@@ -391,7 +403,6 @@ let g:mwDefaultHighlightingPalette = 'extended'
 " let g:mwDefaultHighlightingPalette = 'maximum'
 " clear screen for search and mark
 noremap <C-c> :nohlsearch<CR>:MarkClear<CR>
-
 
 
 " ##############################################################################
@@ -560,6 +571,7 @@ colorscheme monokai
 nnoremap <silent> <leader>d :ArgWrap<CR>
 nnoremap <silent> <leader>j :ArgWrap<CR>
 let g:argwrap_tail_comma = 1
+autocmd FileType vim let b:argwrap_line_prefix = '\'
 
 " EasyAlign: settings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -576,8 +588,11 @@ nmap tj <plug>(signify-next-hunk)
 nmap tk <plug>(signify-prev-hunk)
 nmap tu :SignifyHunkUndo<CR>
 highlight SignifySignAdd    ctermbg=236 ctermfg=2
-" highlight SignifySignChange ctermbg=236 ctermfg=3
-" highlight SignifySignDelete ctermbg=52  ctermfg=1
+highlight SignifySignChange ctermbg=236 ctermfg=3
+highlight SignifySignDelete ctermbg=236  ctermfg=52
+let g:signify_sign_delete = '-'
+let g:signify_sign_change = '~'
+let g:signify_sign_show_count = 0
 
 " Codefmt: settings
 function! s:FormatPython() abort
@@ -591,3 +606,22 @@ augroup autoformat_settings
     autocmd FileType python AutoFormatBuffer isort
     autocmd FileType python command! Fmt :call s:FormatPython()
 augroup END
+
+" AutoPairs: settings
+let b:AutoPairs = {'{': '}', '"""': '"""'}
+autocmd FileType html let b:AutoPairs = {'<!--': '-->'}
+
+" Dadbod: settings
+function! GetEnv(var) abort
+    return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
+endfunction
+let g:dbs = {
+\ 'pg': printf(
+    \'postgres://%s:%s@%s:%s/%s',
+    \GetEnv('DB_USERNAME'),
+    \GetEnv('DB_PASSWORD'),
+    \GetEnv('DB_HOST'),
+    \GetEnv('DB_PORT'),
+    \GetEnv('DB_NAME'),
+\),
+\}

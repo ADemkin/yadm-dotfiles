@@ -6,7 +6,7 @@ export HISTSIZE=64000
 export SAVEHIST=64000
 
 # Terminal
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # Basic envs
 export SHELL=/bin/zsh
@@ -28,7 +28,7 @@ export PYTHONWARNINGS=ignore
 
 # Go
 export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 # Docker options
 export DOCKER_CLI_HINTS=false

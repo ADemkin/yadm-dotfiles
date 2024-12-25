@@ -184,6 +184,9 @@ LESS_TERMCAP_us=$(printf "\e[1;32m") \
 export CLICOLOR=1
 export LSCOLORS="BxGxcxdxCxegDxabagacad"
 
+# bat as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Python
 alias python="python3"
 alias pip="pip3"
@@ -218,8 +221,6 @@ _activate_venv() {
     fi
 }
 alias act="_activate_venv"
-# auto activate venv from current path
-# [[ -f ./venv/bin/activate ]] && act
 
 print256colors() {
     for i in {0..255} ; do
@@ -261,14 +262,9 @@ replace() {
 # Poetry Aliases
 alias p="poetry"
 
-# tmux auto session
-alias tmuxs="~/.tmux.sh"
-
 # workflow
 alias "%ml"="cd ~/code/moscowliuda-webinar-utils && act; tmux rename-window 'moscowliuda'"
-alias "%lsb"="cd ~/code/lionsoul-backend && act && tmux rename-window 'lsb'"
-
-alias psql=pgcli
+alias "%lsb"="cd ~/code/lionsoul-backend && act; tmux rename-window 'lsb'"
 
 # fzf
 fkill() {

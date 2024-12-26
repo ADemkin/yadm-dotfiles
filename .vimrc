@@ -19,25 +19,14 @@ set nojoinspaces
 set list
 set listchars=tab:\¦\ ,trail:·
 
-" #################### LANGUAGES CUSTOM SETTINGS ###############################
-"
-" ts = tabstop - number of spaces to count as tab
-" sw = shiftwidth - number of spaces used as autoindent
-" sts = softtabstop
-" nolist = do not draw | as tab
-" expandtab = replace tab with spaces
-"
-" HTML settings
 autocmd Filetype html,vue,htmldjango setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
-
-" Shell settings
 autocmd FileType sh iabbrev #! #!/bin/sh
-
-" Javascript settings
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-
-" Python Settings
 autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
+autocmd FileType markdown setlocal conceallevel=0
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
+
+" Python: additional language settings
 " Additional python highlight for monokai
 autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)]\)\@="
 autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
@@ -46,14 +35,8 @@ autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
 autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
 
-" Go settings
-autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
-
-" Markdown Settings
-autocmd FileType markdown setlocal conceallevel=0
-
-set ttyfast
-set isfname-=:
+" file handling
+" set isfname-=:
 set noswapfile  " do not create *.sw[op] files
 set autoread  " auto reload file when it's updated
 
@@ -79,6 +62,7 @@ set cursorline
 " highlight errors with red bg
 highlight SpellBad ctermbg=52 cterm=none
 
+set ttyfast
 set showcmd " display incomplete command
 set completeopt=menu,menuone,noinsert,noselect
 set gdefault  " g is not required by default in :s/old/new/ command
@@ -110,6 +94,10 @@ set hlsearch
 set incsearch
 " highlight with yellow on black
 highlight MatchParen ctermbg=yellow
+
+" (re)store session on exit
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " Let menu act like shell
 set wildmenu
@@ -153,7 +141,8 @@ if !has('nvim')
     " for some reason autocommand with nonu nornu sometimes will also
     " affect other buffer, which is unwanted behaviour. Ti fix that manually set
     " nonu nornu when star scroll
-    tnoremap <C-u> <C-w>:set nonu nornu<CR><C-w><S-n><C-u>
+    " tnoremap <C-u> <C-w>:set nonu nornu<CR><C-w><S-n><C-u>
+    tnoremap <C-u> <C-w><S-n><C-u>
     " Leave Terminal Normal mode my enter
     nnoremap <Return> i
     " Do not show line number in terminal in any mode
@@ -189,9 +178,6 @@ autocmd FileType txt setlocal spell
 autocmd FileType rst setlocal spell
 autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
-
-" simple import sort
-" nmap ss :set lazyredraw<CR>vip:sort u<CR>:'<,'>sort i<CR>:set nolazyredraw<CR>
 
 " additional error highlight
 call matchadd('Error', '\s+$')

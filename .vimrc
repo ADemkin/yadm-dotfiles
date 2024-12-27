@@ -24,7 +24,12 @@ autocmd FileType sh iabbrev #! #!/bin/sh
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
 autocmd FileType markdown setlocal conceallevel=0
+
+" Go: additional language settings
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
+autocmd FileType go iabbrev pack package name<CR><CR>import (<CR>"fmt"<CR>)<ESC>ggw
+autocmd FileType go iabbrev iferr if err != nil {<CR>}<ESC>ko
+autocmd FileType go iabbrev imp import (<CR>"fmt"<CR>)<ESC>kw
 
 " Python: additional language settings
 " Additional python highlight for monokai
@@ -34,6 +39,7 @@ autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
 " autocomplete
 autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
+autocmd FileType python iabbrev """ """<CR>"""<ESC>ko
 
 " file handling
 " set isfname-=:
@@ -319,7 +325,8 @@ Plug 'google/vim-glaive'
 Plug 'charlespascoe/vim-go-syntax'
 
 " AutoPairs: auto close brackets
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
+" more
 
 " Endwise: auto close end in vim and sh
 Plug 'tpope/vim-endwise'
@@ -329,6 +336,8 @@ Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'kristijanhusak/vim-dadbod-completion' "Optional
 Plug 'tpope/vim-dotenv'
+
+Plug 'vim-test/vim-test'
 
 call plug#end()
 call glaive#Install()
@@ -465,6 +474,7 @@ nnoremap <Leader>f :GFiles<CR>
 nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>; :Commands<CR>
 
 " VimTmuxNavigator: settings
 " Disable tmux navigator when zooming the Vim pane
@@ -594,8 +604,9 @@ augroup autoformat_settings
 augroup END
 
 " AutoPairs: settings
-let b:AutoPairs = {'{': '}', '"""': '"""'}
-autocmd FileType html let b:AutoPairs = {'<!--': '-->'}
+" let g:AutoPairsFlyMode = 0
+" let g:AutoPairs = {'{': '}', '"""': '"""'}
+" autocmd FileType html let b:AutoPairs = {'<!--': '-->'}
 
 " Dadbod: settings
 function! GetEnv(var) abort

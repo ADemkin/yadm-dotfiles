@@ -147,10 +147,9 @@ call s:h("FoldColumn",    {                     "bg": s:darkblack })
 "        Incsearch"
 
 " popup menu
-call s:h("Pmenu",      { "fg": s:lightblack, "bg": s:white                           })
-call s:h("PmenuSel",   { "fg": s:aqua,       "bg": s:black, "format": "reverse,bold" })
-call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey                            })
-"        PmenuSbar"
+call s:h("Pmenu",      { "fg": s:white,      "bg": s:lightblack  })
+call s:h("PmenuSel",   { "fg": s:aqua,       "bg": s:lightblack2 })
+call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey        })
 
 " Generic Syntax Highlighting
 " ---------------------------

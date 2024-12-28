@@ -1,6 +1,3 @@
-# PATH
-export PATH="/Users/$USER/.npm-global/bin/:$PATH"
-
 # # Prompt
 # # Find and set branch name var if in git repository.
 function git_branch() {
@@ -27,7 +24,7 @@ setopt EXTENDED_GLOB  # use ~ to ignore, ex: **.py*~*.pyc will ignore .pyc
 setopt NO_NOMATCH
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
 # additional stuff
-# setopt CORRECT  # auto correct command, not arguments
+setopt CORRECT  # auto correct command, not arguments
 
 # EMACS mode
 bindkey -e
@@ -35,7 +32,7 @@ setopt EMACS
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line  # open editor with C-x C-e
-# may not work in zsh 5.7:
+
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'  # non-word symbols are threated like words
 # https://unix.stackexchange.com/questions/250690/how-to-configure-ctrlw-as-delete-word-in-zsh
 
@@ -49,35 +46,16 @@ bindkey "^[[B" history-beginning-search-forward-end
 bindkey "^N" history-beginning-search-forward-end
 bindkey "^R" history-incremental-search-backward
 
-# alert when ready to promt:
-precmd() {
-    print -n "\a"
-    # echo -ne "\a"
-}
-
-# # Tmux pane name
-# clear_tmux_pane()
-# {
-#     printf "\033]2;\033\\"
-# }
-# clear_tmux_pane
 
 #######################################################################
 # Aliases
 #######################################################################
-#
-alias l="ls -AF "
-alias ll="ls -AFl "
-alias -g M="| less"
-alias timer="python ~/code/pytimer/timer.py"
 
 # Git workflow
 alias grup="git remote update"
 alias grib="git rebase -i origin/master"
 alias grid="git rebase -i origin/dev"
-alias gch="git checkout"
 alias gst="git status"
-alias gdiff="git diff"
 alias gg="git graph"
 alias gchom="git checkout origin/master"
 alias gchod="git checkout origin/dev"
@@ -89,9 +67,6 @@ ssht() {
 
 # More complex grep
 GREP=$(which grep)
-g() {
-    $GREP --color=always --with-filename --recursive $@ | less --RAW-CONTROL-CHARS
-}
 alias cgrep="$GREP --color=always"
 function grep() {
     # disable color when output is piped
@@ -132,34 +107,6 @@ ZSH_HIGHLIGHT_STYLES[commandseparator]="fg=red"
 ZSH_HIGHLIGHT_STYLES[redirection]="fg=red"
 ZSH_HIGHLIGHT_STYLES[assign]="fg=cyan"
 
-# Launch ssh-agent or reuse it
-# ~/agent.sh $HOME/.ssh/agent.sock
-
-# Murder process
-murder()
-{
-    pkill -f "$@";
-}
-
-# forward ports
-fwd()
-{
-    for port in $@; do
-        ssh -fNL "$port":localhost:"$port" imac5k
-    done;
-}
-
-# kill all forwarding ssh
-unfwd()
-{
-    pkill -f "ssh -fNL";
-}
-
-# ssh & connect to tmux
-ssht() {
-    ssh -C -t "$1" $(which tmux) -S /tmp/tmux-shared.sock attach -t shared
-}
-
 # mkdir and cd into it
 mkcd() {
     mkdir -p "$1" && cd "$1"
@@ -185,6 +132,7 @@ export CLICOLOR=1
 export LSCOLORS="BxGxcxdxCxegDxabagacad"
 
 # bat as manpager
+export BAT_THEME="Monokai Extended"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Python
@@ -266,41 +214,12 @@ alias p="poetry"
 alias "%ml"="cd ~/code/moscowliuda-webinar-utils && act; tmux rename-window 'moscowliuda'"
 alias "%lsb"="cd ~/code/lionsoul-backend && act; tmux rename-window 'lsb'"
 
-# fzf
-fkill() {
-    ps aux |\
-    sed 1d |\
-    fzf \
-    --reverse \
-    --preview='echo {}' \
-    --preview-window=top:3:wrap \
-    --border --border-label='kill (enter to kill, C-c to exit)' --border-label-pos=5 \
-    --no-info |\
-    awk '{print $2}' |\
-    xargs kill -9
-}
-
-fadd() {
-    git status --short | sed -e "s/^M /$(printf '\033[32m')M $(printf '\033[m')/" \
-                             -e "s/^A /$(printf '\033[32m')S $(printf '\033[m')/" \
-                             -e "s/^D /$(printf '\033[31m')D $(printf '\033[m')/" \
-                             -e "s/^ M/$(printf '\033[33m')M $(printf '\033[m')/" \
-    | fzf --multi --ansi --reverse --height=40 --border \
-        --preview="(echo {} | grep -q 'Staged' && git diff --cached --color=always -- {-1} | delta) || git diff --color=always -- {-1} | delta" \
-        --bind="a:toggle" \
-        --header="Select files to stage (press enter to stage selected files)" \
-        --prompt="Git files> " \
-    | echo
-}
-
 # Copilot
 alias copilot=" gh copilot explain"
 
-
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
-
 
 # secrets
 if [ -f ~/.secrets ]; then

@@ -148,7 +148,7 @@ call s:h("FoldColumn",    {                     "bg": s:darkblack })
 
 " popup menu
 call s:h("Pmenu",      { "fg": s:white,      "bg": s:lightblack  })
-call s:h("PmenuSel",   { "fg": s:aqua,       "bg": s:lightblack2 })
+call s:h("PmenuSel",   { "fg": s:white,       "bg": s:lightblack2 })
 call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey        })
 
 " Generic Syntax Highlighting
@@ -422,7 +422,7 @@ call s:h("goReturn",              { "fg": s:pink   })
 call s:h("goSwitch",              { "fg": s:pink   })
 call s:h("goSwitchTypeBlock",     { "fg": s:pink   })
 call s:h("goCase",                { "fg": s:pink   })
-call s:h("goLabel",               { "fg": s:white  })
+call s:h("goLabel",               { "fg": s:pink   })
 call s:h("goVarDecl",             { "fg": s:pink   })
 call s:h("goStructTypeTag",       { "fg": s:yellow })
 call s:h("goTypeDeclName",        { "fg": s:green  })

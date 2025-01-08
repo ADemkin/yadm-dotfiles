@@ -82,6 +82,7 @@ set splitbelow  " :sp split to bottom
 set backspace=indent,eol,start  " Backspace deletes like most programs in insert mode
 set textwidth=0  " prevent from auto-newline
 set nofoldenable  " disable code folding
+set formatoptions-=o "dont continue comments when pushing /O
 
 " Paste mode settings
 set showmode  " show if paste mode is on

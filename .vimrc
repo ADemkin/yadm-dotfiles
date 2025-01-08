@@ -571,10 +571,10 @@ let g:argwrap_tail_comma = 1
 autocmd FileType vim let b:argwrap_line_prefix = '\'
 
 " EasyAlign: settings
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign in visual mode (e.g. vipea)
+xmap ea <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. eaip)
+nmap ea <Plug>(EasyAlign)
 
 " Timelapse: settings
 map <leader>tl :call TimeLapse() <cr>

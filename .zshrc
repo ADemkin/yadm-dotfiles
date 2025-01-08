@@ -23,8 +23,6 @@ setopt GLOB_DOTS
 setopt EXTENDED_GLOB  # use ~ to ignore, ex: **.py*~*.pyc will ignore .pyc
 setopt NO_NOMATCH
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
-# additional stuff
-setopt CORRECT  # auto correct command, not arguments
 
 # EMACS mode
 bindkey -e

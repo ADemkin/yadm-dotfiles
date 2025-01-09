@@ -315,10 +315,6 @@ Plug 'google/vim-glaive'
 " GoSyntax: enhance go syntax
 Plug 'charlespascoe/vim-go-syntax'
 
-" AutoPairs: auto close brackets
-" Plug 'jiangmiao/auto-pairs'
-" more
-
 " Endwise: auto close end in vim and sh
 Plug 'tpope/vim-endwise'
 
@@ -593,11 +589,6 @@ augroup autoformat_settings
     autocmd FileType python AutoFormatBuffer isort
     autocmd FileType python command! Fmt :call s:FormatPython()
 augroup END
-
-" AutoPairs: settings
-" let g:AutoPairsFlyMode = 0
-" let g:AutoPairs = {'{': '}', '"""': '"""'}
-" autocmd FileType html let b:AutoPairs = {'<!--': '-->'}
 
 " Dadbod: settings
 function! GetEnv(var) abort

@@ -391,37 +391,31 @@ noremap <C-c> :nohlsearch<CR>:MarkClear<CR>
 " ##############################################################################
 " LSC SETTINGS
 " ##############################################################################
-" language server executable MUST be in $PATH
-" Javascript: npm install -g javascript-typescript-langserver
-" HTML: npm install -g vscode-html-languageserver-bin
 
-" LSC: settings
-let g:lsc_trace_level = 'verbose'  " 'off', 'messages', or 'verbose'
-let g:lsc_hover_popup = 0
-let g:lsc_reference_highlights = v:false  " conflict with Mark plugin
-" let g:lsc_enable_autocomplete = v:false  " disable autosomplete
-" use path lsc server config in separate local variable
+" LSC: autocomplete
+" debug :set comnifunc? :set completefunc?
+let g:lsc_autocomplete_length = 50
+autocmd FileType python set omnifunc=lsc#complete#complete
+
+" LSC: servers
 let g:pylsp_config = {
-\   'command': 'pylsp',
-\   'log_level': 1,
-\   'suppress_stderr': v:true,
-\   'workspace_config': {
-    \'pyls': {
-        \'configurationSources': ['flake8'],
-        \'plugins': {
-            \'flake8': {'enabled': v:true},
-            \'pyflakes': {'enabled': v:true},
-            \'pycodestyle': {'enabled': v:true},
-            \},
-        \},
-    \},
+    \'command': 'pylsp',
+    \'log_level': 1,
+    \'suppress_stderr': v:true,
+    \'workspace_config': {'pylsp': {'plugins': {}}},
 \}
+let g:pylsp_config.workspace_config.pylsp.plugins.flake8 = {'enabled': v:true}
+" let g:pylsp_config.workspace_config.pylsp.plugins = {
+"     \'rope_autoimport': {
+"         \'enabled': v:true,
+"         \'completions': {'enabled': v:true},
+"     \},
+" \}
 let g:gopls_config = {
     \'command': 'gopls',
     \'log_level': -1,
     \'suppress_stderr': v:true,
 \}
-let g:lsc_enable_autocomplete = 1
 let g:lsc_server_commands = {
     \'python': g:pylsp_config,
     \'javascript': {
@@ -436,9 +430,10 @@ let g:lsc_server_commands = {
     \},
     \'go': g:gopls_config,
 \}
+
+" LSC: keymaps
 let g:lsc_auto_map = {
     \'GoToDefinition': 'gd',
-    \'GoToDefinitionSplit': 'gD',
     \'FindReferences': 'gu',
     \'NextReference': '<C-n>',
     \'PreviousReference': '<C-p>',
@@ -451,18 +446,23 @@ let g:lsc_auto_map = {
     \'SignatureHelp': 'gm',
     \'Completion': 'completefunc',
 \}
-" let g:lsc_enable_autocomplete = 0
-" set completeopt=menu,menuone,noinsert,noselect
-" some linters hightlight Warning instead of Error
-highlight Warning ctermbg=52 cterm=none
+nnoremap gD :vertical LSClientGoToDefinitionSplit<CR>
+autocmd FileType go nnoremap gi :LSClientFindCodeActions "Organize Imports"<CR>
+
+" LSC: other
+let g:lsc_reference_highlights = v:false  " conflict with Mark plugin
+highlight Warning ctermbg=52 cterm=none  " fix highlight for LSC warnings
+
 
 " FZF: settings
-" search only inside project files (respect .gitignore)
+" search only inside project file names (respect .gitignore)
 nnoremap <Leader>f :GFiles<CR>
+" search inside file content
 nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>; :Commands<CR>
+
 
 " VimTmuxNavigator: settings
 " Disable tmux navigator when zooming the Vim pane

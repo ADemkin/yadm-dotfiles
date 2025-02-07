@@ -45,8 +45,10 @@ live_config_reload = true
 
 import = [
     "~/.config/alacritty/monokai.toml",
-    # "~/.config/alacritty/mondrian.toml",
     "~/.config/alacritty/victor-mono.toml",
     "~/.config/alacritty/keyboard.toml",
-    "~/.config/alacritty/autostart.toml",
 ]
+
+[debug]
+log_level = "error"
+print_events = true

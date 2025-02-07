@@ -1,8 +1,0 @@
-# [shell]
-# program = "/opt/local/bin/tmux"
-# args = [
-#     "new-session",
-#     "-A",
-#     "-s",
-#     "main"
-# ]

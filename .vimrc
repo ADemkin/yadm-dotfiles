@@ -39,7 +39,6 @@ autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
 " autocomplete
 autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
-autocmd FileType python iabbrev """ """<CR>"""<ESC>ko
 
 " file handling
 " set isfname-=:
@@ -62,6 +61,9 @@ function! UpdateSignColumn() abort
 endfunction
 autocmd WinResized * call UpdateSignColumn()
 
+" resize all windows when window restized
+autocmd VimResized * :wincmd =
+
 " show cursor line
 set cursorline
 
@@ -70,7 +72,8 @@ highlight SpellBad ctermbg=52 cterm=none
 
 set ttyfast
 set showcmd                                    " display incomplete command
-set completeopt=menu,menuone,noinsert,noselect " completion
+" set completeopt=menu,menuone,noinsert,noselect " completion
+set completeopt=menuone,noselect
 set gdefault                                   " g is not required by default in :s/old/new/ command
 set scrolloff=3
 set undodir=~/.vim/undo
@@ -125,6 +128,18 @@ map <Space> <Leader>
 vnoremap J :move '>+1<CR>gv=gv
 vnoremap K :move '<-2<CR>gv=gv
 
+" delete do not replace current buffer
+nnoremap x "_x
+nnoremap d "_d
+nnoremap dd "_dd
+vnoremap p "_dP
+
+" scroll and center
+nnoremap <C-e> <C-e>zz
+nnoremap <C-y> <C-y>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
 " do not require shift for :
 nmap ; :
 
@@ -175,6 +190,7 @@ autocmd FileType txt setlocal spell
 autocmd FileType rst setlocal spell
 autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
+" autocmd FileType python setlocal spell
 
 " additional error highlight
 call matchadd('Error', '\s+$')
@@ -190,6 +206,12 @@ endfunc
 
 " Show buffer and expect to enter buffer number
 nmap <leader>b :buffers<cr>:buffer<space>
+
+" netrw cofig
+let g:netrw_banner = 0  " disable banner
+let g:netrw_liststyle = 3  " tree view
+" let g:netrw_browse_split = 4  " open in new split
+" let g:netrw_altv = 1  " open in vertical split
 
 " ###################### VIM PLUGINS AND SETTINGS #############################
 "
@@ -217,7 +239,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " new one, maintained
 " Plug 'albfan/nerdtree-git-plugin'
 
-" Fugitive: do git blame and git diff from vim directly
+" Fugitive: all actions with :Git
 Plug 'tpope/vim-fugitive'
 
 " Commentary: comment code with ease
@@ -226,11 +248,14 @@ Plug 'tpope/vim-commentary'
 " Abolish: swap case with cr* and use smart :S instead of :s
 Plug 'tpope/vim-abolish'
 
-" IndentLine: add vertical line on on indent
-Plug 'Yggdroot/indentLine'
-
 " SurrondWith: effective way to 'surround' str(code)
 Plug 'tpope/vim-surround'
+
+" VimRepeat: repeat surround and other stuff with .
+Plug 'tpope/vim-repeat'
+
+" IndentLine: add vertical line on on indent
+Plug 'Yggdroot/indentLine'
 
 " Mark: <leader>-m to highlight word
 Plug 'idbrii/vim-mark'
@@ -253,28 +278,17 @@ Plug 'junegunn/fzf.vim'
 " VimTmuxNavigator: Seamlessly move between vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-" TreeSitter: nvim godly syntax match
-if has('nvim')
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-endif
-
 " VimAutoFormat: format file automatically
-Plug 'vim-autoformat/vim-autoformat'
-
-" Emmet: html plugin
-Plug 'mattn/emmet-vim'
-
-" Undotree: visualise undo history
-Plug 'mbbill/undotree'
+" Plug 'vim-autoformat/vim-autoformat'
 
 " Markdown: syntax, tabs and render
-Plug 'godlygeek/tabular'
-Plug 'preservim/vim-markdown'
+" Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 " run :MarkdownPreview to run web browser in sync with vim
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " VimSneak: Easy and smart movements with s key
 Plug 'justinmk/vim-sneak'
@@ -286,10 +300,7 @@ Plug 'github/copilot.vim'
 Plug 'itchyny/lightline.vim'
 
 " ColorTemplate: convert colorscheme to template
-Plug 'lifepillar/vim-colortemplate'
-
-" VimRepeat: repeat surround and other stuff with .
-Plug 'tpope/vim-repeat'
+" Plug 'lifepillar/vim-colortemplate'
 
 " Argwrap: Split/Unsplit text in brackets
 Plug 'FooSoft/vim-argwrap'
@@ -298,7 +309,7 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'junegunn/vim-easy-align'
 
 " Timelapse: git history fun
-Plug 'vim-scripts/git-time-lapse'
+" Plug 'vim-scripts/git-time-lapse'
 
 " Signify: show diff in gutter, jump and undo hunks
 Plug 'mhinz/vim-signify'
@@ -315,19 +326,27 @@ Plug 'google/vim-glaive'
 " GoSyntax: enhance go syntax
 Plug 'charlespascoe/vim-go-syntax'
 
-" Endwise: auto close end in vim and sh
-Plug 'tpope/vim-endwise'
-
 " Dadbod: database client
+Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
-Plug 'kristijanhusak/vim-dadbod-completion' "Optional
-Plug 'tpope/vim-dotenv'
+" Plug 'kristijanhusak/vim-dadbod-completion' "Optional
 
-Plug 'vim-test/vim-test'
+" VimTest: run tests from vim
+" not yet decided how to run tests
+" Plug 'vim-test/vim-test'
+" Plug 'tpope/vim-dispatch'
+Plug 'christoomey/vim-tmux-runner'
+
+Plug 'kana/vim-arpeggio'
 
 call plug#end()
 call glaive#Install()
+
+" Fugitive: settings
+" get grep word under cursor
+nmap <leader>gr :Git grep <C-R><C-W><CR>
+nmap <leader>gm :Git grep <C-R><C-W>(Model):<CR>
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -352,7 +371,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
 autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 " ignore some basic folders
-let NERDTreeIgnore=[".git/", ".idea", ".helm*", "__pycache__"]
+let NERDTreeIgnore=[".git/", ".idea", ".helm*", "__pycache__", ".ropeproject"]
 
 " ALE settings
 let g:ale_disable_lsp = 1
@@ -411,6 +430,11 @@ let g:pylsp_config.workspace_config.pylsp.plugins.flake8 = {'enabled': v:true}
 "         \'completions': {'enabled': v:true},
 "     \},
 " \}
+let g:pyright_config = {
+    \'command': 'pyright-langserver --stdio',
+    \'log_level': -1,
+    \'suppress_stderr': v:true,
+\}
 let g:gopls_config = {
     \'command': 'gopls',
     \'log_level': -1,
@@ -455,6 +479,20 @@ highlight Warning ctermbg=52 cterm=none  " fix highlight for LSC warnings
 
 
 " FZF: settings
+" move to prev buffer if NERDTree is opened
+" TODO
+function! FZFOpen(fzf_command)
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+
+" nnoremap <silent> <C-b> :call FZFOpen(':Buffers')<CR>
+" nnoremap <silent> <C-g>g :call FZFOpen(':Ag')<CR>
+" nnoremap <silent> <C-g>c :call FZFOpen(':Commands')<CR>
+" nnoremap <silent> <C-g>l :call FZFOpen(':BLines')<CR>
+" nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
 " search only inside project file names (respect .gitignore)
 nnoremap <Leader>f :GFiles<CR>
 " search inside file content
@@ -470,20 +508,12 @@ let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_wrap = 1
 
 " VimAutoFormat: settings
-command Fmt :Autoformat
+" command Fmt :Autoformat
 " jq must be in $PATH
 " brew install jq
-let g:formatdef_jq = '"jq ."'
-let g:formatters_json = ['jq']
-let g:autoformat_verbosemode=1
-
-" VimEmmet: settings
-let g:user_emmet_leader_key='<C-e>'
-
-" Undotree: settings
-let g:undotree_WindowLayout = 3
-let g:undotree_HelpLine = 1
-nnoremap <leader>u :UndotreeShow<cr>:UndotreeFocus<CR>
+" let g:formatdef_jq = '"jq ."'
+" let g:formatters_json = ['jq']
+" let g:autoformat_verbosemode=1
 
 " VimMarkdown: settings
 let g:vim_markdown_folding_disabled = 1
@@ -559,12 +589,12 @@ autocmd FileType vim let b:argwrap_line_prefix = '\'
 
 " EasyAlign: settings
 " Start interactive EasyAlign in visual mode (e.g. vipea)
-xmap ea <Plug>(EasyAlign)
+xmap gea <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. eaip)
-nmap ea <Plug>(EasyAlign)
+nmap gea <Plug>(EasyAlign)
 
 " Timelapse: settings
-map <leader>tl :call TimeLapse() <cr>
+" map <leader>tl :call TimeLapse() <cr>
 
 " Signify: settings
 set updatetime=100
@@ -604,4 +634,22 @@ let g:dbs = {
     \GetEnv('DB_PORT'),
     \GetEnv('DB_NAME'),
 \),
+\ 'sqlite': 'sqlite://db.sqlite3',
 \}
+
+" VimTest: settings TODO
+" working:
+nmap <leader>rf :TestFile<CR>
+nmap <leader>rt :TestNearest<CR>
+" working
+let test#strategy = 'vtr'  " run test in tmux and keep pane- working great, but need manual activation
+" let test#strategy = 'vimterminal'
+" let test#strategy = 'spawn'  " bg vim and run tests
+" let test#strategy = 'dispatch'  " bg with dispatch
+" to check:
+" not working:
+" let test#strategy = 'tslime'
+
+" VimArpeggio: settings
+" Arpeggio inoremap jk  <Esc>
+call arpeggio#map('i', '', 0, 'jk', '<Esc>')

@@ -609,17 +609,28 @@ let g:signify_sign_change = '~'
 let g:signify_sign_show_count = 0
 
 " Codefmt: settings
-function! s:FormatPython() abort
-    FormatCode isort
-    FormatCode ruff
-endfunction
 augroup autoformat_settings
     autocmd FileType go AutoFormatBuffer gofmt
     autocmd FileType json AutoFormatBuffer js-beautify
     autocmd FileType html,css,sass,scss,less AutoFormatBuffer js-beautify
-    autocmd FileType python AutoFormatBuffer isort
-    autocmd FileType python command! Fmt :call s:FormatPython()
 augroup END
+
+function! g:FormatBuffer() abort
+    let l:formatters = {
+    \ 'python':    ['ruff', 'isort'],
+    \ }
+    let l:ft = &filetype
+    if !has_key(l:formatters, l:ft)
+        return
+    endif
+    for fmt in l:formatters[l:ft]
+        execute 'FormatCode ' . fmt
+    endfor
+endfunction
+command! -nargs=0 Fmt call g:FormatBuffer()
+
+autocmd BufWritePost *.py call g:FormatBuffer()
+
 
 " Dadbod: settings
 function! GetEnv(var) abort

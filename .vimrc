@@ -22,7 +22,7 @@ set listchars=tab:\¦\ ,trail:·
 autocmd Filetype html,vue,htmldjango setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
 autocmd FileType sh iabbrev #! #!/bin/sh
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType python setlocal ts=4 sw=4 sts=0 nolist expandtab
+autocmd FileType python setlocal ts=4 sw=4 sts=4 nolist expandtab
 autocmd FileType markdown setlocal conceallevel=0
 
 " Go: additional language settings
@@ -130,8 +130,6 @@ vnoremap K :move '<-2<CR>gv=gv
 
 " delete do not replace current buffer
 nnoremap x "_x
-nnoremap d "_d
-nnoremap dd "_dd
 vnoremap p "_dP
 
 " scroll and center
@@ -139,6 +137,8 @@ nnoremap <C-e> <C-e>zz
 nnoremap <C-y> <C-y>zz
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
+" nnoremap j jzz
+" nnoremap k kzz
 
 " do not require shift for :
 nmap ; :

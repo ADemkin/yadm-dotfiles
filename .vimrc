@@ -1,3 +1,7 @@
+" encoding
+set encoding=utf-8
+scriptencoding utf-8
+
 " generic vimrc
 set nocompatible
 syntax on
@@ -19,7 +23,9 @@ set nojoinspaces
 set list
 set listchars=tab:\¦\ ,trail:·
 
-autocmd Filetype html,vue,htmldjango setlocal ts=4 sw=4 sts=4 expandtab matchpairs+=<:>
+set pastetoggle=<leader>p
+
+autocmd Filetype html,vue,htmldjango setlocal ts=2 sw=2 sts=2 expandtab matchpairs+=<:>
 autocmd FileType sh iabbrev #! #!/bin/sh
 autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType python setlocal ts=4 sw=4 sts=4 nolist expandtab
@@ -37,7 +43,7 @@ autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)
 autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
 autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
 " autocomplete
-autocmd FileType python iabbrev pdb import pdb ; pdb.set_trace();<CR>pass
+autocmd FileType python iabbrev pdb breakpoint();<CR>pass
 autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
 
 " file handling
@@ -338,7 +344,12 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 " Plug 'tpope/vim-dispatch'
 Plug 'christoomey/vim-tmux-runner'
 
+" Arpeggio: jk to esc
 Plug 'kana/vim-arpeggio'
+
+" Unimaired: quickly navigate quickfix and more
+" ]q [q for quickfix
+Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 call glaive#Install()
@@ -541,6 +552,7 @@ function! LightlineLSCServerStatus()
         return LSCServerStatus()
     else
         return ''
+    endif
 endfunction
 let g:lightline = {
 \    'colorscheme': 'monokai',
@@ -603,7 +615,7 @@ nmap tk <plug>(signify-prev-hunk)
 nmap tu :SignifyHunkUndo<CR>
 highlight SignifySignAdd    ctermbg=236 ctermfg=2
 highlight SignifySignChange ctermbg=236 ctermfg=3
-highlight SignifySignDelete ctermbg=236  ctermfg=52
+highlight SignifySignDelete ctermbg=236  ctermfg=1
 let g:signify_sign_delete = '-'
 let g:signify_sign_change = '~'
 let g:signify_sign_show_count = 0
@@ -611,8 +623,10 @@ let g:signify_sign_show_count = 0
 " Codefmt: settings
 augroup autoformat_settings
     autocmd FileType go AutoFormatBuffer gofmt
-    autocmd FileType json AutoFormatBuffer js-beautify
-    autocmd FileType html,css,sass,scss,less AutoFormatBuffer js-beautify
+    autocmd FileType json AutoFormatBuffer prettier
+    autocmd FileType html AutoFormatBuffer prettier
+    " autocmd FileType html,css,sass,scss,less AutoFormatBuffer prettier
+    autocmd FileType js,ts AutoFormatBuffer prettier
 augroup END
 
 function! g:FormatBuffer() abort

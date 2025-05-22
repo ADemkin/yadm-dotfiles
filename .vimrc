@@ -351,6 +351,9 @@ Plug 'kana/vim-arpeggio'
 " ]q [q for quickfix
 Plug 'tpope/vim-unimpaired'
 
+" Ropevim: autoimport and refactor
+Plug 'python-rope/ropevim'
+
 call plug#end()
 call glaive#Install()
 
@@ -675,6 +678,35 @@ let test#strategy = 'vtr'  " run test in tmux and keep pane- working great, but 
 " not working:
 " let test#strategy = 'tslime'
 
+" Copilot: settings
+let g:copilot_workspace_folders = ["~/code/lionsoul-backend", "~/code/moscowliuda-webinar-utils"]
+imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 " VimArpeggio: settings
 " Arpeggio inoremap jk  <Esc>
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
+
+" Ropevim: settings
+let g:ropevim_autoimport_modules = [
+    \"asyncio",
+    \"collections",
+    \"contextlib",
+    \"dataclasses",
+    \"datetime",
+    \"fastapi",
+    \"functools",
+    \"itertools",
+    \"json",
+    \"logging",
+    \"time",
+    \"os",
+    \"pytest",
+    \"re",
+    \"requests",
+    \"shutil",
+    \"sys",
+    \"typing",
+\]
+nnoremap <leader>i :RopeAutoImport<CR><ESC>:w<CR>
+nnoremap <leader>I :RopeGenerateAutoimportCache<CR>

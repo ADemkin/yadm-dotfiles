@@ -539,8 +539,9 @@ let g:mkdp_auto_start = 0
 
 " VimSneak: settings
 let g:sneak#label = 1
-map <Leader>s <Plug>Sneak_s
-highlight Sneak ctermfg=16 ctermbg=red
+nnoremap s <Plug>Sneak_s
+highlight! link Sneak Search
+highlight! link SneakCurrent CurSearch
 
 " Lightline: settings
 function! IsWide()

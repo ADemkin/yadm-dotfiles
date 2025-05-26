@@ -147,7 +147,8 @@ nnoremap <C-d> <C-d>zz
 " nnoremap k kzz
 
 " do not require shift for :
-nmap ; :
+nnoremap ; :
+nnoremap : ;
 
 " easy movement between panes
 nnoremap <C-j> <C-w>j
@@ -156,7 +157,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-h> <C-w>h
 
 " Terminal settings
-nmap <leader>t :vert term<CR>
+nnoremap <leader>t :vert term<CR>
 " nvim and vim configs are different
 if !has('nvim')
     " VIM 9 terminal
@@ -284,9 +285,6 @@ Plug 'junegunn/fzf.vim'
 " VimTmuxNavigator: Seamlessly move between vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
-" VimAutoFormat: format file automatically
-" Plug 'vim-autoformat/vim-autoformat'
-
 " Markdown: syntax, tabs and render
 " Plug 'godlygeek/tabular'
 " Plug 'preservim/vim-markdown'
@@ -367,8 +365,8 @@ let NERDTreeShowHidden = 1
 " auto close NT when file is opened
 " let NERDTreeQuitOnOpen = 1
 " open and close with tt
-nmap tt :NERDTreeToggle<CR>
-nmap tf :NERDTreeFind<CR>
+nnoremap tt :NERDTreeToggle<CR>
+nnoremap tf :NERDTreeFind<CR>
 let NERDTreeRespectWildIgnore=1
 " disable ? for help
 let NERDTreeMinimalUI = 1
@@ -521,14 +519,6 @@ nnoremap <leader>; :Commands<CR>
 let g:tmux_navigator_disable_when_zoomed = 1
 let g:tmux_navigator_no_wrap = 1
 
-" VimAutoFormat: settings
-" command Fmt :Autoformat
-" jq must be in $PATH
-" brew install jq
-" let g:formatdef_jq = '"jq ."'
-" let g:formatters_json = ['jq']
-" let g:autoformat_verbosemode=1
-
 " VimMarkdown: settings
 let g:vim_markdown_folding_disabled = 1
 
@@ -663,7 +653,6 @@ let g:dbs = {
     \GetEnv('DB_PORT'),
     \GetEnv('DB_NAME'),
 \),
-\ 'sqlite': 'sqlite://db.sqlite3',
 \}
 
 " VimTest: settings TODO
@@ -689,6 +678,7 @@ let g:copilot_no_tab_map = v:true
 call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 " Ropevim: settings
+let g:ropevim_enable_shortcuts = 0
 let g:ropevim_autoimport_modules = [
     \"asyncio",
     \"collections",

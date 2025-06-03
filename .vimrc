@@ -512,6 +512,7 @@ nnoremap <Leader>g :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>; :Commands<CR>
+nnoremap <leader>k :Maps<CR>
 
 
 " VimTmuxNavigator: settings
@@ -604,14 +605,23 @@ nmap gea <Plug>(EasyAlign)
 
 " Signify: settings
 set updatetime=100
-nmap tj <plug>(signify-next-hunk)
-nmap tk <plug>(signify-prev-hunk)
-nmap tu :SignifyHunkUndo<CR>
+nnoremap tu :SignifyHunkUndo<CR>
+nnoremap td :SignifyHunkDiff<CR>
+nnoremap tj <plug>(signify-next-hunk)
+nnoremap tk <plug>(signify-prev-hunk)
+nnoremap ]c <plug>(signify-next-hunk)
+nnoremap [c <plug>(signify-prev-hunk)
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
 highlight SignifySignAdd    ctermbg=236 ctermfg=2
 highlight SignifySignChange ctermbg=236 ctermfg=3
 highlight SignifySignDelete ctermbg=236  ctermfg=1
-let g:signify_sign_delete = '-'
-let g:signify_sign_change = '~'
+" ascii \u258D is used. Also try \u258A-F
+let g:signify_sign_add ='▍'
+let g:signify_sign_delete = '▍'
+let g:signify_sign_change ='▍'
 let g:signify_sign_show_count = 0
 
 " Codefmt: settings

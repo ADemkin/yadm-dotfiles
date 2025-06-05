@@ -356,9 +356,7 @@ call plug#end()
 call glaive#Install()
 
 " Fugitive: settings
-" get grep word under cursor
-nmap <leader>gr :Git grep <C-R><C-W><CR>
-nmap <leader>gm :Git grep <C-R><C-W>(Model):<CR>
+nnoremap tg :Git<CR>
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -530,7 +528,13 @@ let g:mkdp_auto_start = 0
 
 " VimSneak: settings
 let g:sneak#label = 1
-nnoremap s <Plug>Sneak_s
+" s key is mapped in NERDTree and Fugitive
+augroup SneakNonNerdTreeOrFugitive
+    autocmd!
+    autocmd BufEnter * if index(['nerdtree', 'fugitive'], &buftype) != -1 | nnoremap <buffer> s <Plug>Sneak_s | endif
+augroup END
+
+" nnoremap s <Plug>Sneak_s
 highlight! link Sneak Search
 highlight! link SneakCurrent CurSearch
 

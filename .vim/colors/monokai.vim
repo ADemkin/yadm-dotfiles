@@ -141,15 +141,18 @@ call s:h("DiffDelete",    { "fg": s:black,      "bg": s:delbg    })
 call s:h("DiffChange",    { "fg": s:changefg,   "bg": s:changebg })
 call s:h("DiffText",      { "fg": s:black,      "bg": s:aqua     })
 
+call s:h("diffRemoved",   { "fg": s:red   })
+call s:h("diffAdded",     { "fg": s:green })
+
 " fold
 call s:h("Folded",        { "fg": s:warmgrey,   "bg": s:darkblack })
 call s:h("FoldColumn",    {                     "bg": s:darkblack })
 "        Incsearch"
 
 " popup menu
-call s:h("Pmenu",      { "fg": s:white,      "bg": s:lightblack  })
+call s:h("Pmenu",      { "fg": s:white,      "bg": s:lightblack   })
 call s:h("PmenuSel",   { "fg": s:white,       "bg": s:lightblack2 })
-call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey        })
+call s:h("PmenuThumb", { "fg": s:lightblack, "bg": s:grey         })
 
 " Generic Syntax Highlighting
 " ---------------------------

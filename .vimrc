@@ -355,6 +355,9 @@ Plug 'python-rope/ropevim'
 " HardMode: use motions more effectively
 Plug 'dusans/vim-hardmode'
 
+" VimHusk: readline mappings for command line
+Plug 'vim-utils/vim-husk'
+
 call plug#end()
 call glaive#Install()
 
@@ -366,8 +369,6 @@ autocmd FileType fugitive nnoremap <buffer> tp :Git push<CR>
 autocmd FileType fugitive nnoremap <buffer> tP :Git push -f<CR>
 command! GitGraph vertical Git graph
 autocmd FileType fugitive nnoremap <buffer> gg :GitGraph<CR>
-
-
 " nnoremap tp :Git push<CR>
 " nnoremap tP :Git push -f<CR>
 

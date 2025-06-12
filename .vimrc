@@ -358,6 +358,9 @@ Plug 'dusans/vim-hardmode'
 " VimHusk: readline mappings for command line
 Plug 'vim-utils/vim-husk'
 
+" PythonSense: python text objects: m for func/method, c for class
+Plug 'jeetsukumaran/vim-pythonsense'
+
 call plug#end()
 call glaive#Install()
 

@@ -379,23 +379,28 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p |
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " TODO: now working with with fzf
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 " ignore some basic folders
 let NERDTreeIgnore=[".git/", ".idea", ".helm*", "__pycache__", ".ropeproject"]
+" autocmd FileType nerdtree nnoremap <buffer> l 
+let NERDTreeMapActivateNode = 'l'
+let NERDTreeMapOpenRecursively = 'L'
+let NERDTreeMapCloseDir = 'h'
+let NERDTreeMapCloseChildren = 'H'
 
-" ALE settings
+" ALE: settings
 let g:ale_disable_lsp = 1
 let g:ale_open_list = 0
 let g:ale_lint_on_enter = 0
 let g:ale_python_flake8_options = '--ignore=W191,E501,W504'
 let g:ale_python_mypy_options = '--no-warn-no-return --disallow-untyped-defs'
 let g:ale_linters = {
-\   'python': ['flake8'],
-\   'javascript': ['eslint'],
-\   'go': ['gopls'],
-\  'markdown': ['markdownlint', 'writegood', 'alex', 'proselint'],
-\  'json': ['jsonlint'],
-\ }
+    \'python': ['flake8'],
+    \'javascript': ['eslint'],
+    \'go': ['gopls'],
+    \'markdown': ['markdownlint', 'writegood', 'alex', 'proselint'],
+    \'json': ['jsonlint'],
+\}
 let g:ale_completion_enabled = 0
 let g:ale_lint_delay = 1500
 " highlight clear ALEErrorSign

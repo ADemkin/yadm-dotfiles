@@ -13,6 +13,12 @@ filetype on
 filetype indent on
 filetype plugin on
 
+" hide buffer when it's abandoned
+set hidden
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " tabs and spaces
 set autoindent
 set tabstop=4
@@ -57,7 +63,7 @@ set relativenumber
 set numberwidth=1
 " Automatically split or merge signcolumn depending on the window width
 function! UpdateSignColumn() abort
-    if &buftype == 'terminal'
+    if &buftype == 'terminal' || &buftype == 'nowrite'
         setlocal signcolumn=no nonumber norelativenumber
     elseif winwidth(winnr()) > &colorcolumn + 10
         setlocal signcolumn=auto
@@ -68,7 +74,7 @@ endfunction
 autocmd WinResized * call UpdateSignColumn()
 
 " resize all windows when window restized
-autocmd VimResized * :wincmd =
+" autocmd VimResized * :wincmd =
 
 " show cursor line
 set cursorline
@@ -203,13 +209,7 @@ autocmd FileType gitcommit setlocal spell
 call matchadd('Error', '\s+$')
 
 " Show syntax highlighting groups for word under cursor
-nmap <leader>w :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
+nnoremap <leader>w :echo synIDattr(synID(line("."), col("."), 1), 'name')<CR>
 
 " Show buffer and expect to enter buffer number
 nmap <leader>b :buffers<cr>:buffer<space>

@@ -352,11 +352,24 @@ Plug 'tpope/vim-unimpaired'
 " Ropevim: autoimport and refactor
 Plug 'python-rope/ropevim'
 
+" HardMode: use motions more effectively
+Plug 'dusans/vim-hardmode'
+
 call plug#end()
 call glaive#Install()
 
 " Fugitive: settings
-nnoremap tg :Git<CR>
+nnoremap ts :Git<CR>
+nnoremap tb :Git blame<CR>
+nnoremap td :Git diff<CR>
+autocmd FileType fugitive nnoremap <buffer> tp :Git push<CR>
+autocmd FileType fugitive nnoremap <buffer> tP :Git push -f<CR>
+command! GitGraph vertical Git graph
+autocmd FileType fugitive nnoremap <buffer> gg :GitGraph<CR>
+
+
+" nnoremap tp :Git push<CR>
+" nnoremap tP :Git push -f<CR>
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -615,7 +628,7 @@ nmap gea <Plug>(EasyAlign)
 " Signify: settings
 set updatetime=100
 nnoremap tu :SignifyHunkUndo<CR>
-nnoremap td :SignifyHunkDiff<CR>
+nnoremap tD :SignifyHunkDiff<CR>
 nnoremap tj <plug>(signify-next-hunk)
 nnoremap tk <plug>(signify-prev-hunk)
 nnoremap ]c <plug>(signify-next-hunk)
@@ -628,9 +641,12 @@ highlight SignifySignAdd    ctermbg=236 ctermfg=2
 highlight SignifySignChange ctermbg=236 ctermfg=3
 highlight SignifySignDelete ctermbg=236  ctermfg=1
 " ascii \u258D is used. Also try \u258A-F
-let g:signify_sign_add ='▍'
-let g:signify_sign_delete = '▍'
-let g:signify_sign_change ='▍'
+" let g:column_sign = '▍'  " \u258D
+" let g:column_sign = '▎'  " \u258E
+let g:column_sign = '▏'  " \u258F
+let g:signify_sign_add = g:column_sign
+let g:signify_sign_delete = g:column_sign
+let g:signify_sign_change = g:column_sign
 let g:signify_sign_show_count = 0
 
 " Codefmt: settings

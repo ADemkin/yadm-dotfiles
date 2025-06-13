@@ -28,8 +28,14 @@ set expandtab
 set nojoinspaces
 set list
 set listchars=tab:\¦\ ,trail:·
+
+function IsReadOnly()
+    return &readonly || &buftype == 'nowrite' || &buftype == 'terminal' || &buftype == 'nofile'
+endfunction
+
 " do not highlight in read-only buffers
-autocmd BufWinEnter * if &buftype == 'nowrite' | setlocal nolist | endif
+autocmd FileType * if IsReadOnly() | set nolist | endif
+autocmd TerminalWinOpen * set nolist
 
 set pastetoggle=<leader>p
 
@@ -65,7 +71,7 @@ set relativenumber
 set numberwidth=1
 " Automatically split or merge signcolumn depending on the window width
 function! UpdateSignColumn() abort
-    if &buftype == 'terminal' || &buftype == 'nowrite'
+    if IsReadOnly()
         setlocal signcolumn=no nonumber norelativenumber
     elseif winwidth(winnr()) > &colorcolumn + 10
         setlocal signcolumn=auto
@@ -74,6 +80,11 @@ function! UpdateSignColumn() abort
     endif
 endfunction
 autocmd WinResized * call UpdateSignColumn()
+
+augroup HelpInRightSplit
+  autocmd!
+  autocmd BufWinEnter *.txt if &buftype == 'help' | wincmd L | vertical resize 80 | endif
+augroup END
 
 " resize all windows when window restized
 " autocmd VimResized * :wincmd =
@@ -207,7 +218,6 @@ autocmd FileType markdown setlocal spell
 autocmd FileType gitcommit setlocal spell
 " autocmd FileType python setlocal spell
 
-" additional error highlight
 call matchadd('Error', '\s+$')
 
 " Show syntax highlighting groups for word under cursor
@@ -250,6 +260,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Fugitive: all actions with :Git
 Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
 
 " Commentary: comment code with ease
 Plug 'tpope/vim-commentary'
@@ -366,16 +377,23 @@ Plug 'jeetsukumaran/vim-pythonsense'
 call plug#end()
 call glaive#Install()
 
+
 " Fugitive: settings
 nnoremap ts :Git<CR>
 nnoremap tb :Git blame<CR>
 nnoremap td :Git diff<CR>
+nnoremap tg :Flog<CR>
 autocmd FileType fugitive nnoremap <buffer> tp :Git push<CR>
 autocmd FileType fugitive nnoremap <buffer> tP :Git push -f<CR>
 command! GitGraph vertical Git graph
 autocmd FileType fugitive nnoremap <buffer> gg :GitGraph<CR>
 " nnoremap tp :Git push<CR>
 " nnoremap tP :Git push -f<CR>
+let g:flog_permanent_default_opts = {
+    \'date': 'short',
+\}
+let g:flog_enable_dynamic_commit_hl = 1
+
 
 " NERDTree: settings
 let NERDTreeShowHidden = 1
@@ -401,11 +419,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 " ignore some basic folders
 let NERDTreeIgnore=[".git/", ".idea", ".helm*", "__pycache__", ".ropeproject"]
-" autocmd FileType nerdtree nnoremap <buffer> l 
-let NERDTreeMapActivateNode = 'l'
-let NERDTreeMapOpenRecursively = 'L'
-let NERDTreeMapCloseDir = 'h'
-let NERDTreeMapCloseChildren = 'H'
+
 
 " ALE: settings
 let g:ale_disable_lsp = 1

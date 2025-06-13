@@ -28,6 +28,8 @@ set expandtab
 set nojoinspaces
 set list
 set listchars=tab:\¦\ ,trail:·
+" do not highlight in read-only buffers
+autocmd BufWinEnter * if &buftype == 'nowrite' | setlocal nolist | endif
 
 set pastetoggle=<leader>p
 

@@ -581,7 +581,7 @@ function! IsWide()
     return winwidth(winnr()) > 100
 endfunction
 function! IsTerminal()
-    return lightline#mode() == 'TERMINAL'
+    return lightline#mode() == 'TERMINAL' || &buftype == 'terminal'
 endfunction
 " LSC only shown in non terminal
 function! LightlineLSCServerStatus()
@@ -618,7 +618,7 @@ let g:lightline = {
 \        'filename': '%{IsTerminal()?"":expand("%t")}',
 \    },
 \    'component_visible_condition': {
-\        'modified': '(!IsTerminal() && &modified)',
+\        'modified': '(!IsTerminal() && &modified && &modifiable)',
 \        'fileencoding': '(!IsTerminal() && IsWide())',
 \    },
 \    'component_function': {

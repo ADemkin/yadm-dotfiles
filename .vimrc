@@ -374,6 +374,9 @@ Plug 'vim-utils/vim-husk'
 " PythonSense: python text objects: m for func/method, c for class
 Plug 'jeetsukumaran/vim-pythonsense'
 
+" Context: show scope event if it's not visible
+Plug 'wellle/context.vim'
+
 call plug#end()
 call glaive#Install()
 
@@ -756,3 +759,9 @@ let g:ropevim_autoimport_modules = [
 \]
 nnoremap <leader>i :RopeAutoImport<CR><ESC>:w<CR>
 nnoremap <leader>I :RopeGenerateAutoimportCache<CR>
+
+" Context: settings
+let g:context_enabled = 1
+let g:context_max_height = 2
+let g:context_highlight_border = '<hide>'
+autocmd FileType nerdtree let b:context_enabled = 0

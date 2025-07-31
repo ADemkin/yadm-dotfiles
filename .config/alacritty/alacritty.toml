@@ -44,7 +44,8 @@ y = 0
 live_config_reload = true
 
 import = [
-    "~/.config/alacritty/monokai.toml",
+    # "~/.config/alacritty/monokai.toml",
+    "~/.config/alacritty/gruvbox.toml",
     "~/.config/alacritty/victor-mono.toml",
     "~/.config/alacritty/keyboard.toml",
 ]

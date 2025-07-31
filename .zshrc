@@ -27,6 +27,7 @@ setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
 # EMACS mode
 bindkey -e
 setopt EMACS
+# Allow to edit command line in editor
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^x^e" edit-command-line  # open editor with C-x C-e
@@ -80,19 +81,20 @@ function grep() {
 
 
 # Completion
-setopt AUTO_MENU AUTO_LIST
-zstyle ":completion:*:functions" ignored-patterns "_*"
-zstyle ":completion:*" matcher-list "" 'm:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
+setopt AUTO_MENU
+setopt AUTO_LIST
+# zstyle ":completion:*:functions" ignored-patterns "_*"
+# zstyle ":completion:*" matcher-list "" 'm:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
+# _mycomp () {
+#     [ $CURRENT -eq 1 ] && _command_names || _files
+# }
+# zstyle ":completion:*" completer _mycomp _parameters
+# autoload -U compinit ; compinit -d /tmp/.zcompdump
+# zstyle ":completion:*:default" list-colors ""
+# autoload -U complist
 
-_mycomp () {
-    [ $CURRENT -eq 1 ] && _command_names || _files
-}
-zstyle ":completion:*" completer _mycomp _parameters
-
-autoload -U compinit ; compinit -d /tmp/.zcompdump
-
-zstyle ":completion:*:default" list-colors ""
-autoload -U complist
+# My Completion
+autoload -U compinit; compinit
 
 # Highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -166,7 +168,7 @@ _activate_venv() {
         export PYTHONPATH=$_basepath
     fi
 }
-alias act="_activate_venv"
+alias va="_activate_venv"
 
 print256colors() {
     for i in {0..255} ; do
@@ -209,8 +211,7 @@ replace() {
 alias p="poetry"
 
 # workflow
-alias "%ml"="cd ~/code/moscowliuda-webinar-utils && act; tmux rename-window 'moscowliuda'"
-alias "%lsb"="cd ~/code/lionsoul-backend && act; tmux rename-window 'lsb'"
+alias "%ml"="cd ~/code/moscowliuda-webinar-utils && va; tmux rename-window 'moscowliuda'"
 
 # Copilot
 alias copilot=" gh copilot explain"
@@ -226,4 +227,10 @@ fi
 
 # completions for brew installed apps
 # installed with docker, etc...
+# source ~/.zsh-completion
 source $(brew --prefix)/share/zsh/site-functions
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/antondemkin/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

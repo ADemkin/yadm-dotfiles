@@ -24,7 +24,7 @@ export LESS=RXi
 # export PIP_VIRTUALENV_BASE=~/.virtualenvs
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonstartup.py"
-export PYTHONWARNINGS=ignore
+# export PYTHONWARNINGS=ignore
 
 # Go
 export GOPATH="$HOME/go"

@@ -88,11 +88,11 @@ chars = "\u00029"
 key = "Key9"
 mods = "Control"
 
-# enter select mode
+# tmux select mode
 [[keyboard.bindings]]
 chars = "\u0002["
 key = "LBracket"
-mods = "Alt"
+mods = "Alt|Shift"
 
 # edit current buffer in vim
 [[keyboard.bindings]]

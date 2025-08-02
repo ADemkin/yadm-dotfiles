@@ -64,3 +64,6 @@ vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Open terminal
 -- vim.keymap.set('n', '<leader>t', ':vert terminal<CR>', opts)
+
+vim.keymap.set('n', 'q<Tab>', '<cmd>cnext<CR>', opts)
+vim.keymap.set('n', 'q<S-Tab>', '<cmd>cprev<CR>', opts)

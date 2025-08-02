@@ -29,6 +29,7 @@ return {
     keymap = {
       ['<C-l>'] = { 'show_documentation', 'hide_documentation' },
       ['<C-c>'] = { 'hide' },
+      ['<C-e>'] = false,
 
       ['<TAB>'] = { 'select_and_accept', 'fallback_to_mappings' },
 

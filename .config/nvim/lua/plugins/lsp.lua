@@ -29,35 +29,6 @@ return {
     },
   },
   config = function()
-    -- Brief aside: **What is LSP?**
-    --
-    -- LSP is an initialism you've probably heard, but might not understand what it is.
-    --
-    -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-    -- and language tooling communicate in a standardized fashion.
-    --
-    -- In general, you have a "server" which is some tool built to understand a particular
-    -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-    -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-    -- processes that communicate with some "client" - in this case, Neovim!
-    --
-    -- LSP provides Neovim with features like:
-    --  - Go to definition
-    --  - Find references
-    --  - Autocompletion
-    --  - Symbol Search
-    --  - and more!
-    --
-    -- Thus, Language Servers are external tools that must be installed separately from
-    -- Neovim. This is where `mason` and related plugins come into play.
-    --
-    -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-    -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
-    --  This function gets run when an LSP attaches to a particular buffer.
-    --    That is to say, every time a new file is opened that is associated with
-    --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-    --    function will be executed to configure the current buffer
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
@@ -67,8 +38,13 @@ return {
         end
 
         map('gr', vim.lsp.buf.rename, '[R]ename')
-        -- map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-        map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+        -- map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+        map('gD', function(opts)
+          vim.cmd('vsplit')
+          -- vim.lsp.buf.definition(opts)
+          require('telescope.builtin').lsp_definitions(opts)
+        end, '[G]oto [D]efinition in vsplit')
         map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
         -- map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
         map('gu', vim.lsp.buf.references, '[G]oto [U]sages')
@@ -76,16 +52,7 @@ return {
         map('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 
         vim.keymap.set('n', '<leader>qf', vim.diagnostic.setqflist, { desc = 'Open [Q]uickfix [D]iagnostics' })
-        vim.keymap.set('n', '<leader>d', vim.diagnostic.setqflist, { desc = 'Open [D]iagnostics' })
-
-        -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-        ---@param client vim.lsp.Client
-        ---@param method vim.lsp.protocol.Method
-        ---@param bufnr? integer some lsp support methods only in specific files
-        ---@return boolean
-        local function client_supports_method(client, method, bufnr)
-          return client:supports_method(method, bufnr)
-        end
+        vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
@@ -93,7 +60,7 @@ return {
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -116,12 +83,21 @@ return {
           })
         end
 
+        vim.keymap.set('n', 'gvt', function()
+          local current = vim.diagnostic.config().virtual_text
+          if current then
+            vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+          else
+            vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+          end
+        end, { desc = 'Toggle virtual text/lines' })
+
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
       end,
     })
 
     -- Diagnostic Config
-    -- See :help vim.diagnostic.Opts
+    ---@param opts vim.diagnostic.Opts
     vim.diagnostic.config({
       severity_sort = true,
       underline = { severity = vim.diagnostic.severity.ERROR },
@@ -129,6 +105,7 @@ return {
         prefix = '●',
         spacing = 2,
       },
+      signs = false,
     })
 
     -- LSP servers and clients are able to communicate to each other what features they support.

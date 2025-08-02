@@ -5,10 +5,6 @@ vim.g.maplocalleader = ' '
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
--- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
-
 -- Find and center
 vim.keymap.set('n', 'n', 'nzzzv', opts)
 vim.keymap.set('n', 'N', 'Nzzzv', opts)
@@ -68,6 +64,3 @@ vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Open terminal
 -- vim.keymap.set('n', '<leader>t', ':vert terminal<CR>', opts)
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)

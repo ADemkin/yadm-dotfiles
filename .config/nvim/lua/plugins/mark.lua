@@ -5,9 +5,12 @@ return {
       'inkarkat/vim-ingo-library',
     },
   },
+  init = function()
+    vim.g.mw_no_mappings = 1
+  end,
   config = function()
     vim.cmd([[
-      let g:mwDefaultHighlightingNum = 19
+      nnoremap <Leader>m <Plug>MarkSet
       highlight MarkWord0 guibg=#fabd2f guifg=#282828 ctermbg=214 ctermfg=235
       highlight MarkWord1 guibg=#d3869b guifg=#282828 ctermbg=175 ctermfg=235
       highlight MarkWord2 guibg=#8ec07c guifg=#282828 ctermbg=108 ctermfg=235
@@ -28,6 +31,7 @@ return {
       highlight MarkWord17 guibg=#b16286 guifg=#ebdbb2 ctermbg=175 ctermfg=223
       highlight MarkWord18 guibg=#d65d0e guifg=#ebdbb2 ctermbg=130 ctermfg=223
       highlight MarkWord19 guibg=#458588 guifg=#ebdbb2 ctermbg=66 ctermfg=223
+      let g:mwDefaultHighlightingNum = 19
     ]])
     vim.keymap.set('n', '<C-c>', ':nohl<CR>:MarkClear<CR>', { silent = true })
   end,

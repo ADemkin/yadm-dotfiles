@@ -76,6 +76,7 @@ return {
         map('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 
         vim.keymap.set('n', '<leader>qf', vim.diagnostic.setqflist, { desc = 'Open [Q]uickfix [D]iagnostics' })
+        vim.keymap.set('n', '<leader>d', vim.diagnostic.setqflist, { desc = 'Open [D]iagnostics' })
 
         -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
         ---@param client vim.lsp.Client

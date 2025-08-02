@@ -33,12 +33,13 @@ require('lazy').setup({
   require('plugins/autopairs'), -- autopairs that doesn't make me barf
 
   -- Heavyweight plugins
-  require('plugins/neotree'),
-  require('plugins/autocomplete'),
-  require('plugins/treesitter'),
-  require('plugins/treesitter-context'),
-  require('plugins/lsp'),
-  require('plugins/null-ls'),
-  require('plugins/telescope'),
-  require('plugins/ai'),
+  require('plugins/neotree'), -- file explorer
+  require('plugins/autocomplete'), -- autocompletion
+  require('plugins/treesitter'), -- syntax highlighting and more
+  require('plugins/treesitter-context'), -- show current function/class
+  require('plugins/treesitter-textobjects'),
+  require('plugins/lsp'), -- LSP support
+  require('plugins/null-ls'), -- formatting and diagnostics
+  require('plugins/telescope'), -- fuzzy finder
+  require('plugins/ai'), -- AI integration
 })

@@ -46,12 +46,8 @@ return {
     signature = { enabled = true },
     cmdline = {
       keymap = {
-        -- Fix conflict with cmd readline <C-e> by remapping to almost 'cmdline'
+        -- Do not remap my readline cmdline keys!
         preset = 'none',
-        ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-        ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
-        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
       },
     },
   },

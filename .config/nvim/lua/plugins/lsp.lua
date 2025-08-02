@@ -2,19 +2,13 @@ return {
   -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
-    -- Mason must be loaded before its dependents so we need to set it up here.
-    -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
     -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
-
     -- Allows extra capabilities provided by blink.cmp
     'saghen/blink.cmp',
-
     -- Allow fucking lua language server to work out of the box
     {
       'folke/lazydev.nvim',
@@ -46,13 +40,10 @@ return {
           require('telescope.builtin').lsp_definitions(opts)
         end, '[G]oto [D]efinition in vsplit')
         map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        -- map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
         map('gu', vim.lsp.buf.references, '[G]oto [U]sages')
-        -- map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
         map('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 
-        vim.keymap.set('n', '<leader>qf', vim.diagnostic.setqflist, { desc = 'Open [Q]uickfix [D]iagnostics' })
-        vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostics' })
+        vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open quickfix diagnostics' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

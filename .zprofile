@@ -10,8 +10,8 @@ export SAVEHIST=64000
 
 # Basic envs
 export SHELL=/bin/zsh
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Less options
 export PAGER=less

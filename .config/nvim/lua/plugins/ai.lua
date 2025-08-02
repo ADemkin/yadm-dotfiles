@@ -1,53 +1,53 @@
 return {
-  {
-    'github/copilot.vim',
-    config = function()
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_assume_mapped = true
-      vim.keymap.set('i', '<C-e>', 'copilot#Accept("\\<CR>")', { silent = true, expr = true, script = true, replace_keycodes = false })
-
-      vim.keymap.set('n', '<Leader>cd', ':Copilot disable<CR>', { noremap = true })
-      vim.keymap.set('n', '<Leader>ce', ':Copilot enable<CR>', { noremap = true })
-      vim.keymap.set('n', '<Leader>cc', ':Copilot panel<CR>', { noremap = true })
-    end,
-  },
-  -- lua version of copilot
   -- {
-  --   'zbirenbaum/copilot.lua',
-  --   cmd = 'Copilot',
-  --   event = 'InsertEnter',
+  --   'github/copilot.vim',
   --   config = function()
-  --     require('copilot').setup({
-  --       suggestion = {
-  --         enabled = true,
-  --         auto_trigger = true,
-  --         keymap = {
-  --           accept = '<C-e>',
-  --           accept_word = false,
-  --           accept_line = false,
-  --           next = '<M-]>',
-  --           prev = '<M-[>',
-  --           dismiss = '<C-]>',
-  --         },
-  --       },
-  --     })
+  --     vim.g.copilot_no_tab_map = true
+  --     vim.g.copilot_assume_mapped = true
+  --     vim.keymap.set('i', '<C-e>', 'copilot#Accept("\\<CR>")', { silent = true, expr = true, script = true, replace_keycodes = false })
 
-  --     -- Disable copilot when blink completion is active
-  --     vim.api.nvim_create_autocmd('User', {
-  --       pattern = 'BlinkCmpMenuOpen',
-  --       callback = function()
-  --         vim.b.copilot_suggestion_hidden = true
-  --       end,
-  --     })
-
-  --     vim.api.nvim_create_autocmd('User', {
-  --       pattern = 'BlinkCmpMenuClose',
-  --       callback = function()
-  --         vim.b.copilot_suggestion_hidden = false
-  --       end,
-  --     })
+  --     vim.keymap.set('n', '<Leader>cd', ':Copilot disable<CR>', { noremap = true })
+  --     vim.keymap.set('n', '<Leader>ce', ':Copilot enable<CR>', { noremap = true })
+  --     vim.keymap.set('n', '<Leader>cc', ':Copilot panel<CR>', { noremap = true })
   --   end,
   -- },
+  -- lua version of copilot
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    config = function()
+      require('copilot').setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          keymap = {
+            accept = '<tab>',
+            accept_word = false,
+            accept_line = false,
+            next = '<M-]>',
+            prev = '<M-[>',
+            dismiss = '<C-c>',
+          },
+        },
+      })
+
+      -- Disable copilot when blink completion is active
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'BlinkCmpMenuOpen',
+        callback = function()
+          vim.b.copilot_suggestion_hidden = true
+        end,
+      })
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'BlinkCmpMenuClose',
+        callback = function()
+          vim.b.copilot_suggestion_hidden = false
+        end,
+      })
+    end,
+  },
   -- {
   --   'yetone/avante.nvim',
   --   build = 'make',

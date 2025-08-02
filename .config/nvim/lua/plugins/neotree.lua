@@ -14,6 +14,7 @@ return {
       enable_git_status = true,
       git_status_async = true,
       enable_diagnostics = false,
+      enable_modified_markers = true,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
       sort_case_insensitive = false,
       sort_function = nil,
@@ -157,41 +158,19 @@ return {
           },
         },
         follow_current_file = {
-          enabled = false, -- This will find and focus the file in the active buffer every time
-          --               -- the current file is changed while the tree is open.
-          leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+          enabled = false,
+          leave_dirs_open = true,
         },
-        group_empty_dirs = false, -- when true, empty folders will be grouped together
-        use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes (default: false)
-        -- instead of relying on nvim autocmd events.
+        group_empty_dirs = false,
+        use_libuv_file_watcher = true,
         window = {
           mappings = {
             ['u'] = 'navigate_up',
             ['C'] = 'set_root',
             ['H'] = 'toggle_hidden',
             -- ['/'] = 'fuzzy_finder',
-            -- ['F'] = 'fuzzy_finder',
-            ['D'] = 'fuzzy_finder_directory',
-            ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
-            -- ["D"] = "fuzzy_sorter_directory",
-            ['f'] = 'filter_on_submit',
+            ['/'] = 'filter_on_submit',
             ['<c-c>'] = 'clear_filter',
-            ['[g'] = 'prev_git_modified',
-            [']g'] = 'next_git_modified',
-            ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
-            ['oc'] = { 'order_by_created', nowait = false },
-            ['od'] = { 'order_by_diagnostics', nowait = false },
-            ['og'] = { 'order_by_git_status', nowait = false },
-            ['om'] = { 'order_by_modified', nowait = false },
-            ['on'] = { 'order_by_name', nowait = false },
-            ['os'] = { 'order_by_size', nowait = false },
-            ['ot'] = { 'order_by_type', nowait = false },
-          },
-          fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
-            ['<down>'] = 'move_cursor_down',
-            ['<C-n>'] = 'move_cursor_down',
-            ['<up>'] = 'move_cursor_up',
-            ['<C-p>'] = 'move_cursor_up',
           },
         },
       },

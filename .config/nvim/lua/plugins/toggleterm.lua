@@ -3,18 +3,14 @@ return {
   version = '*',
   event = 'VeryLazy',
   config = function()
-    -- force toggleterm tp respect <C-W> = resize
-    vim.api.nvim_create_autocmd('TermOpen', {
-      callback = function()
-        vim.wo.winfixheight = false
-        vim.wo.winfixwidth = false
-      end,
-    })
     require('toggleterm').setup({
       size = function(term)
         if term.direction == 'horizontal' then
           return 20
         elseif term.direction == 'vertical' then
+          vim.schedule(function()
+            vim.cmd('wincmd =') -- equalize window sizes
+          end)
           return 80
         end
       end,

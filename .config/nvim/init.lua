@@ -16,17 +16,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  -- Appearance
+  require('plugins/lualine'),
   require('themes/gruvbox'),
 
   -- lightweight plugins
   require('plugins/tpope'),
   require('plugins/tmux'), -- tmux integration and panel resizing
-  require('plugins/readline'), -- readline bindings for command line
   require('plugins/indentline'), -- indent guides
   require('plugins/argwrap'), -- arguments wrapper
   require('plugins/wilder'), -- command line completion
   require('plugins/mark'), -- highlights
-  require('plugins/lualine'), -- status line
   require('plugins/flash'), -- S motion
   require('plugins/toggleterm'), -- terminal integration
   require('plugins/gitsigns'), -- Git integration
@@ -42,4 +42,8 @@ require('lazy').setup({
   require('plugins/null-ls'), -- formatting and diagnostics
   require('plugins/telescope'), -- fuzzy finder
   require('plugins/ai'), -- AI integration
+  require('plugins/database'), -- database
+  require('plugins/trouble'), -- fancy quickfix
+
+  require('plugins/readline'), -- readline bindings for command line
 })

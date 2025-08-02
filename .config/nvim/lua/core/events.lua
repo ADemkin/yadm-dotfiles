@@ -14,14 +14,14 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter', 'TermOpen' }, {
   pattern = 'term://*',
   command = 'startinsert',
 })
---
+
 -- Prevent cursor from blinking in terminal mode
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function()
     vim.opt_local.guicursor = ''
   end,
 })
---
+
 -- Restore cursor position when opening a file
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = vim.api.nvim_create_augroup('LastPlace', { clear = true }),

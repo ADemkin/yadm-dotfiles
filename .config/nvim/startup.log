@@ -1,0 +1,760 @@
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- NVIM STARTING ---
+000.072  000.071: event init
+000.431  000.359: early init
+000.562  000.131: locale set
+000.595  000.033: init first window
+010.255  009.661: inits 1
+010.263  000.008: window checked
+010.267  000.004: parsing arguments
+010.919  000.035  000.035: require('vim.shared')
+011.026  000.027  000.027: require('vim.inspect')
+011.061  000.027  000.027: require('vim._options')
+011.063  000.141  000.087: require('vim._editor')
+011.064  000.211  000.036: require('vim._init_packages')
+011.066  000.588: init lua interpreter
+013.683  002.617: nvim_ui_attach
+014.042  000.359: nvim_set_client_info
+014.044  000.001: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.000  000.000: --- NVIM STARTING ---
+000.055  000.054: event init
+000.170  000.116: early init
+000.467  000.297: locale set
+000.498  000.031: init first window
+000.839  000.341: inits 1
+000.853  000.014: window checked
+000.856  000.003: parsing arguments
+001.234  000.032  000.032: require('vim.shared')
+001.302  000.026  000.026: require('vim.inspect')
+001.337  000.026  000.026: require('vim._options')
+001.339  000.103  000.051: require('vim._editor')
+001.340  000.160  000.025: require('vim._init_packages')
+001.341  000.325: init lua interpreter
+003.004  001.663: expanding arguments
+003.016  000.012: inits 2
+003.247  000.231: init highlight
+003.248  000.001: waiting for UI
+003.367  000.119: done waiting for UI
+003.372  000.005: clear screen
+003.483  000.014  000.014: require('vim.keymap')
+004.486  000.142  000.142: sourcing nvim_exec2()
+004.621  001.247  001.091: require('vim._defaults')
+004.623  000.004: init default mappings & autocommands
+005.453  000.385  000.385: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/ftplugin.vim
+005.813  000.288  000.288: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/indent.vim
+007.168  000.913  000.913: require('core.keymaps')
+007.543  000.373  000.373: require('core.options')
+008.215  000.670  000.670: require('core.search')
+008.463  000.247  000.247: require('core.ui')
+008.798  000.334  000.334: require('core.events')
+009.655  000.821  000.821: require('lazy')
+010.178  000.520  000.520: require('plugins/lualine')
+010.525  000.345  000.345: require('themes/gruvbox')
+010.741  000.215  000.215: require('plugins/tpope')
+011.014  000.272  000.272: require('plugins/tmux')
+011.376  000.361  000.361: require('plugins/indentline')
+011.660  000.282  000.282: require('plugins/argwrap')
+012.065  000.405  000.405: require('plugins/wilder')
+012.300  000.233  000.233: require('plugins/mark')
+012.670  000.369  000.369: require('plugins/flash')
+012.993  000.322  000.322: require('plugins/toggleterm')
+013.284  000.289  000.289: require('plugins/gitsigns')
+013.668  000.383  000.383: require('plugins/autopairs')
+014.003  000.334  000.334: require('plugins/neotree')
+014.318  000.314  000.314: require('plugins/autocomplete')
+014.768  000.448  000.448: require('plugins/treesitter')
+015.158  000.389  000.389: require('plugins/treesitter-context')
+015.453  000.293  000.293: require('plugins/treesitter-textobjects')
+015.620  000.166  000.166: require('plugins/lsp')
+015.990  000.369  000.369: require('plugins/null-ls')
+016.290  000.298  000.298: require('plugins/telescope')
+016.546  000.255  000.255: require('plugins/ai')
+016.872  000.324  000.324: require('plugins/database')
+017.191  000.318  000.318: require('plugins/trouble')
+017.395  000.203  000.203: require('plugins/readline')
+017.421  000.014  000.014: require('ffi')
+017.466  000.026  000.026: require('vim.fs')
+017.718  000.250  000.250: require('vim.uri')
+017.728  000.304  000.029: require('vim.loader')
+018.090  000.341  000.341: require('lazy.stats')
+018.396  000.270  000.270: require('lazy.core.util')
+018.761  000.363  000.363: require('lazy.core.config')
+019.275  000.223  000.223: require('lazy.core.handler')
+020.314  000.188  000.188: require('lazy.pkg')
+020.317  000.528  000.340: require('lazy.core.meta')
+020.322  001.045  000.517: require('lazy.core.plugin')
+020.327  001.565  000.297: require('lazy.core.loader')
+020.701  000.183  000.183: require('lazy.core.fragments')
+023.315  000.273  000.273: require('lazy.core.handler.event')
+023.317  000.430  000.156: require('lazy.core.handler.ft')
+023.553  000.233  000.233: require('lazy.core.handler.keys')
+023.663  000.108  000.108: require('lazy.core.handler.cmd')
+024.147  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+024.157  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+025.041  000.151  000.151: sourcing nvim_exec2() called at /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/filetype.lua:0
+025.043  000.541  000.391: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/filetype.lua
+025.045  000.597  000.055: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+025.225  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+025.232  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+026.683  001.406  001.406: require('gruvbox')
+028.318  000.413  000.413: require('vim.version')
+030.612  003.063  002.650: sourcing /Users/antondemkin/.local/share/nvim/lazy/gruvbox.nvim/colors/gruvbox.lua
+030.949  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+030.955  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+032.189  000.345  000.345: require('lualine_require')
+032.903  001.944  001.599: require('lualine')
+033.166  000.008  000.008: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+034.566  000.339  000.339: require('lualine.themes.gruvbox_dark')
+035.254  000.006  000.006: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.264  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.270  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.276  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.283  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.305  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.310  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.315  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.320  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.327  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.332  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.336  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.341  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.345  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.350  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.355  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.359  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.364  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.368  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+035.377  000.006  000.006: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+037.346  000.144  000.144: require('lualine.utils.mode')
+037.878  000.008  000.008: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+037.885  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.962  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.971  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.978  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.983  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.988  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.993  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+038.999  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.041  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.047  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.077  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.082  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.138  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.143  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.148  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.154  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.159  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.164  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.169  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.184  000.012  000.012: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.191  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.195  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.266  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.276  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.338  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.343  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.347  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.351  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.358  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.910  000.007  000.007: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.916  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.921  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+039.925  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.569  000.007  000.007: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.587  000.004  000.004: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.598  000.008  000.008: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.605  000.004  000.004: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.610  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.618  010.001  007.409: require('lualine')
+040.707  000.008  000.008: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.764  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.767  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.770  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.772  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.775  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.777  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.779  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.782  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.784  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.787  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.789  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.791  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.794  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.796  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.798  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.800  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.803  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.814  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.827  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.835  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.837  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.840  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.842  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.844  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.847  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.849  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.852  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.854  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.856  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.858  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.860  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.863  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.865  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.867  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.869  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.871  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.873  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.875  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.878  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.880  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.882  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.884  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.886  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.891  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.893  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.895  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.898  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.900  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.902  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.920  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.922  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.925  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.927  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.930  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.939  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.945  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.950  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.956  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.960  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.965  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.969  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.973  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.977  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.982  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.988  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.991  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+040.995  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.000  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.004  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.008  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.012  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.016  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.020  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.027  000.005  000.005: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.124  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.129  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.236  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.242  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.252  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.256  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.260  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.265  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.269  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.276  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.280  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.283  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.287  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.291  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.297  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.301  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.306  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.309  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.314  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.318  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.322  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.325  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.329  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.334  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.338  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.343  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.347  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.351  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.355  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.358  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.382  000.004  000.004: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.386  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.390  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.394  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.524  000.011  000.011: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.532  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.542  000.008  000.008: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.547  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.552  000.003  000.003: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.741  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+041.747  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+042.927  000.203  000.203: require('mason-core.path')
+043.530  000.190  000.190: require('mason-core.functional.data')
+043.671  000.138  000.138: require('mason-core.functional.function')
+043.870  000.194  000.194: require('mason-core.functional.list')
+044.086  000.195  000.195: require('mason-core.functional.relation')
+044.262  000.172  000.172: require('mason-core.functional.logic')
+044.519  000.255  000.255: require('mason-core.functional.number')
+044.780  000.256  000.256: require('mason-core.functional.string')
+044.922  000.138  000.138: require('mason-core.functional.table')
+045.056  000.131  000.131: require('mason-core.functional.type')
+045.059  001.932  000.264: require('mason-core.functional')
+045.131  002.203  000.270: require('mason-core.platform')
+045.255  000.122  000.122: require('mason.settings')
+045.258  002.945  000.417: require('mason-core.installer.InstallLocation')
+045.776  000.231  000.231: require('mason-core.log')
+045.778  000.341  000.110: require('mason-core.EventEmitter')
+046.801  001.021  001.021: require('mason-registry.sources')
+046.808  001.549  000.187: require('mason-registry')
+046.810  004.997  000.503: require('mason')
+047.295  000.195  000.195: require('mason.api.command')
+047.356  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+047.404  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+047.936  000.241  000.241: sourcing /Users/antondemkin/.local/share/nvim/lazy/mason-tool-installer.nvim/plugin/mason-tool-installer.lua
+047.939  000.291  000.050: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+047.944  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+047.951  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+048.154  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+048.205  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+050.280  000.191  000.191: require('fidget.spinner.patterns')
+050.282  000.423  000.232: require('fidget.spinner')
+050.396  000.112  000.112: require('fidget.options')
+050.401  000.806  000.271: require('fidget.progress.display')
+050.640  000.128  000.128: require('fidget.logger')
+051.367  000.229  000.229: require('vim.lsp.log')
+052.162  000.792  000.792: require('vim.lsp.protocol')
+052.550  000.386  000.386: require('vim.lsp.util')
+052.892  000.217  000.217: require('vim.lsp.sync')
+052.896  000.344  000.127: require('vim.lsp._changetracking')
+054.330  000.226  000.226: require('vim.lsp._transport')
+054.341  001.443  001.217: require('vim.lsp.rpc')
+054.401  003.759  000.566: require('vim.lsp')
+055.235  000.267  000.267: require('vim.lsp.completion')
+055.305  000.903  000.636: require('vim.lsp.handlers')
+055.310  004.907  000.117: require('fidget.progress.lsp')
+056.037  000.171  000.171: require('fidget.poll')
+056.040  000.397  000.226: require('fidget.notification.model')
+056.438  000.397  000.397: require('fidget.notification.window')
+056.754  000.314  000.314: require('fidget.notification.view')
+056.764  001.344  000.236: require('fidget.notification')
+056.766  001.455  000.111: require('fidget.progress.handle')
+056.789  007.449  000.280: require('fidget.progress')
+057.032  000.241  000.241: require('fidget.commands')
+057.232  000.104  000.104: require('fidget.integration.nvim-tree')
+057.333  000.099  000.099: require('fidget.integration.xcodebuild-nvim')
+057.376  000.343  000.140: require('fidget.integration')
+057.428  009.059  001.026: require('fidget')
+061.247  001.160  001.160: require('vim.filetype')
+062.362  000.230  000.230: require('luasnip.util.types')
+062.365  000.589  000.360: require('luasnip.util.ext_opts')
+063.024  000.128  000.128: require('luasnip.util.lazy_table')
+063.149  000.124  000.124: require('luasnip.extras.filetype_functions')
+063.157  000.476  000.224: require('luasnip.default_config')
+063.159  000.792  000.316: require('luasnip.session')
+063.160  001.803  000.422: require('luasnip.config')
+064.010  000.262  000.262: require('luasnip.util.vimversion')
+064.015  000.531  000.269: require('luasnip.util.util')
+064.415  000.151  000.151: require('luasnip.nodes.key_indexer')
+064.644  000.228  000.228: require('luasnip.util.feedkeys')
+064.651  000.634  000.255: require('luasnip.nodes.util')
+065.012  000.126  000.126: require('luasnip.session.snippet_collection.source')
+065.243  000.229  000.229: require('luasnip.util.table')
+065.356  000.112  000.112: require('luasnip.util.auto_table')
+065.362  000.710  000.243: require('luasnip.session.snippet_collection')
+065.863  000.229  000.229: require('luasnip.util.select')
+065.999  000.134  000.134: require('luasnip.util.time')
+066.586  001.109  000.745: require('luasnip.util._builtin_vars')
+066.669  001.306  000.196: require('luasnip.util.environ')
+066.831  000.161  000.161: require('luasnip.util.extend_decorator')
+067.379  000.385  000.385: require('luasnip.util.path')
+067.785  000.173  000.173: require('luasnip.util.log')
+067.789  000.409  000.236: require('luasnip.loaders.util')
+067.895  000.004  000.004: require('vim.F')
+067.898  000.108  000.104: require('luasnip.loaders.data')
+068.148  000.249  000.249: require('luasnip.loaders.fs_watchers')
+068.152  001.319  000.168: require('luasnip.loaders')
+068.165  005.001  000.340: require('luasnip')
+068.187  008.403  000.438: sourcing /Users/antondemkin/.local/share/nvim/lazy/LuaSnip/plugin/luasnip.lua
+068.190  008.449  000.046: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+068.400  000.158  000.158: sourcing /Users/antondemkin/.local/share/nvim/lazy/LuaSnip/plugin/luasnip.vim
+068.403  000.207  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+068.409  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+068.458  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+069.398  000.558  000.558: require('lazydev')
+070.463  001.064  001.064: require('lazydev.config')
+070.725  000.252  000.252: require('lazydev.util')
+071.374  000.262  000.262: require('blink.cmp')
+071.848  000.226  000.226: require('blink.cmp.lib.async')
+072.562  000.488  000.488: require('blink.cmp.config.utils')
+072.790  000.227  000.227: require('blink.cmp.config.keymap')
+073.006  000.101  000.101: require('blink.cmp.config.completion.keyword')
+073.241  000.233  000.233: require('blink.cmp.config.completion.trigger')
+073.341  000.099  000.099: require('blink.cmp.config.completion.list')
+073.517  000.174  000.174: require('blink.cmp.config.completion.accept')
+073.685  000.167  000.167: require('blink.cmp.config.completion.menu')
+073.793  000.107  000.107: require('blink.cmp.config.completion.documentation')
+073.894  000.100  000.100: require('blink.cmp.config.completion.ghost_text')
+073.895  001.104  000.122: require('blink.cmp.config.completion')
+073.998  000.101  000.101: require('blink.cmp.config.fuzzy')
+074.110  000.111  000.111: require('blink.cmp.config.sources')
+074.211  000.100  000.100: require('blink.cmp.config.signature')
+074.321  000.109  000.109: require('blink.cmp.config.snippets')
+074.427  000.104  000.104: require('blink.cmp.config.appearance')
+074.529  000.100  000.100: require('blink.cmp.config.modes.cmdline')
+074.807  000.276  000.276: require('blink.cmp.config.modes.term')
+074.809  002.960  000.240: require('blink.cmp.config')
+074.957  000.147  000.147: require('blink.cmp.lib.utils')
+075.093  000.135  000.135: require('blink.cmp.lib.event_emitter')
+075.098  003.723  000.255: require('blink.cmp.sources.lib')
+075.109  004.240  000.256: sourcing /Users/antondemkin/.local/share/nvim/lazy/blink.cmp/plugin/blink-cmp.lua
+075.112  004.287  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+075.117  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+075.124  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+075.579  000.388  000.388: require('blink-cmp')
+077.047  000.317  000.317: require('blink.cmp.config.modes.types')
+078.241  000.580  000.580: require('blink.cmp.fuzzy.download.system')
+078.257  000.780  000.200: require('blink.cmp.fuzzy.download.files')
+078.259  000.908  000.128: require('blink.cmp.fuzzy.download.git')
+078.261  001.046  000.139: require('blink.cmp.fuzzy.download')
+078.790  000.255  000.255: require('lspconfig.util')
+079.832  001.487  001.231: sourcing /Users/antondemkin/.local/share/nvim/lazy/nvim-lspconfig/plugin/lspconfig.lua
+079.836  001.534  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+079.853  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+079.861  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+080.425  000.557  000.557: require('vim.diagnostic')
+080.944  000.287  000.287: require('mason.version')
+080.950  000.514  000.226: require('mason-tool-installer')
+081.617  000.457  000.457: require('mason-lspconfig.settings')
+081.619  000.621  000.164: require('mason-lspconfig')
+081.884  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+081.890  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+082.340  000.115  000.115: require('mason-core.optional')
+082.345  000.725  000.608: require('mason-null-ls.mappings.source')
+083.078  000.229  000.229: require('mason-core.async')
+083.561  000.236  000.236: require('mason-core.async.control')
+083.681  000.119  000.119: require('mason-core.result')
+084.029  000.164  000.164: require('mason-core.async.uv')
+084.038  000.355  000.192: require('mason-core.fs')
+084.068  000.989  000.279: require('mason-registry.installer')
+085.424  000.331  000.331: require('mason-core.process')
+085.583  000.155  000.155: require('mason-core.spawn')
+085.586  000.651  000.166: require('mason-core.installer.managers.powershell')
+085.590  000.862  000.210: require('mason-core.fetch')
+085.717  000.125  000.125: require('mason-core.providers')
+086.667  000.163  000.163: require('mason-core.purl')
+086.674  000.647  000.484: require('mason-core.package.AbstractPackage')
+087.496  000.126  000.126: require('mason-core.installer.compiler.expr')
+087.507  000.407  000.281: require('mason-core.installer.compiler.link')
+088.304  000.121  000.121: require('mason-core.installer.context.InstallContextCwd')
+088.425  000.120  000.120: require('mason-core.installer.context.InstallContextFs')
+088.646  000.220  000.220: require('mason-core.installer.context.InstallContextSpawn')
+088.770  000.121  000.121: require('mason-core.receipt')
+088.787  000.892  000.311: require('mason-core.installer.context')
+088.789  001.050  000.158: require('mason-core.installer')
+088.808  001.187  000.138: require('mason-core.installer.managers.std')
+088.810  001.302  000.115: require('mason-core.installer.compiler.schemas')
+088.933  000.121  000.121: require('mason-core.installer.compiler.util')
+088.940  001.979  000.149: require('mason-core.installer.compiler')
+089.069  000.128  000.128: require('mason-core.installer.linker')
+089.073  002.397  000.289: require('mason-core.installer.InstallRunner')
+089.187  000.113  000.113: require('mason-core.installer.UninstallRunner')
+089.193  003.354  000.198: require('mason-core.package')
+089.196  003.478  000.124: require('mason-registry.sources.util')
+089.203  004.727  000.263: require('mason-registry.sources.github')
+093.455  000.135  000.135: require('mason-lspconfig.mappings')
+093.459  000.300  000.165: require('mason-lspconfig.features.automatic_enable')
+102.832  000.171  000.171: require('mason-lspconfig.notify')
+102.914  000.465  000.294: require('mason-lspconfig.api.command')
+103.071  000.010  000.010: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+103.129  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+104.898  000.153  000.153: require('tmux.configuration.logging')
+105.106  000.205  000.205: require('tmux.log.severity')
+105.108  000.525  000.167: require('tmux.log.channels')
+105.111  001.006  000.481: require('tmux.log')
+105.375  000.263  000.263: require('tmux.configuration.options')
+106.739  000.143  000.143: require('tmux.version')
+106.741  001.365  001.221: require('tmux.configuration.validate')
+106.994  000.252  000.252: require('tmux.wrapper.tmux')
+106.997  003.091  000.206: require('tmux.configuration')
+107.763  000.505  000.505: require('tmux.keymaps')
+107.767  000.767  000.262: require('tmux.copy')
+108.379  000.242  000.242: require('tmux.layout.parse')
+108.562  000.182  000.182: require('tmux.wrapper.nvim')
+108.565  000.551  000.128: require('tmux.layout')
+108.568  000.676  000.124: require('tmux.navigation.navigate')
+108.571  000.803  000.127: require('tmux.navigation')
+108.818  000.246  000.246: require('tmux.resize')
+109.183  000.363  000.363: require('tmux.swap')
+109.187  006.054  000.783: require('tmux')
+109.339  000.148  000.148: require('tmux.log.convert')
+118.946  000.298  000.298: require('tmux.version.parse')
+119.028  000.067  000.067: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+121.281  000.130  000.130: require('nvim-treesitter.utils')
+122.974  000.114  000.114: require('vim.treesitter.language')
+123.071  000.095  000.095: require('vim.func')
+123.180  000.106  000.106: require('vim.func._memoize')
+123.240  000.663  000.349: require('vim.treesitter.query')
+123.347  000.106  000.106: require('vim.treesitter._range')
+123.358  001.308  000.539: require('vim.treesitter.languagetree')
+123.363  001.590  000.282: require('vim.treesitter')
+123.860  002.577  000.986: require('nvim-treesitter.parsers')
+124.737  000.099  000.099: require('nvim-treesitter.compat')
+125.090  000.242  000.242: require('nvim-treesitter.ts_utils')
+125.094  000.356  000.114: require('nvim-treesitter.tsrange')
+125.191  000.095  000.095: require('nvim-treesitter.caching')
+125.200  000.780  000.230: require('nvim-treesitter.query')
+125.210  001.067  000.286: require('nvim-treesitter.configs')
+125.212  001.351  000.284: require('nvim-treesitter.info')
+125.347  000.134  000.134: require('nvim-treesitter.shell_command_selectors')
+125.365  004.790  000.599: require('nvim-treesitter.install')
+125.462  000.096  000.096: require('nvim-treesitter.statusline')
+125.577  000.114  000.114: require('nvim-treesitter.query_predicates')
+125.579  005.657  000.657: require('nvim-treesitter')
+125.872  000.276  000.276: require('vim.iter')
+126.408  006.799  000.865: sourcing /Users/antondemkin/.local/share/nvim/lazy/nvim-treesitter/plugin/nvim-treesitter.lua
+126.412  006.868  000.069: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+126.421  000.002  000.002: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+126.429  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+128.853  000.123  000.123: require('nvim-treesitter.indent')
+128.982  000.109  000.109: require('nvim-treesitter.highlight')
+129.620  000.419  000.419: require('nvim-treesitter-textobjects')
+130.265  000.194  000.194: require('nvim-treesitter.textobjects.shared')
+130.269  000.454  000.260: require('nvim-treesitter.textobjects.select')
+130.870  000.190  000.190: require('nvim-treesitter.textobjects.attach')
+130.994  000.123  000.123: require('nvim-treesitter.textobjects.repeatable_move')
+130.999  000.631  000.318: require('nvim-treesitter.textobjects.move')
+131.491  000.277  000.277: require('nvim-treesitter.textobjects.swap')
+132.662  001.148  001.148: require('nvim-treesitter.textobjects.lsp_interop')
+132.677  003.602  000.674: sourcing /Users/antondemkin/.local/share/nvim/lazy/nvim-treesitter-textobjects/plugin/nvim-treesitter-textobjects.vim
+132.680  003.653  000.051: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+132.685  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+132.695  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+133.875  000.616  000.616: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-sleuth/plugin/sleuth.vim
+133.878  000.662  000.046: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+133.885  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+133.892  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.236  001.003  001.003: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-abolish/plugin/abolish.vim
+135.239  001.049  000.046: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.245  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.251  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.773  000.211  000.211: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-commentary/plugin/commentary.vim
+135.775  000.256  000.045: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.779  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+135.831  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+136.507  000.302  000.302: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-surround/plugin/surround.vim
+136.509  000.347  000.045: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+136.559  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+136.610  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+138.391  000.221  000.221: require('treesitter-context.config')
+138.399  001.101  000.880: require('treesitter-context')
+138.445  001.482  000.381: sourcing /Users/antondemkin/.local/share/nvim/lazy/nvim-treesitter-context/plugin/treesitter-context.lua
+138.447  001.534  000.051: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+138.494  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+138.508  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+139.088  000.241  000.241: require('vim.treesitter.highlighter')
+139.293  000.204  000.204: require('treesitter-context.util')
+139.299  000.751  000.306: require('treesitter-context.render')
+139.920  000.189  000.189: sourcing /Users/antondemkin/.local/share/nvim/lazy/plenary.nvim/plugin/plenary.vim
+139.922  000.236  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+139.926  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+139.932  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+140.439  000.144  000.144: sourcing /Users/antondemkin/.local/share/nvim/lazy/nvim-web-devicons/plugin/nvim-web-devicons.vim
+140.442  000.192  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+140.447  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+140.454  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+140.685  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+140.732  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+141.057  000.234  000.234: sourcing /Users/antondemkin/.local/share/nvim/lazy/neo-tree.nvim/plugin/neo-tree.lua
+141.060  000.283  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+141.064  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+141.070  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+141.955  000.881  000.881: require('neo-tree')
+142.289  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+142.296  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.430  001.057  001.057: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-mark/plugin/mark.vim
+143.433  001.104  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.437  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.444  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.483  000.035  000.035: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.741  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+143.746  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+144.414  000.333  000.333: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-dadbod-ui/plugin/db_ui.vim
+144.416  000.381  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+144.421  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+144.449  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+144.988  000.218  000.218: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-dadbod/plugin/dadbod.vim
+144.991  000.265  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+144.995  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+145.002  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+145.515  000.188  000.188: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-husk/plugin/husk.vim
+145.518  000.236  000.048: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+145.562  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+145.570  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.068  000.142  000.142: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-dadbod-completion/plugin/vim_dadbod_completion.vim
+146.071  000.195  000.052: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.075  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.082  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.349  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.359  000.001  000.001: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+146.761  000.227  000.227: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/editorconfig.lua
+146.764  000.281  000.053: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+147.033  000.217  000.217: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/gzip.vim
+147.035  000.266  000.049: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+147.211  000.128  000.128: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/man.lua
+147.214  000.175  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+148.324  000.280  000.280: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+148.338  001.076  000.795: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/matchit.vim
+148.340  001.123  000.047: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+148.621  000.228  000.228: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/matchparen.vim
+148.623  000.279  000.051: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+149.821  000.341  000.341: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/pack/dist/opt/netrw/plugin/netrwPlugin.vim
+149.836  001.162  000.821: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/netrwPlugin.vim
+149.838  001.211  000.050: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+150.110  000.210  000.210: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/osc52.lua
+150.113  000.271  000.061: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+150.356  000.186  000.186: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/rplugin.vim
+150.358  000.242  000.056: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+150.629  000.212  000.212: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/shada.vim
+150.631  000.270  000.058: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+150.858  000.166  000.166: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/spellfile.vim
+150.860  000.225  000.059: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+151.014  000.088  000.088: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/tarPlugin.vim
+151.016  000.153  000.065: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+151.252  000.179  000.179: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/tohtml.lua
+151.255  000.236  000.057: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+151.343  000.031  000.031: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/tutor.vim
+151.345  000.087  000.057: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+151.509  000.107  000.107: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/plugin/zipPlugin.vim
+151.512  000.164  000.057: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+153.080  001.408  001.408: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-dadbod-completion/after/plugin/vim_dadbod_completion.lua
+153.083  001.470  000.063: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+153.300  000.150  000.150: sourcing /Users/antondemkin/.local/share/nvim/lazy/vim-dadbod-completion/after/plugin/vim_dadbod_completion.vim
+153.303  000.212  000.063: sourcing nvim_exec2() called at /Users/antondemkin/.config/nvim/init.lua:0
+153.337  147.423  043.077: sourcing /Users/antondemkin/.config/nvim/init.lua
+153.345  000.626: sourcing vimrc file(s)
+153.640  000.053  000.053: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/filetype.lua
+154.468  000.147  000.147: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/syntax/synload.vim
+154.520  000.776  000.630: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/syntax/syntax.vim
+154.530  000.356: inits 3
+156.317  001.787: reading ShaDa
+157.594  000.298  000.298: require('luasnip.util.directed_graph')
+158.084  000.488  000.488: require('luasnip.session.enqueueable_operations')
+158.091  001.097  000.311: require('luasnip.loaders.from_lua')
+159.254  000.102  000.102: require('luasnip.util.events')
+159.261  000.341  000.239: require('luasnip.nodes.node')
+159.528  000.266  000.266: require('luasnip.nodes.insertNode')
+159.645  000.116  000.116: require('luasnip.nodes.textNode')
+159.798  000.150  000.150: require('luasnip.util.mark')
+159.899  000.099  000.099: require('luasnip.util.pattern_tokenizer')
+159.992  000.092  000.092: require('luasnip.util.dict')
+160.932  000.008  000.008: require('jsregexp.core')
+160.935  000.253  000.244: require('luasnip-jsregexp')
+160.936  000.841  000.588: require('luasnip.util.jsregexp')
+160.941  000.947  000.106: require('luasnip.nodes.util.trig_engines')
+160.963  002.304  000.292: require('luasnip.nodes.snippet')
+160.965  002.411  000.107: require('luasnip.nodes.duplicate')
+160.967  002.623  000.212: require('luasnip.loaders.snippet_cache')
+160.973  002.879  000.256: require('luasnip.loaders.from_snipmate')
+161.644  000.112  000.112: require('luasnip.util.parser.neovim_ast')
+161.752  000.107  000.107: require('luasnip.util.str')
+161.757  000.333  000.114: require('luasnip.util.parser.ast_utils')
+161.875  000.117  000.117: require('luasnip.nodes.functionNode')
+162.061  000.185  000.185: require('luasnip.nodes.choiceNode')
+162.284  000.222  000.222: require('luasnip.nodes.dynamicNode')
+162.386  000.100  000.100: require('luasnip.util.functions')
+162.390  001.075  000.119: require('luasnip.util.parser.ast_parser')
+162.626  000.235  000.235: require('luasnip.util.parser.neovim_parser')
+162.630  001.420  000.110: require('luasnip.util.parser')
+162.742  000.111  000.111: require('luasnip.nodes.snippetProxy')
+162.941  000.197  000.197: require('luasnip.util.jsonc')
+162.948  001.973  000.245: require('luasnip.loaders.from_vscode')
+162.987  000.722: opening buffers
+163.071  000.085: BufEnter autocommands
+163.073  000.002: editing files in windows
+163.443  000.002  000.002: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+163.448  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+163.741  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+163.746  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+164.064  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+164.069  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+164.486  000.325  000.325: sourcing /Users/antondemkin/.local/share/nvim/lazy/telescope.nvim/plugin/telescope.lua
+164.489  000.385  000.060: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+164.496  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+164.503  000.001  000.001: sourcing nvim_exec2() called at VimEnter Autocommands for "*":0
+167.160  000.279  000.279: require('plenary.bit')
+167.354  000.192  000.192: require('plenary.functional')
+167.381  000.819  000.348: require('plenary.path')
+167.394  000.986  000.168: require('plenary.strings')
+167.640  000.244  000.244: require('telescope.deprecated')
+168.602  000.319  000.319: require('plenary.log')
+168.621  000.680  000.361: require('telescope.log')
+169.543  000.144  000.144: require('plenary.compat')
+169.552  000.570  000.426: require('plenary.job')
+169.728  000.174  000.174: require('telescope.state')
+169.745  001.123  000.379: require('telescope.utils')
+169.754  002.113  000.310: require('telescope.sorters')
+171.250  005.165  001.822: require('telescope.config')
+171.789  000.227  000.227: require('plenary.window.border')
+171.915  000.125  000.125: require('plenary.window')
+172.159  000.243  000.243: require('plenary.popup.utils')
+172.162  000.910  000.316: require('plenary.popup')
+172.311  000.148  000.148: require('telescope.pickers.scroller')
+172.449  000.138  000.138: require('telescope.actions.state')
+172.590  000.139  000.139: require('telescope.actions.utils')
+172.931  000.154  000.154: require('telescope.actions.mt')
+172.948  000.357  000.203: require('telescope.actions.set')
+173.276  000.169  000.169: require('telescope.config.resolve')
+173.279  000.330  000.161: require('telescope.pickers.entry_display')
+173.414  000.134  000.134: require('telescope.from_entry')
+173.679  009.170  001.849: require('telescope.actions')
+174.425  000.289  000.289: require('telescope.pickers.window')
+174.443  000.763  000.475: require('telescope.pickers.layout_strategies')
+174.711  000.138  000.138: require('telescope._extensions')
+174.714  000.269  000.131: require('telescope')
+174.858  000.141  000.141: require('telescope.themes')
+176.338  000.602  000.602: require('fzf_lib')
+176.342  000.768  000.166: require('telescope._extensions.fzf')
+176.506  000.146  000.146: require('telescope._extensions.ui-select')
+178.061  000.115  000.115: require('plenary.tbl')
+178.064  000.228  000.113: require('plenary.vararg.rotate')
+178.065  000.602  000.373: require('plenary.vararg')
+178.172  000.106  000.106: require('plenary.errors')
+178.176  000.921  000.214: require('plenary.async.async')
+178.680  000.136  000.136: require('plenary.async.structs')
+178.686  000.271  000.135: require('plenary.async.control')
+178.691  000.391  000.119: require('plenary.async.util')
+178.694  000.516  000.126: require('plenary.async.tests')
+178.695  001.816  000.378: require('plenary.async')
+178.843  000.146  000.146: require('telescope.debounce')
+179.074  000.230  000.230: require('telescope.mappings')
+179.217  000.141  000.141: require('telescope.pickers.highlights')
+179.523  000.153  000.153: require('telescope.algos.linked_list')
+179.527  000.308  000.155: require('telescope.entry_manager')
+179.656  000.128  000.128: require('telescope.pickers.multi')
+179.674  003.156  000.387: require('telescope.pickers')
+180.280  000.459  000.459: require('telescope.make_entry')
+180.501  000.220  000.220: require('telescope.finders.async_static_finder')
+180.919  000.111  000.111: require('plenary.class')
+180.932  000.286  000.175: require('telescope._')
+180.934  000.431  000.145: require('telescope.finders.async_oneshot_finder')
+181.065  000.130  000.130: require('telescope.finders.async_job_finder')
+181.070  001.395  000.155: require('telescope.finders')
+181.306  000.230  000.230: require('vim.ui')
+182.762  001.027  001.027: require('git_grep')
+182.783  001.457  000.430: require('telescope._extensions.git_grep')
+183.251  000.465  000.465: require('telescope.builtin')
+307.385  125.959: VimEnter autocommands
+308.851  001.348  001.348: require('vim.termcap')
+309.040  000.150  000.150: require('vim.text')
+309.082  000.199: UIEnter autocommands
+310.000  000.614  000.614: sourcing /opt/homebrew/Cellar/neovim/0.11.1/share/nvim/runtime/autoload/provider/clipboard.vim
+310.006  000.310: before starting main loop
+310.229  000.223: first screen update
+310.230  000.001: --- NVIM STARTED ---
+

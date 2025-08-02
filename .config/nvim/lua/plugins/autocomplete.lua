@@ -1,26 +1,26 @@
 return {
   'saghen/blink.cmp',
-  event = 'VimEnter',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   version = '1.*',
   dependencies = {
     -- Snippet Engine
-    {
-      'L3MON4D3/LuaSnip',
-      version = '2.*',
-      build = 'make install_jsregexp',
-      dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
-        -- {
-        --   'rafamadriz/friendly-snippets',
-        --   config = function()
-        --     require('luasnip.loaders.from_vscode').lazy_load()
-        --   end,
-        -- },
-      },
-      opts = {},
-    },
+    -- {
+    --   'L3MON4D3/LuaSnip',
+    --   version = '2.*',
+    --   build = 'make install_jsregexp',
+    --   dependencies = {
+    --     -- `friendly-snippets` contains a variety of premade snippets.
+    --     --    See the README about individual language/framework/plugin snippets:
+    --     --    https://github.com/rafamadriz/friendly-snippets
+    --     -- {
+    --     --   'rafamadriz/friendly-snippets',
+    --     --   config = function()
+    --     --     require('luasnip.loaders.from_vscode').lazy_load()
+    --     --   end,
+    --     -- },
+    --   },
+    --   opts = {},
+    -- },
     'folke/lazydev.nvim',
   },
   --- @module 'blink.cmp'
@@ -46,7 +46,7 @@ return {
     signature = { enabled = true },
     cmdline = {
       keymap = {
-        -- Do not remap my readline cmdline keys!
+        -- Do not remap my readline cmdline keys
         preset = 'none',
       },
     },

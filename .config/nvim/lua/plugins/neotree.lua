@@ -122,8 +122,8 @@ return {
           },
           ['R'] = 'refresh',
           ['?'] = 'show_help',
-          -- ['<'] = 'prev_source',
-          -- ['>'] = 'next_source',
+          ['<'] = 'prev_source',
+          ['>'] = 'next_source',
           ['i'] = 'show_file_details',
         },
       },
@@ -158,7 +158,7 @@ return {
           },
         },
         follow_current_file = {
-          enabled = false,
+          enabled = true,
           leave_dirs_open = true,
         },
         group_empty_dirs = false,
@@ -168,8 +168,10 @@ return {
             ['u'] = 'navigate_up',
             ['C'] = 'set_root',
             ['H'] = 'toggle_hidden',
-            -- ['/'] = 'fuzzy_finder',
-            ['/'] = 'filter_on_submit',
+            ['/'] = false, -- let me search neotree manually
+            ['f'] = 'filter_on_submit', -- same as above, but without the config
+            ['F'] = 'clear_filter',
+            ['<c-f>'] = 'filter_on_submit', -- same as above, but without the config
             ['<c-c>'] = 'clear_filter',
           },
         },

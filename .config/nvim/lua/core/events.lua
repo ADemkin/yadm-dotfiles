@@ -32,10 +32,22 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'VimResized' }, {
+vim.api.nvim_create_autocmd('VimResized', {
   desc = 'Resize windows when Vim is resized',
   group = vim.api.nvim_create_augroup('ResizeWindows', { clear = true }),
   callback = function()
     vim.cmd('wincmd =')
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  desc = 'Move help to the right side',
+  group = vim.api.nvim_create_augroup('HelpInRightSplit', { clear = true }),
+  pattern = '*.txt',
+  callback = function()
+    if vim.bo.buftype == 'help' then
+      vim.cmd('wincmd L')
+      vim.cmd('vertical resize 80')
+    end
   end,
 })

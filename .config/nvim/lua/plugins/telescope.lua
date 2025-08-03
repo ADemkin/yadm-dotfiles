@@ -96,7 +96,11 @@ return {
       require('git_grep').grep()
     end, { desc = '[F]ind [G]it grep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
-    vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent files' })
+    vim.keymap.set('n', '<leader>fr', function()
+      builtin.oldfiles({ only_cwd = true })
+    end, { desc = '[F]ind [R]ecent files' })
+    vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = '[F]ind all [R]ecent files' })
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind vim api' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>;', builtin.commands, { desc = 'Commands' })
   end,

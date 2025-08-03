@@ -22,29 +22,30 @@ require('lazy').setup({
 
   -- lightweight plugins
   require('plugins/tpope'),
-  require('plugins/tmux'),       -- tmux integration and panel resizing
+  require('plugins/tmux'), -- tmux integration and panel resizing
   require('plugins/indentline'), -- indent guides
-  require('plugins/argwrap'),    -- arguments wrapper
-  require('plugins/wilder'),     -- command line completion
-  require('plugins/mark'),       -- highlights
-  require('plugins/flash'),      -- S motion
+  require('plugins/argwrap'), -- arguments wrapper
+  require('plugins/wilder'), -- command line completion
+  require('plugins/mark'), -- highlights
+  require('plugins/flash'), -- S motion
   require('plugins/toggleterm'), -- terminal integration
-  require('plugins/gitsigns'),   -- Git integration
-  require('plugins/autopairs'),  -- autopairs that doesn't make me barf
-  require('plugins/quickfix'),   -- quickfix enhancements
+  require('plugins/gitsigns'), -- Git integration
+  -- require('plugins/autopairs'),  -- autopairs that doesn't make me barf
+  require('plugins/quickfix'), -- quickfix enhancements
+  require('plugins/colors'), -- quickfix enhancements
 
   -- Heavyweight plugins
-  require('plugins/neotree'),            -- file explorer
-  require('plugins/autocomplete'),       -- autocompletion
-  require('plugins/treesitter'),         -- syntax highlighting and more
+  require('plugins/neotree'), -- file explorer
+  require('plugins/autocomplete'), -- autocompletion
+  require('plugins/treesitter'), -- syntax highlighting and more
   require('plugins/treesitter-context'), -- show current function/class
   require('plugins/treesitter-textobjects'),
-  require('plugins/lsp'),                -- LSP support
-  require('plugins/null-ls'),            -- formatting and diagnostics
-  require('plugins/telescope'),          -- fuzzy finder
-  require('plugins/ai'),                 -- AI integration
-  require('plugins/database'),           -- database
-  require('plugins/trouble'),            -- fancy quickfix
+  require('plugins/lsp'), -- LSP support
+  require('plugins/null-ls'), -- formatting and diagnostics
+  require('plugins/telescope'), -- fuzzy finder
+  require('plugins/ai'), -- AI integration
+  require('plugins/database'), -- database
+  require('plugins/trouble'), -- fancy quickfix
 
-  require('plugins/readline'),           -- readline bindings for command line
+  require('plugins/readline'), -- readline bindings for command line
 })

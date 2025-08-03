@@ -88,10 +88,10 @@ return {
           ['l'] = 'open',
           ['<esc>'] = 'cancel',
           ['p'] = { 'toggle_preview', config = { use_float = true } },
-          -- ['P'] = 'toggle_preview', -- enter preview mode, which shows the current node without focusing
           ['S'] = 'open_split',
           ['s'] = 'open_vsplit',
-          ['t'] = false, -- disable t
+          ['t'] = 'open_tabnew',
+          ['w'] = 'noop',
           ['h'] = 'close_node',
           ['X'] = 'close_all_nodes',
           ['a'] = {
@@ -101,7 +101,7 @@ return {
             },
           },
           ['A'] = {
-            'add_directory', -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
+            'add_directory',
             config = {
               show_path = 'relative',
             },
@@ -125,6 +125,8 @@ return {
           ['<'] = 'prev_source',
           ['>'] = 'next_source',
           ['i'] = 'show_file_details',
+          ['tj'] = 'next_git_modified',
+          ['tk'] = 'prev_git_modified',
         },
       },
       nesting_rules = {},
@@ -168,10 +170,8 @@ return {
             ['u'] = 'navigate_up',
             ['C'] = 'set_root',
             ['H'] = 'toggle_hidden',
-            ['/'] = false, -- let me search neotree manually
-            ['f'] = 'filter_on_submit', -- same as above, but without the config
-            ['F'] = 'clear_filter',
-            ['<c-f>'] = 'filter_on_submit', -- same as above, but without the config
+            ['/'] = 'noop',
+            ['f'] = 'filter_on_submit',
             ['<c-c>'] = 'clear_filter',
           },
         },

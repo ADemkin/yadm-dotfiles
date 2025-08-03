@@ -21,7 +21,6 @@ return {
       },
       opts = {},
     },
-    'folke/lazydev.nvim',
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -31,7 +30,7 @@ return {
     },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 3000 },
-      ghost_text = { enabled = true },
+      -- ghost_text = { enabled = true },
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'lazydev' },
@@ -48,6 +47,9 @@ return {
       keymap = {
         -- Do not remap my readline cmdline keys
         preset = 'none',
+        ['<Tab>'] = { 'select_and_accept' },
+        ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
+        ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
       },
     },
   },

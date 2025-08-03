@@ -6,8 +6,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'WinEnter', 'TermOpen' }, {
-  desc = 'Start terminal in insert mode',
+vim.api.nvim_create_autocmd('BufEnter', {
+  desc = 'Start insert when entering terminal buffer',
   pattern = 'term://*',
   command = 'startinsert',
 })

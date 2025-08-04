@@ -7,7 +7,8 @@ vim.o.cursorcolumn = false
 -- do not show mode like -- INSERT -- in the bottom
 vim.o.showmode = false
 
-vim.o.showtabline = 0
+-- show tabline when there are more than one tab opened
+vim.o.showtabline = 1
 
 -- allow more horizontal movements - ?
 vim.o.whichwrap = 'bs<>[]hl'

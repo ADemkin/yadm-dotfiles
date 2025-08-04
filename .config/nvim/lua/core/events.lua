@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('TermEnter', {
   desc = 'Start insert when entering terminal buffer',
   pattern = 'term://*',
   command = 'startinsert',
@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('VimResized', {
+vim.api.nvim_create_autocmd({ 'VimResized', 'WinResized' }, {
   desc = 'Resize windows when Vim is resized',
   group = vim.api.nvim_create_augroup('ResizeWindows', { clear = true }),
   callback = function()

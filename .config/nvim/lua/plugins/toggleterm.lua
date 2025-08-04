@@ -31,15 +31,14 @@ return {
           vim.wo[term.window].winfixwidth = false
         end,
       })
-      vim.api.nvim_create_user_command('ToggleTermOrientation', function()
+      vim.keymap.set('n', '<leader>y', function()
         local term = require('toggleterm.terminal').get(1)
         local current_direction = term.direction
         local new_direction = (current_direction == 'horizontal') and 'vertical' or 'horizontal'
         -- close terminal and reopen with new direction
         vim.cmd('ToggleTerm')
         vim.cmd('ToggleTerm direction=' .. new_direction)
-      end, {})
-      vim.keymap.set('n', '<leader>y', ':ToggleTermOrientation<CR>', { noremap = true, silent = true })
+      end, { noremap = true, silent = true })
     end,
   },
   -- 'brianhuster/unnest.nvim',

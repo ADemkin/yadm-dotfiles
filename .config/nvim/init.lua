@@ -33,6 +33,7 @@ require('lazy').setup({
   -- require('plugins/autopairs'),  -- autopairs that doesn't make me barf
   require('plugins/quickfix'), -- quickfix enhancements
   require('plugins/colors'), -- quickfix enhancements
+  require('plugins/readline'), -- readline bindings for command line
 
   -- Heavyweight plugins
   require('plugins/neotree'), -- file explorer
@@ -46,6 +47,6 @@ require('lazy').setup({
   require('plugins/ai'), -- AI integration
   require('plugins/database'), -- database
   require('plugins/trouble'), -- fancy quickfix
-
-  require('plugins/readline'), -- readline bindings for command line
 })
+
+require('core.terminal')

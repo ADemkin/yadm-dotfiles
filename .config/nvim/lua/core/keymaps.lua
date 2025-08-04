@@ -40,6 +40,9 @@ vim.keymap.set('t', '<A-l>', [[<C-\><C-n><A-l><CR>]], opts)
 -- scroll up in terminal like it is in normal mode
 vim.keymap.set('t', '<C-u>', '<C-\\><C-n><C-u>', opts)
 
+-- Escape to normal mode in terminal
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
+
 -- Enter in scrolled terminal goes back into insert mode
 vim.keymap.set('n', '<Return>', 'i', opts)
 
@@ -65,5 +68,6 @@ vim.keymap.set('n', 'x', '"_x', opts)
 -- Open terminal
 -- vim.keymap.set('n', '<leader>t', ':vert terminal<CR>', opts)
 
+-- Navigate quickfix list
 vim.keymap.set('n', 'q<Tab>', '<cmd>cnext<CR>', opts)
 vim.keymap.set('n', 'q<S-Tab>', '<cmd>cprev<CR>', opts)

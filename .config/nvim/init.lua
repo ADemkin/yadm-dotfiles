@@ -30,9 +30,8 @@ require('lazy').setup({
   require('plugins/flash'),      -- S motion
   require('plugins/toggleterm'), -- terminal integration
   require('plugins/gitsigns'),   -- Git integration
-  -- require('plugins/autopairs'),  -- autopairs that doesn't make me barf
   require('plugins/quickfix'),   -- quickfix enhancements
-  require('plugins/colors'),     -- quickfix enhancements
+  require('plugins/colors'),     -- display hex colors
   require('plugins/readline'),   -- readline bindings for command line
 
   -- Heavyweight plugins

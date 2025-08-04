@@ -1,6 +1,6 @@
 return {
   'aserowy/tmux.nvim',
-  event = 'VeryLazy',
+  lazy = false,
   config = function()
     return require('tmux').setup({
       navigation = {

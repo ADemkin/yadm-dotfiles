@@ -11,7 +11,7 @@ vim.o.showmode = false
 vim.o.showtabline = 1
 
 -- allow more horizontal movements - ?
-vim.o.whichwrap = 'bs<>[]hl'
+-- vim.o.whichwrap = 'bs<>[]'
 
 -- Pop up menu height (default: 0)
 vim.o.pumheight = 10

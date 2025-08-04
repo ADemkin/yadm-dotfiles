@@ -21,21 +21,36 @@ return {
       },
       opts = {},
     },
+    'giuxtaposition/blink-cmp-copilot',
+    'folke/lazydev.nvim', -- required as a provier
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
     keymap = {
       preset = 'default',
+      -- not yet decided which one is better
+      ['<enter>'] = { 'select_and_accept', 'fallback' },
+      ['<tab>'] = { 'select_and_accept', 'fallback' },
+      ['<C-n>'] = { 'show', 'select_next' },
     },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 3000 },
-      -- ghost_text = { enabled = true },
+      ghost_text = { enabled = true },
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' },
       providers = {
-        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+        lazydev = {
+          module = 'lazydev.integrations.blink',
+          score_offset = 100,
+        },
+        copilot = {
+          name = 'copilot',
+          module = 'blink-cmp-copilot',
+          score_offset = 100,
+          async = true,
+        },
       },
     },
     snippets = { preset = 'luasnip' },
@@ -47,7 +62,6 @@ return {
       keymap = {
         -- Do not remap my readline cmdline keys
         preset = 'none',
-        ['<Tab>'] = { 'select_and_accept' },
         ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
         ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
       },

@@ -4,6 +4,7 @@ return {
     opts = {
       'css',
       'toml',
+      'lua',
     },
   },
 }

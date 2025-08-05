@@ -14,7 +14,7 @@ return {
             ['af'] = '@function.outer',
             ['if'] = '@function.inner',
             ['ac'] = '@class.outer',
-            ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+            ['ic'] = '@class.inner',
           },
         },
         move = {
@@ -22,7 +22,7 @@ return {
           set_jumps = true, -- whether to set jumps in the jumplist
           goto_next_start = {
             [']f'] = '@function.outer',
-            [']c'] = { query = '@class.outer', desc = 'Next class start' },
+            [']c'] = '@class.outer',
           },
           goto_next_end = {
             [']F'] = '@function.outer',

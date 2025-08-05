@@ -62,7 +62,7 @@ return {
       keymap = {
         -- Do not remap my readline cmdline keys
         preset = 'none',
-        ['<Tab>'] = { 'show', 'select_next', 'fallback' },
+        ['<Tab>'] = { 'show', 'select_and_accept', 'fallback' },
         ['<C-p>'] = { 'select_prev', 'fallback' },
         ['<C-n>'] = { 'select_next', 'fallback' },
       },

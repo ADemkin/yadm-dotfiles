@@ -38,6 +38,7 @@ require('lazy').setup({
   -- Heavyweight plugins
   require('plugins/neotree'),            -- file explorer
   require('plugins/autocomplete'),       -- autocompletion
+  require('plugins/autopairs'),          -- auto-pairs and brackets
   require('plugins/treesitter'),         -- syntax highlighting and more
   require('plugins/treesitter-context'), -- show current function/class
   require('plugins/treesitter-textobjects'),
@@ -48,6 +49,7 @@ require('lazy').setup({
   require('plugins/database'),           -- database
   require('plugins/trouble'),            -- fancy quickfix
   require('plugins/outline'),            -- fancy module navigation
+  require('plugins/coverage'),           -- show test coverage in numbercolumn
 })
 
 require('core.terminal')

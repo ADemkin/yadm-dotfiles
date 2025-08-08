@@ -28,6 +28,7 @@ return {
       'tsx',
       'css',
       'html',
+      'tmux',
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
@@ -36,7 +37,7 @@ return {
     },
     indent = { enable = true },
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require('nvim-treesitter.configs').setup(opts)
       vim.keymap.set('n', '<leader>i', ':Inspect')
     end,
   },

@@ -10,7 +10,7 @@ return {
       symbols = {
         icons = {
           Class = { icon = 'class', hl = 'Type' },
-          Method = { icon = 'meth', hl = 'Function' },
+          Method = { icon = 'm', hl = 'Function' },
           Constructor = { icon = 'init', hl = 'Special' },
           Enum = { icon = 'Enum', hl = 'Type' },
           Interface = { icon = 'I', hl = 'Type' },

@@ -8,7 +8,6 @@ return {
   },
   config = function()
     require('neo-tree').setup({
-      popup_border_style = 'single',
       close_if_last_window = true,
       use_popups_for_input = false, -- use vim's comman line for inputs
       enable_git_status = true,
@@ -46,7 +45,7 @@ return {
         },
         git_status = {
           symbols = {
-            added = '', -- highlight only
+            added = '',    -- highlight only
             modified = '', -- highlight only
           },
         },

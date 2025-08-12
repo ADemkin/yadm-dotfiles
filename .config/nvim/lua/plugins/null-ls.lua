@@ -4,11 +4,25 @@ return {
   dependencies = {
     'nvimtools/none-ls-extras.nvim',
     'jayp0521/mason-null-ls.nvim', -- ensure dependencies are installed
+    'davidmh/cspell.nvim',
   },
-  config = function()
+  config = function(_, opts)
+    local cspell = require('cspell')
+    opts.sources = opts.sources or {}
+    table.insert(
+      opts.sources,
+      cspell.diagnostics.with({
+        diagnostics_postprocess = function(diagnostic)
+          diagnostic.severity = vim.diagnostic.severity.HINT
+        end,
+      })
+    )
+    table.insert(opts.sources, cspell.code_actions)
+
     local null_ls = require('null-ls')
     local formatting = null_ls.builtins.formatting   -- to setup formatters
     local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+    local code_actions = null_ls.builtins.code_actions
 
     -- Formatters & linters for mason to install
     require('mason-null-ls').setup({
@@ -33,6 +47,8 @@ return {
       formatting.gofmt,
       formatting.goimports,
       formatting.golines,
+      diagnostics.cspell,
+      code_actions.cspell,
     }
 
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})

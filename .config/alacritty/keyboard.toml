@@ -167,3 +167,24 @@ mods = "Command"
 action = "CreateNewWindow"
 key = "N"
 mods = "Command|Control|Alt|Shift"
+
+# remap scale to more complex chord
+[[keyboard.bindings]]
+action = "None"
+key = "Equals"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "None"
+key = "Minus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Alt|Control|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Alt|Control|Shift"

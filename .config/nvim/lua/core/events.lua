@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'VimResized', 'WinResized' }, {
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
   desc = 'Resize windows when Vim is resized',
   group = vim.api.nvim_create_augroup('ResizeWindows', { clear = true }),
   callback = function()

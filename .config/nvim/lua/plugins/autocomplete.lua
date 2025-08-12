@@ -39,8 +39,15 @@ return {
       ghost_text = { enabled = true },
     },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'lazydev', 'copilot' },
+      default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'copilot' },
       providers = {
+        -- autocomplete from all open buffers
+        buffer = {
+          opts = {
+            -- get all buffers, even ones like neo-tree
+            get_bufnrs = vim.api.nvim_list_bufs,
+          },
+        },
         lazydev = {
           module = 'lazydev.integrations.blink',
           score_offset = 100,

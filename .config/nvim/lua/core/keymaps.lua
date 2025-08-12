@@ -41,7 +41,9 @@ vim.keymap.set('t', '<A-l>', [[<C-\><C-n><A-l><CR>]], opts)
 vim.keymap.set('t', '<C-u>', '<C-\\><C-n><C-u>', opts)
 
 -- Escape to normal mode in terminal
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
+-- Why not single? If another instance of vim will run inside terminal,
+-- then you wint be able to change mode
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', opts)
 
 -- Enter in scrolled terminal goes back into insert mode
 vim.keymap.set('n', '<Return>', 'i', opts)
@@ -71,3 +73,5 @@ vim.keymap.set('n', 'x', '"_x', opts)
 -- Navigate quickfix list
 vim.keymap.set('n', 'q<Tab>', '<cmd>cnext<CR>', opts)
 vim.keymap.set('n', 'q<S-Tab>', '<cmd>cprev<CR>', opts)
+vim.keymap.set('n', 'qj', '<cmd>cnext<CR>', opts)
+vim.keymap.set('n', 'qk', '<cmd>cprev<CR>', opts)

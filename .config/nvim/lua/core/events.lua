@@ -7,9 +7,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('TermEnter', {
-  desc = 'Start insert when entering terminal buffer',
+  desc = 'Prepare terminal buffer',
   pattern = 'term://*',
-  command = 'startinsert',
+  callback = function()
+    vim.opt_local.spell = false
+    vim.cmd('startinsert')
+  end,
 })
 
 vim.api.nvim_create_autocmd('TermOpen', {

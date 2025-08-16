@@ -59,14 +59,8 @@ alias gg="git graph"
 alias gchom="git checkout origin/master"
 alias gchod="git checkout origin/dev"
 
-# ssh and attach tmux with compression:
-ssht() {
-    ssh -C -t "$1" tmux attach -t0
-}
-
 # More complex grep
 GREP=$(which grep)
-alias cgrep="$GREP --color=always"
 function grep() {
     # disable color when output is piped
     if [ -t 1 ]; then
@@ -179,9 +173,9 @@ print256colors() {
     done
 }
 
-alias zshrc="vim ~/.zshrc"
+alias zshrc="nvim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
-alias nvimrc="nvim ~/.config/nvim/init.vim"
+alias nvimrc="cd ~/.config/nvim; nvim init.lua"
 
 replace() {
     local _from=$1

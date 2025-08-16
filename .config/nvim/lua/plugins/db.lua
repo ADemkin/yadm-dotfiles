@@ -27,4 +27,12 @@ return {
   --    require "custom.dbee"
   --  end,
   --},
+  {
+    'xemptuous/sqlua.nvim',
+    lazy = true,
+    cmd = 'SQLua',
+    config = function()
+      require('sqlua').setup()
+    end,
+  },
 }

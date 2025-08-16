@@ -10,15 +10,15 @@ vim.api.nvim_create_autocmd('TermEnter', {
   desc = 'Prepare terminal buffer',
   pattern = 'term://*',
   callback = function()
-    vim.opt_local.spell = false
     vim.cmd('startinsert')
   end,
 })
 
 vim.api.nvim_create_autocmd('TermOpen', {
-  desc = 'Prevent cursor from blinking in terminal mode',
+  desc = 'Set local terminal settings',
   callback = function()
     vim.opt_local.guicursor = ''
+    vim.opt_local.spell = false
   end,
 })
 

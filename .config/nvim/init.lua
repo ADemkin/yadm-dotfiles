@@ -31,35 +31,33 @@ require('lazy').setup({
   require('plugins/flash'), -- S motion
   require('plugins/toggleterm'), -- terminal integration
   require('plugins/gitsigns'), -- Git integration
-  require('plugins/quickfix'), -- quickfix enhancements
   require('plugins/colors'), -- display hex colors
   require('plugins/readline'), -- readline bindings for command line
   require('plugins/cycle'), -- cycle through values with <C-a> and <C-x>
 
   -- Heavyweight plugins
-  require('plugins/neotree'), -- file explorer
-  require('plugins/autocomplete'), -- autocompletion
-  require('plugins/autopairs'), -- auto-pairs and brackets
-  require('plugins/treesitter'), -- syntax highlighting and more
-  require('plugins/treesitter-context'), -- show current function/class
-  require('plugins/treesitter-textobjects'),
-  require('plugins/lsp'), -- LSP support
-  require('plugins/null-ls'), -- formatting and diagnostics
-  require('plugins/telescope'), -- fuzzy finder
-  require('plugins/ai'), -- AI integration
-  require('plugins/database'), -- database
-  require('plugins/trouble'), -- fancy quickfix
-  require('plugins/outline'), -- fancy module navigation
+  require('plugins/neotree'),
+  require('plugins/autocomplete'),
+  require('plugins/autopairs'),
+  require('plugins/treesitter'),
+  require('plugins/treesitter-context'),
+  require('plugins/textobjects'),
+  require('plugins/lsp'),
+  require('plugins/autoformat'),
+  require('plugins/telescope'),
+  require('plugins/ai'),
+  require('plugins/quickfix'),
+  require('plugins/code-navigation'),
   require('plugins/coverage'), -- show test coverage in numbercolumn
+  require('plugins/db'), -- SQL integration
   -- require('plugins/neotest'),
 
-  { 'wellle/targets.vim', event = 'VeryLazy' }, -- more text objects
-  -- {
-  --   'm4xshen/hardtime.nvim',
-  --   lazy = false,
-  --   dependencies = { 'MunifTanjim/nui.nvim' },
-  --   opts = {},
-  -- },
+  {
+    'm4xshen/hardtime.nvim',
+    lazy = false,
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    opts = {},
+  },
 })
 
 require('core.terminal')

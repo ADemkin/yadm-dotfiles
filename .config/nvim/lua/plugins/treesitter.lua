@@ -38,7 +38,6 @@ return {
     indent = { enable = true },
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
-      vim.keymap.set('n', '<leader>i', ':Inspect')
     end,
   },
 }

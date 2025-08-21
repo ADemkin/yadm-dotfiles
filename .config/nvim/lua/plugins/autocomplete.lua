@@ -22,7 +22,7 @@ return {
       opts = {},
     },
     'giuxtaposition/blink-cmp-copilot',
-    'folke/lazydev.nvim', -- required as a provier
+    'folke/lazydev.nvim', -- required as a provider
   },
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
@@ -41,13 +41,6 @@ return {
     sources = {
       default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'copilot' },
       providers = {
-        -- autocomplete from all open buffers
-        buffer = {
-          opts = {
-            -- get all buffers, even ones like neo-tree
-            get_bufnrs = vim.api.nvim_list_bufs,
-          },
-        },
         lazydev = {
           module = 'lazydev.integrations.blink',
           score_offset = 100,

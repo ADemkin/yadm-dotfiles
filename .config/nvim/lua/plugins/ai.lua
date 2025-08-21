@@ -120,13 +120,20 @@ return {
     'CopilotC-Nvim/CopilotChat.nvim',
     event = 'VeryLazy',
     dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log and async functions
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
     },
     build = 'make tiktoken',
-    opts = {
-      -- See Configuration section for options
-    },
-    -- See Commands section for default commands if you want to lazy load on them
+    config = function()
+      require('CopilotChat').setup({})
+      vim.api.nvim_create_autocmd('BufEnter', {
+        desc = 'Settings for Copilot Chat',
+        pattern = 'copilot-chat',
+        callback = function()
+          vim.opt_local.spell = false
+          vim.opt_local.colorcolumn = ''
+        end,
+      })
+    end,
   },
   {
     'olimorris/codecompanion.nvim',

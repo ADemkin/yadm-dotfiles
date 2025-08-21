@@ -5,7 +5,7 @@ return {
     local filename = {
       'filename',
       file_status = true, -- displays file status (readonly status, modified status)
-      path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+      path = 1,           -- 0 = just filename, 1 = relative path, 2 = absolute path
     }
 
     local hide_in_width = function()
@@ -33,12 +33,9 @@ return {
     require('lualine').setup({
       options = {
         icons_enabled = false,
-        -- Some useful glyphs:
-        -- https://www.nerdfonts.com/cheat-sheet
-        --        
         section_separators = { left = '', right = '' },
         component_separators = { left = '|', right = '|' },
-        disabled_filetypes = { 'alpha', 'neo-tree' },
+        disabled_filetypes = { 'alpha', 'neo-tree', 'dbui' },
         always_divide_middle = true,
       },
       sections = {

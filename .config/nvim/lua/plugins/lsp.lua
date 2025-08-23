@@ -1,23 +1,18 @@
 return {
-  -- Main LSP Configuration
   'neovim/nvim-lspconfig',
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
-    -- Allows extra capabilities provided by blink.cmp
     'saghen/blink.cmp',
-    -- Allow fucking lua language server to work out of the box
+    -- Allow fucking lua language server to work out of the box:
     {
       'folke/lazydev.nvim',
-      ft = 'lua', -- only load on lua files
+      ft = 'lua',
       opts = {
         library = {
-          -- See the configuration section for more details
-          -- Load luvit types when the `vim.uv` word is found
           { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         },
       },
@@ -27,30 +22,25 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc, mode)
+        local map = function(keys, func, mode)
           mode = mode or 'n'
-          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          vim.keymap.set(mode, keys, func, { buffer = event.buf })
         end
 
-        map('gr', vim.lsp.buf.rename, '[R]ename')
-        map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-        -- map('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+        map('gn', vim.lsp.buf.rename)
+        -- prefer telescope over vim.lsp.buf.definition to quicker select if multiple results
+        map('gd', require('telescope.builtin').lsp_definitions)
         map('gD', function(opts)
           vim.cmd('vsplit')
-          -- vim.lsp.buf.definition(opts)
           require('telescope.builtin').lsp_definitions(opts)
-        end, '[G]oto [D]efinition in vsplit')
-        map('ga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        map('gu', vim.lsp.buf.references, '[G]oto [U]sages')
-        map('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+        end)
+        map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
+        map('gu', vim.lsp.buf.references)
+        map('gi', vim.lsp.buf.implementation)
 
-        vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open quickfix diagnostics' })
+        vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
-        -- The following two autocommands are used to highlight references of the
-        -- word under your cursor when your cursor rests there for a little while.
-        --    See `:help CursorHold` for information about when this is executed
-        --
-        -- When you move your cursor, the highlights will be cleared (the second autocommand).
+        -- highlight word under cursor
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
@@ -75,6 +65,7 @@ return {
           })
         end
 
+        -- toggle virtual text and virtual lines
         vim.keymap.set('n', 'gvt', function()
           local current = vim.diagnostic.config().virtual_text
           if current then
@@ -82,7 +73,7 @@ return {
           else
             vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
           end
-        end, { desc = 'Toggle virtual text/lines' })
+        end)
 
         if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
           vim.lsp.inlay_hint.enable()
@@ -138,12 +129,12 @@ return {
     -- for you, so that they are Undefined global `vim`. available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
+      'stylua',
     })
     require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
     require('mason-lspconfig').setup({
-      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      ensure_installed = {},
       automatic_installation = true,
       handlers = {
         function(server_name)

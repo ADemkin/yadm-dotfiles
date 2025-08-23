@@ -23,17 +23,19 @@ require('lazy').setup({
 
   -- lightweight plugins
   require('plugins/tpope'),
-  require('plugins/tmux'), -- tmux integration and panel re sizing
-  require('plugins/indentline'), -- indent guides
-  require('plugins/argwrap'), -- arguments wrapper
-  require('plugins/wilder'), -- command line completion
-  require('plugins/mark'), -- highlights
-  require('plugins/flash'), -- S motion
-  require('plugins/toggleterm'), -- terminal integration
-  require('plugins/gitsigns'), -- Git integration
-  require('plugins/colors'), -- display hex colors
-  require('plugins/readline'), -- readline bindings for command line
-  require('plugins/cycle'), -- cycle through values with <C-a> and <C-x>
+  require('plugins/tmux'),
+  require('plugins/indentline'),
+  require('plugins/argwrap'),
+  require('plugins/wilder'),
+  require('plugins/mark'),
+  require('plugins/flash'),
+  require('plugins/toggleterm'),
+  require('plugins/gitsigns'),
+  require('plugins/colors'),
+  require('plugins/readline'),
+  require('plugins/cycle'),
+  require('plugins/quickfix'),
+  require('plugins/coverage'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -49,9 +51,7 @@ require('lazy').setup({
   require('plugins/textobjects'),
   require('plugins/telescope'),
   require('plugins/ai'),
-  require('plugins/quickfix'),
   require('plugins/code-navigation'),
-  require('plugins/coverage'),
   require('plugins/db'),
   -- require('plugins/neotest'),
 
@@ -63,4 +63,4 @@ require('lazy').setup({
   },
 })
 
-require('core.terminal')
+-- require('core.terminal')

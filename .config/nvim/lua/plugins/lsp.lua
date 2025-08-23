@@ -89,6 +89,7 @@ return {
       virtual_text = {
         prefix = '●',
         spacing = 2,
+        source = 'if_many',
       },
       signs = false,
     })

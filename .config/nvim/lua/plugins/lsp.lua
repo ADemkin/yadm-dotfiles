@@ -27,7 +27,7 @@ return {
           vim.keymap.set(mode, keys, func, { buffer = event.buf })
         end
 
-        map('gn', vim.lsp.buf.rename)
+        map('gr', vim.lsp.buf.rename)
         -- prefer telescope over vim.lsp.buf.definition to quicker select if multiple results
         map('gd', require('telescope.builtin').lsp_definitions)
         map('gD', function(opts)

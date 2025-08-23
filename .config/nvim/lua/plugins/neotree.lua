@@ -45,7 +45,7 @@ return {
         },
         git_status = {
           symbols = {
-            added = '',    -- highlight only
+            added = '', -- highlight only
             modified = '', -- highlight only
           },
         },
@@ -171,8 +171,7 @@ return {
             ['H'] = 'toggle_hidden',
             ['/'] = 'noop',
             ['f'] = 'noop',
-            ['<c-f>'] = 'filter_on_submit',
-            ['<c-c>'] = 'clear_filter',
+            ['<c-c>'] = 'noop', -- allow to reset hl search
           },
         },
       },

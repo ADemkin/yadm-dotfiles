@@ -35,6 +35,11 @@ require('lazy').setup({
   require('plugins/readline'), -- readline bindings for command line
   require('plugins/cycle'), -- cycle through values with <C-a> and <C-x>
 
+  -- LSP, lint, format
+  require('plugins/lsp'),
+  require('plugins/format'),
+  require('plugins/lint'),
+
   -- Heavyweight plugins
   require('plugins/neotree'),
   require('plugins/autocomplete'),
@@ -42,14 +47,12 @@ require('lazy').setup({
   require('plugins/treesitter'),
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
-  require('plugins/lsp'),
-  require('plugins/autoformat'),
   require('plugins/telescope'),
   require('plugins/ai'),
   require('plugins/quickfix'),
   require('plugins/code-navigation'),
-  require('plugins/coverage'), -- show test coverage in numbercolumn
-  require('plugins/db'), -- SQL integration
+  require('plugins/coverage'),
+  require('plugins/db'),
   -- require('plugins/neotest'),
 
   {

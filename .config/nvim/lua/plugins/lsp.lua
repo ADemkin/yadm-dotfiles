@@ -84,7 +84,9 @@ return {
           end
         end, { desc = 'Toggle virtual text/lines' })
 
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+        if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
+          vim.lsp.inlay_hint.enable()
+        end
       end,
     })
 

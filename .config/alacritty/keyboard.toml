@@ -9,16 +9,6 @@ key = "C"
 mods = "Control|Shift"
 
 [[keyboard.bindings]]
-action = "IncreaseFontSize"
-key = "Equals"
-mods = "Control"
-
-[[keyboard.bindings]]
-action = "DecreaseFontSize"
-key = "Minus"
-mods = "Control"
-
-[[keyboard.bindings]]
 action = "Paste"
 key = "Paste"
 mods = "None"
@@ -171,13 +161,18 @@ mods = "Command|Control|Alt|Shift"
 # remap scale to more complex chord
 [[keyboard.bindings]]
 action = "None"
-key = "Equals"
-mods = "Command"
+key = "="
+mods = "Control"
 
 [[keyboard.bindings]]
 action = "None"
-key = "Minus"
-mods = "Command"
+key = "+"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "None"
+key = "-"
+mods = "Control"
 
 [[keyboard.bindings]]
 action = "IncreaseFontSize"

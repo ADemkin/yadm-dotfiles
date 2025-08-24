@@ -36,6 +36,7 @@ require('lazy').setup({
   require('plugins/cycle'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
+  require('plugins/autopairs'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -45,7 +46,6 @@ require('lazy').setup({
   -- Heavyweight plugins
   require('plugins/neotree'),
   require('plugins/autocomplete'),
-  require('plugins/autopairs'),
   require('plugins/treesitter'),
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
@@ -53,7 +53,7 @@ require('lazy').setup({
   require('plugins/ai'),
   require('plugins/code-navigation'),
   require('plugins/db'),
-  -- require('plugins/neotest'),
+  require('plugins/neotest'),
 
   {
     'm4xshen/hardtime.nvim',

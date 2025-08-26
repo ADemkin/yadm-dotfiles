@@ -1,5 +1,6 @@
 return {
   'idbrii/vim-mark',
+  event = 'VeryLazy',
   dependencies = {
     {
       'inkarkat/vim-ingo-library',

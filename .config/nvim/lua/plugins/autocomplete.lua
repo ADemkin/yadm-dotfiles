@@ -30,7 +30,7 @@ return {
     keymap = {
       preset = 'default',
       -- not yet decided which one is better
-      ['<enter>'] = { 'select_and_accept', 'fallback' },
+      -- ['<enter>'] = { 'select_and_accept', 'fallback' }, -- conflicts with abbr
       ['<tab>'] = { 'select_and_accept', 'fallback' },
       ['<C-n>'] = { 'show', 'select_next' },
     },

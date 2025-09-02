@@ -16,6 +16,8 @@ return {
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
             },
           },
           move = {
@@ -24,18 +26,22 @@ return {
             goto_next_start = {
               [']f'] = '@function.outer',
               [']c'] = '@class.outer',
+              [']a'] = '@parameter.inner',
             },
             goto_next_end = {
               [']F'] = '@function.outer',
               [']C'] = '@class.outer',
+              [']A'] = '@parameter.outer',
             },
             goto_previous_start = {
               ['[f'] = '@function.outer',
               ['[c'] = '@class.outer',
+              ['[a'] = '@parameter.inner',
             },
             goto_previous_end = {
               ['[F'] = '@function.outer',
               ['[C'] = '@class.outer',
+              ['[A'] = '@parameter.outer',
             },
           },
         },

@@ -66,7 +66,7 @@ return {
         end
 
         -- toggle virtual text and virtual lines
-        vim.keymap.set('n', 'gvt', function()
+        vim.keymap.set('n', 'gtv', function()
           local current = vim.diagnostic.config().virtual_text
           if current then
             vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
@@ -74,6 +74,14 @@ return {
             vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
           end
         end)
+
+        -- toggle whole diagnostics
+        vim.g['diagnostics_active'] = true
+        local function toggle_diagnostics()
+          vim.g.diagnostics_active = not vim.g.diagnostics_active
+          vim.diagnostic.enable(vim.g.diagnostics_active)
+        end
+        map('gtd', toggle_diagnostics)
 
         if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
           vim.lsp.inlay_hint.enable()

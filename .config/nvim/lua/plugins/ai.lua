@@ -39,13 +39,17 @@ return {
           vim.b.copilot_suggestion_hidden = true
         end,
       })
-
       vim.api.nvim_create_autocmd('User', {
         pattern = 'BlinkCmpMenuClose',
         callback = function()
           vim.b.copilot_suggestion_hidden = false
         end,
       })
+
+      -- enable and disable copilot
+      vim.keymap.set('n', '<Leader>cd', ':Copilot disable<CR>', { noremap = true })
+      vim.keymap.set('n', '<Leader>ce', ':Copilot enable<CR>', { noremap = true })
+      vim.keymap.set('n', '<Leader>cc', ':Copilot panel<CR>', { noremap = true })
     end,
   },
   -- {

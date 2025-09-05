@@ -37,6 +37,7 @@ require('lazy').setup({
   require('plugins/quickfix'),
   require('plugins/coverage'),
   require('plugins/autopairs'),
+  require('plugins/hardtime'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -50,17 +51,10 @@ require('lazy').setup({
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
-  require('plugins/ai'),
+  -- require('plugins/ai'),
   require('plugins/code-navigation'),
-  require('plugins/db'),
-  require('plugins/neotest'),
-
-  {
-    'm4xshen/hardtime.nvim',
-    lazy = false,
-    dependencies = { 'MunifTanjim/nui.nvim' },
-    opts = {},
-  },
+  -- require('plugins/db'),
+  -- require('plugins/neotest'),
 })
 
--- require('core.terminal')
+require('core.terminal')

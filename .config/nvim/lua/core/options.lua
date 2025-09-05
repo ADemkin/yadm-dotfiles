@@ -22,3 +22,5 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- Don't insert the current comm
 
 -- runtime
 vim.opt.runtimepath:remove('/usr/share/vim/vimfiles') -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
+
+vim.o.gdefault = true -- default to global substitution

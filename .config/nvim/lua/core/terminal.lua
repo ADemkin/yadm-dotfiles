@@ -45,7 +45,7 @@ local function execute_in_terminal(command)
   vim.cmd('TermExec cmd="' .. command .. '"')
 end
 
-vim.keymap.set('n', '<leader>tt', function()
+local function run_single_test()
   if not vim.bo.filetype == 'python' then
     return
   end
@@ -61,9 +61,9 @@ vim.keymap.set('n', '<leader>tt', function()
   end
   local command = build_pytest_command(module_path, function_name)
   execute_in_terminal(command)
-end, { noremap = true, silent = true, desc = 'Run current pytest test in terminal' })
+end
 
-vim.keymap.set('n', '<leader>tf', function()
+local function run_module_test()
   if not vim.bo.filetype == 'python' then
     return
   end
@@ -74,4 +74,8 @@ vim.keymap.set('n', '<leader>tf', function()
   end
   local command = build_pytest_command(module_path)
   execute_in_terminal(command)
-end, { noremap = true, silent = true, desc = 'Run current pytest module tests in terminal' })
+end
+
+vim.keymap.set('n', '<leader>tt', run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
+
+vim.keymap.set('n', '<leader>tf', run_module_test, { noremap = true, silent = true, desc = 'Run current pytest module tests in terminal' })

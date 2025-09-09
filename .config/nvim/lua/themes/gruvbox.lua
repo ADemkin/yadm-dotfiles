@@ -15,6 +15,15 @@ return {
         GruvboxAquaSign = { link = 'GruvboxAqua' },
         GruvboxOrangeSign = { link = 'GruvboxOrange' },
         ['@punctuation.delimiter'] = { link = '@variable' },
+        NeoTreeGitAdded = { link = 'GitGutterAdd' },
+        NeoTreeGitConflict = { link = 'GruvboxOragne' },
+        NeoTreeGitDeleted = { link = 'GitGutterDelete' },
+        NeoTreeGitIgnored = { link = 'NeoTreeDotfile' },
+        NeoTreeGitModified = { link = 'GruvboxBlue' },
+        NeoTreeGitRenamed = { link = 'NeoTreeGitModified' },
+        NeoTreeGitStaged = { link = 'NeoTreeGitAdded' },
+        NeoTreeGitUntracked = { link = 'GruvboxOragne' },
+        NeoTreeGitUnstaged = { link = 'NeoTreeGitConflict' },
       },
     })
     vim.cmd.colorscheme('gruvbox')

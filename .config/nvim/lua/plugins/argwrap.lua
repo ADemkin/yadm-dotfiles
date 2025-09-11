@@ -16,12 +16,3 @@ return {
     end)
   end,
 }
--- simpler vimscript version without treesitter support
--- return {
---   'FooSoft/vim-argwrap',
---   event = 'VeryLazy',
---   config = function()
---     local opts = { noremap = true, silent = true }
---     vim.keymap.set('n', '<leader>j', ':ArgWrap<CR>', opts)
---   end,
--- }

@@ -36,7 +36,7 @@ return {
     },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 3000 },
-      ghost_text = { enabled = true },
+      ghost_text = { enabled = false },
     },
     sources = {
       default = { 'lsp', 'buffer', 'path', 'snippets', 'lazydev', 'copilot' },

@@ -51,11 +51,11 @@ require('lazy').setup({
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
-  -- require('plugins/ai'),
+  require('plugins/ai'),
   require('plugins/code-navigation'),
   -- require('plugins/db'),
   require('plugins/mongo'),
-  -- require('plugins/neotest'),
+  require('plugins/neotest'),
   require('plugins/markdown'),
 })
 

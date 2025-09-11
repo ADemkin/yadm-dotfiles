@@ -76,6 +76,6 @@ local function run_module_test()
   execute_in_terminal(command)
 end
 
-vim.keymap.set('n', '<leader>tt', run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
+vim.keymap.set('n', '<leader>yt', run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
 
-vim.keymap.set('n', '<leader>tf', run_module_test, { noremap = true, silent = true, desc = 'Run current pytest module tests in terminal' })
+vim.keymap.set('n', '<leader>yf', run_module_test, { noremap = true, silent = true, desc = 'Run current pytest module tests in terminal' })

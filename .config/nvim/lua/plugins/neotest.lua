@@ -45,5 +45,8 @@ return {
     vim.keymap.set('n', '<leader>ts', function()
       require('neotest').summary.toggle()
     end)
+    vim.keymap.set('n', '<leader>to', function()
+      require('neotest').output_panel.toggle()
+    end)
   end,
 }

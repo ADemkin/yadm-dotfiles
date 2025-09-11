@@ -19,7 +19,7 @@ return {
         NeoTreeGitConflict = { link = 'GruvboxOragne' },
         NeoTreeGitDeleted = { link = 'GitGutterDelete' },
         NeoTreeGitIgnored = { link = 'NeoTreeDotfile' },
-        NeoTreeGitModified = { link = 'GruvboxBlue' },
+        NeoTreeGitModified = { link = 'GruvboxAqua' },
         NeoTreeGitRenamed = { link = 'NeoTreeGitModified' },
         NeoTreeGitStaged = { link = 'NeoTreeGitAdded' },
         NeoTreeGitUntracked = { link = 'GruvboxOragne' },

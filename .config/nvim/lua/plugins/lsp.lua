@@ -82,9 +82,14 @@ return {
         end
         map('gtd', toggle_diagnostics)
 
-        if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
-          vim.lsp.inlay_hint.enable()
-        end
+        -- if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
+        --   vim.lsp.inlay_hint.enable()
+        -- end
+        vim.keymap.set('n', 'gtt', function()
+          filter = { bufnr = event.buf }
+          is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
+          vim.lsp.inlay_hint.enable(not is_enabled, filter)
+        end)
       end,
     })
 

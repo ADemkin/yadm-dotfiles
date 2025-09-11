@@ -43,10 +43,10 @@ require('lazy').setup({
   require('plugins/lsp'),
   require('plugins/format'),
   require('plugins/lint'),
+  require('plugins/autocomplete'),
 
   -- Heavyweight plugins
   require('plugins/neotree'),
-  require('plugins/autocomplete'),
   require('plugins/treesitter'),
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
@@ -54,7 +54,9 @@ require('lazy').setup({
   -- require('plugins/ai'),
   require('plugins/code-navigation'),
   -- require('plugins/db'),
+  require('plugins/mongo'),
   -- require('plugins/neotest'),
+  require('plugins/markdown'),
 })
 
 require('core.terminal')

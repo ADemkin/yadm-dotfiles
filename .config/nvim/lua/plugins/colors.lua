@@ -6,6 +6,7 @@ return {
       'css',
       'toml',
       'lua',
+      'conf',
     },
   },
 }

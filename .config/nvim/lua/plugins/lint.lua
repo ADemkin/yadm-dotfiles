@@ -16,6 +16,7 @@ return {
         typescriptreact = { 'eslint_d' },
         make = { 'checkmake' },
       }
+
       vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
         group = vim.api.nvim_create_augroup('NvimLint', { clear = true }),
         callback = function()
@@ -24,6 +25,12 @@ return {
           end
         end,
       })
+
+      local function toggle_diagnostics()
+        local is_enabled = vim.diagnostic.is_enabled({})
+        vim.diagnostic.enable(not is_enabled, {})
+      end
+      vim.keymap.set('n', 'gtd', toggle_diagnostics)
     end,
   },
   {

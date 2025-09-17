@@ -29,12 +29,13 @@ return {
       'tsx',
       'css',
       'html',
-      'tmux',
+      'comment',
     },
     -- Autoinstall languages that are not installed
     auto_install = true,
     highlight = {
       enable = true,
+      disable = { 'tmux' },
     },
     indent = { enable = true },
     config = function(_, opts)

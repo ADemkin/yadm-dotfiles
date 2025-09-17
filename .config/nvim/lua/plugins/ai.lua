@@ -50,6 +50,9 @@ return {
       vim.keymap.set('n', '<Leader>cd', ':Copilot disable<CR>', { noremap = true })
       vim.keymap.set('n', '<Leader>ce', ':Copilot enable<CR>', { noremap = true })
       vim.keymap.set('n', '<Leader>cc', ':Copilot panel<CR>', { noremap = true })
+
+      -- start disabled
+      vim.cmd(':Copilot disable')
     end,
   },
   -- {
@@ -120,27 +123,27 @@ return {
   --     },
   --   },
   -- },
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    event = 'VeryLazy',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
-    },
-    build = 'make tiktoken',
-    config = function()
-      require('CopilotChat').setup({})
-      vim.api.nvim_create_autocmd('BufEnter', {
-        desc = 'Settings for Copilot Chat',
-        pattern = 'copilot-chat',
-        callback = function()
-          vim.opt_local.spell = false
-          vim.opt_local.colorcolumn = ''
-        end,
-      })
-    end,
-  },
-  {
-    'olimorris/codecompanion.nvim',
-    event = 'VeryLazy',
-  },
+  -- {
+  --   'CopilotC-Nvim/CopilotChat.nvim',
+  --   event = 'VeryLazy',
+  --   dependencies = {
+  --     { 'nvim-lua/plenary.nvim', branch = 'master' },
+  --   },
+  --   build = 'make tiktoken',
+  --   config = function()
+  --     require('CopilotChat').setup({})
+  --     vim.api.nvim_create_autocmd('BufEnter', {
+  --       desc = 'Settings for Copilot Chat',
+  --       pattern = 'copilot-chat',
+  --       callback = function()
+  --         vim.opt_local.spell = false
+  --         vim.opt_local.colorcolumn = ''
+  --       end,
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   'olimorris/codecompanion.nvim',
+  --   event = 'VeryLazy',
+  -- },
 }

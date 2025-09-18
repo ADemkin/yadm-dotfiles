@@ -183,3 +183,9 @@ mods = "Alt|Control|Shift"
 action = "DecreaseFontSize"
 key = "Minus"
 mods = "Alt|Control|Shift"
+
+# noop for control-b
+[[keyboard.bindings]]
+action = "None"
+key = "b"
+mods = "Command"

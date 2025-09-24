@@ -27,8 +27,9 @@ return {
       })
 
       local function toggle_diagnostics()
-        local is_enabled = vim.diagnostic.is_enabled({})
-        vim.diagnostic.enable(not is_enabled, {})
+        local filter = { bufnr = vim.fn.bufnr('%') }
+        local is_enabled = vim.diagnostic.is_enabled(filter)
+        vim.diagnostic.enable(not is_enabled, filter)
       end
       vim.keymap.set('n', 'gtd', toggle_diagnostics)
     end,

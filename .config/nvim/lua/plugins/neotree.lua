@@ -161,7 +161,7 @@ return {
           },
         },
         follow_current_file = {
-          enabled = true,
+          enabled = false,
           leave_dirs_open = true,
         },
         group_empty_dirs = false,

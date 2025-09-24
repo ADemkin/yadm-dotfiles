@@ -14,7 +14,6 @@ return {
         GruvboxPurpleSign = { link = 'GruvboxPurple' },
         GruvboxAquaSign = { link = 'GruvboxAqua' },
         GruvboxOrangeSign = { link = 'GruvboxOrange' },
-        ['@punctuation.delimiter'] = { link = '@variable' },
         NeoTreeGitAdded = { link = 'GitGutterAdd' },
         NeoTreeGitConflict = { link = 'GruvboxOragne' },
         NeoTreeGitDeleted = { link = 'GitGutterDelete' },

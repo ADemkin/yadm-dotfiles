@@ -37,7 +37,7 @@ require('lazy').setup({
   require('plugins/quickfix'),
   require('plugins/coverage'),
   require('plugins/autopairs'),
-  require('plugins/hardtime'),
+  -- require('plugins/hardtime'),
 
   -- LSP, lint, format
   require('plugins/lsp'),

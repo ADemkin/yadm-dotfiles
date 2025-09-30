@@ -63,8 +63,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- Delete do not replace current register
 vim.keymap.set('n', 'x', '"_x', opts)
 vim.keymap.set('v', 'p', '"_dP', opts)
-vim.keymap.set('v', 'c', '"_dC', opts)
--- vim.keymap.set('n', 'd', '"_d', opts)
 vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Open terminal

@@ -52,11 +52,11 @@ bindkey "^R" history-incremental-search-backward
 
 # Git workflow
 alias grup="git remote update"
-alias grib="git rebase -i origin/master"
+alias grim="git rebase -i origin/main"
 alias grid="git rebase -i origin/dev"
 alias gst="git status"
 alias gg="git graph"
-alias gchom="git checkout origin/master"
+alias gchom="git checkout origin/main"
 alias gchod="git checkout origin/dev"
 
 # More complex grep
@@ -126,7 +126,7 @@ export CLICOLOR=1
 export LSCOLORS="BxGxcxdxCxegDxabagacad"
 
 # bat as manpager
-export BAT_THEME="Monokai Extended"
+export BAT_THEME="gruvbox-dark"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Python
@@ -135,7 +135,14 @@ alias pip="pip3"
 # venv workflow enhances
 export PYTHON="python3"
 mkvenv() {
-    $PYTHON -m venv venv &&
+    local python_version="$1"
+    echo $python_version
+    local python_name=$PYTHON
+    if [[ $python_version ]]; then
+        python_name="python$python_version"
+    fi
+    echo $python_name
+    $python_name -m venv venv &&
     ./venv/bin/python -m pip install --upgrade pip
 }
 _activate_venv() {
@@ -228,3 +235,12 @@ fpath=(/Users/antondemkin/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+# Add Docker Desktop for Mac (docker)
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+
+# wb teleport
+alias tshdm="tsh kube login k8s.moderation-dm && kubectl config set-context --current --namespace=moderation"
+alias tshel="tsh kube login k8s.moderation-el && kubectl config set-context --current --namespace=moderation"
+alias tshxs="tsh kube login k8s.moderation-xs && kubectl config set-context --current --namespace=moderation"
+alias tshstage="tsh kube login k8s.tns-stage-el && kubectl config set-context --current --namespace=moderation"
+alias tshlogin="tsh login --proxy=tp.wb.ru:443 --mfa-mode=otp --auth=local --user=demkin.anton teleport"

@@ -1,5 +1,5 @@
-require('core.keymaps')
 require('core.options')
+require('core.keymaps')
 require('core.search')
 require('core.ui')
 require('core.events')
@@ -54,7 +54,6 @@ require('lazy').setup({
   require('plugins/ai'),
   require('plugins/code-navigation'),
   -- require('plugins/db'),
-  require('plugins/mongo'),
   require('plugins/neotest'),
   require('plugins/markdown'),
 })

@@ -2,7 +2,7 @@ return {
   { 'tpope/vim-sleuth' },
   {
     'tpope/vim-fugitive',
-    event = 'VeryLazy',
+    command = 'Git',
     config = function()
       vim.keymap.set('n', 'ts', ':Git<CR>', { noremap = true, silent = true, desc = 'Git status' })
       vim.keymap.set('n', 'tg', ':Git<CR>', { noremap = true, silent = true, desc = 'Git status' })

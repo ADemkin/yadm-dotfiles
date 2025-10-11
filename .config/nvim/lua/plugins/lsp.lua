@@ -64,6 +64,22 @@ return {
           })
         end
 
+        -- show diagnostics when hold
+        vim.api.nvim_create_autocmd('CursorHold', {
+          buffer = event.buf,
+          callback = function()
+            -- show diagnostics under cursor without stealing focus
+            vim.diagnostic.open_float({
+              scope = 'cursor',
+              focus = false,
+              border = 'single',
+              header = '',
+              prefix = '',
+              source = true,
+            })
+          end,
+        })
+
         -- toggle virtual text and virtual lines
         vim.keymap.set('n', 'gtv', function()
           local current = vim.diagnostic.config().virtual_text
@@ -74,17 +90,6 @@ return {
           end
         end)
 
-        -- TODO: move to lint
-        -- local function toggle_diagnostics()
-        --   local filter = { bufnr = event.buf }
-        --   local is_enabled = vim.diagnostic.is_enabled(filter)
-        --   vim.diagnostic.enable(not is_enabled, filter)
-        -- end
-        -- vim.keymap.set('n', 'gtd', toggle_diagnostics)
-
-        -- if not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }) then
-        --   vim.lsp.inlay_hint.enable()
-        -- end
         vim.keymap.set('n', 'gtt', function()
           local filter = { bufnr = event.buf }
           local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)

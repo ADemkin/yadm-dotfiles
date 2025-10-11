@@ -32,6 +32,7 @@ return {
       -- not yet decided which one is better
       -- ['<enter>'] = { 'select_and_accept', 'fallback' }, -- conflicts with abbr
       ['<tab>'] = { 'select_and_accept', 'fallback' },
+      ['<C-y>'] = { 'select_and_accept', 'fallback' }, -- also try this one
       ['<C-n>'] = { 'show', 'select_next' },
     },
     completion = {
@@ -76,6 +77,7 @@ return {
         ['<Tab>'] = { 'show', 'select_next', 'fallback' },
         ['<C-p>'] = { 'select_prev', 'fallback' },
         ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<enter>'] = { 'select_and_accept', 'fallback' },
       },
     },
   },

@@ -3,13 +3,15 @@
 # Default colors
 [colors.primary]
 # hard contrast background = = '#1d2021'
-background = '#282828'
+# background = '#282828'  # original
+background = '#262722'
 # soft contrast background = = '#32302f'
 foreground = '#ebdbb2'
 
 # Normal colors
 [colors.normal]
-black   = '#282828'
+# black   = '#282828'
+black   = '#262722'
 red     = '#cc241d'
 green   = '#98971a'
 yellow  = '#d79921'

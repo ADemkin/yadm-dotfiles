@@ -24,6 +24,13 @@ return {
         NeoTreeGitUntracked = { link = 'GruvboxOragne' },
         NeoTreeGitUnstaged = { link = 'NeoTreeGitConflict' },
       },
+      palette_overrides = {
+        -- dark0 = "#282828",  -- original
+        -- dark1 = "#3c3836",  -- original
+        -- dark0 = '#1c1d1a',
+        dark0 = '#262722',
+        dark1 = '#3a3730',
+      },
     })
     vim.cmd.colorscheme('gruvbox')
     require('lualine').setup({

@@ -34,13 +34,13 @@ return {
       vim.keymap.set('n', 'gtd', toggle_diagnostics)
     end,
   },
-  {
-    'rshkarin/mason-nvim-lint',
-    event = 'VeryLazy',
-    dependencies = {
-      'williamboman/mason.nvim',
-      'mfussenegger/nvim-lint',
-    },
-    opts = { automatic_installation = true },
-  },
+  -- {
+  --   'rshkarin/mason-nvim-lint',
+  --   event = 'VeryLazy',
+  --   dependencies = {
+  --     'williamboman/mason.nvim',
+  --     'mfussenegger/nvim-lint',
+  --   },
+  --   opts = { automatic_installation = true },
+  -- },
 }

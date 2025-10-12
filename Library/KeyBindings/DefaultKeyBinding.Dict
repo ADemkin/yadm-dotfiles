@@ -1,0 +1,12 @@
+/* ~/Library/KeyBindings/DefaultKeyBinding.Dict */
+{
+	"~f" = "moveWordForward:";     /* Option+F → forward by word */
+	"~b" = "moveWordBackward:";    /* Option+B → back by word */
+
+	"~F" = "moveWordForwardAndModifySelection:";   /* Opt+Shift+F: select forward by word */
+	"~B" = "moveWordBackwardAndModifySelection:";  /* Opt+Shift+B: select backward by word */
+
+	"^a" = "moveToBeginningOfLine:";        /* Ctrl-A: start of line */
+	"^e" = "moveToEndOfLine:";              /* Ctrl-E: end of line */
+
+}

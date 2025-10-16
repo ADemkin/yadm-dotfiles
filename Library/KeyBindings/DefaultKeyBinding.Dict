@@ -9,4 +9,7 @@
 	"^a" = "moveToBeginningOfLine:";        /* Ctrl-A: start of line */
 	"^e" = "moveToEndOfLine:";              /* Ctrl-E: end of line */
 
+	"^p" = "moveUp:";
+	"^n" = "moveDown:";
+
 }

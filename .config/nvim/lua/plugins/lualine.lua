@@ -2,24 +2,25 @@ return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
   config = function()
+    local function hide_in_width()
+      return vim.fn.winwidth(0) > 100
+    end
+    local function hide_in_terminal()
+      return vim.bo.buftype ~= 'terminal'
+    end
+
     local filename = {
       'filename',
       file_status = true,
       path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-      cond = function()
-        return vim.bo.buftype ~= 'terminal'
-      end,
+      cond = hide_in_terminal,
     }
-
-    local hide_in_width = function()
-      return vim.fn.winwidth(0) > 100
-    end
 
     local diagnostics = {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = { error = 'E ', warn = 'W ', info = 'I ', hint = 'H ' },
+      symbols = { error = 'E', warn = 'W', info = 'I', hint = 'H' },
       colored = true,
       update_in_insert = false,
       always_visible = false,
@@ -48,11 +49,23 @@ return {
         lualine_x = {
           diagnostics,
           diff,
-          { 'encoding', cond = hide_in_width },
-          { 'filetype', cond = hide_in_width },
+          {
+            'filetype',
+            cond = hide_in_width,
+          },
         },
-        lualine_y = { 'location' },
-        lualine_z = { 'progress' },
+        lualine_y = {
+          {
+            'location',
+            cond = hide_in_terminal,
+          },
+        },
+        lualine_z = {
+          {
+            'progress',
+            cond = hide_in_terminal,
+          },
+        },
       },
       inactive_sections = {
         lualine_a = {},
@@ -61,12 +74,16 @@ return {
           {
             'filename',
             path = 1,
-            cond = function()
-              return vim.bo.buftype ~= 'terminal'
-            end,
+            cond = hide_in_terminal,
           },
         },
-        lualine_x = { { 'location', padding = 0 } },
+        lualine_x = {
+          {
+            'location',
+            cond = hide_in_terminal,
+            padding = 0,
+          },
+        },
         lualine_y = {},
         lualine_z = {},
       },

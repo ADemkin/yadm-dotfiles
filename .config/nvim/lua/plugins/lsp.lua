@@ -69,14 +69,16 @@ return {
           buffer = event.buf,
           callback = function()
             -- show diagnostics under cursor without stealing focus
-            vim.diagnostic.open_float({
-              scope = 'cursor',
-              focus = false,
-              border = 'single',
-              header = '',
-              prefix = '',
-              source = true,
-            })
+            if vim.diagnostic.is_enabled({ bufnr = event.buf }) then
+              vim.diagnostic.open_float({
+                scope = 'cursor',
+                focus = false,
+                border = 'single',
+                header = '',
+                prefix = '',
+                source = true,
+              })
+            end
           end,
         })
 

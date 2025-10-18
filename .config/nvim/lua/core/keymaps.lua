@@ -32,10 +32,10 @@ vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
 vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 
 -- Resize terminal
-vim.keymap.set('t', '<A-h>', [[<C-\><C-n><A-h><CR>]], opts)
-vim.keymap.set('t', '<A-j>', [[<C-\><C-n><A-j><CR>]], opts)
-vim.keymap.set('t', '<A-k>', [[<C-\><C-n><A-k><CR>]], opts)
-vim.keymap.set('t', '<A-l>', [[<C-\><C-n><A-l><CR>]], opts)
+vim.keymap.set('t', '<A-h>', [[<C-\><C-n><A-h><CR><CR>]], opts)
+vim.keymap.set('t', '<A-j>', [[<C-\><C-n><A-j><CR><CR>]], opts)
+vim.keymap.set('t', '<A-k>', [[<C-\><C-n><A-k><CR><CR>]], opts)
+vim.keymap.set('t', '<A-l>', [[<C-\><C-n><A-l><CR><CR>]], opts)
 
 -- scroll up in terminal like it is in normal mode
 vim.keymap.set('t', '<C-u>', '<C-\\><C-n><C-u>', opts)

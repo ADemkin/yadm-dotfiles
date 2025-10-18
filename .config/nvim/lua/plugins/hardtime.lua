@@ -14,11 +14,8 @@ return {
     local stopwords = {
       'moderation',
     }
-    local enabled = is_enabled(stopwords)
-    local enabled_str = is_enabled and 'enabled' or 'disabled'
-    vim.notify('hardtime is ' .. enabled_str)
     require('hardtime').setup({
-      enabled = enabled,
+      enabled = is_enabled(stopwords),
     })
   end,
 }

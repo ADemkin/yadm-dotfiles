@@ -13,6 +13,7 @@ return {
     end
     local stopwords = {
       'moderation',
+      'ml-platform',
     }
     require('hardtime').setup({
       enabled = is_enabled(stopwords),

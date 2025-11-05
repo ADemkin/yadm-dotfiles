@@ -311,7 +311,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'justinmk/vim-sneak'
 
 " Copilot: AI completion tool
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 " Lightline: fast configurable statusline
 Plug 'itchyny/lightline.vim'
@@ -727,9 +727,9 @@ let test#strategy = 'vtr'  " run test in tmux and keep pane- working great, but 
 " let test#strategy = 'tslime'
 
 " Copilot: settings
-let g:copilot_workspace_folders = ["~/code/lionsoul-backend", "~/code/moscowliuda-webinar-utils"]
-imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
+" let g:copilot_workspace_folders = ["~/code/lionsoul-backend", "~/code/moscowliuda-webinar-utils"]
+" imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+" let g:copilot_no_tab_map = v:true
 
 " VimArpeggio: settings
 " Arpeggio inoremap jk  <Esc>

@@ -192,14 +192,15 @@ replace() {
         echo "usage: replace [FROM] [TO]"
         return
     fi
-    echo "git grep '$_FROM'"
-    echo "git grep done"
+    echo "git grep '$_from'"
     if [[ -z $_to ]]; then
         echo "no [TO] arg, printing files"
         echo $(git grep $_from)
         return
     fi
     _files=$(git grep -l "$_from")
+    echo "git grep done"
+    echo "$_files"
     echo "replacing '$_from' > '$_to'"
     echo $_files | xargs sed -i.tmp "s/$_from/$_to/g"
     echo "replacing done"
@@ -213,6 +214,10 @@ alias p="poetry"
 
 # workflow
 alias "%ml"="cd ~/code/moscowliuda-webinar-utils && va; tmux rename-window 'moscowliuda'"
+alias "%md"="cd ~/code/moderation-detectors/ && va; tmux rename-window 'detectors'"
+alias "%maas"="cd ~/code/maas-moderation/ && va; tmux rename-window 'maas'"
+alias "%mig"="cd ~/code/moderation-input-gateway/ && va; tmux rename-window 'input-gateway'"
+alias "%mid"="cd ~/code/moderation-io-dump/ && va; tmux rename-window 'io-dump'"
 
 # Copilot
 alias copilot=" gh copilot explain"

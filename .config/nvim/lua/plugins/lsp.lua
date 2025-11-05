@@ -103,12 +103,16 @@ return {
     -- Diagnostic Config
     ---@param opts vim.diagnostic.Opts
     vim.diagnostic.config({
+      -- undercurl all errors
+      -- show virtual text only for errors
       severity_sort = true,
-      underline = { severity = vim.diagnostic.severity.ERROR },
+      -- underline = { severity = vim.diagnostic.severity.WARN }, -- TODO: add toggle for severity
       virtual_text = {
+        severity = vim.diagnostic.severity.ERROR,
         prefix = '●',
         spacing = 2,
-        source = 'if_many',
+        source = true,
+        -- source = 'if_many',
       },
       signs = false,
     })
@@ -132,6 +136,20 @@ return {
           },
         },
       },
+      basedpyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'standard',
+              diagnosticSeverityOverrides = {
+                reportUnusedCallResult = 'none',
+                reportUnknownMemberType = 'none',
+                reportUnknownVariableType = 'none',
+              },
+            },
+          },
+        },
+      },
     }
 
     -- Ensure the servers and tools above are installed
@@ -150,8 +168,15 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua',
+      'yamllint',
+      'checkmake',
+      'shellcheck',
+      'markdownlint',
     })
-    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+    require('mason-tool-installer').setup({
+      ensure_installed = ensure_installed,
+      auto_update = false,
+    })
 
     require('mason-lspconfig').setup({
       ensure_installed = {},

@@ -31,6 +31,7 @@ require('lazy').setup({
   require('plugins/flash'),
   require('plugins/toggleterm'),
   require('plugins/gitsigns'),
+  { 'rhysd/conflict-marker.vim' }, -- ct / co / cb git conflict resolver
   require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/cycle'),

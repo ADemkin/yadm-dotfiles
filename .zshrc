@@ -147,26 +147,37 @@ mkvenv() {
 }
 _activate_venv() {
     # get optional basepath
-    local _basepath="."
+    local base="."
     if [[ -n $1 ]]; then
-        _basepath=$1
+        base=$1
     fi
     # find activate script
-    local _activate=$(find $_basepath -name "activate" -type f -depth 3)
-    # case: multiple venvs found
-    if [[ $(wc -l <<< $_activate) -gt 1 ]]; then
-        echo "multiple venvs found:\n$_activate"
+    # first try to search in usual places
+    local act=""
+    for d in "$base/venv" "$base/.venv"; do
+        if [[ -f "$d/bin/activate" ]]; then
+            act="$d/bin/activate"
+            break
+        fi
+    done
+    # if not found - try to to use find
+    if [[ -z $act ]]; then
+        act=$(find "$base" -depth 3 -type f -name activate)
+        if [[ $(wc -l <<< "$act") -gt 1 ]]; then
+            echo "multiple venvs found:" >&2
+            echo "$act" >&2
+            return 1
+        fi
+    fi
+    # final check
+    if [[ -z $act ]]; then
+        echo "no venv found" >&2
         return 1
     fi
-    # case: no venv found
-    if [[ -z $_activate ]]; then
-        echo "no venv found"
-        return 1
-    fi
-    . $_activate
+    . "$act"
     # set PYTHONPATH
     if [[ -z $PYTHONPATH ]]; then
-        export PYTHONPATH=$_basepath
+        export PYTHONPATH=$base
     fi
 }
 alias va="_activate_venv"

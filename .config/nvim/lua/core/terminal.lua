@@ -2,7 +2,11 @@ local ts_utils = require('nvim-treesitter.ts_utils')
 
 local function get_function_name()
   local node = ts_utils.get_node_at_cursor()
+  local steps = 0
+  local MAXSTEPS = 40
   while node do
+    steps = steps + 1
+    assert(steps < MAXSTEPS)
     local node_type = node:type()
 
     if

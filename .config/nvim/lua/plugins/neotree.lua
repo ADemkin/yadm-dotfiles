@@ -135,13 +135,13 @@ return {
           hide_dotfiles = false,
           hide_gitignored = true,
           hide_by_name = {
-            '.DS_Store',
             'thumbs.db',
             'node_modules',
             '__pycache__',
             '.virtual_documents',
             '.git',
             '.python-version',
+            '.idea',
           },
           hide_by_pattern = { -- uses glob style patterns
             '.*_cache',

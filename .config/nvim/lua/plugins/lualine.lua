@@ -20,7 +20,7 @@ return {
       'diagnostics',
       sources = { 'nvim_diagnostic' },
       sections = { 'error', 'warn' },
-      symbols = { error = 'E', warn = 'W', info = 'I', hint = 'H' },
+      symbols = { error = '', warn = '', info = '', hint = '' },
       colored = true,
       update_in_insert = false,
       always_visible = false,

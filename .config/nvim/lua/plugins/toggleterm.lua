@@ -31,13 +31,19 @@ return {
           vim.wo[term.window].winfixwidth = false
         end,
       })
-      vim.keymap.set('n', '<leader>y', function()
+
+      vim.keymap.set('n', '<M-y>', function()
+        local cur = vim.api.nvim_get_current_win()
         local term = require('toggleterm.terminal').get(1)
-        local current_direction = term.direction
-        local new_direction = (current_direction == 'horizontal') and 'vertical' or 'horizontal'
-        -- close terminal and reopen with new direction
-        vim.cmd('ToggleTerm')
-        vim.cmd('ToggleTerm direction=' .. new_direction)
+        if not term then
+          -- Terminal not created yet → create horizontal by default
+          vim.cmd('ToggleTerm direction=horizontal')
+          return
+        end
+        local new_direction = (term.direction == 'horizontal') and 'vertical' or 'horizontal'
+        term:close()
+        term:toggle(nil, new_direction)
+        vim.api.nvim_set_current_win(cur)
       end, { noremap = true, silent = true })
     end,
   },

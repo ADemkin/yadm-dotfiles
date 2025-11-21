@@ -17,6 +17,8 @@ return {
     }
     require('hardtime').setup({
       enabled = is_enabled(stopwords),
-    })
+     disabled_filetypes = {
+        ["fugitive"] = true,
+      })
   end,
 }

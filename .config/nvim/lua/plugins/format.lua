@@ -13,7 +13,11 @@ return {
         timeout_ms = 2000,
       },
       formatters_by_ft = {
-        python = { 'isort', 'ruff_format' },
+        python = {
+          -- 'isort',
+          'ruff_organize_imports',
+          'ruff_format',
+        },
         lua = { 'stylua' },
         sh = { 'shfmt' },
         json = { 'prettierd' },

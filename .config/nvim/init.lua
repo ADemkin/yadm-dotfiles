@@ -22,7 +22,7 @@ require('lazy').setup({
   require('themes/gruvbox'),
 
   -- lightweight plugins
-  require('plugins/tpope'),
+  require('plugins/tpope'), -- TODO: refactor git
   require('plugins/tmux'),
   require('plugins/indentline'),
   require('plugins/argwrap'),
@@ -31,14 +31,14 @@ require('lazy').setup({
   require('plugins/flash'),
   require('plugins/toggleterm'),
   require('plugins/gitsigns'),
-  { 'rhysd/conflict-marker.vim' }, -- ct / co / cb git conflict resolver
+  { 'rhysd/conflict-marker.vim' }, -- ct / co / cb git conflict resolver -- TODO: refactor git
   require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/cycle'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
   require('plugins/autopairs'),
-  require('plugins/hardtime'),
+  -- require('plugins/hardtime'),
 
   -- LSP, lint, format
   require('plugins/lsp'),

@@ -45,11 +45,11 @@ return {
     -- TODO: add keymap to run single test
     -- TODO: add keymap to toggle test overlay
     -- TODO: add keymap to skip test?
-    vim.keymap.set('n', '<leader>ts', function()
+    vim.keymap.set('n', '<leader>nn', function()
       require('neotest').summary.toggle()
     end)
     -- TODO: this does not show failed test output
-    vim.keymap.set('n', '<leader>to', function()
+    vim.keymap.set('n', '<leader>no', function()
       require('neotest').output_panel.toggle()
     end)
   end,

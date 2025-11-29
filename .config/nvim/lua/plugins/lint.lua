@@ -26,21 +26,14 @@ return {
         end,
       })
 
+      vim.diagnostic.enable(false)
+
       local function toggle_diagnostics()
-        local filter = { bufnr = vim.fn.bufnr('%') }
-        local is_enabled = vim.diagnostic.is_enabled(filter)
-        vim.diagnostic.enable(not is_enabled, filter)
+        local is_enabled = vim.diagnostic.is_enabled()
+        vim.diagnostic.enable(not is_enabled)
       end
       vim.keymap.set('n', 'gtd', toggle_diagnostics)
+      vim.keymap.set('n', '<leader>l', toggle_diagnostics)
     end,
   },
-  -- {
-  --   'rshkarin/mason-nvim-lint',
-  --   event = 'VeryLazy',
-  --   dependencies = {
-  --     'williamboman/mason.nvim',
-  --     'mfussenegger/nvim-lint',
-  --   },
-  --   opts = { automatic_installation = true },
-  -- },
 }

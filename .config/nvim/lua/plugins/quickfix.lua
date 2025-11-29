@@ -1,15 +1,15 @@
 return {
-  {
-    'stevearc/quicker.nvim',
-    event = 'FileType qf',
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    opts = {
-      edit = {
-        enabled = false,
-      },
-    },
-  },
+  --{
+  --  'stevearc/quicker.nvim',
+  --  event = 'FileType qf',
+  --  ---@module "quicker"
+  --  ---@type quicker.SetupOptions
+  --  opts = {
+  --    edit = {
+  --      enabled = false,
+  --    },
+  --  },
+  --},
   {
     'folke/trouble.nvim',
     event = 'VeryLazy',

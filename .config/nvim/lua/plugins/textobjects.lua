@@ -53,6 +53,15 @@ return {
               ['<leader>A'] = '@parameter.inner',
             },
           },
+          lsp_interop = {
+            enable = true,
+            border = 'single',
+            floating_preview_opts = {},
+            peek_definition_code = {
+              ['gp'] = '@function.outer',
+              ['gP'] = '@class.outer',
+            },
+          },
         },
       })
     end,

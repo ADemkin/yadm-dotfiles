@@ -172,6 +172,7 @@ return {
       'checkmake',
       'shellcheck',
       'markdownlint',
+      'rstcheck',
     })
     require('mason-tool-installer').setup({
       ensure_installed = ensure_installed,

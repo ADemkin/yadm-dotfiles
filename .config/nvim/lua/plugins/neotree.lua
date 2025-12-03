@@ -10,6 +10,7 @@ return {
     require('neo-tree').setup({
       close_if_last_window = true,
       use_popups_for_input = false, -- use vim's comman line for inputs
+      popup_border_style = 'single',
       enable_git_status = true,
       git_status_async = true,
       enable_diagnostics = false,
@@ -71,9 +72,6 @@ return {
           enabled = false,
         },
       },
-      -- A list of functions, each representing a global custom command
-      -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-      -- see `:h neo-tree-custom-commands-global`
       commands = {},
       window = {
         position = 'left',
@@ -83,13 +81,13 @@ return {
           nowait = true,
         },
         mappings = {
-          ['<cr>'] = 'open',
+          -- ['<cr>'] = 'open',
           ['l'] = 'open',
           ['<esc>'] = 'cancel',
           ['p'] = { 'toggle_preview', config = { use_float = true } },
           ['S'] = 'open_split',
           ['s'] = 'open_vsplit',
-          ['t'] = 'open_tabnew',
+          -- ['t'] = 'open_tabnew',
           ['w'] = 'noop',
           ['h'] = 'close_node',
           ['X'] = 'close_all_nodes',

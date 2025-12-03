@@ -175,6 +175,8 @@ return {
             ['/'] = 'noop',
             ['f'] = 'noop',
             ['<c-c>'] = 'noop', -- allow to reset hl search
+            ['<C-u>'] = { 'scroll_preview', config = { direction = 10 } },
+            ['<C-d>'] = { 'scroll_preview', config = { direction = -10 } },
           },
         },
       },

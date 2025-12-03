@@ -61,7 +61,7 @@ return {
       },
       pickers = {
         find_files = {
-          file_ignore_patterns = { 'node_modules', '.git', '.venv', '.DS_Store' },
+          file_ignore_patterns = { 'node_modules', '.git', '.venv', 'venv', '.DS_Store' },
           hidden = true,
         },
       },

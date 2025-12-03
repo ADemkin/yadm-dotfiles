@@ -140,7 +140,6 @@ return {
     vim.keymap.set('n', '<leader>fg', function()
       require('git_grep').grep()
     end, { desc = '[F]ind [G]it grep' })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
     vim.keymap.set('n', '<leader>fr', function()
       builtin.oldfiles({ only_cwd = true })
     end, { desc = '[F]ind [R]ecent files' })

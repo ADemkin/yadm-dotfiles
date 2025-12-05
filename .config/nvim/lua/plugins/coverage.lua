@@ -5,9 +5,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  config = function()
-    require('coverage').setup({
-      auto_reload = true,
-    })
-  end,
+  opts = {
+    auto_reload = true,
+  },
 }

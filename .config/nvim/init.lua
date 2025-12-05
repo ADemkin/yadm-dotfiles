@@ -22,16 +22,14 @@ require('lazy').setup({
   require('themes/gruvbox'),
 
   -- lightweight plugins
-  require('plugins/tpope'), -- TODO: refactor git
+  require('plugins/tpope'),
   require('plugins/tmux'),
   require('plugins/indentline'),
   require('plugins/argwrap'),
-  require('plugins/wilder'),
+  -- require('plugins/wilder'),  -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
   require('plugins/toggleterm'),
-  require('plugins/gitsigns'),
-  { 'rhysd/conflict-marker.vim' }, -- ct / co / cb git conflict resolver -- TODO: refactor git
   require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/cycle'),
@@ -39,6 +37,7 @@ require('lazy').setup({
   require('plugins/coverage'),
   require('plugins/autopairs'),
   -- require('plugins/hardtime'),
+  require('plugins/git'),
 
   -- LSP, lint, format
   require('plugins/lsp'),

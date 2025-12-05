@@ -29,14 +29,11 @@ return {
   opts = {
     keymap = {
       preset = 'default',
-      -- not yet decided which one is better
-      -- ['<enter>'] = { 'select_and_accept', 'fallback' }, -- conflicts with abbr
       ['<tab>'] = { 'select_and_accept', 'fallback' },
-      ['<C-y>'] = { 'select_and_accept', 'fallback' }, -- also try this one
       ['<C-n>'] = { 'show', 'select_next' },
     },
     completion = {
-      documentation = { auto_show = true, auto_show_delay_ms = 3000 },
+      documentation = { auto_show = true, auto_show_delay_ms = 500 },
       ghost_text = { enabled = false },
     },
     sources = {

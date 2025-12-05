@@ -48,6 +48,7 @@ return {
     end,
   },
   {
+    -- when open nvim from nvim's terminal put it into a new tab in host nvim
     'willothy/flatten.nvim',
     config = true,
     opts = {

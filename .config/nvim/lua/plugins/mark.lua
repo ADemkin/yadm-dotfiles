@@ -1,6 +1,6 @@
 return {
   'idbrii/vim-mark',
-  event = 'VeryLazy',
+  command = { 'MarkSet' },
   dependencies = {
     {
       'inkarkat/vim-ingo-library',

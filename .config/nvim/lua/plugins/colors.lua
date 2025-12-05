@@ -1,12 +1,10 @@
 return {
-  {
-    'norcalli/nvim-colorizer.lua',
-    event = 'VeryLazy',
-    opts = {
-      'css',
-      'toml',
-      'lua',
-      'conf',
-    },
+  'norcalli/nvim-colorizer.lua',
+  event = 'VeryLazy',
+  opts = {
+    'css',
+    'toml',
+    'lua',
+    'conf',
   },
 }

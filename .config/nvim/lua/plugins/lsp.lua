@@ -136,18 +136,7 @@ return {
         auto_update = false,
       })
 
-      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
-      -- allow automatic enable of all installed servers
-      require('mason-lspconfig').setup({
-        -- ensure_installed = {},
-        -- automatic_installation = true,
-        -- handlers = {
-        --   function(server_name)
-        --     local server = { capabilities = capabilities }
-        --     vim.lsp.enable(server_name).setup(server)
-        --   end,
-        -- },
-      })
+      require('mason-lspconfig').setup({})
     end,
   },
   {

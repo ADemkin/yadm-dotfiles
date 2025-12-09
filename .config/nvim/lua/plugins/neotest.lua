@@ -42,15 +42,61 @@ return {
         watching = 'Structure',
       },
     })
-    -- TODO: add keymap to run single test
-    -- TODO: add keymap to toggle test overlay
-    -- TODO: add keymap to skip test?
-    vim.keymap.set('n', '<leader>nn', function()
-      require('neotest').summary.toggle()
-    end)
-    -- TODO: this does not show failed test output
-    vim.keymap.set('n', '<leader>no', function()
-      require('neotest').output_panel.toggle()
-    end)
   end,
+  keys = {
+    {
+      '<leader>tt',
+      function()
+        require('neotest').summary.toggle()
+      end,
+    },
+    {
+      '<leader>to',
+      function()
+        require('neotest').output_panel.toggle()
+      end,
+    },
+    {
+      '<leader>tp',
+      function()
+        require('neotest').output.open()
+      end,
+    },
+    {
+      '<leader>tr',
+      function()
+        require('neotest').run.run()
+      end,
+    },
+    {
+      '<leader>tm',
+      function()
+        require('neotest').run.run(vim.fn.expand('%'))
+      end,
+    },
+    {
+      '<leader>ta',
+      function()
+        require('neotest').run.run(vim.fn.getcwd())
+      end,
+    },
+    {
+      '<leader>ts',
+      function()
+        require('neotest').run.stop()
+      end,
+    },
+    {
+      '[t',
+      function()
+        require('neotest').jump.prev({ status = 'failed' })
+      end,
+    },
+    {
+      ']t',
+      function()
+        require('neotest').jump.next({ status = 'failed' })
+      end,
+    },
+  },
 }

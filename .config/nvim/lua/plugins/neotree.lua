@@ -87,7 +87,7 @@ return {
           ['p'] = { 'toggle_preview', config = { use_float = true } },
           ['S'] = 'open_split',
           ['s'] = 'open_vsplit',
-          -- ['t'] = 'open_tabnew',
+          ['t'] = 'noop',
           ['w'] = 'noop',
           ['h'] = 'close_node',
           ['X'] = 'close_all_nodes',

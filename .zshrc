@@ -129,6 +129,10 @@ export LSCOLORS="BxGxcxdxCxegDxabagacad"
 export BAT_THEME="gruvbox-dark"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+cheat() {
+    curl cheat.sh/$1
+}
+
 # Python
 alias python="python3"
 alias pip="pip3"
@@ -255,8 +259,11 @@ compinit
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 
 # wb teleport
-alias tshdm="tsh kube login k8s.moderation-dm && kubectl config set-context --current --namespace=moderation"
-alias tshel="tsh kube login k8s.moderation-el && kubectl config set-context --current --namespace=moderation"
-alias tshxs="tsh kube login k8s.moderation-xs && kubectl config set-context --current --namespace=moderation"
-alias tshstage="tsh kube login k8s.tns-stage-el && kubectl config set-context --current --namespace=moderation"
-alias tshlogin="tsh login --proxy=tp.wb.ru:443 --mfa-mode=otp --auth=local --user=demkin.anton teleport"
+alias tsh17='TELEPORT_HOME=${HOME}/.tsh17 TELEPORT_PROXY=tp.rwb.ru:443 TELEPORT_CLUSTER=teleport-rwb /Applications/tsh.app/Contents/MacOS/tsh'
+alias tshdm="tsh17 kube login k8s.moderation-dm && kubectl config set-context --current --namespace=moderation"
+alias tshel="tsh17 kube login k8s.moderation-el && kubectl config set-context --current --namespace=moderation"
+alias tshxs="tsh17 kube login k8s.moderation-xs && kubectl config set-context --current --namespace=moderation"
+alias tshstage="tsh17 kube login k8s.tns-stage-el && kubectl config set-context --current --namespace=moderation"
+alias tshlogin="tsh17 login --auth=passwordless --user=demkin.anton"
+alias tshlogout="tsh17 logout --user=demkin.anton"
+

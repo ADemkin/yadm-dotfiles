@@ -84,3 +84,36 @@ vim.keymap.del('n', 'gri')
 vim.keymap.del({ 'n', 'x' }, 'gra')
 vim.keymap.del('n', 'grr')
 vim.keymap.del('n', 'grn')
+
+-- Allow russian layout to control nvim
+vim.opt.langmap = table.concat({
+  'ц;w',
+  'Ц;W',
+  'у;e',
+  'У;E',
+  'ф;a',
+  'Ф;A',
+  'ч;x',
+  'с;c',
+  'С;C',
+  'м;v',
+  'М;V',
+  'и;b',
+  'И;B',
+  'н;y',
+  'ш;i',
+  'Ш;I',
+  'щ;o',
+  'Щ;O',
+  'з;p',
+  'З;P',
+  'п;g',
+  'П;G',
+  'р;h',
+  'о;j',
+  'л;k',
+  'д;l',
+  'т;n',
+  'Т;N',
+  'ж;:',
+}, ',')

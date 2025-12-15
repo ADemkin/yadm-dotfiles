@@ -26,7 +26,7 @@ require('lazy').setup({
   require('plugins/tmux'),
   require('plugins/indentline'),
   require('plugins/argwrap'),
-  -- require('plugins/wilder'),  -- maybe this one is replaced by blink.cmp?
+  require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
   require('plugins/toggleterm'),
@@ -56,6 +56,20 @@ require('lazy').setup({
   -- require('plugins/db'),
   require('plugins/neotest'),
   require('plugins/markdown'),
+
+  -- random stuff
+  -- {
+  --   'saxon1964/neovim-tips',
+  --   command = 'NeovimTips',
+  --   opts = {},
+  -- },
+  {
+    -- auto f-string
+    'chrisgrieser/nvim-puppeteer',
+    lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
+  },
 })
 
 require('core.terminal')
+
+vim.keymap.set('n', '<C-p>', require('python.try_wrapper').toggle_try, { noremap = true, silent = true })

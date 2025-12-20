@@ -1,10 +1,18 @@
 return {
   {
     'tpope/vim-fugitive',
-    command = 'Git',
+    event = 'BufWinEnter',
     keys = {
       { '<C-g>', '<cmd>Git<cr>' },
     },
+  },
+  {
+    -- allow fugitive to work with yadm
+    'purarue/yadm-git.vim',
+    event = 'BufWinEnter',
+    config = function()
+      vim.g.yadm_git_fugitive_enabled = 1
+    end,
   },
   {
     'rhysd/conflict-marker.vim',
@@ -25,5 +33,10 @@ return {
       { '[h', '<cmd>Gitsigns prev_hunk<CR>' },
       { 'tu', '<cmd>Gitsigns reset_hunk<CR>' },
     },
+  },
+  {
+    'esmuellert/vscode-diff.nvim',
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    cmd = 'CodeDiff',
   },
 }

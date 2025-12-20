@@ -115,5 +115,7 @@ vim.opt.langmap = table.concat({
   'д;l',
   'т;n',
   'Т;N',
+  'ь;m',
+  'Ь;M',
   'ж;:',
 }, ',')

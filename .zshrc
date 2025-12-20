@@ -53,9 +53,11 @@ bindkey "^R" history-incremental-search-backward
 # Git workflow
 alias grup="git remote update"
 alias grim="git rebase -i origin/main"
+alias grm="git rebase origin/main"
 alias grid="git rebase -i origin/dev"
 alias gst="git status"
 alias gg="git graph"
+alias greset="git reset --hard"
 alias gchom="git checkout origin/main"
 alias gchod="git checkout origin/dev"
 

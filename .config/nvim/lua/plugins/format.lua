@@ -50,6 +50,7 @@ return {
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
         make = {},
+        ['*'] = { 'trim_whitespace' },
       },
       formatters = {
         -- allow ruff to use custom monorepo config

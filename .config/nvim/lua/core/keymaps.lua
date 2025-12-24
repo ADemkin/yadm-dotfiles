@@ -93,6 +93,8 @@ vim.opt.langmap = table.concat({
   'У;E',
   'ф;a',
   'Ф;A',
+  'в;d',
+  'В;D',
   'ч;x',
   'с;c',
   'С;C',

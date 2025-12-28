@@ -42,8 +42,19 @@ return {
 
           vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
-          -- highlight word under cursor
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          -- disable basedpyright diagnostics
+          if client and client.name == 'basedpyright' then
+            local namespace = vim.lsp.diagnostic.get_namespace(client.id)
+            vim.diagnostic.config({
+              filter = function(diagnostic)
+                return diagnostic.namespace ~= namespace
+              end,
+            }, event.buf)
+          end
+
+          -- highlight word under cursor
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {

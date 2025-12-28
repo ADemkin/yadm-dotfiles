@@ -41,16 +41,6 @@ return {
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-          -- disable basedpyright diagnostics
-          if client and client.name == 'basedpyright' then
-            local namespace = vim.lsp.diagnostic.get_namespace(client.id)
-            vim.diagnostic.config({
-              filter = function(diagnostic)
-                return diagnostic.namespace ~= namespace
-              end,
-            }, event.buf)
-          end
-
           -- highlight word under cursor
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
@@ -110,6 +100,25 @@ return {
           end)
         end,
       })
+
+      -- HACK to disable all fucking basedpyright diagnostics
+      -- idea is taken from here:
+      -- https://github.com/m-gail/diagnostic_manipulation.nvim/
+      local disabled_sources = { 'basedpyright', 'ruff' }
+      local function filter_diagnostics(diagnostics)
+        return vim.tbl_filter(function(diagnostic)
+          for _, src in ipairs(disabled_sources) do
+            if diagnostic.source == src then
+              return false
+            end
+          end
+          return true
+        end, diagnostics)
+      end
+      old_set = vim.diagnostic.set
+      vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+        old_set(namespace, bufnr, filter_diagnostics(diagnostics), opts)
+      end
 
       -- Diagnostic Config
       ---@param opts vim.diagnostic.Opts

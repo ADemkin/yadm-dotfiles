@@ -53,16 +53,9 @@ require('lazy').setup({
   require('plugins/telescope'),
   require('plugins/ai'),
   require('plugins/code-navigation'),
-  -- require('plugins/db'),
   require('plugins/neotest'),
   require('plugins/markdown'),
 
-  -- random stuff
-  -- {
-  --   'saxon1964/neovim-tips',
-  --   command = 'NeovimTips',
-  --   opts = {},
-  -- },
   {
     -- auto f-string
     'chrisgrieser/nvim-puppeteer',
@@ -70,6 +63,11 @@ require('lazy').setup({
   },
 })
 
-require('core.terminal')
-
-vim.keymap.set('n', '<C-p>', require('python.try_wrapper').toggle_try, { noremap = true, silent = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*.py',
+  callback = function()
+    vim.keymap.set('n', '<leader>yt', require('core.terminal').run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
+    vim.keymap.set('n', '<leader>yf', require('core.terminal').run_module_test, { noremap = true, desc = 'Run current pytest module tests in terminal' })
+    vim.keymap.set('n', '<C-p>', require('python.try_wrapper').toggle_try, { noremap = true, silent = true })
+  end,
+})

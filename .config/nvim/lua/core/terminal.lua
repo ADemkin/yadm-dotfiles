@@ -50,9 +50,6 @@ local function execute_in_terminal(command)
 end
 
 local function run_single_test()
-  if not vim.bo.filetype == 'python' then
-    return
-  end
   local module_name, module_path = get_module_name_and_path()
   if not vim.startswith(module_name, 'test_') then
     print('Module is not a test: ' .. module_name)
@@ -68,9 +65,6 @@ local function run_single_test()
 end
 
 local function run_module_test()
-  if not vim.bo.filetype == 'python' then
-    return
-  end
   local module_name, module_path = get_module_name_and_path()
   if not vim.startswith(module_name, 'test_') then
     print('Module is not a test: ' .. module_name)
@@ -80,5 +74,7 @@ local function run_module_test()
   execute_in_terminal(command)
 end
 
-vim.keymap.set('n', '<leader>yt', run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
-vim.keymap.set('n', '<leader>yf', run_module_test, { noremap = true, desc = 'Run current pytest module tests in terminal' })
+return {
+  run_single_test = run_single_test,
+  run_module_test = run_module_test,
+}

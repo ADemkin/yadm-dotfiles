@@ -28,17 +28,14 @@ return {
           end
 
           map('gr', vim.lsp.buf.rename)
-          -- prefer telescope over vim.lsp.buf.definition to quicker select if multiple results
-          map('gbd', vim.lsp.buf.definition)
           map('gd', require('telescope.builtin').lsp_definitions)
           map('gD', function(opts)
             vim.cmd('vsplit')
             require('telescope.builtin').lsp_definitions(opts)
-            -- vim.lsp.buf.definition(opts)
           end)
           map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
-          map('gu', vim.lsp.buf.references)
-          map('gi', vim.lsp.buf.implementation)
+          map('gu', require('telescope.builtin').lsp_references)
+          map('gi', require('telescope.builtin').lsp_implementations)
 
           vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 

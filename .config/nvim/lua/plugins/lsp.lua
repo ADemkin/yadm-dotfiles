@@ -104,21 +104,21 @@ return {
       -- HACK to disable all fucking basedpyright diagnostics
       -- idea is taken from here:
       -- https://github.com/m-gail/diagnostic_manipulation.nvim/
-      local disabled_sources = { 'basedpyright', 'ruff' }
-      local function filter_diagnostics(diagnostics)
-        return vim.tbl_filter(function(diagnostic)
-          for _, src in ipairs(disabled_sources) do
-            if diagnostic.source == src then
-              return false
-            end
-          end
-          return true
-        end, diagnostics)
-      end
-      old_set = vim.diagnostic.set
-      vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
-        old_set(namespace, bufnr, filter_diagnostics(diagnostics), opts)
-      end
+      -- local disabled_sources = { 'basedpyright', 'ruff' }
+      -- local function filter_diagnostics(diagnostics)
+      --   return vim.tbl_filter(function(diagnostic)
+      --     for _, src in ipairs(disabled_sources) do
+      --       if diagnostic.source == src then
+      --         return false
+      --       end
+      --     end
+      --     return true
+      --   end, diagnostics)
+      -- end
+      -- old_set = vim.diagnostic.set
+      -- vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+      --   old_set(namespace, bufnr, filter_diagnostics(diagnostics), opts)
+      -- end
 
       -- Diagnostic Config
       ---@param opts vim.diagnostic.Opts

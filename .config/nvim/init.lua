@@ -16,10 +16,21 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+weekend = require('utils/weekend')
+
 require('lazy').setup({
   -- Appearance
   require('plugins/lualine'),
   require('themes/gruvbox'),
+  -- require(weekend.choose_theme('themes/gruvbox', 'themes/zenbones')),
+  -- {
+  --   'folke/twilight.nvim',
+  --   config = function(opts)
+  --     if not weekend.is_worktime() then
+  --       vim.cmd('TwilightEnable')
+  --     end
+  --   end,
+  -- },
 
   -- lightweight plugins
   require('plugins/tpope'),
@@ -63,6 +74,12 @@ require('lazy').setup({
   },
 })
 
+local dimmer = require('utils.dimmer.main')
+if not weekend.is_worktime() then
+  dimmer.set_tint(0.3, 0.7, 1.5)
+end
+
+-- TODO: move to keymaps
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*.py',
   callback = function()

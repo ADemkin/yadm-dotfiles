@@ -1,8 +1,5 @@
 # # Prompt
 # # Find and set branch name var if in git repository.
-function git_branch() {
-    git br
-}
 function format_git_branch() {
     _branch=$(git br)
     [[ $_branch != "" ]] && echo "%F{green}>%f $_branch" || echo ""
@@ -13,6 +10,19 @@ function format_git_branch() {
 setopt prompt_subst
 export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(format_git_branch)
 %F{red}%#%f '
+
+# hook that runs on cd command
+chpwd() {
+    for d in venv .venv; do
+        if [[ -f "$d/bin/activate" ]]; then
+            . "$d/bin/activate"
+            if [[ -z $PYTHONPATH ]]; then
+                export PYTHONPATH="$PWD"
+            fi
+            return
+        fi
+    done
+}
 
 # Basic options
 setopt APPEND_HISTORY SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_ALL_DUPS
@@ -200,6 +210,8 @@ print256colors() {
 alias zshrc="nvim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias nvimrc="cd ~/.config/nvim; nvim init.lua"
+
+alias vimdiff="nvim -d"
 
 replace() {
     local _from=$1

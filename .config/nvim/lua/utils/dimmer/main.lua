@@ -14,6 +14,41 @@ local function is_valid_time(k)
   return h and m and h >= 0 and h <= 23 and m >= 0 and m <= 59
 end
 
+local function to_minutes(k)
+  local h, m = k:match('^(%d%d):(%d%d)$')
+  return tonumber(h) * 60 + tonumber(m)
+end
+
+local function normalize_k(v)
+  if type(v) == 'number' then
+    return { k_chroma = v, k_light = v }
+  end
+  return { k_chroma = v.k_chroma or 0, k_light = v.k_light or 0 }
+end
+
+local function normalize_schedule(tbl)
+  local points = {}
+
+  for k, v in pairs(tbl) do
+    if not is_valid_time(k) then
+      error('invalid time key: ' .. tostring(k))
+    end
+
+    local kk = normalize_k(v)
+    table.insert(points, {
+      minute = to_minutes(k),
+      k_chroma = kk.k_chroma,
+      k_light = kk.k_light,
+    })
+  end
+
+  table.sort(points, function(a, b)
+    return a.minute < b.minute
+  end)
+
+  return { points = points }
+end
+
 function M.setup(opts)
   opts = opts or {}
 
@@ -34,11 +69,7 @@ function M.setup(opts)
 
   if opts.schedule ~= nil then
     assert(type(opts.schedule) == 'table', 'schedule must be a table')
-    for k, v in pairs(opts.schedule) do
-      assert(is_valid_time(k), 'invalid time key: ' .. tostring(k))
-      assert(type(v) == 'number' or type(v) == 'table', 'schedule values must be number or {k_chroma,k_light}')
-    end
-    api.set_schedule(opts.schedule, state.update_interval)
+    state.schedule = normalize_schedule(opts.schedule)
   end
 
   if opts.enabled ~= nil then

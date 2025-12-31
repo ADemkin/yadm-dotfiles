@@ -1,8 +1,3 @@
-local function time_to_minutes(t)
-  local h, m = t:match('^(%d%d):(%d%d)$')
-  return tonumber(h) * 60 + tonumber(m)
-end
-
 local function now_minutes()
   local t = os.date('*t')
   return t.hour * 60 + t.min
@@ -27,7 +22,7 @@ local function normalize_entry(v)
 end
 
 local function resolve(state)
-  -- override wins (schedule mode only; static handled in api)
+  -- override wins
   if state.override then
     local ok, v = pcall(state.override)
     if ok and v ~= nil then
@@ -35,44 +30,31 @@ local function resolve(state)
     end
   end
 
-  local schedule = state.schedule
-  if not schedule then
+  local sched = state.schedule
+  if not sched or not sched.points or #sched.points == 0 then
     return nil
   end
 
   local now = now_minutes()
-  local points = {}
+  local pts = sched.points
 
-  for time, v in pairs(schedule) do
-    local t = time_to_minutes(time)
-    if t then
-      table.insert(points, { t = t, v = normalize_entry(v) })
+  if now <= pts[1].minute then
+    return pts[1]
+  end
+
+  if now >= pts[#pts].minute then
+    return pts[#pts]
+  end
+
+  for i = 1, #pts - 1 do
+    local a, b = pts[i], pts[i + 1]
+    if now >= a.minute and now <= b.minute then
+      local t = (now - a.minute) / (b.minute - a.minute)
+      return interpolate(a, b, t)
     end
   end
 
-  table.sort(points, function(a, b)
-    return a.t < b.t
-  end)
-  if #points == 0 then
-    return nil
-  end
-
-  if now <= points[1].t then
-    return points[1].v
-  end
-  if now >= points[#points].t then
-    return points[#points].v
-  end
-
-  for i = 1, #points - 1 do
-    local a, b = points[i], points[i + 1]
-    if now >= a.t and now <= b.t then
-      local t = (now - a.t) / (b.t - a.t)
-      return interpolate(a.v, b.v, t)
-    end
-  end
-
-  return points[#points].v
+  return pts[#pts]
 end
 
 return resolve

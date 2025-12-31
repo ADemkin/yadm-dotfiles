@@ -1,3 +1,4 @@
+-- dim/commands.lua
 local api = require('utils.dimmer.api')
 
 vim.api.nvim_create_user_command('Dim', function(opts)

@@ -1,3 +1,5 @@
+-- dim/dim.lua
+--
 local original_hl = nil
 
 local function hex_to_rgb(hex)

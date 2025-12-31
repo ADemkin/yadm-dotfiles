@@ -1,3 +1,5 @@
+-- dim/tint.lua
+
 --- k_chroma, k_light ∈ [0, 1]
 --- curve > 0  (1 = linear, 2 = quadratic, ~1.5 = nice default)
 local function tint_lspace(k_chroma, k_light, curve)

@@ -5,33 +5,32 @@ local resolve = require('utils.dimmer.resolve')
 
 local M = {}
 
-local function apply_k(kc, kl)
-  dim(tint_fn(kc, kl, state.curve))
+local function apply_k(k)
+  dim(tint_fn(k))
 end
 
 function M.apply()
   if not state.enabled then
-    apply_k(0, 0)
+    apply_k(0)
     return
   end
 
-  -- STATIC MODE
-  if state.tint then
-    apply_k(state.tint.k_chroma, state.tint.k_light)
+  -- STATIC
+  if state.tint ~= nil then
+    apply_k(state.tint)
     return
   end
 
-  -- SCHEDULE MODE
+  -- SCHEDULE
   if state.schedule then
     local v = resolve(state)
-    if v then
-      apply_k(v.k_chroma, v.k_light)
+    if v ~= nil then
+      apply_k(v)
     end
     return
   end
 
-  -- DISABLED FALLBACK
-  apply_k(0, 0)
+  apply_k(0)
 end
 
 function M.enable()
@@ -49,16 +48,10 @@ function M.toggle()
   M.apply()
 end
 
-function M.set_tint(kc, kl, curve)
-  state.tint = {
-    k_chroma = math.max(0, math.min(1, kc)),
-    k_light = math.max(0, math.min(1, kl)),
-  }
-  if curve then
-    state.curve = curve
-  end
+function M.set_tint(k)
+  state.tint = math.max(0, math.min(1, k))
   state.enabled = true
-  M.stop() -- manual tint overrides schedule
+  M.stop() -- manual override cancels schedule
   M.apply()
 end
 
@@ -86,7 +79,8 @@ function M.start()
     return
   end
 
-  if state.tint then
+  -- entering schedule mode clears static tint
+  if state.tint ~= nil then
     state.tint = nil
   end
 

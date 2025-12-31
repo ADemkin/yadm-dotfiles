@@ -1,12 +1,15 @@
 -- dim/tint.lua
 
---- k_chroma, k_light ∈ [0, 1]
---- curve > 0  (1 = linear, 2 = quadratic, ~1.5 = nice default)
-local function tint_lspace(k_chroma, k_light, curve)
-  curve = curve or 1.5
+-- Global perceptual curve.
+-- Increase → steeper falloff (more night-shift like)
+-- Decrease → more linear
+DIM_CURVE = 1.5
+
+local function tint_lspace(amount)
+  local k = math.max(0, math.min(1, amount))
 
   local function ease(x)
-    return x ^ curve
+    return x ^ DIM_CURVE
   end
 
   return function(hex)
@@ -17,18 +20,12 @@ local function tint_lspace(k_chroma, k_light, curve)
     -- perceptual luminance (sRGB / Rec.709)
     local l = 0.2126 * r + 0.7152 * g + 0.0722 * b
 
-    local kc = ease(k_chroma)
-    local kl = ease(k_light)
+    local kk = ease(k)
 
-    -- remove chroma (toward gray of same luminance)
-    r = r + (l - r) * kc
-    g = g + (l - g) * kc
-    b = b + (l - b) * kc
-
-    -- compress lightness contrast
-    r = l + (r - l) * (1 - kl)
-    g = l + (g - l) * (1 - kl)
-    b = l + (b - l) * (1 - kl)
+    -- chroma removal + contrast compression together
+    r = l + (r - l) * (1 - kk)
+    g = l + (g - l) * (1 - kk)
+    b = l + (b - l) * (1 - kk)
 
     local function clamp(x)
       x = math.floor(x + 0.5)

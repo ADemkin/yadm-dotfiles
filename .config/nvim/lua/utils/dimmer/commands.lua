@@ -36,24 +36,26 @@ vim.api.nvim_create_user_command('Dim', function(opts)
 
   if args[1] == 'tint' then
     if #args < 2 then
-      vim.notify('Usage: :Dim tint <k_chroma> [k_light] [curve]', vim.log.levels.ERROR)
+      vim.notify('Usage: :Dim tint <amount>', vim.log.levels.ERROR)
       return
     end
 
-    local kc = tonumber(args[2])
-    local kl = tonumber(args[3] or args[2])
-    local curve = tonumber(args[4] or 1.5)
-
-    if not (kc and kl) then
-      vim.notify('k_chroma and k_light must be numbers', vim.log.levels.ERROR)
+    local k = tonumber(args[2])
+    if not k then
+      vim.notify('amount must be a number', vim.log.levels.ERROR)
       return
     end
 
-    api.set_tint(kc, kl, curve)
+    if k < 0 or k > 1 then
+      vim.notify('amount must be in range 0..1', vim.log.levels.ERROR)
+      return
+    end
+
+    api.set_tint(k)
     return
   end
 
-  vim.notify('Dim commands: enable | disable | toggle | start | stop | state | tint <k_chroma> <k_light> [curve]', vim.log.levels.INFO)
+  vim.notify('Dim commands: enable | disable | toggle | start | stop | state | tint <amount>', vim.log.levels.INFO)
 end, {
   nargs = '+',
   complete = function(_, cmdline)

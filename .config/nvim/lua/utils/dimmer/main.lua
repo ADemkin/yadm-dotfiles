@@ -19,43 +19,35 @@ local function to_minutes(k)
   return tonumber(h) * 60 + tonumber(m)
 end
 
-local function normalize_k(v)
-  if type(v) == 'number' then
-    return { k_chroma = v, k_light = v }
+local function clamp01(x)
+  if x < 0 then
+    return 0
   end
-  return { k_chroma = v.k_chroma or 0, k_light = v.k_light or 0 }
+  if x > 1 then
+    return 1
+  end
+  return x
 end
 
 local function normalize_schedule(tbl)
-  local points = {}
+  local out = {}
 
   for k, v in pairs(tbl) do
-    if not is_valid_time(k) then
-      error('invalid time key: ' .. tostring(k))
-    end
+    assert(is_valid_time(k), 'invalid time key: ' .. tostring(k))
+    assert(type(v) == 'number', 'schedule values must be numbers')
 
-    local kk = normalize_k(v)
-    table.insert(points, {
-      minute = to_minutes(k),
-      k_chroma = kk.k_chroma,
-      k_light = kk.k_light,
-    })
+    table.insert(out, { to_minutes(k), clamp01(v) })
   end
 
-  table.sort(points, function(a, b)
-    return a.minute < b.minute
+  table.sort(out, function(a, b)
+    return a[1] < b[1]
   end)
 
-  return { points = points }
+  return out
 end
 
 function M.setup(opts)
   opts = opts or {}
-
-  if opts.curve ~= nil then
-    assert(type(opts.curve) == 'number', 'curve must be a number')
-    state.curve = opts.curve
-  end
 
   if opts.update_interval ~= nil then
     assert(type(opts.update_interval) == 'number', 'update_interval must be a number')

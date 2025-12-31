@@ -2,12 +2,11 @@
 
 local State = {
   enabled = false,
-  tint = nil, -- { k_chroma, k_light } | nil  (static mode)
-  curve = 1.5,
+  tint = nil, -- number ∈ [0,1] | nil (static mode)
   timer = nil,
-  schedule = nil, -- normalized schedule or raw table (for now)
+  schedule = nil, -- normalized schedule (points)
   update_interval = 60 * 1000,
-  override = nil, -- function() -> number | {k_chroma,k_light} | nil
+  override = nil, -- function() -> number | nil
 }
 
 return State

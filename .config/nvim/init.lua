@@ -20,6 +20,7 @@ require('lazy').setup({
   -- Appearance
   require('plugins/lualine'),
   require('themes/gruvbox'),
+  require('plugins/dim'),
 
   -- lightweight plugins
   require('plugins/tpope'),
@@ -72,39 +73,6 @@ require('lazy').setup({
     end,
   },
 })
-
-local schedule = {
-  interval_ms = 1000,
-  daily = {
-    ['08:00'] = 0.0,
-    ['16:00'] = 0.1,
-    ['17:00'] = 0.2,
-    ['17:30'] = 0.3,
-    ['17:45'] = 0.4,
-    ['18:00'] = 0.7,
-    ['19:00'] = 0.8,
-    ['21:00'] = 0.9,
-  },
-  days = {
-    ['Friday'] = { -- stop working on Friday earlier
-      ['08:00'] = 0.0,
-      ['16:00'] = 0.0,
-      ['17:00'] = 0.8,
-      ['18:00'] = 1.0,
-    },
-    ['Saturday'] = { k_chroma = 0.8, k_light = 0.7 },
-    ['Sunday'] = 1.0,
-  },
-}
-local opts = {
-  enabled = true,
-  curve = 1.5,
-  dim = schedule,
-}
--- require('utils.dimmer.setup').setup(opts)
-local dimmer = require('utils.dimmer.main')
-dimmer.set_schedule(schedule)
-dimmer.start()
 
 -- TODO: move to keymaps
 vim.api.nvim_create_autocmd('BufEnter', {

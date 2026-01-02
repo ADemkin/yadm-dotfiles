@@ -1,10 +1,14 @@
 return {
   -- local development:
-  --   'dim.nvim',
-  --   dev = true,
-  'ademkin/dim.nvim',
+  'dim.nvim',
+  dev = true,
+  lazy = false,
+  priority = 1000,
+  -- public plugin
+  -- 'ademkin/dim.nvim',
   opts = {
     enabled = true,
+    update_interval = 15 * 1000,
     schedule = {
       ['04:00'] = 1.0,
       ['08:00'] = 0,
@@ -13,13 +17,12 @@ return {
       ['18:00'] = 0.7,
       ['20:00'] = 1.0,
     },
-    override = function()
-      local month = os.date('%m')
-      local day = os.date('%d')
-      if month == 1 and day < 11 then
-        return 0.6
+    override = function(amount)
+      local month = tonumber(os.date('%m'))
+      local day = tonumber(os.date('%d'))
+      if month == 1 and day < 12 then
+        return math.max(amount, 0.5)
       end
-
       local weekday = os.date('%a')
       if weekday == 'Sunday' or weekday == 'Saturday' then
         return 0.9

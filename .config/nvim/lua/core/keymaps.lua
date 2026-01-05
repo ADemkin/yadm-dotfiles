@@ -14,22 +14,24 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
 
 -- Navigate between splits
-vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
+vim.keymap.set({ 'n', 't', 'i' }, '<C-k>', '<CMD>wincmd k<CR>', opts)
+vim.keymap.set({ 'n', 't', 'i' }, '<C-j>', '<CMD>wincmd j<CR>', opts)
+vim.keymap.set({ 'n', 't', 'i' }, '<C-h>', '<CMD>wincmd h<CR>', opts)
+vim.keymap.set({ 'n', 't', 'i' }, '<C-l>', '<CMD>wincmd l<CR>', opts)
 
--- Navigate terminal
-vim.keymap.set('t', '<C-h>', [[<CMD>wincmd h<CR>]], opts)
-vim.keymap.set('t', '<C-j>', [[<CMD>wincmd j<CR>]], opts)
-vim.keymap.set('t', '<C-k>', [[<CMD>wincmd k<CR>]], opts)
-vim.keymap.set('t', '<C-l>', [[<CMD>wincmd l<CR>]], opts)
-vim.keymap.set('i', '<C-h>', [[<CMD>wincmd h<CR>]], opts)
-vim.keymap.set('i', '<C-j>', [[<CMD>wincmd j<CR>]], opts)
-vim.keymap.set('i', '<C-k>', [[<CMD>wincmd k<CR>]], opts)
-vim.keymap.set('i', '<C-l>', [[<CMD>wincmd l<CR>]], opts)
+-- Terminal specific binding
+
+-- Esc like in classic vim
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+-- C-w like in classic vim
 vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function(event)
+    -- Enter in scrolled terminal goes back into insert mode
+    vim.keymap.set('n', '<Return>', 'i', { buffer = event.buf, noremap = true, silent = true })
+  end,
+})
 
 -- Resize terminal
 vim.keymap.set('t', '<A-h>', [[<C-\><C-n><A-h><CR><CR>]], opts)
@@ -42,11 +44,8 @@ vim.keymap.set('t', '<C-u>', '<C-\\><C-n><C-u>', opts)
 
 -- Escape to normal mode in terminal
 -- Why not single? If another instance of vim will run inside terminal,
--- then you wint be able to change mode
+-- then you want to be able to change mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', opts)
-
--- Enter in scrolled terminal goes back into insert mode
-vim.keymap.set('n', '<Return>', 'i', opts)
 
 -- C-c reset search and highlight
 -- remapped by mark plugin
@@ -87,37 +86,51 @@ vim.keymap.del('n', 'grn')
 
 -- Allow Russian layout to control nvim
 vim.opt.langmap = table.concat({
-  'ц;w',
-  'Ц;W',
-  'у;e',
-  'У;E',
-  'ф;a',
-  'Ф;A',
-  'в;d',
+  'Ë;~',
+  'А;F',
+  'Б;<',
   'В;D',
-  'ч;x',
-  'с;c',
-  'С;C',
-  'м;v',
-  'М;V',
-  'и;b',
-  'И;B',
-  'н;y',
-  'ш;i',
-  'Ш;I',
-  'щ;o',
-  'Щ;O',
-  'з;p',
+  'Г;U',
+  'Д;L',
+  'Е;T',
   'З;P',
-  'п;g',
+  'И;B',
+  'Й;Q',
+  'К;R',
+  'М;V',
   'П;G',
-  'р;h',
-  'о;j',
-  'л;k',
-  'д;l',
-  'т;n',
+  'С;C',
   'Т;N',
-  'ь;m',
+  'У;E',
+  'Ф;A',
+  'Ц;W',
+  'Ш;I',
+  'Щ;O',
   'Ь;M',
+  'а;f',
+  'в;d',
+  'г;u',
+  'д;l',
+  'е;t',
   'ж;:',
+  'з;p',
+  'и;b',
+  'й;q',
+  'к;r',
+  'л;k',
+  'м;v',
+  'н;y',
+  'о;j',
+  'п;g',
+  'р;h',
+  'с;c',
+  'т;n',
+  'у;e',
+  'ф;a',
+  'ц;w',
+  'ч;x',
+  'ш;i',
+  'щ;o',
+  'ь;m',
+  'ё;`',
 }, ',')

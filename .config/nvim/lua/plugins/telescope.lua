@@ -12,8 +12,9 @@ return {
       end,
     },
     { 'nvim-telescope/telescope-ui-select.nvim' }, -- dropdown menu
-    -- { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     'davvid/telescope-git-grep.nvim',
+    'SalOrak/whaler',
   },
   config = function()
     local actions = require('telescope.actions')
@@ -69,6 +70,16 @@ return {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        whaler = {
+          directories = {
+            '~/code/moderation-detectors/',
+          },
+          -- Directories to be directly used as projects. No subdirectory lookup.
+          oneoff_directories = {
+            { path = '~/code/', alias = 'Moderation Detectors' },
+          },
+          file_explorer = 'neotree',
+        },
       },
     })
 
@@ -76,6 +87,7 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'git_grep')
+    pcall(require('telescope').load_extension, 'whaler')
 
     -- Grep for pattern and glob from same prompt
     local pickers = require('telescope.pickers')
@@ -146,6 +158,7 @@ return {
     vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = '[F]ind all [R]ecent files' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind vim api' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
-    vim.keymap.set('n', '<leader>;', builtin.commands, { desc = 'Commands' })
+    vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
+    vim.keymap.set('n', '<leader>fp', require('telescope').extensions.whaler.whaler)
   end,
 }

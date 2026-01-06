@@ -39,6 +39,7 @@ require('lazy').setup({
   -- require('plugins/autopairs'),
   -- require('plugins/hardtime'),
   require('plugins/git'),
+  -- require('plugins/notes'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -52,16 +53,12 @@ require('lazy').setup({
   require('plugins/treesitter-context'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
-  require('plugins/ai'),
+  -- require('plugins/ai'),
   require('plugins/code-navigation'),
   require('plugins/neotest'),
   require('plugins/markdown'),
+  require('plugins/qol'),
 
-  -- auto f-string
-  {
-    'chrisgrieser/nvim-puppeteer',
-    lazy = false,
-  },
   -- time tracker
   {
     'ptdewey/pendulum-nvim',
@@ -72,14 +69,6 @@ require('lazy').setup({
       })
     end,
   },
-})
-
--- TODO: move to keymaps
-vim.api.nvim_create_autocmd('BufEnter', {
-  pattern = '*.py',
-  callback = function()
-    vim.keymap.set('n', '<leader>yt', require('core.terminal').run_single_test, { noremap = true, desc = 'Run current pytest test in terminal' })
-    vim.keymap.set('n', '<leader>yf', require('core.terminal').run_module_test, { noremap = true, desc = 'Run current pytest module tests in terminal' })
-    vim.keymap.set('n', '<C-p>', require('python.try_wrapper').toggle_try, { noremap = true, silent = true })
-  end,
+}, {
+  dev = { path = '~/code' },
 })

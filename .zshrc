@@ -242,11 +242,11 @@ replace() {
 alias p="poetry"
 
 # workflow
-alias "%ml"="cd ~/code/moscowliuda-webinar-utils && va; tmux rename-window 'moscowliuda'"
-alias "%md"="cd ~/code/moderation-detectors/ && va; tmux rename-window 'detectors'"
-alias "%maas"="cd ~/code/maas-moderation/ && va; tmux rename-window 'maas'"
-alias "%mig"="cd ~/code/moderation-input-gateway/ && va; tmux rename-window 'input-gateway'"
-alias "%mid"="cd ~/code/moderation-io-dump/ && va; tmux rename-window 'io-dump'"
+alias "%ml"="cd ~/code/moscowliuda-webinar-utils && tmux rename-window 'moscowliuda'"
+alias "%md"="cd ~/code/moderation-detectors/ && tmux rename-window 'detectors'"
+alias "%maas"="cd ~/code/maas-moderation/ && tmux rename-window 'maas'"
+alias "%mig"="cd ~/code/moderation-input-gateway/ && tmux rename-window 'input-gateway'"
+alias "%mid"="cd ~/code/moderation-io-dump/ && tmux rename-window 'io-dump'"
 
 # Copilot
 alias copilot=" gh copilot explain"

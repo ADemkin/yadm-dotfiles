@@ -19,8 +19,6 @@ vim.keymap.set({ 'n', 't', 'i' }, '<C-j>', '<CMD>wincmd j<CR>', opts)
 vim.keymap.set({ 'n', 't', 'i' }, '<C-h>', '<CMD>wincmd h<CR>', opts)
 vim.keymap.set({ 'n', 't', 'i' }, '<C-l>', '<CMD>wincmd l<CR>', opts)
 
--- Terminal specific binding
-
 -- Esc like in classic vim
 vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
 -- C-w like in classic vim
@@ -67,16 +65,6 @@ vim.keymap.set('n', 'x', '"_x', opts)
 -- Open terminal
 -- vim.keymap.set('n', '<leader>t', ':vert terminal<CR>', opts)
 
--- Navigate quickfix list
-vim.keymap.set('n', 'q<Tab>', '<cmd>cnext<CR>', opts)
-vim.keymap.set('n', 'q<S-Tab>', '<cmd>cprev<CR>', opts)
-vim.keymap.set('n', 'qj', '<cmd>cnext<CR>', opts)
-vim.keymap.set('n', 'qk', '<cmd>cprev<CR>', opts)
-vim.keymap.set('n', 'qn', '<cmd>cnext<CR>', opts)
-vim.keymap.set('n', 'qp', '<cmd>cprev<CR>', opts)
-vim.keymap.set('n', '<leader>qn', '<cmd>cnext<CR>', opts)
-vim.keymap.set('n', '<leader>qp', '<cmd>cprev<CR>', opts)
-
 -- unbind default LSP keymaps
 vim.keymap.del('n', 'grt')
 vim.keymap.del('n', 'gri')
@@ -97,16 +85,22 @@ vim.opt.langmap = table.concat({
   'И;B',
   'Й;Q',
   'К;R',
+  'Л;K',
   'М;V',
+  'Н;Y',
+  'О;J',
   'П;G',
+  'Р;H',
   'С;C',
   'Т;N',
   'У;E',
   'Ф;A',
   'Ц;W',
+  'И;B',
   'Ш;I',
   'Щ;O',
   'Ь;M',
+  'Я;Z',
   'а;f',
   'в;d',
   'г;u',

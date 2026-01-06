@@ -72,12 +72,13 @@ return {
         },
         whaler = {
           directories = {
+            '~/code/',
             '~/code/moderation-detectors/',
           },
           -- Directories to be directly used as projects. No subdirectory lookup.
-          oneoff_directories = {
-            { path = '~/code/', alias = 'Moderation Detectors' },
-          },
+          -- oneoff_directories = {
+          --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
+          -- },
           file_explorer = 'neotree',
         },
       },
@@ -87,7 +88,22 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'git_grep')
-    pcall(require('telescope').load_extension, 'whaler')
+    -- pcall(require('telescope').load_extension, 'whaler')
+
+    -- Rename tmux window on project switch
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'WhalerPostSwitch',
+      callback = function(event)
+        local name
+        if event.data.display ~= event.data.path then
+          name = event.data.display
+        else
+          name = vim.fn.fnamemodify(event.data.path, ':t')
+        end
+        os.execute('tmux rename-window ' .. name)
+        os.execute('va ' .. event.data.path)
+      end,
+    })
 
     -- Grep for pattern and glob from same prompt
     local pickers = require('telescope.pickers')

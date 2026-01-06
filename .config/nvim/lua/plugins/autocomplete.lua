@@ -21,7 +21,7 @@ return {
       },
       opts = {},
     },
-    'giuxtaposition/blink-cmp-copilot',
+    -- 'giuxtaposition/blink-cmp-copilot',
     'folke/lazydev.nvim', -- required as a provider
   },
   --- @module 'blink.cmp'
@@ -43,19 +43,19 @@ return {
         'path',
         'snippets',
         'lazydev',
-        'copilot',
+        -- 'copilot',
       },
       providers = {
         lazydev = {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
         },
-        copilot = {
-          name = 'copilot',
-          module = 'blink-cmp-copilot',
-          score_offset = 100,
-          async = true,
-        },
+        -- copilot = {
+        --   name = 'copilot',
+        --   module = 'blink-cmp-copilot',
+        --   score_offset = 100,
+        --   async = true,
+        -- },
         buffer = {
           module = 'blink.cmp.sources.buffer',
           score_offset = -100,

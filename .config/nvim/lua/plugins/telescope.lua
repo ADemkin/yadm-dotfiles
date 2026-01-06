@@ -101,7 +101,6 @@ return {
           name = vim.fn.fnamemodify(event.data.path, ':t')
         end
         os.execute('tmux rename-window ' .. name)
-        os.execute('va ' .. event.data.path)
       end,
     })
 

@@ -29,6 +29,7 @@ return {
   opts = {
     keymap = {
       preset = 'default',
+      ['<CR>'] = { 'select_and_accept', 'fallback' },
       ['<tab>'] = { 'select_and_accept', 'fallback' },
       ['<C-n>'] = { 'show', 'select_next' },
     },

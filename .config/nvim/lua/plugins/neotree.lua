@@ -5,11 +5,22 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
+    'folke/snacks.nvim',
   },
   config = function()
+    local snacks = require('snacks')
+    local events = require('neo-tree.events')
+    local function on_move(data)
+      snacks.rename.on_rename_file(data.source, data.destination)
+    end
+    local function on_window(args)
+      if args.position == 'left' or args.position == 'right' then
+        vim.cmd('wincmd =')
+      end
+    end
     require('neo-tree').setup({
       close_if_last_window = true,
-      use_popups_for_input = false, -- use vim's comman line for inputs
+      use_popups_for_input = false, -- Use vim's command line for inputs
       popup_border_style = 'single',
       enable_git_status = true,
       git_status_async = true,
@@ -180,22 +191,11 @@ return {
       },
       event_handlers = {
         -- equalize windows after opening or closing the neo-tree window
-        {
-          event = 'neo_tree_window_after_open',
-          handler = function(args)
-            if args.position == 'left' or args.position == 'right' then
-              vim.cmd('wincmd =')
-            end
-          end,
-        },
-        {
-          event = 'neo_tree_window_after_close',
-          handler = function(args)
-            if args.position == 'left' or args.position == 'right' then
-              vim.cmd('wincmd =')
-            end
-          end,
-        },
+        { event = events.NEO_TREE_WINDOW_AFTER_OPEN, handler = on_window },
+        { event = events.NEO_TREE_WINDOW_AFTER_CLOSE, handler = on_window },
+        -- LSP actions after file move/rename
+        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
       },
     })
 

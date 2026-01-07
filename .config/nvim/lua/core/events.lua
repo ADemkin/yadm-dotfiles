@@ -54,3 +54,25 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd('DirChanged', {
+  desc = 'Auto activate venv on cd',
+  pattern = '*',
+  callback = function(event)
+    local cwd = event.file
+    local venv_candidates = { 'venv', '.venv' }
+    for _, venv in ipairs(venv_candidates) do
+      local virtual_env = vim.fs.joinpath(cwd, venv)
+      if vim.fn.isdirectory(virtual_env) == 1 then
+        -- Simulate what actually happens in venv/bin/activate
+        vim.fn.setenv('VIRTUAL_ENV', virtual_env)
+        local venv_bin = vim.fs.joinpath(virtual_env, 'bin')
+        local PATH = vim.fn.getenv('PATH')
+        -- On local projects I sometimes need an .src prefix
+        vim.fn.setenv('PATH', './src:' .. venv_bin .. ':' .. PATH)
+        vim.fn.setenv('PYTHONPATH', cwd)
+        return
+      end
+    end
+  end,
+})

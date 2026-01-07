@@ -36,6 +36,14 @@ return {
       return layout
     end
 
+    layout_strategies.center_fused = function(picker, max_columns, max_lines, layout_config)
+      local layout = layout_strategies.center(picker, max_columns, max_lines, layout_config)
+      layout.results.height = layout.results.height + 1
+      layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└' }
+      layout.prompt.borderchars = { '─', '│', '─', '│', '┌', '┐', '┴', '└' }
+      return layout
+    end
+
     require('telescope').setup({
       defaults = {
         layout_strategy = 'horizontal_fused',
@@ -81,17 +89,16 @@ return {
           -- },
           file_explorer = 'neotree',
           telescope_opts = {
-            previewer = false,
             layout_config = {
               height = 0.8,
               width = 0.8,
             },
-            layout_strategy = 'horizontal_fused',
-            prompt_prefix = '  ',
-            selection_caret = '',
-            wrap_results = true,
+            layout_strategy = 'center_fused',
+            prompt_prefix = ' ',
+            selection_caret = ' ',
             entry_prefix = ' ',
-            path_display = 'smart',
+            results_title = '',
+            prompt_title = 'Projects',
           },
         },
       },

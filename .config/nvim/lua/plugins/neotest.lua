@@ -1,3 +1,14 @@
+vim.api.nvim_create_autocmd('DirChanged', {
+  desc = 'Reload neotest',
+  pattern = '*',
+  callback = function()
+    vim.print('reload neotest')
+    require('neotest').output_panel.close()
+    require('neotest').summary.close()
+    require('lazy').reload({ plugins = { 'neotest', 'neotest-python' } })
+  end,
+})
+
 return {
   'nvim-neotest/neotest',
   dependencies = {
@@ -15,8 +26,14 @@ return {
         },
       },
       icons = {
-        expanded = '┐',
-        final_child_prefix = '└',
+        child_indent = ' ',
+        child_prefix = '',
+        collapsed = '',
+        expanded = '',
+        final_child_indent = '',
+        final_child_prefix = '',
+        non_collapsible = '',
+        running_animated = { '⠁', '⠃', '⠇', '⠧', '⠷', '⠿', '⠾', '⠼', '⠸', '⠘' },
       },
       adapters = {
         require('neotest-python'),
@@ -41,6 +58,7 @@ return {
         unknown = 'DiagnosticInfo',
         watching = 'Structure',
       },
+      quickfix = { open = true },
     })
   end,
   keys = {

@@ -80,6 +80,19 @@ return {
           --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
           -- },
           file_explorer = 'neotree',
+          telescope_opts = {
+            previewer = false,
+            layout_config = {
+              height = 0.8,
+              width = 0.8,
+            },
+            layout_strategy = 'horizontal_fused',
+            prompt_prefix = '  ',
+            selection_caret = '',
+            wrap_results = true,
+            entry_prefix = ' ',
+            path_display = 'smart',
+          },
         },
       },
     })
@@ -88,7 +101,7 @@ return {
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'git_grep')
-    -- pcall(require('telescope').load_extension, 'whaler')
+    pcall(require('telescope').load_extension, 'whaler')
 
     -- Rename tmux window on project switch
     vim.api.nvim_create_autocmd('User', {

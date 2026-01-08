@@ -19,9 +19,14 @@ return {
   config = function()
     local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
+    local pickers = require('telescope.pickers')
+    local finders = require('telescope.finders')
+    local conf = require('telescope.config').values
+    local actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
+    local layout_strategies = require('telescope.pickers.layout_strategies')
 
     -- horizontal_fused layout strategy
-    local layout_strategies = require('telescope.pickers.layout_strategies')
     layout_strategies.horizontal_fused = function(picker, max_columns, max_lines, layout_config)
       local layout = layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
       layout.prompt.title = ''
@@ -87,7 +92,8 @@ return {
           -- oneoff_directories = {
           --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
           -- },
-          file_explorer = 'neotree',
+          -- file_explorer = 'neotree',
+          -- file_explorer = 'neotree', -- TODO: use Snacks.explorer
           telescope_opts = {
             layout_config = {
               height = 0.8,
@@ -195,5 +201,31 @@ return {
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
     vim.keymap.set('n', '<leader>fp', require('telescope').extensions.whaler.whaler)
+
+    -- telescope picker for z=
+    local function spell_suggest_telescope()
+      local word = vim.fn.expand('<cword>')
+      local suggestions = vim.fn.spellsuggest(word, 50)
+      if vim.tbl_isempty(suggestions) then
+        return
+      end
+      pickers
+        .new({}, {
+          finder = finders.new_table({
+            results = suggestions,
+          }),
+          sorter = conf.generic_sorter({}),
+          attach_mappings = function(_, map)
+            actions.select_default:replace(function(bufnr)
+              local entry = action_state.get_selected_entry()
+              actions.close(bufnr)
+              vim.cmd('normal! ciw' .. entry[1])
+            end)
+            return true
+          end,
+        })
+        :find()
+    end
+    vim.keymap.set('n', 'z=', spell_suggest_telescope, { silent = true })
   end,
 }

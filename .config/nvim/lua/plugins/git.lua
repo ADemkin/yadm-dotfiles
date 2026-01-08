@@ -39,4 +39,16 @@ return {
     dependencies = { 'MunifTanjim/nui.nvim' },
     cmd = 'CodeDiff',
   },
+  {
+    'folke/snacks.nvim',
+    keys = {
+      {
+        'to',
+        function()
+          ---@param opts? snacks.gitbrowse.Config
+          require('snacks.gitbrowse').open()
+        end,
+      },
+    },
+  },
 }

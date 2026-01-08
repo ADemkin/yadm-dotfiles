@@ -70,6 +70,7 @@ return {
             ['<C-c>'] = actions.close,
             ['<esc>'] = actions.close,
             ['<C-f>'] = require('telescope.actions').delete_buffer,
+            ['<C-d>'] = require('telescope.actions').delete_buffer,
           },
         },
       },
@@ -92,8 +93,7 @@ return {
           -- oneoff_directories = {
           --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
           -- },
-          -- file_explorer = 'neotree',
-          -- file_explorer = 'neotree', -- TODO: use Snacks.explorer
+          file_explorer = 'neotree',
           telescope_opts = {
             layout_config = {
               height = 0.8,

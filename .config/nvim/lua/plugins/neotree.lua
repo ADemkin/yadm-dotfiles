@@ -21,11 +21,10 @@ return {
     require('neo-tree').setup({
       close_if_last_window = true,
       use_popups_for_input = false, -- Use vim's command line for inputs
-      popup_border_style = 'single',
       enable_git_status = true,
       git_status_async = true,
       enable_diagnostics = false,
-      enable_modified_markers = true,
+      enable_modified_markers = false,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },
       sort_case_insensitive = false,
       sort_function = nil,
@@ -41,11 +40,6 @@ return {
           indent_marker = '│',
           last_indent_marker = '└',
           highlight = 'NeoTreeIndentMarker',
-          -- expander config, needed for nesting files
-          with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = '',
-          expander_expanded = '',
-          expander_highlight = 'NeoTreeExpander',
         },
         modified = {
           highlight = 'NeoTreeModified',
@@ -61,29 +55,10 @@ return {
             modified = '', -- highlight only
           },
         },
-
-        -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
-        file_size = {
-          enabled = true,
-          required_width = 64, -- min width of window required to show this column
-        },
-        type = {
-          enabled = true,
-          required_width = 122, -- min width of window required to show this column
-        },
-        last_modified = {
-          enabled = true,
-          required_width = 88, -- min width of window required to show this column
-        },
-        created = {
-          enabled = true,
-          required_width = 110, -- min width of window required to show this column
-        },
         symlink_target = {
           enabled = false,
         },
       },
-      commands = {},
       window = {
         position = 'left',
         width = 30,
@@ -92,55 +67,36 @@ return {
           nowait = true,
         },
         mappings = {
-          -- ['<cr>'] = 'open',
           ['l'] = 'open',
           ['<esc>'] = 'cancel',
           ['p'] = { 'toggle_preview', config = { use_float = true } },
           ['S'] = 'open_split',
           ['s'] = 'open_vsplit',
+          ['v'] = 'open_vsplit',
           ['t'] = 'noop',
           ['w'] = 'noop',
           ['h'] = 'close_node',
-          ['X'] = 'close_all_nodes',
-          ['a'] = {
-            'add',
-            config = {
-              show_path = 'relative',
-            },
-          },
-          ['A'] = {
-            'add_directory',
-            config = {
-              show_path = 'relative',
-            },
-          },
+          ['x'] = 'close_all_subnodes',
+          ['e'] = 'expand_all_subnodes',
+          ['a'] = { 'add', config = { show_path = 'relative' } },
           ['d'] = 'delete',
           ['r'] = 'rename',
-          ['c'] = {
-            'copy',
-            config = {
-              show_path = 'relative',
-            },
-          },
-          ['m'] = {
-            'move',
-            config = {
-              show_path = 'relative',
-            },
-          },
+          ['c'] = { 'copy', config = { show_path = 'relative' } },
+          ['m'] = { 'move', config = { show_path = 'relative' } },
           ['R'] = 'refresh',
           ['?'] = 'show_help',
-          ['<'] = 'prev_source',
-          ['>'] = 'next_source',
+          -- ['<'] = 'prev_source',
+          -- ['>'] = 'next_source',
           ['i'] = 'show_file_details',
           ['<C-n>'] = 'next_git_modified',
           ['<C-p>'] = 'prev_git_modified',
+          ['tj'] = 'next_git_modified',
+          ['tk'] = 'prev_git_modified',
         },
       },
-      nesting_rules = {},
       filesystem = {
         filtered_items = {
-          visible = false, -- when true, they will just be displayed differently than normal items
+          visible = false,
           hide_dotfiles = false,
           hide_gitignored = true,
           hide_by_name = {

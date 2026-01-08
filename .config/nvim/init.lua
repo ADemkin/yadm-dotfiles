@@ -39,6 +39,7 @@ require('lazy').setup({
   -- require('plugins/autopairs'),
   -- require('plugins/hardtime'),
   require('plugins/git'),
+  require('plugins/align'),
   -- require('plugins/notes'),
 
   -- LSP, lint, format

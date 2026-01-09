@@ -15,12 +15,9 @@ return {
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     'davvid/telescope-git-grep.nvim',
     'SalOrak/whaler',
+    'jmacadie/telescope-hierarchy.nvim',
   },
   config = function()
-    local actions = require('telescope.actions')
-    local action_state = require('telescope.actions.state')
-    local pickers = require('telescope.pickers')
-    local finders = require('telescope.finders')
     local conf = require('telescope.config').values
     local actions = require('telescope.actions')
     local action_state = require('telescope.actions.state')
@@ -107,6 +104,9 @@ return {
             prompt_title = 'Projects',
           },
         },
+        hierarchy = {
+          layout_strategy = 'horizontal_fused',
+        },
       },
     })
 
@@ -115,6 +115,7 @@ return {
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'git_grep')
     pcall(require('telescope').load_extension, 'whaler')
+    pcall(require('telescope').load_extension, 'hierarchy')
 
     -- Rename tmux window on project switch
     vim.api.nvim_create_autocmd('User', {
@@ -181,6 +182,8 @@ return {
         :find()
     end
 
+    local telescope = require('telescope')
+
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
@@ -200,7 +203,9 @@ return {
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind vim api' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
-    vim.keymap.set('n', '<leader>fp', require('telescope').extensions.whaler.whaler)
+    vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler)
+    vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls)
+    vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls)
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

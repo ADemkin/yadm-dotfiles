@@ -36,7 +36,7 @@ require('lazy').setup({
   require('plugins/cycle'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
-  -- require('plugins/autopairs'),
+  require('plugins/autopairs'),
   -- require('plugins/hardtime'),
   require('plugins/git'),
   require('plugins/align'),

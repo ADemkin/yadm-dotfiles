@@ -17,6 +17,7 @@ return {
     'SalOrak/whaler',
     'jmacadie/telescope-hierarchy.nvim',
     'debugloop/telescope-undo.nvim',
+    'd4wns-l1ght/telescope-messages.nvim',
   },
   config = function()
     local conf = require('telescope.config').values
@@ -118,6 +119,7 @@ return {
     pcall(require('telescope').load_extension, 'whaler')
     pcall(require('telescope').load_extension, 'hierarchy')
     pcall(require('telescope').load_extension, 'undo')
+    pcall(require('telescope').load_extension, 'messages')
 
     -- Rename tmux window on project switch
     vim.api.nvim_create_autocmd('User', {
@@ -209,6 +211,7 @@ return {
     vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls)
     vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls)
     vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo)
+    vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages)
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

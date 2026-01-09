@@ -16,6 +16,7 @@ return {
     'davvid/telescope-git-grep.nvim',
     'SalOrak/whaler',
     'jmacadie/telescope-hierarchy.nvim',
+    'debugloop/telescope-undo.nvim',
   },
   config = function()
     local conf = require('telescope.config').values
@@ -116,6 +117,7 @@ return {
     pcall(require('telescope').load_extension, 'git_grep')
     pcall(require('telescope').load_extension, 'whaler')
     pcall(require('telescope').load_extension, 'hierarchy')
+    pcall(require('telescope').load_extension, 'undo')
 
     -- Rename tmux window on project switch
     vim.api.nvim_create_autocmd('User', {
@@ -206,6 +208,7 @@ return {
     vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler)
     vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls)
     vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls)
+    vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo)
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

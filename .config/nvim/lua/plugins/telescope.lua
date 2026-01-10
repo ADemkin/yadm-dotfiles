@@ -13,7 +13,6 @@ return {
     },
     { 'nvim-telescope/telescope-ui-select.nvim' }, -- dropdown menu
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-    'davvid/telescope-git-grep.nvim',
     'SalOrak/whaler',
     'jmacadie/telescope-hierarchy.nvim',
     'debugloop/telescope-undo.nvim',
@@ -115,7 +114,6 @@ return {
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension, 'git_grep')
     pcall(require('telescope').load_extension, 'whaler')
     pcall(require('telescope').load_extension, 'hierarchy')
     pcall(require('telescope').load_extension, 'undo')
@@ -196,10 +194,9 @@ return {
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fc', builtin.resume, { desc = 'Continue last fuzzy search' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope builtin' })
+    vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols)
     vim.keymap.set('n', '<leader>fw', multigrep, { desc = '[F]ind [W]ords and glob' })
-    vim.keymap.set('n', '<leader>fg', function()
-      require('git_grep').grep()
-    end, { desc = '[F]ind [G]it grep' })
+    vim.keymap.set('n', '<leader>fg', multigrep, { desc = '[F]ind words and [G]lob' })
     vim.keymap.set('n', '<leader>fr', function()
       builtin.oldfiles({ only_cwd = true })
     end, { desc = '[F]ind [R]ecent files' })
@@ -207,11 +204,11 @@ return {
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind vim api' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
-    vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler)
-    vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls)
-    vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls)
-    vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo)
-    vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages)
+    vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
+    vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls, { desc = 'call stack [h]ierarchy' })
+    vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls, { desc = 'caller stack [h]ierarchy' })
+    vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = '[U]ndo tree' })
+    vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

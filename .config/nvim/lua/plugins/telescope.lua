@@ -84,8 +84,9 @@ return {
         },
         whaler = {
           directories = {
-            '~/code/',
-            '~/code/moderation-detectors/',
+            { path = '~/code/', alias = 'code' },
+            { path = '~/code/moderation-detectors/', alias = 'md' },
+            { path = '~/.config/', alias = 'config' },
           },
           -- Directories to be directly used as projects. No subdirectory lookup.
           -- oneoff_directories = {
@@ -102,7 +103,7 @@ return {
             selection_caret = ' ',
             entry_prefix = ' ',
             results_title = '',
-            prompt_title = 'Projects',
+            prompt_title = '',
           },
         },
         hierarchy = {

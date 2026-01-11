@@ -1,3 +1,5 @@
+local python = require('utils.python')
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
@@ -60,19 +62,16 @@ vim.api.nvim_create_autocmd('DirChanged', {
   pattern = '*',
   callback = function(event)
     local cwd = event.file
-    local venv_candidates = { 'venv', '.venv' }
-    for _, venv in ipairs(venv_candidates) do
-      local virtual_env = vim.fs.joinpath(cwd, venv)
-      if vim.fn.isdirectory(virtual_env) == 1 then
-        -- Simulate what actually happens in venv/bin/activate
-        vim.fn.setenv('VIRTUAL_ENV', virtual_env)
-        local venv_bin = vim.fs.joinpath(virtual_env, 'bin')
-        local PATH = vim.fn.getenv('PATH')
-        -- On local projects I sometimes need an .src prefix
-        vim.fn.setenv('PATH', './src:' .. venv_bin .. ':' .. PATH)
-        vim.fn.setenv('PYTHONPATH', cwd)
-        return
-      end
+    local venv_path = python.find_venv_path(cwd)
+    if venv_path then
+      -- Simulate what actually happens in venv/bin/activate
+      vim.fn.setenv('VIRTUAL_ENV', venv_path)
+      local venv_bin = vim.fs.joinpath(venv_path, 'bin')
+      local PATH = vim.fn.getenv('PATH')
+      -- On local projects I sometimes need an ./src prefix
+      vim.fn.setenv('PATH', './src:' .. venv_bin .. ':' .. PATH)
+      vim.fn.setenv('PYTHONPATH', cwd)
+      return
     end
   end,
 })

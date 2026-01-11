@@ -1,21 +1,10 @@
-local function find_venv_path(startpath)
-  local venv_candidates = { 'venv', '.venv' }
-  for _, venv in ipairs(venv_candidates) do
-    local venv_path = vim.fs.joinpath(startpath, venv)
-    local exists = vim.fn.glob(venv_path) ~= ''
-    if exists then
-      return venv_path
-    end
-  end
-  return nil
-end
+local python = require('utils.python')
 
 local function on_new_config(new_config, new_root_dir)
-  local venv_path = find_venv_path(new_root_dir)
-  if not venv_path then
-    return
+  local venv_path = python.find_venv_path(new_root_dir)
+  if venv_path then
+    new_config.settings.python.pythonPath = vim.fs.joinpath(venv_path, 'bin', 'python')
   end
-  new_config.settings.python.pythonPath = vim.fs.joinpath(venv_path, 'bin', 'python')
 end
 
 return {

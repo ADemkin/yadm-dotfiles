@@ -74,7 +74,13 @@ local function run_module_test()
   execute_in_terminal(command)
 end
 
+local function run_with_python()
+  local _, module_path = get_module_name_and_path()
+  execute_in_terminal('python ' .. module_path)
+end
+
 return {
   run_single_test = run_single_test,
   run_module_test = run_module_test,
+  run_with_python = run_with_python,
 }

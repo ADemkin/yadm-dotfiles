@@ -35,7 +35,7 @@ return {
     require('dim').setup({
       enabled = true,
       -- update_interval = 1 * 60 * 1000, -- once a minute
-      update_interval = 1 * 1000, -- once a second
+      update_interval = 15 * 1000, -- once a second
       schedule = {
         ['04:00'] = 1.0,
         ['08:00'] = 0,

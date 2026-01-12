@@ -124,13 +124,8 @@ return {
     vim.api.nvim_create_autocmd('User', {
       pattern = 'WhalerPostSwitch',
       callback = function(event)
-        local name
-        if event.data.display ~= event.data.path then
-          name = event.data.display
-        else
-          name = vim.fn.fnamemodify(event.data.path, ':t')
-        end
-        os.execute('tmux rename-window ' .. name)
+        name = vim.fn.fnamemodify(event.data.path, ':t')
+        vim.system({ 'tmux', 'rename-window', name }, { detach = true })
       end,
     })
 

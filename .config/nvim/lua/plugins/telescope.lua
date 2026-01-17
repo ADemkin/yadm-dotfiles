@@ -92,7 +92,8 @@ return {
           -- oneoff_directories = {
           --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
           -- },
-          file_explorer = 'neotree',
+          auto_file_explorer = false,
+          -- file_explorer = 'neotree',
           telescope_opts = {
             layout_config = {
               height = 0.8,
@@ -119,15 +120,6 @@ return {
     pcall(require('telescope').load_extension, 'hierarchy')
     pcall(require('telescope').load_extension, 'undo')
     pcall(require('telescope').load_extension, 'messages')
-
-    -- Rename tmux window on project switch
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'WhalerPostSwitch',
-      callback = function(event)
-        name = vim.fn.fnamemodify(event.data.path, ':t')
-        vim.system({ 'tmux', 'rename-window', name }, { detach = true })
-      end,
-    })
 
     -- Grep for pattern and glob from same prompt
     local pickers = require('telescope.pickers')
@@ -231,5 +223,44 @@ return {
         :find()
     end
     vim.keymap.set('n', 'z=', spell_suggest_telescope, { silent = true })
+
+    -- Rename tmux window on project switch
+    local Path = require('plenary.path')
+
+    ---@return boolean
+    local function buf_in_cwd(bufname, cwd)
+      if cwd:sub(-1) ~= Path.path.sep then
+        cwd = cwd .. Path.path.sep
+      end
+      local bufname_prefix = bufname:sub(1, #cwd)
+      return bufname_prefix == cwd
+    end
+
+    ---@return boolean
+    local function has_oldfiles_in_cwd(cwd)
+      for _, file in ipairs(vim.v.oldfiles) do
+        local file_stat = vim.uv.fs_stat(file)
+        if file_stat and file_stat.type == 'file' and buf_in_cwd(file, cwd) then
+          return true
+        end
+      end
+      return false
+    end
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'WhalerPostSwitch',
+      callback = function(event)
+        local cwd = event.data.path
+        local name = vim.fn.fnamemodify(cwd, ':t')
+        vim.system({ 'tmux', 'rename-window', name }, { detach = true })
+        vim.cmd('Neotree close')
+        vim.cmd('bdelete')
+        if has_oldfiles_in_cwd(cwd) then
+          builtin.oldfiles({ only_cwd = true })
+        else
+          builtin.find_files({ cwd = cwd })
+        end
+      end,
+    })
   end,
 }

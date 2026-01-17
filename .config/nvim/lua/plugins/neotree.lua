@@ -163,6 +163,10 @@ return {
     vim.api.nvim_create_autocmd('VimEnter', {
       desc = 'Open NeoTree on startup if no files are opened',
       callback = function()
+        -- skip if vim used as pipe
+        if vim.fn.filereadable('stdin') then
+          return
+        end
         if vim.fn.argc() == 0 then
           vim.cmd('Neotree reveal')
         end

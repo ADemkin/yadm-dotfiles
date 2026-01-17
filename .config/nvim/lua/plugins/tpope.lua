@@ -4,4 +4,5 @@ return {
   { 'tpope/vim-abolish' },
   { 'tpope/vim-surround' },
   { 'tpope/vim-repeat' },
+  { 'tpope/vim-dispatch' },
 }

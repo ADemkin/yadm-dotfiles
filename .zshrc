@@ -65,6 +65,7 @@ alias grup="git remote update"
 alias grim="git rebase -i origin/main"
 alias grm="git rebase origin/main"
 alias grid="git rebase -i origin/dev"
+alias grc="git rebase --continue"
 alias gst="git status"
 alias gg="git graph"
 alias greset="git reset --hard"
@@ -209,7 +210,7 @@ print256colors() {
 
 alias zshrc="nvim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
-alias nvimrc="cd ~/.config/nvim; nvim init.lua"
+alias nvimrc="nvim ~/.config/nvim/init.lua"
 
 alias vimdiff="nvim -d"
 
@@ -254,6 +255,7 @@ alias copilot=" gh copilot explain"
 # fzf
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
+export FZF_DEFAULT_OPTS="--no-mouse"
 
 # secrets
 if [ -f ~/.secrets ]; then
@@ -280,4 +282,9 @@ alias tshxs="tsh17 kube login k8s.moderation-xs && kubectl config set-context --
 alias tshstage="tsh17 kube login k8s.tns-stage-el && kubectl config set-context --current --namespace=moderation"
 alias tshlogin="tsh17 login --auth=passwordless --user=demkin.anton"
 alias tshlogout="tsh17 logout --user=demkin.anton"
+
+podlogs() {
+    kubectl -n moderation logs -p  $1
+}
+
 

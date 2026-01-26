@@ -51,7 +51,7 @@ require('lazy').setup({
   -- Heavyweight plugins
   require('plugins/neotree'),
   require('plugins/treesitter'),
-  require('plugins/treesitter-context'),
+  -- require('plugins.breadcrumbs'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
   -- require('plugins/ai'),
@@ -59,6 +59,7 @@ require('lazy').setup({
   require('plugins/neotest'),
   require('plugins/markdown'),
   require('plugins/qol'),
+  require('plugins/refactoring'),
 
   -- time tracker
   {
@@ -69,6 +70,17 @@ require('lazy').setup({
         time_format = '24h',
       })
     end,
+  },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      preset = 'helix', -- "classic" | "modern" | "helix"
+      delay = 600,
+    },
   },
 }, {
   dev = { path = '~/code' },

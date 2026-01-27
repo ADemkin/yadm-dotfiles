@@ -70,8 +70,7 @@ return {
           ['l'] = 'open',
           ['<esc>'] = 'cancel',
           ['p'] = { 'toggle_preview', config = { use_float = true } },
-          ['S'] = 'open_split',
-          ['s'] = 'open_vsplit',
+          ['s'] = 'open_split',
           ['v'] = 'open_vsplit',
           ['t'] = 'noop',
           ['w'] = 'noop',
@@ -160,13 +159,13 @@ return {
     vim.keymap.set('n', 'tt', ':Neotree toggle<CR>', opts)
     vim.keymap.set('n', '<C-s>', ':Neotree toggle<CR>', opts)
 
-    vim.api.nvim_create_autocmd('VimEnter', {
-      desc = 'Open NeoTree on startup if no files are opened',
-      callback = function()
-        if vim.fn.argc() == 0 then
-          vim.cmd('Neotree reveal')
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd('VimEnter', {
+    --   desc = 'Open NeoTree on startup if no files are opened',
+    --   callback = function()
+    --     if vim.fn.argc() == 0 then
+    --       vim.cmd('Neotree reveal')
+    --     end
+    --   end,
+    -- })
   end,
 }

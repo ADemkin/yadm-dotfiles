@@ -73,6 +73,9 @@ return {
         },
       },
       pickers = {
+        oldfiles = {
+          cwd_only = true,
+        },
         find_files = {
           file_ignore_patterns = { 'node_modules', '.git', '.venv', 'venv', '.DS_Store' },
           hidden = true,
@@ -174,6 +177,8 @@ return {
 
     local telescope = require('telescope')
 
+    vim.api.nvim_create_user_command('Grep', multigrep, { desc = 'Grep with glob' })
+
     -- See `:help telescope.builtin`
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
@@ -183,12 +188,8 @@ return {
     vim.keymap.set('n', '<leader>fc', builtin.resume, { desc = 'Continue last fuzzy search' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope builtin' })
     vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols)
-    vim.keymap.set('n', '<leader>fw', multigrep, { desc = '[F]ind [W]ords and glob' })
     vim.keymap.set('n', '<leader>fg', multigrep, { desc = '[F]ind words and [G]lob' })
-    vim.keymap.set('n', '<leader>fr', function()
-      builtin.oldfiles({ only_cwd = true })
-    end, { desc = '[F]ind [R]ecent files' })
-    vim.keymap.set('n', '<leader>fR', builtin.oldfiles, { desc = '[F]ind all [R]ecent files' })
+    vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent files' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind vim api' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
@@ -224,29 +225,6 @@ return {
     end
     vim.keymap.set('n', 'z=', spell_suggest_telescope, { silent = true })
 
-    -- Rename tmux window on project switch
-    local Path = require('plenary.path')
-
-    ---@return boolean
-    local function buf_in_cwd(bufname, cwd)
-      if cwd:sub(-1) ~= Path.path.sep then
-        cwd = cwd .. Path.path.sep
-      end
-      local bufname_prefix = bufname:sub(1, #cwd)
-      return bufname_prefix == cwd
-    end
-
-    ---@return boolean
-    local function has_oldfiles_in_cwd(cwd)
-      for _, file in ipairs(vim.v.oldfiles) do
-        local file_stat = vim.uv.fs_stat(file)
-        if file_stat and file_stat.type == 'file' and buf_in_cwd(file, cwd) then
-          return true
-        end
-      end
-      return false
-    end
-
     vim.api.nvim_create_autocmd('User', {
       pattern = 'WhalerPostSwitch',
       callback = function(event)
@@ -255,11 +233,7 @@ return {
         vim.system({ 'tmux', 'rename-window', name }, { detach = true })
         vim.cmd('Neotree close')
         vim.cmd('bdelete')
-        if has_oldfiles_in_cwd(cwd) then
-          builtin.oldfiles({ only_cwd = true })
-        else
-          builtin.find_files({ cwd = cwd })
-        end
+        vim.cmd('Alpha')
       end,
     })
   end,

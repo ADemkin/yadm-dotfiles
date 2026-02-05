@@ -74,6 +74,7 @@ return {
           ['v'] = 'open_vsplit',
           ['t'] = 'noop',
           ['w'] = 'noop',
+          ['#'] = 'noop',
           ['h'] = 'close_node',
           ['x'] = 'close_all_subnodes',
           ['e'] = 'expand_all_subnodes',

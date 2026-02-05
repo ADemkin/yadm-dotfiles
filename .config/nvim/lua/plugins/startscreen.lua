@@ -20,7 +20,7 @@ return {
       dashboard.button('f', 'Find file', ':Telescope find_files<CR>'),
       dashboard.button('g', 'Grep file', ':Grep<CR>'),
       dashboard.button('r', 'Recent', ':Telescope oldfiles<CR>'),
-      dashboard.button('s', 'Side tree', ':Neotree show<CR>'),
+      dashboard.button('s', 'Side tree', ':Neotree toggle<CR>'),
       dashboard.button('p', 'Project switch', ':Telescope whaler<CR>'),
     }
 

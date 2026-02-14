@@ -71,6 +71,7 @@ alias gg="git graph"
 alias greset="git reset --hard"
 alias gchom="git checkout origin/main"
 alias gchod="git checkout origin/dev"
+alias gchb="git checkout -b"
 
 # More complex grep
 GREP=$(which grep)
@@ -210,7 +211,7 @@ print256colors() {
 
 alias zshrc="nvim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
-alias nvimrc="nvim ~/.config/nvim/init.lua"
+alias nvimrc="cd ~/.config/nvim && nvim init.lua"
 
 alias vimdiff="nvim -d"
 
@@ -244,6 +245,7 @@ alias p="poetry"
 
 # workflow
 alias "%ml"="cd ~/code/moscowliuda-webinar-utils && tmux rename-window 'moscowliuda'"
+alias "%mb"="cd ~/code/moscowliuda-backend && tmux rename-window 'moscowliuda-backend'"
 alias "%md"="cd ~/code/moderation-detectors/ && tmux rename-window 'detectors'"
 alias "%maas"="cd ~/code/maas-moderation/ && tmux rename-window 'maas'"
 alias "%mig"="cd ~/code/moderation-input-gateway/ && tmux rename-window 'input-gateway'"
@@ -284,7 +286,7 @@ alias tshlogin="tsh17 login --auth=passwordless --user=demkin.anton"
 alias tshlogout="tsh17 logout --user=demkin.anton"
 
 podlogs() {
-    kubectl -n moderation logs -p  $1
+    kubectl -n moderation logs $@
 }
 
 

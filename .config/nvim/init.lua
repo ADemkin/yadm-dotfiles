@@ -51,7 +51,7 @@ require('lazy').setup({
   -- Heavyweight plugins
   require('plugins/neotree'),
   require('plugins/treesitter'),
-  -- require('plugins.breadcrumbs'),
+  require('plugins/breadcrumbs'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
   -- require('plugins/ai'),

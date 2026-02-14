@@ -58,7 +58,6 @@ require('lazy').setup({
   require('plugins/navigation'),
   require('plugins/neotest'),
   require('plugins/markdown'),
-  require('plugins/qol'),
   require('plugins/refactoring'),
   require('plugins/startscreen'),
 

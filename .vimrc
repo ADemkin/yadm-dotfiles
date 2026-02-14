@@ -363,7 +363,7 @@ Plug 'kana/vim-arpeggio'
 Plug 'tpope/vim-unimpaired'
 
 " Ropevim: autoimport and refactor
-Plug 'python-rope/ropevim'
+" Plug 'python-rope/ropevim'
 
 " HardMode: use motions more effectively
 Plug 'dusans/vim-hardmode'
@@ -475,12 +475,6 @@ let g:pylsp_config = {
     \'workspace_config': {'pylsp': {'plugins': {}}},
 \}
 let g:pylsp_config.workspace_config.pylsp.plugins.flake8 = {'enabled': v:true}
-" let g:pylsp_config.workspace_config.pylsp.plugins = {
-"     \'rope_autoimport': {
-"         \'enabled': v:true,
-"         \'completions': {'enabled': v:true},
-"     \},
-" \}
 let g:pyright_config = {
     \'command': 'pyright-langserver --stdio',
     \'log_level': -1,
@@ -545,9 +539,9 @@ endfunction
 " nnoremap <silent> <C-g>l :call FZFOpen(':BLines')<CR>
 " nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
 " search only inside project file names (respect .gitignore)
-nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>ff :GFiles<CR>
 " search inside file content
-nnoremap <Leader>g :Rg<CR>
+nnoremap <Leader>fg :Rg<CR>
 " replace simple buffers to fzf buffers
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>; :Commands<CR>
@@ -631,7 +625,8 @@ let g:lightline = {
 set noshowmode
 
 " colorscheme
-colorscheme monokai
+" colorscheme monokai
+colorscheme retrobox
 
 " Argwap: settings
 nnoremap <silent> <leader>d :ArgWrap<CR>

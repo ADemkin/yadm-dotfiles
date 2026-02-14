@@ -93,6 +93,12 @@ return {
       end,
     },
     {
+      '<leader>tl',
+      function()
+        require('neotest').run.run_last()
+      end,
+    },
+    {
       '<leader>ta',
       function()
         require('neotest').run.run(vim.fn.getcwd())

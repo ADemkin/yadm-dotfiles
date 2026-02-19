@@ -17,6 +17,7 @@ return {
   settings = {
     basedpyright = {
       analysis = {
+        diagnosticMode = 'workspace', -- ["openFilesOnly", "workspace"]
         typeCheckingMode = 'basic', -- "off", "basic", "standard", "strict", "recommended", "all"
       },
     },

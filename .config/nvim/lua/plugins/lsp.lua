@@ -34,8 +34,13 @@ return {
             require('telescope.builtin').lsp_definitions(opts)
           end)
           map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
-          map('gu', require('telescope.builtin').lsp_references)
-          map('gi', require('telescope.builtin').lsp_implementations)
+          -- map('gu', require('telescope.builtin').lsp_references)
+          map('gu', function()
+            require('telescope.builtin').lsp_references({ show_line = false })
+          end)
+          map('gi', function()
+            require('telescope.builtin').lsp_implementations({ show_line = false })
+          end)
 
           vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 

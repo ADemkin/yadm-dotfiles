@@ -34,7 +34,7 @@ return {
     end,
     keymap = {
       preset = 'default',
-      ['<CR>'] = { 'select_and_accept', 'fallback' }, -- conflict with abbr
+      -- ['<CR>'] = { 'select_and_accept', 'fallback' }, -- conflict with abbr
       ['<tab>'] = { 'select_and_accept', 'fallback' },
       ['<C-n>'] = { 'show', 'select_next' },
     },

@@ -33,7 +33,7 @@ return {
         final_child_indent = '',
         final_child_prefix = '',
         non_collapsible = '',
-        running_animated = { '⠁', '⠃', '⠇', '⠧', '⠷', '⠿', '⠾', '⠼', '⠸', '⠘' },
+        running_animated = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
       },
       adapters = {
         require('neotest-python'),
@@ -58,7 +58,7 @@ return {
         unknown = 'DiagnosticInfo',
         watching = 'Structure',
       },
-      quickfix = { open = true },
+      -- quickfix = { open = true },
     })
   end,
   keys = {

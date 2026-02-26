@@ -40,7 +40,10 @@ return {
       enable = true,
       disable = { 'tmux' },
     },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+      disable = { 'python', 'htmldjango' },
+    },
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
     end,

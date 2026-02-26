@@ -21,11 +21,7 @@ return {
   -- local development:
   'dim.nvim',
   dev = true,
-  lazy = false,
   priority = 1000,
-  dependencies = {
-    { 'nvim-tree/nvim-web-devicons' },
-  },
   -- public plugin
   -- 'ademkin/dim.nvim',
   config = function()

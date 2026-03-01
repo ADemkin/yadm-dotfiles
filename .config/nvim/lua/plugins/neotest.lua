@@ -2,17 +2,22 @@ vim.api.nvim_create_autocmd('DirChanged', {
   desc = 'Reload neotest',
   pattern = '*',
   callback = function()
-    vim.print('reload neotest')
     require('neotest').output_panel.close()
     require('neotest').summary.close()
-    require('lazy').reload({ plugins = { 'neotest', 'neotest-python' } })
+    require('lazy').reload({ plugins = {
+      'neotest',
+      'neotest-python',
+      'neotest-go',
+    } })
   end,
 })
 
 return {
   'nvim-neotest/neotest',
+  commands = { 'Neotest' },
   dependencies = {
     'nvim-neotest/neotest-python',
+    'nvim-neotest/neotest-go',
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
     'antoinemadec/FixCursorHold.nvim',
@@ -37,6 +42,12 @@ return {
       },
       adapters = {
         require('neotest-python'),
+        require('neotest-go')({
+          experimental = {
+            test_table = true,
+          },
+          args = { '-count=1', '-timeout=60s' },
+        }),
       },
       highlights = {
         adapter_name = 'Title',

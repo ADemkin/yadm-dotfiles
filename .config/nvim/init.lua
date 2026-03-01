@@ -60,6 +60,28 @@ require('lazy').setup({
   require('plugins/markdown'),
   require('plugins/refactoring'),
   require('plugins/startscreen'),
+  require('plugins/claude'),
+
+  -- which key - temporary ?
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    opts = {
+      triggers = {
+        { '<leader>', mode = { 'n', 'v' } },
+        { 'g', mode = { 'n', 'v' } },
+      },
+    },
+    keys = {
+      {
+        '<leader>?',
+        function()
+          require('which-key').show({ global = false })
+        end,
+        desc = 'Buffer Local Keymaps (which-key)',
+      },
+    },
+  },
 
   -- time tracker
   {
@@ -70,6 +92,17 @@ require('lazy').setup({
         time_format = '24h',
       })
     end,
+  },
+
+  -- Zed like diff
+  {
+    'martindur/zdiff.nvim',
+    cmd = 'Zdiff',
+    keys = {
+      { '<leader>zd', '<cmd>Zdiff<cr>', desc = 'Zdiff (uncommitted)' },
+      { '<leader>zD', '<cmd>Zdiff main<cr>', desc = 'Zdiff (vs main)' },
+    },
+    opts = {},
   },
 }, {
   dev = { path = '~/code' },

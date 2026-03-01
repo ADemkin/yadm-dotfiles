@@ -21,6 +21,8 @@ return {
       dashboard.button('g', 'Grep file', ':Grep<CR>'),
       dashboard.button('r', 'Recent', ':Telescope oldfiles<CR>'),
       dashboard.button('s', 'Side tree', ':Neotree toggle<CR>'),
+      -- dashboard.button('c', 'Claude', '<leader>ar'),
+      -- dashboard.button('t', 'Tests', '<leader>tt'),
       dashboard.button('p', 'Project switch', ':Telescope whaler<CR>'),
     }
 

@@ -45,6 +45,17 @@ return {
         term:toggle(nil, new_direction)
         vim.api.nvim_set_current_win(cur)
       end, { noremap = true, silent = true })
+
+      local trim_spaces = true
+      local send = function(motion_type)
+        require('toggleterm').send_lines_to_terminal(motion_type, trim_spaces, { args = 1 })
+      end
+      vim.keymap.set('n', '<leader>ys', function()
+        send('single_line')
+      end, { noremap = true, silent = true })
+      vim.keymap.set('v', '<leader>ys', function()
+        send('visual_selection')
+      end, { noremap = true, silent = true })
     end,
   },
   {

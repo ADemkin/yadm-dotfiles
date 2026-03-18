@@ -83,64 +83,81 @@ return {
   end,
   keys = {
     {
-      '<leader>tt',
+      'tt',
       function()
         require('neotest').summary.toggle()
       end,
+      desc = 'Toggle test summary',
     },
     {
-      '<leader>to',
+      'to',
       function()
         require('neotest').output_panel.toggle()
       end,
+      desc = 'Toggle output panel',
     },
     {
-      '<leader>tp',
+      'tp',
       function()
-        require('neotest').output.open()
+        require('neotest').output.open({ enter = true })
       end,
+      desc = 'Open test output',
     },
     {
-      '<leader>tr',
+      'tw',
+      function()
+        require('neotest').watch.toggle()
+      end,
+      desc = 'Toggle test watching',
+    },
+    {
+      'tr',
       function()
         require('neotest').run.run()
       end,
+      desc = 'Run nearest test',
     },
     {
-      '<leader>tm',
+      'tm',
       function()
         require('neotest').run.run(vim.fn.expand('%'))
       end,
+      desc = 'Run tests in file',
     },
     {
-      '<leader>tl',
+      'tl',
       function()
         require('neotest').run.run_last()
       end,
+      desc = 'Run last test',
     },
     {
-      '<leader>ta',
+      'ta',
       function()
         require('neotest').run.run(vim.fn.getcwd())
       end,
+      desc = 'Run all tests',
     },
     {
-      '<leader>ts',
+      'ts',
       function()
         require('neotest').run.stop()
       end,
+      desc = 'Stop test run',
     },
     {
       '[t',
       function()
         require('neotest').jump.prev({ status = 'failed' })
       end,
+      desc = 'Jump to previous failed test',
     },
     {
       ']t',
       function()
         require('neotest').jump.next({ status = 'failed' })
       end,
+      desc = 'Jump to next failed test',
     },
   },
 }

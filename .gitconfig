@@ -31,7 +31,8 @@
 
 [delta]
     features = decorations
-    syntax-theme = gruvbox-dark
+    ; syntax-theme = gruvbox-dark
+    syntax-theme = Monokai Extended
     ; minus-style = syntax "#330011"
     ; plus-style = syntax "#0c2705"
 

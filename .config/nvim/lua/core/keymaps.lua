@@ -128,3 +128,18 @@ vim.opt.langmap = table.concat({
   'ь;m',
   'ё;`',
 }, ',')
+
+vim.keymap.set('n', '<leader>i', ':Inspect<CR>', opts)
+vim.keymap.set('n', '<leader>hi', function()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local line, col = pos[1] - 1, pos[2] -- Treesitter uses 0-index
+  local captures = vim.treesitter.get_captures_at_pos(0, line, col)
+
+  if #captures > 0 then
+    print('Treesitter captures: ' .. vim.inspect(captures))
+  else
+    local synid = vim.fn.synID(pos[1], pos[2], 1)
+    local name = vim.fn.synIDattr(synid, 'name')
+    print('Syntax group: ' .. (name == '' and 'none' or name))
+  end
+end, { desc = 'Show highlight group under cursor' })

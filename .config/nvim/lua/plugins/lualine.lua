@@ -27,12 +27,12 @@ return {
       cond = hide_in_width,
     }
 
-    local diff = {
-      'diff',
-      colored = false,
-      symbols = { added = '+', modified = '±', removed = '-' }, -- changes diff symbols
-      cond = hide_in_width,
-    }
+    -- local diff = {
+    --   'diff',
+    --   colored = false,
+    --   symbols = { added = '+', modified = '±', removed = '-' }, -- changes diff symbols
+    --   cond = hide_in_width,
+    -- }
 
     require('lualine').setup({
       options = {
@@ -48,7 +48,7 @@ return {
         lualine_c = { filename },
         lualine_x = {
           diagnostics,
-          diff,
+          -- diff,
           {
             'filetype',
             cond = hide_in_width,
@@ -88,7 +88,7 @@ return {
         lualine_z = {},
       },
       tabline = {},
-      extensions = { 'fugitive' },
+      -- extensions = { 'fugitive' },
     })
   end,
 }

@@ -625,8 +625,8 @@ let g:lightline = {
 set noshowmode
 
 " colorscheme
-" colorscheme monokai
-colorscheme retrobox
+colorscheme monokai
+" colorscheme retrobox
 
 " Argwap: settings
 nnoremap <silent> <leader>d :ArgWrap<CR>

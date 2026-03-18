@@ -9,14 +9,18 @@ return {
   priority = 1000,
   config = function()
     require('monokai-pro').setup({
-      -- TODO: FIX FUCKING SEARCH HIGHLIGHTS!!!
-      -- TODO: Fix complement bracket highlight (like in gruvbox?)
+      background_clear = {
+        'float_win',
+      },
+      disabled_plugins = {
+        'nvim-telescope/telescope.nvim', -- allow override to work
+      },
       -- TODO: f"" make f orange
       -- TODO: @decorator make @ red
       -- TODO: fix black color in lualine
       -- TODO: fix error suggestion: border and bg
       filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
-      ---@field override? fun(scheme: MonokaiPro.Scheme)
+      ---@field override? fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
         -- dumps(scheme)
         local white = { fg = scheme.base.white }
@@ -26,11 +30,24 @@ return {
         local yellow = { fg = scheme.base.yellow }
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
+        local c = scheme
         return {
           WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = orange,
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },
+          MatchParen = {
+            underline = false,
+            fg = scheme.base.red,
+            -- strikethrough = true,
+          },
           CursorLineNr = orange,
+          Search = { fg = scheme.editor.background, bg = scheme.base.yellow },
+          IncSearch = { fg = scheme.editor.background, bg = scheme.base.yellow },
+          CurSearch = { fg = scheme.editor.background, bg = scheme.base.blue },
+          -- LspReferenceText = { reverse = true },
+          -- LspReferenceRead = { reverse = true },
+          -- LspReferenceWrite = { reverse = true },
+          -- LspReferenceTarget = { reverse = true },
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,
@@ -58,14 +75,16 @@ return {
           fugitiveUntrackedModifier = orange,
           -- yaml
           ['@property.yaml'] = white,
+          -- -- Telescope
+          TelescopePromptCounter = { fg = scheme.base.dimmed3 },
+          TelescopeBorder = { bg = c.editor.background, fg = c.tab.unfocusedActiveBorder },
         }
-      end,
-      ---@field override_scheme? fun(scheme: MonokaiPro.Scheme, palette: MonokaiPro.Palette, colors: MonokaiPro.Colors): MonokaiPro.Scheme
-      override_scheme = function(scheme, palette, colors)
-        scheme.breadcrumb.foreground = scheme.base.white
-        return scheme
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
+
+    require('lualine').setup({
+      options = { theme = 'monokai-pro' },
+    })
   end,
 }

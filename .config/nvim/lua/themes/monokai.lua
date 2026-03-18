@@ -17,7 +17,6 @@ return {
       },
       -- TODO: f"" make f orange
       -- TODO: @decorator make @ red (not possible: LSP p125 overrides TS, no extmark workaround)
-      -- TODO: fix error suggestion: border and bg
       filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
       ---@field override? fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)

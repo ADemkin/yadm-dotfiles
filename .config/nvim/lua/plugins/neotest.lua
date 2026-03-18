@@ -24,6 +24,15 @@ return {
     'nvim-treesitter/nvim-treesitter',
   },
   config = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'neotest-summary',
+      callback = function()
+        local bg = require('monokai-pro').get_scheme().sideBar.background
+        vim.api.nvim_set_hl(0, 'NeotestSummaryBg', { fg = bg, bg = bg })
+        vim.wo.winhighlight = 'Normal:NeotestSummaryBg,NormalNC:NeotestSummaryBg,EndOfBuffer:NeotestSummaryBg'
+      end,
+    })
+
     require('neotest').setup({
       summary = {
         mappings = {
@@ -35,7 +44,7 @@ return {
         child_prefix = '',
         collapsed = '',
         expanded = '',
-        final_child_indent = '',
+        final_child_indent = ' ',
         final_child_prefix = '',
         non_collapsible = '',
         running_animated = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
@@ -50,24 +59,24 @@ return {
         }),
       },
       highlights = {
-        adapter_name = 'Title',
-        border = 'FloatBorder',
-        dir = 'Directory',
-        expand_marker = 'Comment',
+        adapter_name = 'NeoTreeRootName',
+        border = 'NeoTreeWinSeparator',
+        dir = 'NeoTreeRootName',
+        expand_marker = 'NeoTreeIndentMarker',
         failed = 'DiagnosticError',
-        file = 'GruvboxFg1',
-        focused = 'Special',
-        indent = 'Comment',
-        marked = 'Special',
-        namespace = 'Title',
+        file = 'NeoTreeRootName',
+        focused = 'NeoTreeCursorLine',
+        indent = 'NeoTreeIndentMarker',
+        marked = 'NeoTreeCursorLine',
+        namespace = 'NeoTreeDirectoryName',
         passed = 'DiagnosticOk',
         running = 'DiagnosticWarn',
-        select_win = 'Title',
+        select_win = 'NeoTreeRootName',
         skipped = 'DiagnosticHint',
-        target = 'Type',
-        test = 'GruvboxFg1',
+        target = 'NeoTreeDirectoryIcon',
+        test = 'NeoTreeNormal',
         unknown = 'DiagnosticInfo',
-        watching = 'Structure',
+        watching = 'DiagnosticWarn',
       },
       -- quickfix = { open = true },
     })

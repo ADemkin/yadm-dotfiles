@@ -10,7 +10,6 @@ return {
   config = function()
     require('monokai-pro').setup({
       -- TODO: FIX FUCKING SEARCH HIGHLIGHTS!!!
-      -- TODO: FIX FUCKING DICTIONARY ERRORS IN RED AND UNDERCURL!
       -- TODO: Fix complement bracket highlight (like in gruvbox?)
       -- TODO: f"" make f orange
       -- TODO: @decorator make @ red
@@ -29,6 +28,9 @@ return {
         local red = { fg = scheme.base.red }
         return {
           WinSeparator = { fg = scheme.base.dimmed4 },
+          Todo = orange,
+          SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },
+          CursorLineNr = orange,
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,
@@ -37,11 +39,8 @@ return {
           ['@variable.parameter'] = white,
           ['@module'] = white,
           ['@constant.builtin'] = aqua,
-          -- ['@type'] = green,
           ['@type'] = white,
           ['@punctuation.special'] = red,
-          ['@comment.todo.comment'] = orange,
-          -- ['@punctuation.special'] = orange,
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
@@ -49,16 +48,14 @@ return {
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
           ['@lsp.typemod.class.declaration.python'] = green,
-          -- ['@type.python'] = white,
-          -- ['@lsp.type.class.python'] = white,
           -- lua
           ['@comment.documentation.lua'] = white,
+          ['@lsp.type.comment.lua'] = {},
           -- git
           ['@markup.heading.gitcommit'] = white,
-          -- ['@string.special.path.gitcommit'] = { link = 'Comment' },
           ['@string.special.path.gitcommit'] = yellow,
-          ['fugitiveSymbolicRef'] = white,
-          ['fugitiveUntrackedModifier'] = orange,
+          fugitiveSymbolicRef = white,
+          fugitiveUntrackedModifier = orange,
           -- yaml
           ['@property.yaml'] = white,
         }
@@ -66,13 +63,9 @@ return {
       ---@field override_scheme? fun(scheme: MonokaiPro.Scheme, palette: MonokaiPro.Palette, colors: MonokaiPro.Colors): MonokaiPro.Scheme
       override_scheme = function(scheme, palette, colors)
         scheme.breadcrumb.foreground = scheme.base.white
-        -- scheme.statusBar.background = scheme.base.black
         return scheme
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
-    -- local lualine = require('lualine.themes.monokai-pro')
-    -- local scheme = monokai.get_scheme()
-    -- lualine.
   end,
 }

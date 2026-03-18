@@ -19,8 +19,10 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Appearance
   require('plugins/lualine'),
-  require('themes/gruvbox'),
-  require('plugins/dim'),
+  -- require('themes/gruvbox'),
+  require('themes/monokai'),
+  -- require('themes/monokai-night'),
+  -- require('plugins/dim'),
 
   -- lightweight plugins
   require('plugins/tpope'),
@@ -103,6 +105,12 @@ require('lazy').setup({
       { '<leader>zD', '<cmd>Zdiff main<cr>', desc = 'Zdiff (vs main)' },
     },
     opts = {},
+  },
+
+  -- Vim mastery
+  {
+    'scinac/vim-norm-trainer.nvim',
+    lazy = false,
   },
 }, {
   dev = { path = '~/code' },

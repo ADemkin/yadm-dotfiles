@@ -16,8 +16,7 @@ return {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },
       -- TODO: f"" make f orange
-      -- TODO: @decorator make @ red
-      -- TODO: fix black color in lualine
+      -- TODO: @decorator make @ red (not possible: LSP p125 overrides TS, no extmark workaround)
       -- TODO: fix error suggestion: border and bg
       filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
       ---@field override? fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
@@ -30,7 +29,6 @@ return {
         local yellow = { fg = scheme.base.yellow }
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
-        local c = scheme
         return {
           WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = orange,
@@ -68,6 +66,7 @@ return {
           -- lua
           ['@comment.documentation.lua'] = white,
           ['@lsp.type.comment.lua'] = {},
+          ['@lsp.type.type'] = green,
           -- git
           ['@markup.heading.gitcommit'] = white,
           ['@string.special.path.gitcommit'] = yellow,
@@ -77,14 +76,46 @@ return {
           ['@property.yaml'] = white,
           -- -- Telescope
           TelescopePromptCounter = { fg = scheme.base.dimmed3 },
-          TelescopeBorder = { bg = c.editor.background, fg = c.tab.unfocusedActiveBorder },
+          TelescopeBorder = { bg = scheme.editor.background, fg = scheme.tab.unfocusedActiveBorder },
         }
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
 
-    require('lualine').setup({
-      options = { theme = 'monokai-pro' },
-    })
+    -- local scheme = require('monokai-pro').get_scheme()
+    -- require('lualine').setup({
+    --   options = {
+    --     theme = {
+    --       normal = {
+    --         a = { bg = scheme.base.cyan, fg = scheme.base.black },
+    --         b = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.activeForeground },
+    --         c = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.inactiveForeground },
+    --         -- x = { bg = scheme.tab.activeBackground, fg = scheme.tab.inactiveForeground },
+    --         -- y = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.inactiveForeground },
+    --         z = { bg = scheme.tab.unfocusedActiveBackground, fg = scheme.tab.unfocusedActiveForeground },
+    --       },
+    --       insert = {
+    --         a = { bg = scheme.base.green, fg = scheme.base.black },
+    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.green },
+    --       },
+    --       command = {
+    --         a = { bg = scheme.base.yellow, fg = scheme.base.black },
+    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.yellow },
+    --       },
+    --       visual = {
+    --         a = { bg = scheme.base.magenta, fg = scheme.base.black },
+    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.magenta },
+    --       },
+    --       replace = {
+    --         a = { bg = scheme.base.red, fg = scheme.base.black },
+    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.red },
+    --       },
+    --       inactive = {
+    --         a = { bg = scheme.base.black, fg = scheme.base.yellow },
+    --         b = { bg = scheme.base.black, fg = scheme.base.black },
+    --       },
+    --     },
+    --   },
+    -- })
   end,
 }

@@ -16,7 +16,6 @@ return {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },
       -- TODO: f"" make f orange
-      -- TODO: @decorator make @ red (not possible: LSP p125 overrides TS, no extmark workaround)
       filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
       ---@field override? fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
@@ -58,6 +57,7 @@ return {
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
+          ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
@@ -80,6 +80,10 @@ return {
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
+
+    local s = require('monokai-pro').get_scheme()
+    vim.api.nvim_set_hl(0, 'pythonDecoratorAt', { fg = s.base.red })
+    vim.api.nvim_set_hl(0, 'pythonDecoratorName', { fg = s.base.green })
 
     -- local scheme = require('monokai-pro').get_scheme()
     -- require('lualine').setup({

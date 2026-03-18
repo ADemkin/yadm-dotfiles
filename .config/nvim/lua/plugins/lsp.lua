@@ -28,9 +28,12 @@ return {
           end
 
           map('gr', vim.lsp.buf.rename)
-          map('gd', require('telescope.builtin').lsp_definitions)
+          map('gd', function()
+            require('telescope.builtin').lsp_definitions({ show_line = false })
+          end)
           map('gD', function(opts)
             vim.cmd('vsplit')
+            opts.show_line = false
             require('telescope.builtin').lsp_definitions(opts)
           end)
           map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
@@ -148,10 +151,9 @@ return {
         'stylua',
         'yamllint',
         'checkmake',
-        'shellcheck',
         'markdownlint',
         'rstcheck',
-        'harper-ls', -- spell lint
+        -- 'harper-ls', -- spell lint
       }
       require('mason-tool-installer').setup({
         ensure_installed = ensure_installed,

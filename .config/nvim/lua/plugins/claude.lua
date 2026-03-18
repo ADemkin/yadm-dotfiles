@@ -1,3 +1,4 @@
+-- TODO: check https://github.com/folke/sidekick.nvim
 return {
   dependencies = { 'folke/snacks.nvim' },
   'coder/claudecode.nvim',

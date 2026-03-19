@@ -90,5 +90,6 @@ return {
       tabline = {},
       -- extensions = { 'fugitive' },
     })
+    vim.opt.cmdheight = 0
   end,
 }

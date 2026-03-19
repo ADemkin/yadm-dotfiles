@@ -17,7 +17,7 @@ return {
       },
       -- TODO: f"" make f orange
       filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
-      ---@field override? fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
+      ---@type fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
         -- dumps(scheme)
         local white = { fg = scheme.base.white }
@@ -29,7 +29,7 @@ return {
         local red = { fg = scheme.base.red }
         return {
           WinSeparator = { fg = scheme.base.dimmed4 },
-          Todo = orange,
+          Todo = { bg = 'NONE', fg = scheme.base.blue },
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },
           SpellCap = { link = 'SpellBad' },
           SpellLocal = { link = 'SpellBad' },
@@ -70,6 +70,8 @@ return {
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
           ['@lsp.typemod.class.declaration.python'] = green,
+          -- go
+          ['@constant.builtin.go'] = purple,
           -- lua
           ['@comment.documentation.lua'] = white,
           ['@lsp.type.comment.lua'] = {},
@@ -79,6 +81,8 @@ return {
           ['@string.special.path.gitcommit'] = yellow,
           fugitiveSymbolicRef = white,
           fugitiveUntrackedModifier = orange,
+          fugitiveStagedModifier = orange,
+          fugitiveHash = aqua,
           -- yaml
           ['@property.yaml'] = white,
           -- -- Telescope

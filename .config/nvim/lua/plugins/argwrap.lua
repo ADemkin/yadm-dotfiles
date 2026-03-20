@@ -1,23 +1,40 @@
 return {
-  'Wansmer/treesj',
-  event = 'VeryLazy',
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  opts = {
-    use_default_keymaps = false,
-    max_join_length = 512,
+  {
+    'FooSoft/vim-argwrap',
+    cmd = 'ArgWrap',
+    init = function()
+      vim.g.argwrap_tail_comma = 1
+    end,
   },
-  keys = {
-    {
-      '<leader>j',
-      function()
-        require('treesj').toggle()
-      end,
+  {
+    'Wansmer/treesj',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {
+      use_default_keymaps = false,
+      max_join_length = 512,
     },
-    {
-      '<leader>J',
-      function()
-        require('treesj').toggle({ split = { recursive = true } })
-      end,
+    keys = {
+      {
+        '<leader>j',
+        function()
+          if require('treesj.langs')[vim.bo.filetype] then
+            require('treesj').toggle()
+          else
+            vim.cmd('ArgWrap')
+          end
+        end,
+      },
+      {
+        '<leader>J',
+        function()
+          if require('treesj.langs')[vim.bo.filetype] then
+            require('treesj').toggle({ split = { recursive = true } })
+          else
+            vim.cmd('ArgWrap')
+          end
+        end,
+      },
     },
   },
 }

@@ -55,7 +55,7 @@ return {
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,
-          ['@function.method.call'] = aqua,
+          ['@function.method.call'] = white,
           ['@function.builtin'] = aqua,
           ['@variable.parameter'] = white,
           ['@module'] = white,
@@ -70,6 +70,7 @@ return {
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
           ['@lsp.typemod.class.declaration.python'] = green,
+          ['@lsp.type.type.python'] = white,
           -- go
           ['@constant.builtin.go'] = purple,
           -- lua

@@ -27,13 +27,6 @@ return {
       cond = hide_in_width,
     }
 
-    -- local diff = {
-    --   'diff',
-    --   colored = false,
-    --   symbols = { added = '+', modified = '±', removed = '-' }, -- changes diff symbols
-    --   cond = hide_in_width,
-    -- }
-
     require('lualine').setup({
       options = {
         icons_enabled = false,
@@ -48,7 +41,6 @@ return {
         lualine_c = { filename },
         lualine_x = {
           diagnostics,
-          -- diff,
           {
             'filetype',
             cond = hide_in_width,
@@ -88,8 +80,6 @@ return {
         lualine_z = {},
       },
       tabline = {},
-      -- extensions = { 'fugitive' },
     })
-    vim.opt.cmdheight = 0
   end,
 }

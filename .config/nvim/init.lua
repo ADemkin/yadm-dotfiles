@@ -18,31 +18,29 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   -- Appearance
-  require('plugins/lualine'),
   -- require('themes/gruvbox'),
   require('themes/monokai'),
+  require('plugins/lualine'),
   -- require('themes/monokai-night'),
   -- require('plugins/dim'),
 
   -- lightweight plugins
   require('plugins/tpope'),
+  require('plugins/git'),
   require('plugins/tmux'),
+  require('plugins/toggleterm'),
   require('plugins/indentline'),
   require('plugins/argwrap'),
   require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
-  require('plugins/toggleterm'),
   require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/cycle'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
   require('plugins/autopairs'),
-  -- require('plugins/hardtime'),
-  require('plugins/git'),
   require('plugins/align'),
-  -- require('plugins/notes'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -56,7 +54,6 @@ require('lazy').setup({
   require('plugins/breadcrumbs'),
   require('plugins/textobjects'),
   require('plugins/telescope'),
-  -- require('plugins/ai'),
   require('plugins/navigation'),
   require('plugins/neotest'),
   require('plugins/markdown'),
@@ -96,7 +93,7 @@ require('lazy').setup({
     end,
   },
 
-  -- Zed like diff
+  -- Zed like diff ?
   {
     'martindur/zdiff.nvim',
     cmd = 'Zdiff',
@@ -105,12 +102,6 @@ require('lazy').setup({
       { '<leader>zD', '<cmd>Zdiff main<cr>', desc = 'Zdiff (vs main)' },
     },
     opts = {},
-  },
-
-  -- Vim mastery
-  {
-    'scinac/vim-norm-trainer.nvim',
-    lazy = false,
   },
 }, {
   dev = { path = '~/code' },

@@ -82,6 +82,7 @@ return {
           fugitiveSymbolicRef = white,
           fugitiveUntrackedModifier = orange,
           fugitiveStagedModifier = orange,
+          fugitiveUnstagedModifier = orange,
           fugitiveHash = aqua,
           -- yaml
           ['@property.yaml'] = white,

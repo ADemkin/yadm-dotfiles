@@ -28,7 +28,7 @@ return {
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
         return {
-          WinSeparator = { fg = scheme.base.dimmed4 },
+          -- WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = { bg = 'NONE', fg = scheme.base.blue },
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },
           SpellCap = { link = 'SpellBad' },
@@ -49,6 +49,7 @@ return {
           LspReferenceText = { fg = 'NONE' },
           LspReferenceRead = { fg = 'NONE' },
           LspReferenceWrite = { fg = scheme.base.blue },
+          DiagnosticUnnecessary = { link = 'Comment' },
           -- LspReferenceText = { bg = scheme.editor.wordHighlightStrongBackground },
           -- LspReferenceRead = { bg = scheme.editor.wordHighlightStrongBackground },
           -- LspReferenceWrite = { bg = scheme.editor.wordHighlightStrongBackground },
@@ -57,6 +58,8 @@ return {
           ['@constant'] = white,
           ['@function.method.call'] = white,
           ['@function.builtin'] = aqua,
+          ['@function.call'] = white,
+          ['@variable.builtin'] = aqua,
           ['@variable.parameter'] = white,
           ['@module'] = white,
           ['@constant.builtin'] = aqua,
@@ -65,12 +68,21 @@ return {
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
+          -- EXPERIMENT START -- :: GREEN CLASS
+          -- ['@lsp.type.class'] = green,
+          -- ['@lsp.type.enum.python'] = green,
+          -- EXPERIMENT END --
           ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
           ['@lsp.typemod.class.declaration.python'] = green,
-          ['@lsp.type.type.python'] = white,
+          ['@lsp.typemod.method.declaration.python'] = green,
+          -- ['@lsp.type.function.python'] = white,
+          ['@lsp.type.function.python'] = {},
+          ['@lsp.type.method.python'] = {},
+          -- ['@lsp.type.type.python'] = white,
+          ['@lsp.type.type.python'] = {},
           -- go
           ['@constant.builtin.go'] = purple,
           -- lua
@@ -87,9 +99,21 @@ return {
           fugitiveHash = aqua,
           -- yaml
           ['@property.yaml'] = white,
-          -- -- Telescope
+          -- Telescope
           TelescopePromptCounter = { fg = scheme.base.dimmed3 },
           TelescopeBorder = { bg = scheme.editor.background, fg = scheme.tab.unfocusedActiveBorder },
+          -- markdown render
+          RenderMarkdownH1Bg = red,
+          RenderMarkdownH2Bg = aqua,
+          RenderMarkdownH3Bg = green,
+          RenderMarkdownH4Bg = purple,
+          RenderMarkdownH5Bg = white,
+          RenderMarkdownH6Bg = white,
+          -- Outline (matches neotree dark sidebar style)
+          OutlineCurrent = { bg = scheme.list.activeSelectionBackground, bold = true },
+          OutlineGuides = { fg = scheme.editorIndentGuide.background },
+          OutlineFoldMarker = { fg = scheme.sideBar.foreground },
+          OutlineDetails = { fg = scheme.base.dimmed3 },
         }
       end,
     })
@@ -98,41 +122,5 @@ return {
     local s = require('monokai-pro').get_scheme()
     vim.api.nvim_set_hl(0, 'pythonDecoratorAt', { fg = s.base.red })
     vim.api.nvim_set_hl(0, 'pythonDecoratorName', { fg = s.base.green })
-
-    -- local scheme = require('monokai-pro').get_scheme()
-    -- require('lualine').setup({
-    --   options = {
-    --     theme = {
-    --       normal = {
-    --         a = { bg = scheme.base.cyan, fg = scheme.base.black },
-    --         b = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.activeForeground },
-    --         c = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.inactiveForeground },
-    --         -- x = { bg = scheme.tab.activeBackground, fg = scheme.tab.inactiveForeground },
-    --         -- y = { bg = scheme.tab.inactiveBackground, fg = scheme.tab.inactiveForeground },
-    --         z = { bg = scheme.tab.unfocusedActiveBackground, fg = scheme.tab.unfocusedActiveForeground },
-    --       },
-    --       insert = {
-    --         a = { bg = scheme.base.green, fg = scheme.base.black },
-    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.green },
-    --       },
-    --       command = {
-    --         a = { bg = scheme.base.yellow, fg = scheme.base.black },
-    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.yellow },
-    --       },
-    --       visual = {
-    --         a = { bg = scheme.base.magenta, fg = scheme.base.black },
-    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.magenta },
-    --       },
-    --       replace = {
-    --         a = { bg = scheme.base.red, fg = scheme.base.black },
-    --         b = { bg = scheme.base.dimmed5, fg = scheme.base.red },
-    --       },
-    --       inactive = {
-    --         a = { bg = scheme.base.black, fg = scheme.base.yellow },
-    --         b = { bg = scheme.base.black, fg = scheme.base.black },
-    --       },
-    --     },
-    --   },
-    -- })
   end,
 }

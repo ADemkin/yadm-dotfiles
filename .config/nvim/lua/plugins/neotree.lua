@@ -157,7 +157,7 @@ return {
 
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', 'tf', ':Neotree reveal<CR>', opts)
-    vim.keymap.set('n', 'tt', ':Neotree toggle<CR>', opts)
+    -- vim.keymap.set('n', 'tt', ':Neotree toggle<CR>', opts)
     vim.keymap.set('n', '<C-s>', ':Neotree toggle<CR>', opts)
 
     -- vim.api.nvim_create_autocmd('VimEnter', {

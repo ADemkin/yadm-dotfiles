@@ -7,5 +7,7 @@ return {
   },
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
-  opts = {},
+  opts = {
+    sign = { enabled = false },
+  },
 }

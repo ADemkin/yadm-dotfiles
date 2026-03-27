@@ -10,9 +10,7 @@ return {
     vim.g.mw_no_mappings = 1
   end,
   config = function()
-    vim.cmd([[
-      nnoremap <Leader>m <Plug>MarkSet
-    ]])
+    vim.keymap.set('n', '<Leader>m', '<Plug>MarkSet')
     vim.keymap.set('n', '<C-c>', ':nohl<CR>:MarkClear<CR>', { silent = true })
   end,
 }

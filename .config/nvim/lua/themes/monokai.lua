@@ -28,7 +28,7 @@ return {
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
         return {
-          -- WinSeparator = { fg = scheme.base.dimmed4 },
+          WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = { bg = 'NONE', fg = scheme.base.blue },
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },
           SpellCap = { link = 'SpellBad' },
@@ -63,7 +63,8 @@ return {
           ['@variable.parameter'] = white,
           ['@module'] = white,
           ['@constant.builtin'] = aqua,
-          ['@type'] = white,
+          -- ['@type'] = white,
+          ['@type'] = green,
           ['@punctuation.special'] = red,
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
@@ -72,17 +73,24 @@ return {
           -- ['@lsp.type.class'] = green,
           -- ['@lsp.type.enum.python'] = green,
           -- EXPERIMENT END --
+          pythonDecoratorAt = red,
+          -- pythonDecoratorName = green,
           ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
           ['@lsp.typemod.parameter.parameter.python'] = orange,
           ['@lsp.typemod.class.declaration.python'] = green,
           ['@lsp.typemod.method.declaration.python'] = green,
+          ['@lsp.typemod.enum.declaration.python'] = green,
+          ['@lsp.typemod.property.declaration.python'] = green,
           -- ['@lsp.type.function.python'] = white,
           ['@lsp.type.function.python'] = {},
           ['@lsp.type.method.python'] = {},
-          -- ['@lsp.type.type.python'] = white,
-          ['@lsp.type.type.python'] = {},
+          ['@lsp.type.enum.python'] = white,
+          ['@lsp.type.type.python'] = white,
+          -- ['@lsp.type.type.python'] = {},
+          ['@lsp.type.class.python'] = white,
+          -- ['@lsp.type.class.python'] = {},
           -- go
           ['@constant.builtin.go'] = purple,
           -- lua
@@ -118,9 +126,5 @@ return {
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
-
-    local s = require('monokai-pro').get_scheme()
-    vim.api.nvim_set_hl(0, 'pythonDecoratorAt', { fg = s.base.red })
-    vim.api.nvim_set_hl(0, 'pythonDecoratorName', { fg = s.base.green })
   end,
 }

@@ -9,10 +9,10 @@ return {
       outline_window = {
         position = 'left',
         width = 15,
-        auto_width = {
-          enabled = true,
-          max_width = 40,
-        },
+        -- auto_width = {
+        --   enabled = true,
+        --   max_width = 40,
+        -- },
         auto_close = true,
         auto_jump = true,
       },

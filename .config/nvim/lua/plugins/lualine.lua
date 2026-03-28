@@ -32,7 +32,7 @@ return {
         icons_enabled = false,
         section_separators = { left = '', right = '' },
         component_separators = { left = '|', right = '|' },
-        disabled_filetypes = { 'alpha', 'neo-tree', 'dbui' },
+        disabled_filetypes = { 'alpha', 'neo-tree', 'dbui', 'nofile', 'neotest-summary', 'Outline' },
         always_divide_middle = true,
       },
       sections = {

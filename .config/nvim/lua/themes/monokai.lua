@@ -9,9 +9,9 @@ return {
   priority = 1000,
   config = function()
     require('monokai-pro').setup({
-      background_clear = {
-        'float_win',
-      },
+      -- background_clear = {
+      --   'float_win',
+      -- },
       disabled_plugins = {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },

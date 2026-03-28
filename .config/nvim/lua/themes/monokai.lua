@@ -42,17 +42,10 @@ return {
           Search = { fg = scheme.editor.background, bg = scheme.base.yellow },
           IncSearch = { fg = scheme.editor.background, bg = scheme.base.yellow },
           CurSearch = { fg = scheme.editor.background, bg = scheme.base.blue },
-          -- LspReferenceText = { reverse = true },
-          -- LspReferenceRead = { reverse = true },
-          -- LspReferenceWrite = { reverse = true },  -- объявление
-          -- LspReferenceTarget = { reverse = true },  -- word under cursor
           LspReferenceText = { fg = 'NONE' },
           LspReferenceRead = { fg = 'NONE' },
           LspReferenceWrite = { fg = scheme.base.blue },
           DiagnosticUnnecessary = { link = 'Comment' },
-          -- LspReferenceText = { bg = scheme.editor.wordHighlightStrongBackground },
-          -- LspReferenceRead = { bg = scheme.editor.wordHighlightStrongBackground },
-          -- LspReferenceWrite = { bg = scheme.editor.wordHighlightStrongBackground },
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,
@@ -60,7 +53,8 @@ return {
           ['@function.builtin'] = aqua,
           ['@function.call'] = white,
           ['@variable.builtin'] = aqua,
-          ['@variable.parameter'] = white,
+          -- ['@variable.parameter'] = white,
+          -- ['@variable.parameter'] = { fg = scheme.base.blue, force = true },
           ['@module'] = white,
           ['@constant.builtin'] = aqua,
           -- ['@type'] = white,
@@ -69,12 +63,7 @@ return {
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
-          -- EXPERIMENT START -- :: GREEN CLASS
-          -- ['@lsp.type.class'] = green,
-          -- ['@lsp.type.enum.python'] = green,
-          -- EXPERIMENT END --
           pythonDecoratorAt = red,
-          -- pythonDecoratorName = green,
           ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,
@@ -83,7 +72,6 @@ return {
           ['@lsp.typemod.method.declaration.python'] = green,
           ['@lsp.typemod.enum.declaration.python'] = green,
           ['@lsp.typemod.property.declaration.python'] = green,
-          -- ['@lsp.type.function.python'] = white,
           ['@lsp.type.function.python'] = {},
           ['@lsp.type.method.python'] = {},
           ['@lsp.type.enum.python'] = white,
@@ -126,5 +114,35 @@ return {
       end,
     })
     vim.cmd.colorscheme('monokai-pro')
+
+    -- custom highlight for @
+    local decorator_ns = vim.api.nvim_create_namespace('python_decorator_hl')
+    vim.api.nvim_create_autocmd('LspTokenUpdate', {
+      desc = 'Properly highlight python @decorator',
+      pattern = '*.py',
+      callback = function(event)
+        local token = event.data.token
+        if token.type ~= 'decorator' then
+          return
+        end
+        local char = vim.api.nvim_buf_get_text(event.buf, token.line, token.start_col, token.line, token.start_col + 1, {})[1]
+        if char == '@' then
+          vim.api.nvim_buf_set_extmark(event.buf, decorator_ns, token.line, token.start_col, {
+            end_col = token.end_col,
+            hl_group = 'pythonDecoratorAt',
+            priority = 200,
+            strict = false,
+          })
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('LspDetach', {
+      desc = 'Clear python decorator highlights on LSP detach',
+      pattern = '*.py',
+      callback = function(ev)
+        vim.api.nvim_buf_clear_namespace(ev.buf, decorator_ns, 0, -1)
+      end,
+    })
   end,
 }

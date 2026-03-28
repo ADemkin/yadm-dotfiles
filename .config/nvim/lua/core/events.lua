@@ -57,33 +57,6 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end,
 })
 
-local decorator_ns = vim.api.nvim_create_namespace('python_decorator_hl')
-vim.api.nvim_create_autocmd('LspTokenUpdate', {
-  desc = 'Properly highlight python @decorator',
-  pattern = '*.py',
-  callback = function(event)
-    local token = event.data.token
-    if token.type ~= 'decorator' then
-      return
-    end
-    local char = vim.api.nvim_buf_get_text(event.buf, token.line, token.start_col, token.line, token.start_col + 1, {})[1]
-    vim.api.nvim_buf_set_extmark(event.buf, decorator_ns, token.line, token.start_col, {
-      end_col = token.end_col,
-      hl_group = char == '@' and 'pythonDecoratorAt' or 'pythonDecoratorName',
-      priority = 200,
-      strict = false,
-    })
-  end,
-})
-
-vim.api.nvim_create_autocmd('LspDetach', {
-  desc = 'Clear python decorator highlights on LSP detach',
-  pattern = '*.py',
-  callback = function(ev)
-    vim.api.nvim_buf_clear_namespace(ev.buf, decorator_ns, 0, -1)
-  end,
-})
-
 vim.api.nvim_create_autocmd('DirChanged', {
   desc = 'Auto activate venv on cd',
   pattern = '*',

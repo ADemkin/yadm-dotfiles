@@ -49,6 +49,7 @@ return {
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,
+          -- ['@constant'] = purple,  -- maybe
           ['@function.method.call'] = white,
           ['@function.builtin'] = aqua,
           ['@function.call'] = white,
@@ -109,6 +110,8 @@ return {
           OutlineGuides = { fg = scheme.editorIndentGuide.background },
           OutlineFoldMarker = { fg = scheme.sideBar.foreground },
           OutlineDetails = { fg = scheme.base.dimmed3 },
+          OutlineSidebarBg = { fg = scheme.sideBar.foreground, bg = scheme.sideBar.background },
+          OutlineSidebarEob = { fg = scheme.sideBar.background, bg = scheme.sideBar.background },
         }
       end,
     })

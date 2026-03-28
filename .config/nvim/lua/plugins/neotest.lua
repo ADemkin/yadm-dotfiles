@@ -27,9 +27,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'neotest-summary',
       callback = function()
-        local bg = require('monokai-pro').get_scheme().sideBar.background
-        vim.api.nvim_set_hl(0, 'NeotestSummaryBg', { fg = bg, bg = bg })
-        vim.wo.winhighlight = 'Normal:NeotestSummaryBg,NormalNC:NeotestSummaryBg,EndOfBuffer:NeotestSummaryBg'
+        vim.wo.winhighlight = 'Normal:NeotestSummaryBg,NormalNC:NeotestSummaryBg,EndOfBuffer:NeotestSummaryBg,WinSeparator:NeoTreeWinSeparator'
       end,
     })
 

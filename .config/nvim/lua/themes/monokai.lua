@@ -112,6 +112,8 @@ return {
           OutlineDetails = { fg = scheme.base.dimmed3 },
           OutlineSidebarBg = { fg = scheme.sideBar.foreground, bg = scheme.sideBar.background },
           OutlineSidebarEob = { fg = scheme.sideBar.background, bg = scheme.sideBar.background },
+          -- Neotest
+          NeotestSummaryBg = { fg = scheme.sideBar.background, bg = scheme.sideBar.background },
         }
       end,
     })

@@ -30,11 +30,10 @@ require('lazy').setup({
   require('plugins/tmux'),
   require('plugins/toggleterm'),
   require('plugins/indentline'),
-  require('plugins/argwrap'),
   require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
-  require('plugins/colors'),
+  -- require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/cycle'),
   require('plugins/quickfix'),
@@ -48,11 +47,14 @@ require('lazy').setup({
   require('plugins/lint'),
   require('plugins/autocomplete'),
 
+  -- treesitter
+  require('plugins/treesitter'),
+  require('plugins/textobjects'),
+  require('plugins/argwrap'),
+
   -- Heavyweight plugins
   require('plugins/neotree'),
-  require('plugins/treesitter'),
   require('plugins/breadcrumbs'),
-  require('plugins/textobjects'),
   require('plugins/telescope'),
   require('plugins/navigation'),
   require('plugins/neotest'),

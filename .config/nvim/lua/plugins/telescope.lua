@@ -49,6 +49,7 @@ return {
 
     require('telescope').setup({
       defaults = {
+        preview = { treesitter = false }, -- wait until nvim v0.12 treesitter compatible
         layout_strategy = 'horizontal_fused',
         mappings = {
           i = {

@@ -72,6 +72,7 @@ return {
           ['@lsp.typemod.method.declaration.python'] = green,
           ['@lsp.typemod.enum.declaration.python'] = green,
           ['@lsp.typemod.property.declaration.python'] = green,
+          ['@attribute.builtin.python'] = {},
           ['@lsp.type.function.python'] = {},
           ['@lsp.type.method.python'] = {},
           ['@lsp.type.enum.python'] = white,
@@ -81,6 +82,7 @@ return {
           -- ['@lsp.type.class.python'] = {},
           -- go
           ['@constant.builtin.go'] = purple,
+          ['@keyword.function.go'] = aqua,
           -- lua
           ['@comment.documentation.lua'] = white,
           ['@lsp.type.comment.lua'] = {},

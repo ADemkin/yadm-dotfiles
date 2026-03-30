@@ -31,10 +31,9 @@ return {
           map('gd', function()
             require('telescope.builtin').lsp_definitions({ show_line = false })
           end)
-          map('gD', function(opts)
+          map('gD', function()
             vim.cmd('vsplit')
-            opts.show_line = false
-            require('telescope.builtin').lsp_definitions(opts)
+            require('telescope.builtin').lsp_definitions({ show_line = false })
           end)
           map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
           -- map('gu', require('telescope.builtin').lsp_references)
@@ -147,7 +146,7 @@ return {
 
       local ensure_installed = {
         'lua_ls',
-        'basedpyright',
+        -- 'basedpyright',
         'stylua',
         'yamllint',
         'checkmake',

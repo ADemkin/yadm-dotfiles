@@ -73,7 +73,8 @@ return {
                   border = 'single',
                   header = '',
                   prefix = '',
-                  source = true,
+                  -- source = true,
+                  source = 'if_many',
                 })
               end
             end,
@@ -132,15 +133,15 @@ return {
           severity = vim.diagnostic.severity.ERROR,
           prefix = '●',
           spacing = 2,
-          source = true,
-          -- source = 'if_many',
+          -- source = true,
+          source = 'if_many',
         },
         signs = false,
       })
 
       local ensure_installed = {
         'lua_ls',
-        -- 'basedpyright',
+        'basedpyright',
         'stylua',
         'yamllint',
         'checkmake',

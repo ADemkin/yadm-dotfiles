@@ -19,6 +19,33 @@ local function get_ruff_monorepo_args()
   return {}
 end
 
+local function get_ruff_monorepo_args_by_bufnr(bufnr)
+  bufnr = bufnr or 0
+
+  local root = vim.fs.root(bufnr, {
+    'pyproject.toml',
+    'ruff.toml',
+    '.git',
+  })
+
+  if not root or not root:find('moderation%-detectors') then
+    return {}
+  end
+
+  local candidates = {
+    root .. '/../moderation-tools/ruff.toml',
+    root .. '/moderation-tools/ruff.toml',
+  }
+
+  for _, path in ipairs(candidates) do
+    if vim.uv.fs_stat(path) then
+      return { '--config', path }
+    end
+  end
+
+  return {}
+end
+
 return {
   {
     'stevearc/conform.nvim',
@@ -63,12 +90,14 @@ return {
         -- allow ruff to use custom monorepo config
         ruff_format = {
           append_args = function(self, ctx)
-            return get_ruff_monorepo_args()
+            -- return get_ruff_monorepo_args()
+            return get_ruff_monorepo_args_by_bufnr(ctx.bufnr)
           end,
         },
         ruff_organize_imports = {
           append_args = function(self, ctx)
-            return get_ruff_monorepo_args()
+            -- return get_ruff_monorepo_args()
+            return get_ruff_monorepo_args_by_bufnr(ctx.bufnr)
           end,
         },
       },

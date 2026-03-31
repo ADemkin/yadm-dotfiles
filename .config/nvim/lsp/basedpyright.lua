@@ -12,7 +12,7 @@ return {
   -- https://docs.basedpyright.com/latest/configuration/language-server-settings/
   on_new_config = on_new_config,
   handlers = {
-    ['textDocument/publishDiagnostics'] = function(...) end,
+    [vim.lsp.protocol.Methods.textDocument_publishDiagnostics] = function(...) end,
   },
   settings = {
     basedpyright = {

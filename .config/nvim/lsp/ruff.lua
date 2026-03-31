@@ -1,5 +1,5 @@
 return {
   handlers = {
-    ['textDocument/publishDiagnostics'] = function(...) end,
+    [vim.lsp.protocol.Methods.textDocument_publishDiagnostics] = function(...) end,
   },
 }

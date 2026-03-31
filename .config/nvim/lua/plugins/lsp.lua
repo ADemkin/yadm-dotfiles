@@ -89,8 +89,13 @@ return {
             end
           end)
 
+          local filter = { bufnr = event.buf }
+          local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
+          if not is_enabled then
+            vim.lsp.inlay_hint.enable(true, filter)
+          end
+
           vim.keymap.set('n', 'gtt', function()
-            local filter = { bufnr = event.buf }
             local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
             vim.lsp.inlay_hint.enable(not is_enabled, filter)
           end)

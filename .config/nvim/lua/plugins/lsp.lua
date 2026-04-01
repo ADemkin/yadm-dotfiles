@@ -27,21 +27,22 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf })
           end
 
+          local telescope = require('telescope.builtin')
           map('gr', vim.lsp.buf.rename)
           map('gd', function()
-            require('telescope.builtin').lsp_definitions({ show_line = false })
+            telescope.lsp_definitions({ show_line = false })
           end)
           map('gD', function()
             vim.cmd('vsplit')
-            require('telescope.builtin').lsp_definitions({ show_line = false })
+            telescope.lsp_definitions({ show_line = false })
           end)
           map('ga', vim.lsp.buf.code_action, { 'n', 'x' })
           -- map('gu', require('telescope.builtin').lsp_references)
           map('gu', function()
-            require('telescope.builtin').lsp_references({ show_line = false })
+            telescope.lsp_references({ show_line = false })
           end)
           map('gi', function()
-            require('telescope.builtin').lsp_implementations({ show_line = false })
+            telescope.lsp_implementations({ show_line = false })
           end)
 
           vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
@@ -91,10 +92,10 @@ return {
           end)
 
           local filter = { bufnr = event.buf }
-          local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
-          if not is_enabled then
-            vim.lsp.inlay_hint.enable(true, filter)
-          end
+          -- local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
+          -- if not is_enabled then
+          --   vim.lsp.inlay_hint.enable(true, filter)
+          -- end
 
           vim.keymap.set('n', 'gtt', function()
             local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)

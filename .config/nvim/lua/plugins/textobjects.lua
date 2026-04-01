@@ -1,83 +1,45 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    branch = 'main',
     event = 'VeryLazy',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('nvim-treesitter.config').setup({
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-              [']f'] = '@function.outer',
-              [']c'] = '@class.outer',
-              [']a'] = '@parameter.inner',
-            },
-            goto_next_end = {
-              [']F'] = '@function.outer',
-              [']C'] = '@class.outer',
-              [']A'] = '@parameter.outer',
-            },
-            goto_previous_start = {
-              ['[f'] = '@function.outer',
-              ['[c'] = '@class.outer',
-              ['[a'] = '@parameter.inner',
-            },
-            goto_previous_end = {
-              ['[F'] = '@function.outer',
-              ['[C'] = '@class.outer',
-              ['[A'] = '@parameter.outer',
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['}a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['{a'] = '@parameter.inner',
-            },
-          },
-          lsp_interop = {
-            enable = true,
-            border = 'single',
-            floating_preview_opts = {},
-            peek_definition_code = {
-              ['gp'] = '@function.outer',
-              ['gP'] = '@class.outer',
-            },
-          },
+      require('nvim-treesitter-textobjects').setup({
+        select = {
+          lookahead = true,
         },
       })
+
+      local select = require('nvim-treesitter-textobjects.select')
+      local swap = require('nvim-treesitter-textobjects.swap')
+      vim.keymap.set({ 'x', 'o' }, 'af', function()
+        select.select_textobject('@function.outer')
+      end)
+      vim.keymap.set({ 'x', 'o' }, 'if', function()
+        select.select_textobject('@function.inner')
+      end)
+      vim.keymap.set({ 'x', 'o' }, 'ac', function()
+        select.select_textobject('@class.outer')
+      end)
+      vim.keymap.set({ 'x', 'o' }, 'ic', function()
+        select.select_textobject('@class.inner')
+      end)
+      vim.keymap.set({ 'x', 'o' }, 'aa', function()
+        select.select_textobject('@parameter.outer')
+      end)
+      vim.keymap.set({ 'x', 'o' }, 'ia', function()
+        select.select_textobject('@parameter.inner')
+      end)
+      vim.keymap.set('n', '}a', function()
+        swap.swap_next('@parameter.inner')
+      end)
+      vim.keymap.set('n', '{a', function()
+        swap.swap_previous('@parameter.inner')
+      end)
     end,
   },
-  {
-    -- supply additional text objects:
-    -- * `b` for brackets
-    -- * `q` for quotes
-    -- * `a` for arguments
-    'echasnovski/mini.ai',
-    event = 'VeryLazy',
-    version = '*',
-    opts = {
-      custom_textobjects = {
-        f = false,
-      },
-    },
-  },
 }
+

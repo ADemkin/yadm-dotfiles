@@ -69,9 +69,6 @@ return {
   branch = 'main',
   lazy = false,
   build = ':TSUpdate',
-  -- dependencies = {
-  --   'nvim-treesitter/nvim-treesitter-context',
-  -- },
   config = function()
     -- Auto-install parsers and enable treesitter highlight/indent per filetype.
     -- See: https://github.com/nvim-treesitter/nvim-treesitter/discussions/7927

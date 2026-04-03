@@ -6,6 +6,10 @@ return {
     lazy = true,
     cmd = { 'Outline', 'OutlineOpen' },
     opts = {
+      symbol_folding = {
+        markers = { '', '' },
+      },
+
       outline_window = {
         position = 'left',
         width = 15,

@@ -15,5 +15,3 @@ vim.cmd([[
   iabbrev <expr> ifname v:lua.NoCompleteAbbrev("if __name__ == '__main__':\<CR>")
   iabbrev <expr> adef v:lua.NoCompleteAbbrev("async def ")
 ]])
-
-vim.treesitter.start()

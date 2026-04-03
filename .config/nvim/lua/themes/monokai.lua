@@ -38,6 +38,8 @@ return {
             underline = false,
             fg = scheme.base.red,
           },
+          Statement = aqua,
+          Structure = green,
           CursorLineNr = orange,
           Search = { fg = scheme.editor.background, bg = scheme.base.yellow },
           IncSearch = { fg = scheme.editor.background, bg = scheme.base.yellow },
@@ -65,6 +67,7 @@ return {
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
+          pythonBuiltin = aqua,
           ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,

@@ -1,3 +1,6 @@
+-- First of all, learn the defaults:
+-- https://github.com/neovim/neovim/blob/master/runtime/lua/vim/_core/defaults.lua#L452-L478
+
 -- Set leader key to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '

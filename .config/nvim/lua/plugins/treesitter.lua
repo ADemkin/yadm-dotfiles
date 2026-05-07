@@ -58,7 +58,9 @@ local function ensure_installed(ft)
       vim.g.ts_available = available
     end
     if vim.tbl_contains(available, lang) then
-      require('nvim-treesitter').install(lang):wait(30 * 1000)
+      pcall(function()
+        require('nvim-treesitter').install(lang):wait(30 * 1000)
+      end)
     end
   end
   return lang

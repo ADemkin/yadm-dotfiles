@@ -13,6 +13,8 @@ export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(format_git_branch)
 
 # hook that runs on cd command
 chpwd() {
+    local dir_name=$(basename $PWD)
+    tmux rename-window $dir_name
     for d in venv .venv; do
         if [[ -f "$d/bin/activate" ]]; then
             . "$d/bin/activate"
@@ -248,6 +250,7 @@ alias p="poetry"
 alias "%ml"="cd ~/code/moscowliuda-webinar-utils && tmux rename-window 'moscowliuda'"
 alias "%mb"="cd ~/code/moscowliuda-backend && tmux rename-window 'moscowliuda-backend'"
 alias "%md"="cd ~/code/moderation-detectors/ && tmux rename-window 'detectors'"
+alias "%mt"="cd ~/code/moderation-tritons/ && tmux rename-window 'tritons'"
 alias "%maas"="cd ~/code/maas-moderation/ && tmux rename-window 'maas'"
 alias "%mig"="cd ~/code/moderation-input-gateway/ && tmux rename-window 'input-gateway'"
 alias "%mid"="cd ~/code/moderation-io-dump/ && tmux rename-window 'io-dump'"
@@ -264,6 +267,8 @@ export FZF_DEFAULT_OPTS="--no-mouse"
 if [ -f ~/.secrets ]; then
     source ~/.secrets
 fi
+
+alias timer="~/code/timer/timer"
 
 # completions for brew installed apps
 # installed with docker, etc...
@@ -286,8 +291,15 @@ alias tshstage="tsh17 kube login k8s.tns-stage-el && kubectl config set-context 
 alias tshlogin="tsh17 login --auth=passwordless --user=demkin.anton"
 alias tshlogout="tsh17 logout --user=demkin.anton"
 
+alias tshaxc="tsh17 kube login k8s.antifraud-xc && kubectl config set-context --current --namespace=behavior-analysis"
+alias tshrxs="tsh17 kube login k8s.reputation-xs && kubectl config set-context --current --namespace=behavior-analysis"
+alias tshael="tsh17 kube login k8s.antifraud-el && kubectl config set-context --current --namespace=behavior-analysis"
+
 podlogs() {
     kubectl -n moderation logs $@
 }
 
 
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/antondemkin/.lmstudio/bin"
+# End of LM Studio CLI section

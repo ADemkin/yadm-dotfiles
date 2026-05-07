@@ -44,9 +44,12 @@ return {
           Search = { fg = scheme.editor.background, bg = scheme.base.yellow },
           IncSearch = { fg = scheme.editor.background, bg = scheme.base.yellow },
           CurSearch = { fg = scheme.editor.background, bg = scheme.base.blue },
-          LspReferenceText = { fg = 'NONE' },
-          LspReferenceRead = { fg = 'NONE' },
-          LspReferenceWrite = { fg = scheme.base.blue },
+          -- dim=true is nice, but does not fit
+          -- standout=true is very much contrast. Ok for python, but not ok for Go
+          -- underline=true is nice
+          LspReferenceText = {fg = 'NONE'},
+          LspReferenceRead = {fg = 'NONE'},
+          LspReferenceWrite = {fg = scheme.base.blue},
           LspInlayHint = { bg = 'NONE' },
           DiagnosticUnnecessary = { link = 'Comment' },
           ['@punctuation.bracket'] = white,

@@ -39,7 +39,20 @@ return {
       vim.keymap.set('n', '{a', function()
         swap.swap_previous('@parameter.inner')
       end)
+
+      vim.keymap.set({ 'n', 'x', 'o' }, ']f', function()
+        move.goto_next_end('@function.outer', 'textobjects')
+      end)
+      vim.keymap.set({ 'n', 'x', 'o' }, '][', function()
+        move.goto_next_end('@class.outer', 'textobjects')
+      end)
+
+      vim.keymap.set({ 'n', 'x', 'o' }, '[f', function()
+        move.goto_previous_start('@function.outer', 'textobjects')
+      end)
+      vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
+        move.goto_previous_start('@class.outer', 'textobjects')
+      end)
     end,
   },
 }
-

@@ -27,7 +27,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'neotest-summary',
       callback = function()
-        vim.wo.winhighlight = 'Normal:NeotestSummaryBg,NormalNC:NeotestSummaryBg,EndOfBuffer:NeotestSummaryBg,WinSeparator:NeoTreeWinSeparator'
+        vim.wo.winhighlight = 'Normal:NeotestSummaryBg,NormalNC:NeotestSummaryBg,EndOfBuffer:NeotestSummaryBg'
       end,
     })
 

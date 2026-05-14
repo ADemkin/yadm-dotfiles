@@ -2,8 +2,6 @@
 program = "/bin/zsh"
 args = ["-l", "-c", "tmux attach -t 0 || tmux new -s 0"]
 
-[font]
-size = 14.0
 
 [cursor]
 style = "Block"
@@ -43,18 +41,22 @@ startup_mode = "Fullscreen"
 x = 2
 y = 0
 
+[font]
+size = 14.0
+
 [general]
 live_config_reload = true
-
 import = [
+    "~/.config/alacritty/keyboard.toml",
+
     "~/.config/alacritty/monokai.toml",
     # "~/.config/alacritty/gruvbox.toml",
-    "~/.config/alacritty/victor-mono.toml",
-    "~/.config/alacritty/keyboard.toml",
+
+    # "~/.config/alacritty/victor-mono.toml", "~/.config/alacritty/cascadia-mono.toml",  # good
+    "~/.config/alacritty/jetbrains-mono.toml",  # softer than input
+
 ]
 
 [debug]
 log_level = "error"
 print_events = true
-
-[terminal]

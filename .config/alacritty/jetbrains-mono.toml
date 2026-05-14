@@ -1,0 +1,33 @@
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+# style = "SemiBold"
+# style = "Regular"
+style = "ExtraLight"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+# style = "Medium"
+# style = "Regular"
+style = "ExtraLight"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "ExtraLight"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+# style = "Bold"
+# style = "SemiBold"
+# style = "Medium"
+# style = "Regular"
+# style = "Light"
+style = "ExtraLight"
+
+[font.offset]
+x = 0
+y = 0
+

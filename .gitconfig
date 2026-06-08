@@ -3,7 +3,10 @@
     email = "demkin.anton@rwb.ru"
 [alias]
     ch = checkout
+    co = checkout
+    com = checkout origin/main
     chb = checkout -b
+    cob = checkout -b
     st = status
     graph = log --graph --date-order --pretty=format:\"%h %ad %Cgreen%d%Creset %s [%an]\" --date=short --all
     retag = tag -f
@@ -50,3 +53,7 @@
     hunk-header-decoration-style = yellow ol
     hunk-header-file-style = red
     hunk-header-style = file line-number
+
+; wb
+[includeIf "hasconfig:remote.*.url:git@*.wildberries.ru*/**"]
+    path = .gitconfig-wb

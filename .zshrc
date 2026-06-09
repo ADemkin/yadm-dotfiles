@@ -1,15 +1,43 @@
-# # Prompt
+# Prompt
 # # Find and set branch name var if in git repository.
 function format_git_branch() {
     _branch=$(git br)
     [[ $_branch != "" ]] && echo "%F{green}>%f $_branch" || echo ""
 }
 
+function git_prompt_info {
+  local ref=$(=git symbolic-ref HEAD 2> /dev/null)
+  local gitst="$(=git status 2> /dev/null)"
+
+  if [[ -f .git/MERGE_HEAD ]]; then
+    if [[ ${gitst} =~ "unmerged" ]]; then
+      gitstatus=" %{$fg[red]%}unmerged%{$reset_color%}"
+    else
+      gitstatus=" %{$fg[green]%}merged%{$reset_color%}"
+    fi
+  elif [[ ${gitst} =~ "Changes to be committed" ]]; then
+    gitstatus=" %{$fg[blue]%}!%{$reset_color%}"
+  elif [[ ${gitst} =~ "use \"git add" ]]; then
+    gitstatus=" %{$fg[red]%}!%{$reset_color%}"
+  elif [[ -n `git checkout HEAD 2> /dev/null | grep ahead` ]]; then
+    gitstatus=" %{$fg[yellow]%}*%{$reset_color%}"
+  else
+    gitstatus=''
+  fi
+
+  if [[ -n $ref ]]; then
+    echo "%{$fg_bold[green]%}/${ref#refs/heads/}%{$reset_color%}$gitstatus"
+  fi
+}
+# PROMPT='%~%<< $(git_prompt_info)${PR_BOLD_WHITE}>%{${reset_color}%} '
+#
 # Config for prompt. PS1 synonym.
 # autoload -U colors && colors
 setopt prompt_subst
 export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(format_git_branch)
 %F{red}%#%f '
+# export PROMPT='%n%F{red}@%f%m%F{red}:%f%? %* %~ $(git_prompt_info)
+# %F{red}%#%f '
 
 # hook that runs on cd command
 chpwd() {
@@ -35,6 +63,7 @@ setopt GLOB_DOTS
 setopt EXTENDED_GLOB  # use ~ to ignore, ex: **.py*~*.pyc will ignore .pyc
 setopt NO_NOMATCH
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
+setopt HIST_FIND_NO_DUPS
 
 # EMACS mode
 bindkey -e
@@ -284,6 +313,7 @@ export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 
 # wb teleport
 alias tsh17='TELEPORT_HOME=${HOME}/.tsh17 TELEPORT_PROXY=tp.rwb.ru:443 TELEPORT_CLUSTER=teleport-rwb /Applications/tsh.app/Contents/MacOS/tsh'
+alias tshls='tsh17 kube ls'
 alias tshdm="tsh17 kube login k8s.moderation-dm && kubectl config set-context --current --namespace=moderation"
 alias tshel="tsh17 kube login k8s.moderation-el && kubectl config set-context --current --namespace=moderation"
 alias tshxs="tsh17 kube login k8s.moderation-xs && kubectl config set-context --current --namespace=moderation"

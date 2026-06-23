@@ -70,7 +70,9 @@ return {
           ['@punctuation.delimiter'] = white,
           ['@string.documentation'] = yellow,
           -- python
-          pythonBuiltin = aqua,
+          ['@type.python'] = white,
+          ['@type.definition.python'] = green,
+          ['@variable.builtin.python'] = orange,
           ['@lsp.type.decorator.python'] = {},
           ['@lsp.typemod.selfParameter.parameter.python'] = orange,
           ['@lsp.typemod.clsParameter.parameter.python'] = orange,

@@ -2,6 +2,9 @@ vim.api.nvim_create_autocmd('DirChanged', {
   desc = 'Reload neotest',
   pattern = '*',
   callback = function()
+    if not package.loaded['neotest'] then
+      return
+    end
     require('neotest').output_panel.close()
     require('neotest').summary.close()
     require('lazy').reload({ plugins = {

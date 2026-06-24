@@ -16,7 +16,6 @@ return {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },
       -- TODO: f"" make f orange
-      filter = 'classic', -- classic | octagon | pro | machine | ristretto | spectrum
       ---@type fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
         -- dumps(scheme)
@@ -128,6 +127,6 @@ return {
         }
       end,
     })
-    vim.cmd.colorscheme('monokai-pro')
+    vim.cmd.colorscheme('monokai-pro-classic')
   end,
 }

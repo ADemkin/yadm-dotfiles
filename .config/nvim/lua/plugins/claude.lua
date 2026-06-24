@@ -1,15 +1,19 @@
 -- TODO: check https://github.com/folke/sidekick.nvim
+
 return {
-  dependencies = { 'folke/snacks.nvim' },
   'coder/claudecode.nvim',
   opts = {
     terminal = {
-      split_width_percentage = 0.5,
+      -- split_width_percentage = 0.5,
+      split_width_percentage = nil,
+      diff_split_width_percentage = 0.2,
+      provider = 'native',
     },
   },
   keys = {
     { '<leader>a', nil, desc = 'AI/Claude Code' },
     { '<leader>ac', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
+    { '<M-a>', '<cmd>ClaudeCode<cr>', mode = { 'n', 't' }, desc = 'Toggle Claude' },
     { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
     { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
     { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },

@@ -44,6 +44,9 @@ local ENSURE_INSTALLED_FTS = {
   'tsx',
   'css',
   'html',
+  'htmldjango',
+  'jinja',
+  'jinja_inline',
   'comment',
 }
 
@@ -77,6 +80,10 @@ return {
     for _, ft in ipairs(ENSURE_INSTALLED_FTS) do
       pcall(ensure_installed, ft)
     end
+
+    -- htmldjango != jinja, but gives good html highlighting.
+    -- this allows to inject jinja into htmldjango for missing parts
+    vim.treesitter.language.register('jinja', 'htmldjango')
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },

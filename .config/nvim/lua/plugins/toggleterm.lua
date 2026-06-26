@@ -32,8 +32,7 @@ return {
         end,
       })
 
-      vim.keymap.set('n', '<M-y>', function()
-        local cur = vim.api.nvim_get_current_win()
+      vim.keymap.set({ 'n', 't' }, '<M-y>', function()
         local term = require('toggleterm.terminal').get(1)
         if not term then
           -- Terminal not created yet → create horizontal by default
@@ -42,8 +41,7 @@ return {
         end
         local new_direction = (term.direction == 'horizontal') and 'vertical' or 'horizontal'
         term:close()
-        term:toggle(nil, new_direction)
-        vim.api.nvim_set_current_win(cur)
+        vim.cmd('ToggleTerm direction=' .. new_direction)
       end, { noremap = true, silent = true })
 
       local trim_spaces = true
@@ -55,6 +53,31 @@ return {
       end, { noremap = true, silent = true })
       vim.keymap.set('v', '<leader>ys', function()
         send('visual_selection')
+      end, { noremap = true, silent = true })
+
+      -- Move terminal with C-w HJKL and remember position
+      local function set_term_direction(new_direction)
+        local term = require('toggleterm.terminal').get(1)
+        if not term then
+          return
+        end
+        if term.direction == new_direction then
+          return
+        end
+        local win = vim.api.nvim_get_current_win()
+        if term.window ~= win then
+          return
+        end
+        term:close()
+        vim.cmd('ToggleTerm direction=' .. new_direction)
+      end
+      vim.keymap.set({ 'n', 't' }, '<C-w>J', function()
+        set_term_direction('horizontal')
+        vim.cmd('wincmd J')
+      end, { noremap = true, silent = true })
+      vim.keymap.set({ 'n', 't' }, '<C-w>L', function()
+        set_term_direction('vertical')
+        vim.cmd('wincmd L')
       end, { noremap = true, silent = true })
     end,
   },

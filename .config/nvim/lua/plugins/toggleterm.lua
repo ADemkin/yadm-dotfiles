@@ -32,18 +32,6 @@ return {
         end,
       })
 
-      vim.keymap.set({ 'n', 't' }, '<M-y>', function()
-        local term = require('toggleterm.terminal').get(1)
-        if not term then
-          -- Terminal not created yet → create horizontal by default
-          vim.cmd('ToggleTerm direction=horizontal')
-          return
-        end
-        local new_direction = (term.direction == 'horizontal') and 'vertical' or 'horizontal'
-        term:close()
-        vim.cmd('ToggleTerm direction=' .. new_direction)
-      end, { noremap = true, silent = true })
-
       local trim_spaces = true
       local send = function(motion_type)
         require('toggleterm').send_lines_to_terminal(motion_type, trim_spaces, { args = 1 })
@@ -70,6 +58,7 @@ return {
         end
         term:close()
         vim.cmd('ToggleTerm direction=' .. new_direction)
+        vim.cmd('startinsert')
       end
       vim.keymap.set({ 'n', 't' }, '<C-w>J', function()
         set_term_direction('horizontal')

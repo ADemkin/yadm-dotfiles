@@ -9,12 +9,13 @@ return {
   priority = 1000,
   config = function()
     require('monokai-pro').setup({
-      background_clear = {
-        'float_win',
-      },
+      -- background_clear = {
+      --   'float_win',
+      -- },
       disabled_plugins = {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },
+
       -- TODO: f"" make f orange
       ---@type fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
@@ -106,6 +107,8 @@ return {
           -- yaml
           ['@property.yaml'] = white,
           -- Telescope
+          NormalFloat = { bg = scheme.editor.background },
+          FloatBorder = { bg = scheme.editor.background, fg = scheme.base.dimmed4 },
           TelescopePromptCounter = { fg = scheme.base.dimmed3 },
           TelescopeBorder = { bg = scheme.editor.background, fg = scheme.tab.unfocusedActiveBorder },
           -- markdown render

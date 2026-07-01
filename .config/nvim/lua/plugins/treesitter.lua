@@ -95,9 +95,10 @@ return {
         end
         if vim.treesitter.language.add(lang) then
           vim.treesitter.start(args.buf, lang)
-          if lang ~= 'python' then
-            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          -- completely ignore treesitter indentation
+          -- if lang ~= 'python' then
+          --   vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          -- end
         end
       end,
     })

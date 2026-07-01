@@ -43,22 +43,18 @@ return {
         send('visual_selection')
       end, { noremap = true, silent = true })
 
-      -- Move terminal with C-w HJKL and remember position
+      -- Move terminal with C-w JL and remember position
       local function set_term_direction(new_direction)
         local term = require('toggleterm.terminal').get(1)
-        if not term then
+        if not term or term.direction == new_direction then
           return
         end
-        if term.direction == new_direction then
-          return
-        end
-        local win = vim.api.nvim_get_current_win()
-        if term.window ~= win then
-          return
-        end
+        local mode = vim.api.nvim_get_mode().mode
         term:close()
         vim.cmd('ToggleTerm direction=' .. new_direction)
-        vim.cmd('startinsert')
+        if mode == 't' then
+          vim.cmd('startinsert')
+        end
       end
       vim.keymap.set({ 'n', 't' }, '<C-w>J', function()
         set_term_direction('horizontal')

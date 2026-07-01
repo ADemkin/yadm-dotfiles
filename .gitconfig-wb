@@ -6,8 +6,8 @@
     gpgsign = true
 [gpg]
     format = ssh
-[core]
-    sshCommand = "ssh -i ~/.ssh/id_ed25519 -F /dev/null"
+; [core]
+    ; sshCommand = "ssh -i ~/.ssh/id_ed25519 -F /dev/null"
 [alias]
     wb = "!echo wildberries config is loaded"
 [tag]

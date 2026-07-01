@@ -298,6 +298,7 @@ if [ -f ~/.secrets ]; then
 fi
 
 alias timer="~/code/timer/timer"
+alias set_default_browser="~/bin/set_default_browser.sh"
 
 # completions for brew installed apps
 # installed with docker, etc...

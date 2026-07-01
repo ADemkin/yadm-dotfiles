@@ -54,14 +54,14 @@
                         ]
                     },
                     {
-                        "description": "Left and right shifts pressed together to fn",
+                        "description": "Left and right shifts pressed together to capslock",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "right_shift",
                                     "modifiers": { "mandatory": ["left_shift"] }
                                 },
-                                "to": [{ "key_code": "fn" }],
+                                "to": [{ "key_code": "caps_lock" }],
                                 "type": "basic"
                             },
                             {
@@ -69,7 +69,7 @@
                                     "key_code": "left_shift",
                                     "modifiers": { "mandatory": ["right_shift"] }
                                 },
-                                "to": [{ "key_code": "fn" }],
+                                "to": [{ "key_code": "caps_lock" }],
                                 "type": "basic"
                             },
                             {
@@ -79,7 +79,7 @@
                                         { "key_code": "right_shift" }
                                     ]
                                 },
-                                "to": [{ "key_code": "fn" }],
+                                "to": [{ "key_code": "caps_lock" }],
                                 "type": "basic"
                             }
                         ]
@@ -218,6 +218,23 @@
                             "to": [{ "key_code": "caps_lock" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 10203,
+                        "vendor_id": 5824
+                    },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "caps_lock" }]
+                        },
+                        {
+                            "from": { "key_code": "escape" },
+                            "to": [{ "key_code": "escape" }]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
@@ -247,7 +264,7 @@
                 },
                 {
                     "from": { "key_code": "escape" },
-                    "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
+                    "to": [{ "key_code": "caps_lock" }]
                 }
             ],
             "virtual_hid_keyboard": {

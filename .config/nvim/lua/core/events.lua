@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('TermEnter', {
+vim.api.nvim_create_autocmd({ 'TermEnter', 'BufWinEnter', 'WinEnter' }, {
   desc = 'Prepare terminal buffer',
   pattern = 'term://*',
   callback = function()

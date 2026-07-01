@@ -64,6 +64,7 @@ require('lazy').setup({
   require('plugins/refactoring'),
   require('plugins/startscreen'),
   require('plugins/claude'),
+  require('plugins/csv'),
 
   -- which key - temporary ?
   {
@@ -96,6 +97,44 @@ require('lazy').setup({
         time_format = '24h',
       })
     end,
+  },
+
+  -- camelCase and snake_case motions
+  -- {
+  --   'chrisgrieser/nvim-spider',
+  --   keys = {
+  --     { 'w', "<cmd>lua require('spider').motion('w')<CR>", mode = { 'n', 'o', 'x' } },
+  --     { 'e', "<cmd>lua require('spider').motion('e')<CR>", mode = { 'n', 'o', 'x' } },
+  --     { 'b', "<cmd>lua require('spider').motion('b')<CR>", mode = { 'n', 'o', 'x' } },
+  --     { 'ge', "<cmd>lua require('spider').motion('ge')<CR>", mode = { 'n', 'o', 'x' } },
+  --   },
+  -- },
+
+  -- better inline diagnostics
+  -- {
+  --   'rachartier/tiny-inline-diagnostic.nvim',
+  --   event = 'VeryLazy',
+  --   priority = 1000,
+  --   config = function()
+  --     require('tiny-inline-diagnostic').setup()
+  --     vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+  --   end,
+  -- },
+
+  -- another better inline diagnostics
+  -- {
+  --   'sontungexpt/better-diagnostic-virtual-text',
+  --   event = 'LspAttach',
+  --   config = function()
+  --     require('better-diagnostic-virtual-text').setup()
+  --   end,
+  -- },
+
+  -- preserve indent level on paste
+  {
+    'nemanjamalesija/smart-paste.nvim',
+    event = 'VeryLazy',
+    config = true,
   },
 }, {
   dev = { path = '~/code' },

@@ -5,6 +5,13 @@ require('core.ui')
 require('core.events')
 require('core.spell')
 
+require('core.cycle').setup({
+  markdown = {
+    { '# ', '## ', '### ', '#### ', '##### ', '###### ' },
+    { '- [ ] ', '- [x] ' },
+  },
+})
+
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 -- local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 -- if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -37,7 +44,6 @@ require('lazy').setup({
   require('plugins/flash'),
   -- require('plugins/colors'),
   require('plugins/readline'),
-  require('plugins/cycle'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
   require('plugins/autopairs'),
@@ -75,6 +81,7 @@ require('lazy').setup({
       triggers = {
         { '<leader>', mode = { 'n', 'v' } },
         { 'g', mode = { 'n', 'v' } },
+        { 't', mode = { 'n', 'v' } },
       },
     },
     keys = {
@@ -89,15 +96,15 @@ require('lazy').setup({
   },
 
   -- time tracker
-  {
-    'ptdewey/pendulum-nvim',
-    config = function()
-      require('pendulum').setup({
-        time_zone = 'EET',
-        time_format = '24h',
-      })
-    end,
-  },
+  -- {
+  --   'ptdewey/pendulum-nvim',
+  --   config = function()
+  --     require('pendulum').setup({
+  --       time_zone = 'EET',
+  --       time_format = '24h',
+  --     })
+  --   end,
+  -- },
 
   -- camelCase and snake_case motions
   -- {
@@ -131,10 +138,48 @@ require('lazy').setup({
   -- },
 
   -- preserve indent level on paste
+  -- {
+  --   'nemanjamalesija/smart-paste.nvim',
+  --   event = 'VeryLazy',
+  --   config = true,
+  -- },
+
+  -- rotate more than numbers with C-a C-x
+  -- foo
+  -- enable
+  -- tic
+  -- NOT WORKING
+  -- {
+  --   'nat-418/boole.nvim',
+  --   lazy = false,
+  --   enabled = true,
+  --   opts = {
+  --     mappings = {
+  --       increment = '<C-a>',
+  --       decrement = '<C-x>',
+  --     },
+  --     additions = {
+  --       { 'foo', 'bar' },
+  --       { 'tic', 'tac', 'toe' },
+  --     },
+  --   },
+  --   keys = {
+  --     { mode = { 'n', 'v' }, '<C-a>' },
+  --     { mode = { 'n', 'v' }, '<C-x>' },
+  --   },
+  -- },
+
+  -- quickfix list
   {
-    'nemanjamalesija/smart-paste.nvim',
-    event = 'VeryLazy',
-    config = true,
+    'stevearc/quicker.nvim',
+    ft = 'qf',
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {},
+  },
+  -- show how many times search is found
+  {
+    'https://github.com/google/vim-searchindex.git',
   },
 }, {
   dev = { path = '~/code' },

@@ -96,6 +96,7 @@ return {
           ['@comment.documentation.lua'] = white,
           ['@lsp.type.comment.lua'] = {},
           ['@lsp.type.type'] = green,
+          ['@keyword.function.lua'] = aqua,
           -- git
           ['@markup.heading.gitcommit'] = white,
           ['@string.special.path.gitcommit'] = yellow,
@@ -127,6 +128,25 @@ return {
           OutlineSidebarEob = { fg = scheme.sideBar.background, bg = scheme.sideBar.background },
           -- Neotest
           NeotestSummaryBg = { fg = scheme.sideBar.background, bg = scheme.sideBar.background },
+          -- Completion
+          Pmenu = {
+            bg = scheme.base.dimmed1,
+            fg = scheme.base.white,
+          },
+          PmenuSel = {
+            bg = scheme.base.blue,
+            fg = scheme.editor.background,
+          },
+          -- PmenuMatchSel = {
+          --   bg = scheme.base.blue,
+          --   fg =scheme.editor.background,
+          --   bold = true,
+          --   underline = true,
+          -- },
+          -- PmenuMatch = {
+          --   bold = true,
+          --   underline = true,
+          -- },
         }
       end,
     })

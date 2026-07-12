@@ -8,7 +8,7 @@ require('core.spell')
 require('core.cycle').setup({
   markdown = {
     { '# ', '## ', '### ', '#### ', '##### ', '###### ' },
-    { '- [ ] ', '- [x] ' },
+    { '[ ] ', '[x] ' },
   },
 })
 
@@ -39,7 +39,7 @@ require('lazy').setup({
   require('plugins/tmux'),
   require('plugins/toggleterm'),
   require('plugins/indentline'),
-  require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
+  -- require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
   -- require('plugins/colors'),
@@ -77,7 +77,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
-      delay = 500,
+      delay = 300,
       triggers = {
         { '<leader>', mode = { 'n', 'v' } },
         { 'g', mode = { 'n', 'v' } },

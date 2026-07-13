@@ -144,39 +144,6 @@ require('lazy').setup({
   --   config = true,
   -- },
 
-  -- rotate more than numbers with C-a C-x
-  -- foo
-  -- enable
-  -- tic
-  -- NOT WORKING
-  -- {
-  --   'nat-418/boole.nvim',
-  --   lazy = false,
-  --   enabled = true,
-  --   opts = {
-  --     mappings = {
-  --       increment = '<C-a>',
-  --       decrement = '<C-x>',
-  --     },
-  --     additions = {
-  --       { 'foo', 'bar' },
-  --       { 'tic', 'tac', 'toe' },
-  --     },
-  --   },
-  --   keys = {
-  --     { mode = { 'n', 'v' }, '<C-a>' },
-  --     { mode = { 'n', 'v' }, '<C-x>' },
-  --   },
-  -- },
-
-  -- quickfix list
-  {
-    'stevearc/quicker.nvim',
-    ft = 'qf',
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    opts = {},
-  },
   -- show how many times search is found
   {
     'https://github.com/google/vim-searchindex.git',

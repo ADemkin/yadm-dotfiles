@@ -46,7 +46,7 @@ require('lazy').setup({
   require('plugins/readline'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
-  require('plugins/autopairs'),
+  -- require('plugins/autopairs'),
   require('plugins/align'),
 
   -- LSP, lint, format

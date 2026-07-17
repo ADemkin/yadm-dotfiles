@@ -48,6 +48,7 @@ local ENSURE_INSTALLED_FTS = {
   'jinja',
   'jinja_inline',
   'comment',
+  'templ',
 }
 
 local function ensure_installed(ft)
@@ -81,8 +82,7 @@ return {
       pcall(ensure_installed, ft)
     end
 
-    -- htmldjango != jinja, but gives good html highlighting.
-    -- this allows to inject jinja into htmldjango for missing parts
+    -- htmldjango highlighter is more capable than jinja
     vim.treesitter.language.register('jinja', 'htmldjango')
 
     vim.api.nvim_create_autocmd('FileType', {
@@ -95,10 +95,6 @@ return {
         end
         if vim.treesitter.language.add(lang) then
           vim.treesitter.start(args.buf, lang)
-          -- completely ignore treesitter indentation
-          -- if lang ~= 'python' then
-          --   vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          -- end
         end
       end,
     })

@@ -201,49 +201,73 @@ mods = "Command"
 [[keyboard.bindings]]
 key = "1"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "1"] }
-
+action = "ReceiveChar"
 [[keyboard.bindings]]
 key = "2"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "2"] }
-
+action = "ReceiveChar"
 [[keyboard.bindings]]
 key = "3"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "3"] }
-
+action = "ReceiveChar"
 [[keyboard.bindings]]
 key = "4"
 mods = "alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "4"] }
-
+action = "ReceiveChar"
 [[keyboard.bindings]]
 key = "5"
 mods = "alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "5"] }
+action = "ReceiveChar"
+[[keyboard.bindings]]
+key = "6"
+mods = "alt"
+action = "ReceiveChar"
+[[keyboard.bindings]]
+key = "7"
+mods = "alt"
+action = "ReceiveChar"
+[[keyboard.bindings]]
+key = "8"
+mods = "alt"
+action = "ReceiveChar"
+[[keyboard.bindings]]
+key = "9"
+mods = "alt"
+action = "ReceiveChar"
 
 
 # Safari
 [[keyboard.bindings]]
 key = "s"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "S"] }
+action = "ReceiveChar"
 
 # Messengers
 [[keyboard.bindings]]
 key = "m"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "M"] }
+action = "ReceiveChar"
 
 # Arc
 [[keyboard.bindings]]
 key = "a"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "A"] }
+action = "ReceiveChar"
 
 # VPNs
 [[keyboard.bindings]]
 key = "v"
 mods = "Alt"
-command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "V"] }
+action = "ReceiveChar"
+
+# Calendar
+[[keyboard.bindings]]
+key = "c"
+mods = "Alt"
+action = "ReceiveChar"
+
+# Calendar
+[[keyboard.bindings]]
+key = "c"
+mods = "Alt"
+action = "ReceiveChar"

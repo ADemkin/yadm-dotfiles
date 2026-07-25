@@ -29,5 +29,6 @@ green = "#a6e22e"
 magenta = "#ae81ff"
 red = "#f92672"
 white = "#f8f8f2"
-yellow = "#f4bf75"
+# yellow = "#f4bf75"
+yellow = "#e6db74"
 

@@ -133,13 +133,29 @@ on-window-detected = [
         ],
     },
 
+    # C - Calendar
+    {
+        if = 'test %{app-bundle-id} = com.apple.iCal',
+        run = [
+            'layout tiling',
+            'move-node-to-workspace C',
+        ],
+    },
+
     # catch-all — MUST be last; anything unmatched goes to workspace 1
     {
         if = 'true',
         run = ['move-node-to-workspace 1'],
     },
 ]
-exec-on-workspace-change = ['/home/antondemkin/.config/aerospace/dock-autohide.sh']
+# not working:
+# exec-on-workspace-change = ['/home/antondemkin/.config/aerospace/dock-autohide.sh']
+
+# sketchybar integration
+# exec-on-workspace-change = ['/bin/bash', '-c',
+#     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+# ]
+
 
 [mode.main.binding]
 
@@ -203,11 +219,8 @@ exec-on-workspace-change = ['/home/antondemkin/.config/aerospace/dock-autohide.s
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
-    # alt-b = 'workspace B' # READLINE_CONFLICT
-    alt-c = 'workspace C'
     alt-d = 'workspace D'
     alt-e = 'workspace E'
-    # alt-f = 'workspace F' # READLINE_CONFLICT
     alt-g = 'workspace G'
     alt-i = 'workspace I'
     alt-m = 'workspace M' # messengers
@@ -217,11 +230,8 @@ exec-on-workspace-change = ['/home/antondemkin/.config/aerospace/dock-autohide.s
     alt-q = 'workspace Q'
     alt-r = 'workspace R'
 
-    # TODO: C for Calendar
-
-    # alt-s = 'workspace S' # safari
-    # alt-t = 'workspace T' # terminal
-    # launch workspace app if not running
+    # Switch to workspace and run main app if not running
+    alt-c = ['exec-and-forget open -b com.apple.iCal', 'workspace C']
     alt-t = ['exec-and-forget open -b org.alacritty', 'workspace T']
     alt-s = ['exec-and-forget open -b com.apple.Safari', 'workspace S']
     alt-a = ['exec-and-forget open -b company.thebrowser.Browser', 'workspace A']
@@ -244,11 +254,9 @@ exec-on-workspace-change = ['/home/antondemkin/.config/aerospace/dock-autohide.s
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
     alt-shift-a = 'move-node-to-workspace A'
-    # alt-shift-b = 'move-node-to-workspace B'  # READLINE_CONFLICT
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-d = 'move-node-to-workspace D'
     alt-shift-e = 'move-node-to-workspace E'
-    # alt-shift-f = 'move-node-to-workspace F'  # READLINE_CONFLICT
     alt-shift-g = 'move-node-to-workspace G'
     alt-shift-i = 'move-node-to-workspace I'
     alt-shift-m = 'move-node-to-workspace M'

@@ -235,6 +235,15 @@
                             "to": [{ "key_code": "escape" }]
                         }
                     ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 10203,
+                        "vendor_id": 5824
+                    },
+                    "ignore": false
                 }
             ],
             "fn_function_keys": [
@@ -257,16 +266,6 @@
             ],
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "escape" }]
-                },
-                {
-                    "from": { "key_code": "escape" },
-                    "to": [{ "key_code": "caps_lock" }]
-                }
-            ],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "keyboard_type": "ansi",

@@ -23,15 +23,21 @@ chars = "\u0002c"
 key = "T"
 mods = "Control"
 
+# dropped in favour of aerospace
+# [[keyboard.bindings]]
+# chars = "\u0002\u0001"
+# key = "Tab"
+# mods = "Alt"
+
 [[keyboard.bindings]]
 chars = "\u0002\u0001"
 key = "Tab"
-mods = "Alt"
+mods = "Control"
 
-[[keyboard.bindings]]
-chars = "\u0002!"
-key = "T"
-mods = "Alt"
+# [[keyboard.bindings]]
+# chars = "\u0002!"
+# key = "T"
+# mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00021"
@@ -91,10 +97,10 @@ key = "E"
 mods = "Alt"
 
 # zoom
-[[keyboard.bindings]]
-chars = "\u0002z"
-key = "Z"
-mods = "Alt"
+# [[keyboard.bindings]]
+# chars = "\u0002z"
+# key = "Z"
+# mods = "Alt"
 
 # Run TMUX command - gping in a new window
 [[keyboard.bindings]]
@@ -103,15 +109,14 @@ key = "G"
 mods = "Alt"
 
 # switch to prev/next window
-[[keyboard.bindings]]
-chars = "\u0002p"
-key = "p"
-mods = "alt"
-
-[[keyboard.bindings]]
-chars = "\u0002n"
-key = "n"
-mods = "alt"
+# [[keyboard.bindings]]
+# chars = "\u0002p"
+# key = "p"
+# mods = "alt"
+# [[keyboard.bindings]]
+# chars = "\u0002n"
+# key = "n"
+# mods = "alt"
 
 # Rename window
 [[keyboard.bindings]]
@@ -189,3 +194,56 @@ mods = "Alt|Control|Shift"
 action = "None"
 key = "b"
 mods = "Command"
+
+
+# Aerospace
+
+[[keyboard.bindings]]
+key = "1"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "1"] }
+
+[[keyboard.bindings]]
+key = "2"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "2"] }
+
+[[keyboard.bindings]]
+key = "3"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "3"] }
+
+[[keyboard.bindings]]
+key = "4"
+mods = "alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "4"] }
+
+[[keyboard.bindings]]
+key = "5"
+mods = "alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "5"] }
+
+
+# Safari
+[[keyboard.bindings]]
+key = "s"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "S"] }
+
+# Messengers
+[[keyboard.bindings]]
+key = "m"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "M"] }
+
+# Arc
+[[keyboard.bindings]]
+key = "a"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "A"] }
+
+# VPNs
+[[keyboard.bindings]]
+key = "v"
+mods = "Alt"
+command = { program = "/opt/homebrew/bin/aerospace", args = ["workspace", "V"] }

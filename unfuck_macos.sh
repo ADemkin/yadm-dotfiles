@@ -7,3 +7,8 @@ defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile
 
 echo "remove stupid delay and popup on language switch"
 defaults write kCFPreferencesAnyApplication TSMLanguageIndicatorEnabled 2
+
+echo "disable dock hide animation"
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+killall Dock

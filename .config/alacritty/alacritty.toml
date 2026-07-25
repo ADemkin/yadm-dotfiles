@@ -31,11 +31,12 @@ multiplier = 0
 save_to_clipboard = true
 
 [window]
-decorations = "full"
+# decorations = "full"
+decorations = "None"
 dynamic_padding = true
 opacity = 1.0
 option_as_alt = "Both"
-startup_mode = "Fullscreen"
+# startup_mode = "Fullscreen"
 
 [window.padding]
 x = 2
@@ -48,12 +49,9 @@ size = 14.0
 live_config_reload = true
 import = [
     "~/.config/alacritty/keyboard.toml",
-
     "~/.config/alacritty/monokai.toml",
-    # "~/.config/alacritty/gruvbox.toml",
-
-    # "~/.config/alacritty/victor-mono.toml", "~/.config/alacritty/cascadia-mono.toml",  # good
-    "~/.config/alacritty/jetbrains-mono.toml",  # softer than input
+    # "~/.config/alacritty/victor-mono.toml",
+    "~/.config/alacritty/jetbrains-mono.toml",
 
 ]
 

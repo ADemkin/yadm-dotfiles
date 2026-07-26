@@ -268,8 +268,8 @@ key = "c"
 mods = "Alt"
 action = "ReceiveChar"
 
-# Calendar
+# Finder
 [[keyboard.bindings]]
-key = "c"
+key = "d"
 mods = "Alt"
 action = "ReceiveChar"

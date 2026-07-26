@@ -80,6 +80,14 @@ on-window-detected = [
             'move-node-to-workspace T',
             'fullscreen on --no-outer-gaps',
         ],
+        check-further-callbacks = false,
+    },
+    # Protect terminal from another apps
+    {
+        if.workspace = 'T',
+        run = [
+            'move-node-to-workspace 1',
+        ],
     },
 
     # S = Safari

@@ -1,3 +1,4 @@
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "jurplel/tap"
@@ -172,6 +173,8 @@ brew "zbar"
 brew "zsh"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# Custom macOS statusbar with shell plugin, interaction and graph support
+brew "felixkratz/formulae/sketchybar", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # VPN client
@@ -202,6 +205,7 @@ cask "dropbox"
 cask "firefox"
 # Screen colour temperature controller
 cask "flux-app"
+cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-victor-mono"
 cask "font-victor-mono-nerd-font"

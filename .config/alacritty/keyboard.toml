@@ -91,10 +91,11 @@ key = "LBracket"
 mods = "Alt|Shift"
 
 # edit current buffer in vim
-[[keyboard.bindings]]
-chars = "\u0002\u0005"
-key = "E"
-mods = "Alt"
+# upd: replaces with C-b e
+# [[keyboard.bindings]]
+# chars = "\u0002\u0005"
+# key = "E"
+# mods = "Alt"
 
 # zoom
 # [[keyboard.bindings]]
@@ -103,10 +104,11 @@ mods = "Alt"
 # mods = "Alt"
 
 # Run TMUX command - gping in a new window
-[[keyboard.bindings]]
-chars = "\u0002g"
-key = "G"
-mods = "Alt"
+# upd: replaced with C-b g
+# [[keyboard.bindings]]
+# chars = "\u0002g"
+# key = "G"
+# mods = "Alt"
 
 # switch to prev/next window
 # [[keyboard.bindings]]

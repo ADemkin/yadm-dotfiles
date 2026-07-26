@@ -273,3 +273,9 @@ action = "ReceiveChar"
 key = "d"
 mods = "Alt"
 action = "ReceiveChar"
+
+# Players
+[[keyboard.bindings]]
+key = "p"
+mods = "Alt"
+action = "ReceiveChar"

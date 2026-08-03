@@ -41,7 +41,7 @@ automatically-unhide-macos-hidden-apps = true
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
 persistent-workspaces = [
-    'workspace 1',
+    '1',
 ]
 
 # A callback that runs every time binding mode changes
@@ -96,8 +96,8 @@ on-window-detected = [
     {
         if = 'test %{app-bundle-id} = com.apple.Safari',
         run = [
+            'layout accordion',
             'move-node-to-workspace S',
-            'fullscreen on --no-outer-gaps',
         ],
     },
     # A = Arc
@@ -158,15 +158,6 @@ on-window-detected = [
         ],
     },
 
-    # Finder goes into space 1
-    {
-        if = 'test %{app-bundle-id} = com.apple.finder',
-        run = [
-            # 'layout floating',
-            'move-node-to-workspace 1',
-        ],
-    },
-
     # P = Players
     {
         if = 'test %{app-bundle-id} = com.colliderli.iina',
@@ -182,10 +173,10 @@ on-window-detected = [
     },
 
     # catch-all — MUST be last; anything unmatched goes to workspace 1
-    {
-        if = 'true',
-        run = ['move-node-to-workspace 1'],
-    },
+    # {
+    #     if = 'true',
+    #     run = ['move-node-to-workspace 1'],
+    # },
 
 ]
 
@@ -302,7 +293,10 @@ on-window-detected = [
     esc = ['reload-config', 'mode main']
 
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['fullscreen', 'mode main']
+    f = ['layout floating', 'mode main']
+    t = ['layout tiling', 'mode main']
+    a = ['layout accordion', 'mode main']
+    enter = ['fullscreen', 'mode main']
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']

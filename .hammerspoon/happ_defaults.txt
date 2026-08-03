@@ -1,0 +1,84 @@
+{
+    "DNSTT.cachedResolvers" =     (
+        "195.208.4.1",
+        "194.169.169.169",
+        "195.208.5.1",
+        "119.28.28.28",
+        "8.8.4.4",
+        "8.8.8.8",
+        "78.47.64.161",
+        "223.5.5.5",
+        "77.88.8.3",
+        "76.76.2.1",
+        "119.29.29.29",
+        "9.9.9.9",
+        "77.88.8.8",
+        "223.6.6.6",
+        "77.88.8.7",
+        "77.88.8.88",
+        "195.46.39.39",
+        "156.154.70.4",
+        "156.154.70.5",
+        "77.88.8.1",
+        "156.154.71.2",
+        "77.88.8.2",
+        "156.154.71.3",
+        "64.6.65.6",
+        "52.80.52.52",
+        "156.154.71.1",
+        "52.80.60.30",
+        "156.154.71.5",
+        "64.6.64.6",
+        "156.154.70.2",
+        "101.226.4.6",
+        "52.80.66.66",
+        "156.154.70.3",
+        "180.76.76.76",
+        "195.46.39.40",
+        "218.30.118.6",
+        "123.125.81.6",
+        "180.184.2.2",
+        "94.140.14.14",
+        "156.154.70.1",
+        "156.154.71.4"
+    );
+    "DNSTT.lastProbeDate" = "2026-07-31 18:43:55 +0000";
+    "appRestrictionService_checkFailed" = 0;
+    askedForInternetOnes = 1;
+    cachedDeviceToken = {length = 32, bytes = 0xb6562ec1 f5d3d995 5f068073 12e6dc43 ... 2a134865 4cea7af8 };
+    cachedProviderIDsForTokenRequest =     (
+        g7PI7IhM
+    );
+    collapseSubscriptions = 1;
+    deviceHasWrongDate = 0;
+    floatingButtonOn = 1;
+    globalSubAutoUpdateDate = "2026-08-03 09:26:47 +0000";
+    keyForSubscriptionsUpdateInterval = 1;
+    lastBlockListUpdateDate = "2026-07-31 18:43:52 +0000";
+    lastTokenPushDate = "2026-07-29 19:22:20 +0000";
+    lastWindowSize =     {
+        height = 1386;
+        width = 1108;
+    };
+    localServersExpanded = 0;
+    logsClear = 1;
+    mainButtonSize = big;
+    migration = 1;
+    migrationFromMinutesSubUpdateToHoursCompleted = 1;
+    persistedBlockList =     (
+        "hpdata.link",
+        "happhost.com.",
+        "happroxy.ru",
+        "rdata.click",
+        "subdata.link",
+        "appsub.link",
+        "hpdata.click",
+        "sub-page-terckpfo2q-ww.a.run.app",
+        "sub.maxg.ch"
+    );
+    preferredFontSize = large;
+    savedPinSection = {length = 62, bytes = 0x7b227375 62736372 69707469 6f6e223a ... 37383841 30227d7d };
+    shouldPingOnLaunch = 1;
+    subscriptionsExpanded = {length = 45, bytes = 0x7b223536 31464537 44412d34 4135462d ... 30223a74 7275657d };
+    updateSubscriptionsInBackground = 1;
+}

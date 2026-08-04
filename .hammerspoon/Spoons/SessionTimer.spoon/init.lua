@@ -21,7 +21,6 @@
 ---@field _sessionStart number|nil Unix timestamp when current session started
 ---@field _todayTotal number Seconds of active time since 4AM
 ---@field _lastTickTime number|nil Unix timestamp of last timer tick
----@field _sleepTime number|nil Unix timestamp when system went to sleep
 local obj = {}
 obj.__index = obj
 
@@ -31,7 +30,7 @@ obj.author = 'Anton Demkin'
 obj.license = 'MIT'
 
 obj.idleThresholdSec = 180
-obj.pollIntervalSec = 15
+obj.pollIntervalSec = 1
 obj.logFile = os.getenv('HOME') .. '/.session_events.log'
 
 obj._menubar = nil
@@ -41,12 +40,13 @@ obj._isIdle = true
 obj._sessionStart = nil
 obj._todayTotal = 0
 obj._lastTickTime = nil
-obj._sleepTime = nil
 
 ---@enum SessionTimer.Event
 local Event = {
   ACTIVE = 'ACTIVE',
   IDLE = 'IDLE',
+  SLEEP = 'SLEEP',
+  WAKE = 'WAKE',
 }
 
 ---@param seconds number
@@ -139,17 +139,35 @@ function obj:_replayLog()
   local lastActiveTime = nil
   local isIdle = true
 
+  local lastSleepTime = nil
+
   for _, event in ipairs(events) do
     if event.time >= cutoff4am then
       if event.type == Event.ACTIVE then
-        lastActiveTime = event.time
-        isIdle = false
+        if isIdle then
+          lastActiveTime = event.time
+          isIdle = false
+        end
+        -- ignore duplicate ACTIVE
       elseif event.type == Event.IDLE then
         if lastActiveTime then
           todayTotal = todayTotal + (event.time - lastActiveTime)
         end
         lastActiveTime = nil
+        lastSleepTime = nil
         isIdle = true
+      elseif event.type == Event.SLEEP then
+        lastSleepTime = event.time
+      elseif event.type == Event.WAKE then
+        if lastSleepTime and not isIdle and lastActiveTime then
+          local sleepDuration = event.time - lastSleepTime
+          if sleepDuration > self.idleThresholdSec then
+            todayTotal = todayTotal + (lastSleepTime - lastActiveTime)
+            lastActiveTime = nil
+            isIdle = true
+          end
+        end
+        lastSleepTime = nil
       end
     end
   end
@@ -194,17 +212,15 @@ function obj:_onTick()
       self._isIdle = false
       self._sessionStart = now
     end
-  else
-    if idle >= self.idleThresholdSec then
-      local idleStartedAt = now - idle
-      if idleStartedAt < self._sessionStart then
-        idleStartedAt = self._sessionStart
-      end
-      self:_logEvent(idleStartedAt, Event.IDLE)
-      self._todayTotal = self._todayTotal + (idleStartedAt - self._sessionStart)
-      self._isIdle = true
-      self._sessionStart = nil
+  elseif idle >= self.idleThresholdSec then
+    local idleStartedAt = now - idle
+    if idleStartedAt < self._sessionStart then
+      idleStartedAt = self._sessionStart
     end
+    self:_logEvent(idleStartedAt, Event.IDLE)
+    self._todayTotal = self._todayTotal + (idleStartedAt - self._sessionStart)
+    self._isIdle = true
+    self._sessionStart = nil
   end
 
   self:_updateMenubar()
@@ -213,23 +229,9 @@ end
 ---@param event number
 function obj:_onCaffeinateEvent(event)
   if event == hs.caffeinate.watcher.systemDidSleep then
-    self._sleepTime = os.time()
+    self:_logEvent(os.time(), Event.SLEEP)
   elseif event == hs.caffeinate.watcher.systemDidWake then
-    if not self._sleepTime then
-      return
-    end
-    local sleepDuration = os.time() - self._sleepTime
-
-    if sleepDuration > self.idleThresholdSec then
-      if not self._isIdle and self._sessionStart then
-        self:_logEvent(self._sleepTime, Event.IDLE)
-        self._todayTotal = self._todayTotal + (self._sleepTime - self._sessionStart)
-        self._isIdle = true
-        self._sessionStart = nil
-        self:_updateMenubar()
-      end
-    end
-    self._sleepTime = nil
+    self:_logEvent(os.time(), Event.WAKE)
   end
 end
 

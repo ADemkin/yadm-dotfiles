@@ -84,6 +84,7 @@ return {
 
     -- htmldjango highlighter is more capable than jinja
     vim.treesitter.language.register('jinja', 'htmldjango')
+    vim.treesitter.language.register('html', 'htmldjango')
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },

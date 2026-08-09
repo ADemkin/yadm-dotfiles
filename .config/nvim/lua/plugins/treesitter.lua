@@ -1,25 +1,7 @@
--- return {
---   'nvim-treesitter/nvim-treesitter',
---   lazy = false,
---   branch = 'main',
---   build = ':TSUpdate',
---   opts = {
---     -- Autoinstall languages that are not installed
---     auto_install = true,
---     highlight = {
---       enable = true,
---       disable = { 'tmux' },
---     },
---     indent = {
---       enable = true,
---       disable = { 'python', 'htmldjango' },
---     },
---   },
---   config = function(_, opts)
---     require('nvim-treesitter').install(opts.ensure_installed)
---     require('nvim-treesitter.config').setup(opts)
---   end,
--- }
+-- htmldjango highlighter is more capable than jinja
+vim.treesitter.language.register('jinja', 'htmldjango')
+vim.treesitter.language.register('html', 'htmldjango')
+
 local ENSURE_INSTALLED_FTS = {
   'lua',
   'python',
@@ -79,10 +61,6 @@ return {
     for _, ft in ipairs(ENSURE_INSTALLED_FTS) do
       pcall(ensure_installed, ft)
     end
-
-    -- htmldjango highlighter is more capable than jinja
-    vim.treesitter.language.register('jinja', 'htmldjango')
-    vim.treesitter.language.register('html', 'htmldjango')
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },

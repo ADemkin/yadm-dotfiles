@@ -62,9 +62,7 @@ local function ensure_installed(ft)
       vim.g.ts_available = available
     end
     if vim.tbl_contains(available, lang) then
-      pcall(function()
-        require('nvim-treesitter').install(lang):wait(30 * 1000)
-      end)
+      require('nvim-treesitter').install(lang)
     end
   end
   return lang
@@ -89,13 +87,14 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },
       callback = function(args)
-        local ft = vim.bo[args.buf].filetype
+        local buf = args.buf
+        local ft = vim.bo[buf].filetype
         local lang = ensure_installed(ft)
         if not lang then
           return
         end
         if vim.treesitter.language.add(lang) then
-          vim.treesitter.start(args.buf, lang)
+          vim.treesitter.start(buf, lang)
         end
       end,
     })

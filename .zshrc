@@ -47,7 +47,11 @@ chpwd() {
         if [[ -f "$d/bin/activate" ]]; then
             . "$d/bin/activate"
             if [[ -z $PYTHONPATH ]]; then
-                export PYTHONPATH="$PWD"
+                if [[ -d "$PWD/src" ]]; then
+                    export PYTHONPATH="$PWD/src"
+                else
+                    export PYTHONPATH="$PWD"
+                fi
             fi
             return
         fi
@@ -170,6 +174,8 @@ LESS_TERMCAP_us=$(printf "\e[1;32m") \
 # ls colors
 export CLICOLOR=1
 export LSCOLORS="BxGxcxdxCxegDxabagacad"
+export LS_COLORS="BxGxcxdxCxegDxabagacad"
+
 
 # bat as manpager
 export BAT_THEME="gruvbox-dark"
@@ -227,7 +233,11 @@ _activate_venv() {
     . "$act"
     # set PYTHONPATH
     if [[ -z $PYTHONPATH ]]; then
-        export PYTHONPATH=$base
+        if [[ -d "$PWD/src" ]]; then
+            export PYTHONPATH="$PWD/src"
+        else
+            export PYTHONPATH="$PWD"
+        fi
     fi
 }
 alias va="_activate_venv"
@@ -244,6 +254,7 @@ print256colors() {
 alias zshrc="nvim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias nvimrc="cd ~/.config/nvim && nvim init.lua"
+alias tmuxrc="nvim ~/.tmux.conf"
 
 alias vimdiff="nvim -d"
 
@@ -291,6 +302,10 @@ alias copilot=" gh copilot explain"
 source <(fzf --zsh)
 bindkey '^f' fzf-file-widget
 export FZF_DEFAULT_OPTS="--no-mouse"
+
+# zoxide
+# replace cd with zoxide
+source <(zoxide init --cmd cd zsh)
 
 # secrets
 if [ -f ~/.secrets ]; then

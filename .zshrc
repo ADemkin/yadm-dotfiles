@@ -120,8 +120,9 @@ function grep() {
         # output is pipe
         _colour="never"
     fi;
-    $GREP --colour=$_colour $@
+    $GREP --color=$_colour $@
 }
+# export GREP_COLOR="never"
 
 
 # Completion

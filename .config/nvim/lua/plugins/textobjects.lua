@@ -33,12 +33,13 @@ return {
       vim.keymap.set({ 'x', 'o' }, 'ia', function()
         select.select_textobject('@parameter.inner')
       end)
-      vim.keymap.set('n', '}a', function()
-        swap.swap_next('@parameter.inner')
-      end)
-      vim.keymap.set('n', '{a', function()
+
+      vim.api.nvim_create_user_command('ArgMoveLeft', function()
         swap.swap_previous('@parameter.inner')
-      end)
+      end, {})
+      vim.api.nvim_create_user_command('ArgMoveRight', function()
+        swap.swap_next('@parameter.inner')
+      end, {})
 
       vim.keymap.set({ 'n', 'x', 'o' }, ']f', function()
         move.goto_next_end('@function.outer', 'textobjects')

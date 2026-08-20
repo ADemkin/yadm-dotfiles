@@ -1,3 +1,5 @@
+require('hs.ipc')
+
 hs.hotkey.bind({ 'alt' }, 'e', function()
   hs.notify.new({ title = 'Hammerspoon 2', informativeText = 'Hello World' }):send()
 end)
@@ -41,4 +43,42 @@ hs.hotkey.bind({ 'cmd', 'shift' }, 'v', function()
   end
   hs.execute("scutil --nc stop 'Happ'")
   hs.alert.show('Happ Off')
+end)
+
+-- Toggle OpenVPN Connect (via status bar menu)
+hs.hotkey.bind({ 'cmd', 'shift' }, 'o', function()
+  local app = hs.application.get('org.openvpn.client.app')
+  if not app then
+    hs.alert.show('OpenVPN not running')
+    return
+  end
+
+  local ax = hs.axuielement.applicationElement(app)
+  local extrasBar = ax:attributeValue('AXChildren')[3]
+  local trayItem = extrasBar:attributeValue('AXChildren')[1]
+
+  trayItem:performAction('AXPress')
+
+  hs.timer.doAfter(0.1, function()
+    local menu = trayItem:attributeValue('AXChildren')
+    if not menu or not menu[1] then
+      hs.alert.show('OpenVPN menu failed')
+      return
+    end
+
+    local items = menu[1]:attributeValue('AXChildren')
+    for _, mi in ipairs(items) do
+      local title = mi:attributeValue('AXTitle') or ''
+      if title == 'Connect' then
+        mi:performAction('AXPress')
+        hs.alert.show('OpenVPN On')
+        return
+      elseif title == 'Disconnect' then
+        mi:performAction('AXPress')
+        hs.alert.show('OpenVPN Off')
+        return
+      end
+    end
+    hs.alert.show('OpenVPN toggle not found')
+  end)
 end)

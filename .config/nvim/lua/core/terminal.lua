@@ -49,10 +49,10 @@ end
 
 local function run_single_test()
   local module_name, module_path = get_module_name_and_path()
-  if not vim.startswith(module_name, 'test_') then
-    print('Module is not a test: ' .. module_name)
-    return
-  end
+  -- if not vim.startswith(module_name, 'test_') then
+  --   print('Module is not a test: ' .. module_name)
+  --   return
+  -- end
   local function_name = get_function_name()
   if function_name == nil then
     print('Function name not found')
@@ -64,10 +64,10 @@ end
 
 local function run_module_test()
   local module_name, module_path = get_module_name_and_path()
-  if not vim.startswith(module_name, 'test_') then
-    print('Module is not a test: ' .. module_name)
-    return
-  end
+  -- if not vim.startswith(module_name, 'test_') then
+  --   print('Module is not a test: ' .. module_name)
+  --   return
+  -- end
   local command = build_pytest_command(module_path)
   execute_in_terminal(command)
 end

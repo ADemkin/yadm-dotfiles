@@ -1,3 +1,13 @@
+vim.api.nvim_create_user_command('LspDebug', function()
+  local clients = vim.lsp.get_clients()
+  local lines = vim.split(vim.inspect(clients), '\n')
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+  vim.bo[buf].filetype = 'lua'
+  vim.cmd('vsplit')
+  vim.api.nvim_win_set_buf(0, buf)
+end, {})
+
 return {
   {
     'neovim/nvim-lspconfig',
@@ -143,6 +153,7 @@ return {
       local ensure_installed = {
         'lua_ls',
         'basedpyright',
+        'jinja-lsp',
         'stylua',
         'yamllint',
         'checkmake',
@@ -156,6 +167,10 @@ return {
       })
 
       require('mason-lspconfig').setup({})
+
+      vim.lsp.config('jinja_lsp', {
+        filetypes = { 'html', 'jinja', 'htmldjango' },
+      })
     end,
   },
   {

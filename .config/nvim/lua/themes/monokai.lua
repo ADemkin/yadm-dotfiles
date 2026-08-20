@@ -28,6 +28,12 @@ return {
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
         return {
+          -- ColorColumn = { bg = '#383a3e' },
+          -- CursorColumn = { bg = '#383a3e' },
+          ColorColumn = { bg = scheme.base.dimmed5 },
+          -- CursorColumn = { bg = scheme.base.dimmed5 },
+          -- ColorColumn = { bg = '#FFAA00' },
+          -- CursorColumn = { bg = '#FF0000' },
           WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = { bg = 'NONE', fg = scheme.base.blue },
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },

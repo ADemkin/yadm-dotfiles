@@ -254,7 +254,7 @@ on-window-detected = [
     alt-a = ['exec-and-forget open -b company.thebrowser.Browser', 'workspace A']
 
     # Run finder in space 1
-    alt-d = ['exec-and-forget open -b com.apple.finder', 'workspace 1']
+    alt-d = ['exec-and-forget open -b com.apple.finder']
     # Run Telegram in space M
     alt-g = ['exec-and-forget open -b ru.keepcoder.Telegram', 'workspace M']
 
@@ -294,6 +294,7 @@ on-window-detected = [
 
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
     f = ['layout floating', 'mode main']
+    # alt-slash = 'layout tiles horizontal vertical'
     t = ['layout tiling', 'mode main']
     a = ['layout accordion', 'mode main']
     enter = ['fullscreen', 'mode main']

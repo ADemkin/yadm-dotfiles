@@ -52,7 +52,7 @@ return {
     event = 'VeryLazy',
     cmd = { 'ConformInfo' },
     dependencies = {
-      { 'williamboman/mason.nvim' },
+      { 'mason-org/mason.nvim' },
     },
     opts = {
       notify_on_error = false,
@@ -145,7 +145,7 @@ return {
     'zapling/mason-conform.nvim',
     event = 'VeryLazy',
     dependencies = {
-      'williamboman/mason.nvim',
+      'mason-org/mason.nvim',
       'stevearc/conform.nvim',
     },
     opts = { automatic_installation = true },

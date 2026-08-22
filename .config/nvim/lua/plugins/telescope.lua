@@ -150,7 +150,7 @@ return {
             table.insert(command, '--glob')
             table.insert(command, pieces[2])
           end
-          return vim.tbl_flatten({
+          return vim.iter({
             command,
             {
               '--color=never',
@@ -160,7 +160,7 @@ return {
               '--column',
               '--smart-case',
             },
-          })
+          }):flatten():totable()
         end,
         entry_maker = make_entry.gen_from_vimgrep(opts),
         cwd = opts.cwd,
@@ -204,7 +204,7 @@ return {
     local function spell_suggest_telescope()
       local word = vim.fn.expand('<cword>')
       local suggestions = vim.fn.spellsuggest(word, 50)
-      if vim.tbl_isempty(suggestions) then
+      if #suggestions == 0 then
         return
       end
       pickers

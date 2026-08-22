@@ -19,6 +19,7 @@ return {
       -- TODO: f"" make f orange
       ---@type fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
+        local colors = require('monokai-pro.colors')
         -- dumps(scheme)
         local white = { fg = scheme.base.white }
         local orange = { fg = scheme.base.blue } -- yes, orange is blue
@@ -27,13 +28,10 @@ return {
         local yellow = { fg = scheme.base.yellow }
         local purple = { fg = scheme.base.magenta }
         local red = { fg = scheme.base.red }
+        local cursor_line = colors.darken(scheme.base.dimmed5, 13)
         return {
-          -- ColorColumn = { bg = '#383a3e' },
-          -- CursorColumn = { bg = '#383a3e' },
-          ColorColumn = { bg = scheme.base.dimmed5 },
-          -- CursorColumn = { bg = scheme.base.dimmed5 },
-          -- ColorColumn = { bg = '#FFAA00' },
-          -- CursorColumn = { bg = '#FF0000' },
+          ColorColumn = { bg = cursor_line },
+          CursorLine = { bg = cursor_line },
           WinSeparator = { fg = scheme.base.dimmed4 },
           Todo = { bg = 'NONE', fg = scheme.base.blue },
           SpellBad = { fg = 'NONE', sp = scheme.base.red, undercurl = true },

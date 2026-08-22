@@ -4,7 +4,6 @@ return {
     event = 'BufWinEnter',
     keys = {
       { '<C-g>', '<cmd>Git<cr>' },
-      { 'tm', '<cmd>Git mergetool<cr>' },
     },
   },
   {
@@ -42,14 +41,21 @@ return {
   -- },
   {
     'folke/snacks.nvim',
-    keys = {
-      {
-        'to',
-        function()
-          ---@param opts? snacks.gitbrowse.Config
-          require('snacks.gitbrowse').open()
-        end,
-      },
+    init = function()
+      vim.api.nvim_create_user_command('OpenGitRepoInBrowser', function()
+        require('snacks.gitbrowse').open()
+      end, {})
+    end,
+  },
+  { 'rickhowe/diffchar.vim' },
+  {
+    'dlyongemallo/diffview.nvim',
+    cmd = {
+      'DiffviewOpen',
+      'DiffviewToggle',
+      'DiffviewFileHistory',
+      'DiffviewDiffFiles',
+      'DiffviewLog',
     },
   },
 }

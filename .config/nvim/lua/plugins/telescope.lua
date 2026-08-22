@@ -1,7 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
   event = 'VeryLazy',
-  branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -49,7 +48,6 @@ return {
 
     require('telescope').setup({
       defaults = {
-        preview = { treesitter = false }, -- wait until nvim v0.12 treesitter compatible
         layout_strategy = 'horizontal_fused',
         mappings = {
           i = {
@@ -150,17 +148,20 @@ return {
             table.insert(command, '--glob')
             table.insert(command, pieces[2])
           end
-          return vim.iter({
-            command,
-            {
-              '--color=never',
-              '--no-heading',
-              '--with-filename',
-              '--line-number',
-              '--column',
-              '--smart-case',
-            },
-          }):flatten():totable()
+          return vim
+            .iter({
+              command,
+              {
+                '--color=never',
+                '--no-heading',
+                '--with-filename',
+                '--line-number',
+                '--column',
+                '--smart-case',
+              },
+            })
+            :flatten()
+            :totable()
         end,
         entry_maker = make_entry.gen_from_vimgrep(opts),
         cwd = opts.cwd,

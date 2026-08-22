@@ -15,6 +15,7 @@ return {
 
       local select = require('nvim-treesitter-textobjects.select')
       local swap = require('nvim-treesitter-textobjects.swap')
+      local move = require('nvim-treesitter-textobjects.move')
       vim.keymap.set({ 'x', 'o' }, 'af', function()
         select.select_textobject('@function.outer')
       end)

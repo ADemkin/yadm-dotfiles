@@ -84,8 +84,7 @@ return {
                   border = 'single',
                   header = '',
                   prefix = '',
-                  -- source = true,
-                  source = 'if_many',
+                  source = true,
                 })
               end
             end,
@@ -144,8 +143,7 @@ return {
           severity = vim.diagnostic.severity.ERROR,
           prefix = '●',
           spacing = 2,
-          -- source = true,
-          source = 'if_many',
+          source = true,
         },
         signs = false,
       })

@@ -1,8 +1,3 @@
-local function getcwd()
-  cwd = vim.fn.getcwd()
-  return cwd
-end
-
 return {
   'goolord/alpha-nvim',
   config = function()
@@ -12,7 +7,7 @@ return {
 
     -- TODO: center and trim cwd
     -- https://github.com/goolord/alpha-nvim
-    dashboard.section.header.val = getcwd
+    dashboard.section.header.val = vim.fn.getcwd()
 
     -- Set menu
     dashboard.section.buttons.val = {

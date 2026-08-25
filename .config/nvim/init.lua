@@ -2,6 +2,7 @@ require('core.options')
 require('core.keymaps')
 require('core.search')
 require('core.ui')
+require('core.indent')
 require('core.events')
 require('core.spell')
 
@@ -77,7 +78,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
-      delay = 300,
+      delay = 200,
       triggers = {
         { '<leader>', mode = { 'n', 'v' } },
         { 'g', mode = { 'n', 'v' } },
@@ -144,10 +145,29 @@ require('lazy').setup({
   --   config = true,
   -- },
 
-  -- show how many times search is found
-  {
-    'https://github.com/google/vim-searchindex.git',
-  },
+  -- nvim session
+  -- {
+  --   'jedrzejboczar/possession.nvim',
+  --   requires = { 'nvim-lua/plenary.nvim' },
+  --   opts = {
+  --     autoload = function()
+  --       local cwd = vim.fn.getcwd()
+  --       if cwd == vim.fn.expand('$HOME') or cwd:match('^/tmp') or cwd:match('^/private') or cwd:match('^/var') then
+  --         return false
+  --       end
+  --       return 'last_cwd'
+  --     end,
+  --     autosave = {
+  --       cwd = function()
+  --         local cwd = vim.fn.getcwd()
+  --         if cwd == vim.fn.expand('$HOME') or cwd:match('^/tmp') or cwd:match('^/private') or cwd:match('^/var') then
+  --           return false
+  --         end
+  --         return true
+  --       end,
+  --     },
+  --   },
+  -- },
 }, {
   dev = { path = '~/code' },
 })

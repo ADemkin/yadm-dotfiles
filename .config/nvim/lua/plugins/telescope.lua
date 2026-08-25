@@ -194,10 +194,15 @@ return {
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
     vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
-    vim.keymap.set('n', '<leader>fh', telescope.extensions.hierarchy.outgoing_calls, { desc = 'call stack [h]ierarchy' })
-    vim.keymap.set('n', '<leader>fH', telescope.extensions.hierarchy.incoming_calls, { desc = 'caller stack [h]ierarchy' })
+    vim.keymap.set('n', '<leader>fo', telescope.extensions.hierarchy.outgoing_calls, { desc = 'LSP [I]ncoming' })
+    vim.keymap.set('n', '<leader>fi', telescope.extensions.hierarchy.incoming_calls, { desc = 'LSP [O]utcoming' })
     vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = '[U]ndo tree' })
     vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
+    vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]umplist' })
+
+    -- git
+    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [B]ranches' })
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

@@ -1,15 +1,45 @@
 -- TODO: check https://github.com/folke/sidekick.nvim
 
+local function equalize_after(fn, ...)
+  local result = { fn(...) }
+  vim.schedule(function()
+    vim.cmd('wincmd =')
+  end)
+  return unpack(result)
+end
+
 return {
   'coder/claudecode.nvim',
   opts = {
     terminal = {
-      -- split_width_percentage = 0.5,
-      split_width_percentage = nil,
+      split_width_percentage = 0.5,
       diff_split_width_percentage = 0.2,
       provider = 'native',
     },
   },
+  config = function(_, opts)
+    require('claudecode').setup(opts)
+
+    -- Monkeypatch: make Claude terminal split like a normal buffer.
+    -- Plugin hardcodes `botright <width>vsplit` which ignores `wincmd =`.
+    -- We replace the vsplit logic to use plain vsplit + equalize.
+    local native = require('claudecode.terminal.native')
+    local orig_open = native.open
+    local orig_simple_toggle = native.simple_toggle
+    local orig_focus_toggle = native.focus_toggle
+
+    -- Patch effective_config to remove the hardcoded width before each call.
+    -- Setting split_width_percentage to 0.5 then equalizing gives true 50/50.
+    native.open = function(...)
+      return equalize_after(orig_open, ...)
+    end
+    native.simple_toggle = function(...)
+      return equalize_after(orig_simple_toggle, ...)
+    end
+    native.focus_toggle = function(...)
+      return equalize_after(orig_focus_toggle, ...)
+    end
+  end,
   keys = {
     { '<leader>a', nil, desc = 'AI/Claude Code' },
     { '<leader>ac', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },

@@ -48,14 +48,4 @@ return {
     end,
   },
   { 'rickhowe/diffchar.vim' },
-  {
-    'dlyongemallo/diffview.nvim',
-    cmd = {
-      'DiffviewOpen',
-      'DiffviewToggle',
-      'DiffviewFileHistory',
-      'DiffviewDiffFiles',
-      'DiffviewLog',
-    },
-  },
 }

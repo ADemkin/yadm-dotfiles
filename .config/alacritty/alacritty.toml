@@ -50,7 +50,6 @@ live_config_reload = true
 import = [
     "~/.config/alacritty/keyboard.toml",
     "~/.config/alacritty/monokai.toml",
-    # "~/.config/alacritty/victor-mono.toml",
     "~/.config/alacritty/jetbrains-mono.toml",
 
 ]

@@ -59,15 +59,22 @@ chpwd() {
 }
 
 # Basic options
-setopt APPEND_HISTORY SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE  # dont write cmd to hist if it start with space
+setopt APPEND_HISTORY
+setopt appendhistory
+setopt SHARE_HISTORY
+setopt sharehistory
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
 setopt INTERACTIVE_COMMENTS
 setopt GLOB_STAR_SHORT  # change **/*.py to **.py
 setopt GLOB_DOTS
 setopt EXTENDED_GLOB  # use ~ to ignore, ex: **.py*~*.pyc will ignore .pyc
 setopt NO_NOMATCH
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS  # use pushd when cd
-setopt HIST_FIND_NO_DUPS
 
 # EMACS mode
 bindkey -e
@@ -348,5 +355,10 @@ podlogs() {
 
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/antondemkin/.lmstudio/bin"
+# export PATH="$PATH:/Users/antondemkin/.lmstudio/bin"
 # End of LM Studio CLI section
+
+
+# source $(brew --prefix)/opt/zinit/zinit.zsh
+
+# export UV_OFFLINE=1

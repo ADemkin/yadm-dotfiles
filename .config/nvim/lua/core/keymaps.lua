@@ -27,6 +27,10 @@ vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
 -- C-w like in classic vim
 vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 
+-- send raw escape
+vim.keymap.set('t', '<C-]>', '<Esc>', opts)
+vim.keymap.set('t', '<Esc><Esc>', '<Esc>', opts)
+
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(event)
     -- Enter in scrolled terminal goes back into insert mode

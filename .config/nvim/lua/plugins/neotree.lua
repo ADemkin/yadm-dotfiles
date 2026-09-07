@@ -51,8 +51,16 @@ return {
         },
         git_status = {
           symbols = {
-            added = '', -- highlight only
-            modified = '', -- highlight only
+            -- highlight only
+            added = '',
+            deleted = '',
+            modified = '',
+            renamed = '',
+            untracked = '',
+            ignored = '',
+            unstaged = '',
+            staged = '',
+            conflict = '',
           },
         },
         symlink_target = {

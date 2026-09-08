@@ -30,9 +30,6 @@ dispatcher.url_patterns = {
 }
 dispatcher:start()
 
--- Session time tracker (menubar: total | current session)
-hs.loadSpoon('SessionTimer'):start()
-
 -- Toggle Happ VPN (service name: Happ)
 hs.hotkey.bind({ 'cmd', 'shift' }, 'v', function()
   local output = hs.execute("scutil --nc status 'Happ' | head -1")

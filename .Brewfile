@@ -1,6 +1,7 @@
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
+tap "janosmiko/tap"
 tap "jurplel/tap"
 tap "m99coder/tap", trusted: true
 tap "mediosz/tap"
@@ -9,6 +10,8 @@ tap "nikitabobko/tap", trusted: true
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Get/set bluetooth power and discoverable state
+brew "blueutil"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Human-friendly and fast alternative to cut and (sometimes) awk
@@ -95,6 +98,8 @@ brew "libfido2"
 brew "lsd"
 # Tool for linting and static analysis of Lua code
 brew "luacheck"
+# Package manager for the Lua programming language
+brew "luarocks"
 # Apple Silicon Monitor Top written in Go Lang
 brew "mactop"
 # NCurses Disk Usage
@@ -103,6 +108,8 @@ brew "ncdu"
 brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node@20"
+# SSL/TLS VPN implementing OSI layer 2 or 3 secure network extension
+brew "openvpn"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
@@ -161,20 +168,32 @@ brew "typos-cli"
 brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Convert HTML to PDF
+brew "weasyprint"
 # Internet file retriever
 brew "wget"
 # Yet Another Dotfiles Manager
 brew "yadm"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
 # Suite of barcodes-reading tools
 brew "zbar"
+# Flexible and fast Zsh plugin manager
+brew "zinit"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar", trusted: true
+# Lightning Fast Kubernetes navigator - keyboard-focused TUI for managing K8s clusters
+brew "janosmiko/tap/lfk", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # VPN client
@@ -187,8 +206,6 @@ cask "arc"
 cask "auto-claude"
 # Tool to customise input devices and automate computer systems
 cask "bettertouchtool"
-# Anthropic's official Claude AI desktop app
-cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # OpenAI's coding agent that runs in your terminal
@@ -205,14 +222,18 @@ cask "dropbox"
 cask "firefox"
 # Screen colour temperature controller
 cask "flux-app"
+cask "font-b612-mono"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
+cask "font-sketchybar-app-font"
 cask "font-victor-mono"
 cask "font-victor-mono-nerd-font"
 # Update maps and software, sync with Garmin Connect and register your device
 cask "garmin-express"
 # Web browser
 cask "google-chrome"
+# Desktop automation application
+cask "hammerspoon"
 # Open-source video transcoder
 cask "handbrake-app"
 # Keyboard shortcuts for every button on your screen
@@ -221,6 +242,8 @@ cask "homerow"
 cask "iina"
 # Native instant workspace switching
 cask "jurplel/tap/instant-space-switcher", trusted: true
+# Menu bar manager
+cask "jordanbaird-ice"
 # Desktop application for JupyterLab
 cask "jupyterlab-app"
 # Keyboard customiser

@@ -1,762 +1,277 @@
-" encoding
+" ~/.vimrc - minimal standalone Vim config
+
+set nocompatible
 set encoding=utf-8
 scriptencoding utf-8
+set fileencoding=utf-8
 
-" generic vimrc
-set nocompatible
+filetype plugin indent on
 syntax on
-set encoding=utf-8
-set colorcolumn=80
 
-" allow to auto indent and auto tab
-filetype on
-filetype indent on
-filetype plugin on
+" gc comment operator; shipped with Vim 9.1+ only, silently skipped on older VDS boxes
+if has('patch-9.1.0375')
+  packadd! comment
+endif
 
-" hide buffer when it's abandoned
-set hidden
+" Files, undo, buffers
+set hidden                        " keep abandoned buffers loaded
+if has('clipboard')
+  " macOS Vim uses the * register; unnamedplus is Neovim/X11 only
+  set clipboard=unnamed
+endif
+set noswapfile
+set nobackup
+set nowritebackup
+set autoread                      " reload file when changed outside vim
+set undofile                      " persistent undo
+set undodir=~/.vim/undo//
+if !isdirectory(expand('~/.vim/undo'))
+  call mkdir(expand('~/.vim/undo'), 'p', 0700)
+endif
 
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" tabs and spaces
-set autoindent
+" Indentation
 set tabstop=4
-set shiftwidth=0
-set smarttab
+set shiftwidth=4
+set softtabstop=4
 set expandtab
+set smarttab
+set autoindent
+set breakindent
 set nojoinspaces
-set list
-set listchars=tab:\¦\ ,trail:·
 
-function IsReadOnly()
-    return &readonly || &buftype == 'nowrite' || &buftype == 'terminal' || &buftype == 'nofile'
-endfunction
-
-" do not highlight in read-only buffers
-autocmd FileType * if IsReadOnly() | set nolist | endif
-autocmd TerminalWinOpen * set nolist
-
-set pastetoggle=<leader>p
-
-autocmd Filetype html,vue,htmldjango setlocal ts=2 sw=2 sts=2 expandtab matchpairs+=<:>
-autocmd FileType sh iabbrev #! #!/bin/sh
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
-autocmd FileType python setlocal ts=4 sw=4 sts=4 nolist expandtab
-autocmd FileType markdown setlocal conceallevel=0
-
-" Go: additional language settings
-autocmd FileType go setlocal tabstop=4 shiftwidth=4 softtabstop=0 nolist noexpandtab
-autocmd FileType go iabbrev pack package name<CR><CR>import (<CR>"fmt"<CR>)<ESC>ggw
-autocmd FileType go iabbrev iferr if err != nil {<CR>}<ESC>ko
-autocmd FileType go iabbrev imp import (<CR>"fmt"<CR>)<ESC>kw
-
-" Python: additional language settings
-" Additional python highlight for monokai
-autocmd FileType python syn match pythonSelf "\(\W\|^\)\@<=\(self\|cls\)\([\.,:)]\)\@="
-autocmd FileType python syn match pythonOperator "\(:\?[<>=\-%+\*!|&^]\)"
-autocmd FileType python syn match pythonNumber "\(\[\d_]*\)\b"
-" autocomplete
-autocmd FileType python iabbrev pdb breakpoint();<CR>pass
-autocmd FileType python iabbrev ifname if __name__ == '__main__':<CR>
-
-" file handling
-" set isfname-=:
-set noswapfile  " do not create *.sw[op] files
-set autoread  " auto reload file when it's updated
-
-" number column
+" UI
+set background=dark
+if has('termguicolors')
+  set termguicolors
+endif
 set number
 set relativenumber
 set numberwidth=1
-" Automatically split or merge signcolumn depending on the window width
-function! UpdateSignColumn() abort
-    if IsReadOnly()
-        setlocal signcolumn=no nonumber norelativenumber
-    elseif winwidth(winnr()) > &colorcolumn + 10
-        setlocal signcolumn=auto
-    else
-        setlocal signcolumn=number
-    endif
-endfunction
-autocmd WinResized * call UpdateSignColumn()
-
-augroup HelpInRightSplit
-  autocmd!
-  autocmd BufWinEnter *.txt if &buftype == 'help' | wincmd L | vertical resize 80 | endif
-augroup END
-
-" resize all windows when window restized
-" autocmd VimResized * :wincmd =
-
-" show cursor line
+set signcolumn=auto
 set cursorline
-
-" highlight errors with red bg
-highlight SpellBad ctermbg=52 cterm=none
-
-set ttyfast
-set showcmd                                    " display incomplete command
-" set completeopt=menu,menuone,noinsert,noselect " completion
-set completeopt=menuone,noselect
-set gdefault                                   " g is not required by default in :s/old/new/ command
-set scrolloff=3
-set undodir=~/.vim/undo
-set mouse=                                     " Allow to select raw text from vim
-set laststatus=2                               " always display the status line
-set visualbell                                 " no sound bell
-set splitright                                 " :vs split to right
-set splitbelow                                 " :sp split to bottom
-set backspace=indent,eol,start                 " Backspace deletes like most programs in insert mode
-set textwidth=0                                " prevent from auto-newline
-set nofoldenable                               " disable code folding
-set formatoptions-=o                           " dont continue comments when pushing /O
-
-" Paste mode settings
-set showmode  " show if paste mode is on
-
-" vertical split appearance
+set colorcolumn=80
+set scrolloff=99
+set laststatus=2
+set showmode
+set showcmd
+set pumheight=10
+set linebreak
+set textwidth=0                   " never auto-wrap
+set nofoldenable
+set visualbell
+set t_vb=
+set splitright
+set splitbelow
+set backspace=indent,eol,start
+set mouse=                        " let the terminal handle selection
+set updatetime=100
+set timeoutlen=1000
+set ttimeout
+set ttimeoutlen=100               " no <Esc> lag in the terminal
+set title
+set history=1000
+set sidescrolloff=5
+set nrformats-=octal              " 007 <C-a> is 8, not 010
+set sessionoptions-=options
+set viewoptions-=options
+set switchbuf=useopen,usetab
+set diffopt+=algorithm:histogram,indent-heuristic
+set list
+set listchars=tab:\¦\ ,trail:·
 set fillchars+=vert:\│
 
-" set colors
-set background=dark
-set termguicolors
+set statusline=\ %f\ %m%r%h%w%=\ %y\ %{&fileencoding?&fileencoding:&encoding}\ \|\ %l:%c\ \|\ %p%%\ \|
 
-" ignore case while searching
+" Search
 set ignorecase
 set smartcase
+set infercase
 set hlsearch
 set incsearch
-" highlight with yellow on black
-highlight MatchParen ctermbg=yellow
+set gdefault
 
-" (re)store session on exit
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
-
-" Let menu act like shell
+" Completion & wildmenu
+set completeopt=menuone,noselect
+set shortmess+=c
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=**/_build/*,**/tags,**/.git,**/.hypothesis
-set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
-set wildignore+=**/*.egg-info,**/.*_cache
-set wildignore+=**/__pychache__
+set iskeyword+=-
 
-" Add fzf to completions
-" set rtp+=/opt/homebrew/opt/fzf
+" :find as a poor man's fuzzy finder
+set path+=**
+set wildignore+=*/node_modules/*,*/.git/*,*/dist/*,*/target/*,*/__pycache__/*,*.o,*.pyc
 
-" Map Space as Leader
-nnoremap <SPACE> <Nop>
-map <Space> <Leader>
+" netrw (built-in file explorer)
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
-" move visual selection up and down with J/K
-vnoremap J :move '>+1<CR>gv=gv
-vnoremap K :move '<-2<CR>gv=gv
+" Keymaps
+nnoremap <Space> <Nop>
+let mapleader = ' '
+let maplocalleader = ' '
 
-" delete do not replace current buffer
-nnoremap x "_x
-vnoremap p "_dP
-
-" scroll and center
-nnoremap <C-e> <C-e>zz
-nnoremap <C-y> <C-y>zz
-nnoremap <C-u> <C-u>zz
-nnoremap <C-d> <C-d>zz
-" nnoremap j jzz
-" nnoremap k kzz
-
-" do not require shift for :
+" Command mode without shift
 nnoremap ; :
 nnoremap : ;
 
-" easy movement between panes
+" Keep the cursor centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
+" Window navigation
+nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-
-" Terminal settings
-nnoremap <leader>t :vert term<CR>
-" nvim and vim configs are different
-if !has('nvim')
-    " VIM 9 terminal
-    " easy movement for terminal
-    tnoremap <C-j> <C-w>j
-    tnoremap <C-k> <C-w>k
-    tnoremap <C-l> <C-w>l
-    tnoremap <C-h> <C-w>h
-    " C-u will just scroll terminal buffer up
-    tnoremap <C-u> <C-w><S-n><C-u>
-    autocmd TerminalOpen * startinsert
-    nnoremap <Return> i
-else
-    " NVIM terminal
-    " nvim has differen terminal binding
-    tnoremap <C-h> <C-\><C-n><C-w>h
-    tnoremap <C-j> <C-\><C-n><C-w>j
-    tnoremap <C-k> <C-\><C-n><C-w>k
-    tnoremap <C-l> <C-\><C-n><C-w>l
-    autocmd TermOpen * startinsert
-
-    " autocmd TerminalWinOpen * startinsert
-    " tnoremap <C-u> <C-\><C-n><C-u>
-    " nnoremap <Return> i
-    autocmd UIEnter * echo "uienter"
-    autocmd UILeave * echo "uileave"
-    autocmd BufWinEnter * startinsert
-endif
-
-" clear highlight
-" (overriden in Mark plugin settings)
-map <leader>c :nohlsearch<CR>
-
-" spell check
-set spelllang=en_gb,ru
-autocmd FileType txt setlocal spell
-autocmd FileType rst setlocal spell
-autocmd FileType markdown setlocal spell
-autocmd FileType gitcommit setlocal spell
-" autocmd FileType python setlocal spell
-
-call matchadd('Error', '\s+$')
-
-" Show syntax highlighting groups for word under cursor
-nnoremap <leader>w :echo synIDattr(synID(line("."), col("."), 1), 'name')<CR>
-
-" Show buffer and expect to enter buffer number
-nmap <leader>b :buffers<cr>:buffer<space>
-
-" netrw cofig
-let g:netrw_banner = 0  " disable banner
-let g:netrw_liststyle = 3  " tree view
-" let g:netrw_browse_split = 4  " open in new split
-" let g:netrw_altv = 1  " open in vertical split
-
-" ###################### VIM PLUGINS AND SETTINGS #############################
-"
-" VimPlug
-"
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-" or autoinstall it:
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" more info on VimPlug on https://github.com/junegunn/vim-plug
-"
-call plug#begin()
-
-" NERDTree: sidebar to navigate project
-Plug 'scrooloose/nerdtree'
-
-" NerdTreeGitPlugin: show git status in NerdTree
-" old one, no longer maintained
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" new one, maintained
-" Plug 'albfan/nerdtree-git-plugin'
-
-" Fugitive: all actions with :Git
-Plug 'tpope/vim-fugitive'
-Plug 'rbong/vim-flog'
-
-" Commentary: comment code with ease
-Plug 'tpope/vim-commentary'
-
-" Abolish: swap case with cr* and use smart :S instead of :s
-Plug 'tpope/vim-abolish'
-
-" SurrondWith: effective way to 'surround' str(code)
-Plug 'tpope/vim-surround'
-
-" VimRepeat: repeat surround and other stuff with .
-Plug 'tpope/vim-repeat'
-
-" IndentLine: add vertical line on on indent
-Plug 'Yggdroot/indentLine'
-
-" Mark: <leader>-m to highlight word
-Plug 'idbrii/vim-mark'
-" requirements
-Plug 'inkarkat/vim-ingo-library'
-
-" ALE: async linter with multiple language support
-Plug 'dense-analysis/ale'
-
-" LSC: Fastest LSP client
-Plug 'natebosch/vim-lsc'
-
-" VimCompletesMe: Use Tab for autocomplete
-" Plug 'vim-scripts/VimCompletesMe'
-
-" FZF: Search files
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" VimTmuxNavigator: Seamlessly move between vim and tmux panes
-Plug 'christoomey/vim-tmux-navigator'
-
-" Markdown: syntax, tabs and render
-" Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
-" If you don't have nodejs and yarn
-" use pre build, add 'vim-plug' to the filetype list so vim-plug can update this plugin
-" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
-" run :MarkdownPreview to run web browser in sync with vim
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
-" VimSneak: Easy and smart movements with s key
-Plug 'justinmk/vim-sneak'
-
-" Copilot: AI completion tool
-" Plug 'github/copilot.vim'
-
-" Lightline: fast configurable statusline
-Plug 'itchyny/lightline.vim'
-
-" ColorTemplate: convert colorscheme to template
-" Plug 'lifepillar/vim-colortemplate'
-
-" Argwrap: Split/Unsplit text in brackets
-Plug 'FooSoft/vim-argwrap'
-
-" EasyAlign: align text with ease
-Plug 'junegunn/vim-easy-align'
-
-" Timelapse: git history fun
-" Plug 'vim-scripts/git-time-lapse'
-
-" Signify: show diff in gutter, jump and undo hunks
-Plug 'mhinz/vim-signify'
-
-" Codefmt: format code with google codefmt
-" " Add maktaba and codefmt to the runtimepath.
-" " (The latter must be installed before it can be used.)
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-" " Also add Glaive, which is used to configure codefmt's maktaba flags. See
-" " `:help :Glaive` for usage.
-Plug 'google/vim-glaive'
-
-" GoSyntax: enhance go syntax
-Plug 'charlespascoe/vim-go-syntax'
-
-" Dadbod: database client
-Plug 'tpope/vim-dotenv'
-Plug 'tpope/vim-dadbod'
-Plug 'kristijanhusak/vim-dadbod-ui'
-" Plug 'kristijanhusak/vim-dadbod-completion' "Optional
-
-" VimTest: run tests from vim
-" not yet decided how to run tests
-" Plug 'vim-test/vim-test'
-" Plug 'tpope/vim-dispatch'
-Plug 'christoomey/vim-tmux-runner'
-
-" Arpeggio: jk to esc
-Plug 'kana/vim-arpeggio'
-
-" Unimaired: quickly navigate quickfix and more
-" ]q [q for quickfix
-Plug 'tpope/vim-unimpaired'
-
-" Ropevim: autoimport and refactor
-" Plug 'python-rope/ropevim'
-
-" HardMode: use motions more effectively
-Plug 'dusans/vim-hardmode'
-
-" VimHusk: readline mappings for command line
-Plug 'vim-utils/vim-husk'
-
-" PythonSense: python text objects: m for func/method, c for class
-Plug 'jeetsukumaran/vim-pythonsense'
-
-" Context: show scope event if it's not visible
-Plug 'wellle/context.vim'
-
-call plug#end()
-call glaive#Install()
-
-
-" Fugitive: settings
-nnoremap ts :Git<CR>
-nnoremap tb :Git blame<CR>
-nnoremap td :Git diff<CR>
-nnoremap tg :Flog<CR>
-autocmd FileType fugitive nnoremap <buffer> tp :Git push<CR>
-autocmd FileType fugitive nnoremap <buffer> tP :Git push -f<CR>
-command! GitGraph vertical Git graph
-autocmd FileType fugitive nnoremap <buffer> gg :GitGraph<CR>
-" nnoremap tp :Git push<CR>
-" nnoremap tP :Git push -f<CR>
-let g:flog_permanent_default_opts = {
-    \'date': 'short',
-\}
-let g:flog_enable_dynamic_commit_hl = 1
-
-
-" NERDTree: settings
-let NERDTreeShowHidden = 1
-" auto close NT when file is opened
-" let NERDTreeQuitOnOpen = 1
-" open and close with tt
-nnoremap tt :NERDTreeToggle<CR>
-nnoremap tf :NERDTreeFind<CR>
-let NERDTreeRespectWildIgnore=1
-" disable ? for help
-let NERDTreeMinimalUI = 1
-" open NERDTree on starup
-autocmd StdinReadPre * let s:std_in=1
-" open nerdtree and put cursor in main window
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
-" open nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
-" close vim with :q if only NERDTree is opened
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" TODO: now working with with fzf
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-" autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-" ignore some basic folders
-let NERDTreeIgnore=[".git/", ".idea", ".helm*", "__pycache__", ".ropeproject"]
-
-
-" ALE: settings
-let g:ale_disable_lsp = 1
-let g:ale_open_list = 0
-let g:ale_lint_on_enter = 0
-let g:ale_python_flake8_options = '--ignore=W191,E501,W504'
-let g:ale_python_mypy_options = '--no-warn-no-return --disallow-untyped-defs'
-let g:ale_linters = {
-    \'python': ['flake8'],
-    \'javascript': ['eslint'],
-    \'go': ['gopls'],
-    \'markdown': ['markdownlint', 'writegood', 'alex', 'proselint'],
-    \'json': ['jsonlint'],
-\}
-let g:ale_completion_enabled = 0
-let g:ale_lint_delay = 1500
-" highlight clear ALEErrorSign
-let g:ale_sign_error = '!'
-" highlight clear ALEWarningSign
-let g:ale_sign_warning = '?'
-nmap <leader>l :ALEToggle<CR>
-highlight SpellCap ctermbg=52 cterm=none
-
-" IndentLine: settings
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#75715e'
-let g:indentLine_fileTypeExclude = ['markdown']
-
-" Mark: settings
-let g:mwDefaultHighlightingPalette = 'extended'
-" let g:mwDefaultHighlightingPalette = 'maximum'
-" clear screen for search and mark
-noremap <C-c> :nohlsearch<CR>:MarkClear<CR>
-
-
-" ##############################################################################
-" LSC SETTINGS
-" ##############################################################################
-
-" LSC: autocomplete
-" debug :set comnifunc? :set completefunc?
-let g:lsc_autocomplete_length = 50
-autocmd FileType python set omnifunc=lsc#complete#complete
-
-" LSC: servers
-let g:pylsp_config = {
-    \'command': 'pylsp',
-    \'log_level': 1,
-    \'suppress_stderr': v:true,
-    \'workspace_config': {'pylsp': {'plugins': {}}},
-\}
-let g:pylsp_config.workspace_config.pylsp.plugins.flake8 = {'enabled': v:true}
-let g:pyright_config = {
-    \'command': 'pyright-langserver --stdio',
-    \'log_level': -1,
-    \'suppress_stderr': v:true,
-\}
-let g:gopls_config = {
-    \'command': 'gopls',
-    \'log_level': -1,
-    \'suppress_stderr': v:true,
-\}
-let g:lsc_server_commands = {
-    \'python': g:pylsp_config,
-    \'javascript': {
-        \'command': 'javascript-typescript-stdio',
-        \'log_level': -1,
-        \'suppress_stderr': v:true,
-    \},
-    \'html': {
-        \'command': 'html-languageserver --stdio',
-        \'log_level': -1,
-        \'suppress_stderr': v:true,
-    \},
-    \'go': g:gopls_config,
-\}
-
-" LSC: keymaps
-let g:lsc_auto_map = {
-    \'GoToDefinition': 'gd',
-    \'FindReferences': 'gu',
-    \'NextReference': '<C-n>',
-    \'PreviousReference': '<C-p>',
-    \'FindImplementations': 'gI',
-    \'FindCodeActions': 'ga',
-    \'Rename': 'gr',
-    \'ShowHover': 'K',
-    \'DocumentSymbol': 'go',
-    \'WorkspaceSymbol': 'gS',
-    \'SignatureHelp': 'gm',
-    \'Completion': 'completefunc',
-\}
-nnoremap gD :vertical LSClientGoToDefinitionSplit<CR>
-autocmd FileType go nnoremap gi :LSClientFindCodeActions "Organize Imports"<CR>
-
-" LSC: other
-let g:lsc_reference_highlights = v:false  " conflict with Mark plugin
-highlight Warning ctermbg=52 cterm=none  " fix highlight for LSC warnings
-
-
-" FZF: settings
-" move to prev buffer if NERDTree is opened
-" TODO
-function! FZFOpen(fzf_command)
-  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
-    exe "normal! \<c-w>\<c-w>"
-  endif
-  exe 'normal! ' . a:command_str . "\<cr>"
-endfunction
-
-" nnoremap <silent> <C-b> :call FZFOpen(':Buffers')<CR>
-" nnoremap <silent> <C-g>g :call FZFOpen(':Ag')<CR>
-" nnoremap <silent> <C-g>c :call FZFOpen(':Commands')<CR>
-" nnoremap <silent> <C-g>l :call FZFOpen(':BLines')<CR>
-" nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
-" search only inside project file names (respect .gitignore)
-nnoremap <Leader>ff :GFiles<CR>
-" search inside file content
-nnoremap <Leader>fg :Rg<CR>
-" replace simple buffers to fzf buffers
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>; :Commands<CR>
-nnoremap <leader>k :Maps<CR>
-
-
-" VimTmuxNavigator: settings
-" Disable tmux navigator when zooming the Vim pane
-let g:tmux_navigator_disable_when_zoomed = 1
-let g:tmux_navigator_no_wrap = 1
-
-" VimMarkdown: settings
-let g:vim_markdown_folding_disabled = 1
-
-" MarkdownPreview: settings
-let g:mkdp_browser = 'firefox'
-let g:mkdp_echo_preview_url = 1
-let g:mkdp_auto_start = 0
-
-" VimSneak: settings
-let g:sneak#label = 1
-" s key is mapped in NERDTree and Fugitive
-augroup SneakNonNerdTreeOrFugitive
-    autocmd!
-    autocmd BufEnter * if index(['nerdtree', 'fugitive'], &buftype) != -1 | nnoremap <buffer> s <Plug>Sneak_s | endif
+tnoremap <C-h> <C-w>h
+tnoremap <C-j> <C-w>j
+tnoremap <C-k> <C-w>k
+tnoremap <C-l> <C-w>l
+
+" Move visual selection up/down
+vnoremap J :move '>+1<CR>gv=gv
+vnoremap K :move '<-2<CR>gv=gv
+
+" Don't clobber the unnamed register
+nnoremap x "_x
+vnoremap p "_dP
+
+" Clear search highlight
+nnoremap <silent> <C-c> :nohlsearch<CR>
+
+" Quickfix / location list navigation (vim-unimpaired subset)
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]Q :clast<CR>
+nnoremap <silent> [Q :cfirst<CR>
+nnoremap <silent> <leader>q :copen<CR>
+
+" Buffers
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [b :bprevious<CR>
+
+" Terminal
+nnoremap <C-y> :vert term<CR>
+tnoremap <Esc><Esc> <C-\><C-n>
+tnoremap <C-w> <C-\><C-n><C-w>
+
+" Autocommands
+augroup vimrc
+  autocmd!
+
+  " Return to the last cursor position when reopening a file
+  autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") && &filetype !~# 'commit'
+        \ |   execute "normal! g`\""
+        \ | endif
+
+  " Never continue comments on o/O or <CR>
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+  autocmd TerminalWinOpen * setlocal nolist nonumber norelativenumber
+
+  " Help windows open on the right
+  autocmd BufWinEnter *.txt if &buftype ==# 'help' | wincmd L | vertical resize 84 | endif
+
+  " Equalize splits when the terminal is resized
+  autocmd VimResized * wincmd =
 augroup END
 
-" nnoremap s <Plug>Sneak_s
-highlight! link Sneak Search
-highlight! link SneakCurrent CurSearch
+let g:colors_name = 'monokai'
 
-" Lightline: settings
-function! IsWide()
-    return winwidth(winnr()) > 100
-endfunction
-function! IsTerminal()
-    return lightline#mode() == 'TERMINAL' || &buftype == 'terminal'
-endfunction
-" LSC only shown in non terminal
-function! LightlineLSCServerStatus()
-    if !IsTerminal()
-        return LSCServerStatus()
-    else
-        return ''
-    endif
-endfunction
-let g:lightline = {
-\    'colorscheme': 'monokai',
-\    'active': {
-\        'left': [
-\            [ 'mode', 'paste' ],
-\            [ 'filename', 'readonly', 'modified' ],
-\        ],
-\        'right': [
-\            [ 'percent', 'line' ],
-\            [ 'lscstatus', 'filetype' ],
-\            [ 'fileencoding', 'charvaluehex' ],
-\        ],
-\    },
-\    'inactive': {
-\        'right': [
-\            [ 'percent', 'line' ],
-\            [ 'filetype' ],
-\        ],
-\    },
-\    'component': {
-\        'modified': '%{IsTerminal()?"":&modified?"[+]":""}',
-\        'charvaluehex': '0x%B',
-\        'filetype': '%{&ft!=#""?&ft:""}',
-\        'fileencoding': '%{(IsTerminal()||!IsWide())?"":&fenc!=#""?&fenc:&enc}',
-\        'filename': '%{IsTerminal()?"":expand("%:.")}',
-\    },
-\    'component_visible_condition': {
-\        'modified': '(!IsTerminal() && &modified && &modifiable)',
-\        'fileencoding': '(!IsTerminal() && IsWide())',
-\    },
-\    'component_function': {
-\        'lscstatus': 'LightlineLSCServerStatus',
-\    },
-\ }
-set noshowmode
+hi Normal       guifg=#E8E8E3 guibg=#272822 ctermfg=252 ctermbg=234
+hi ColorColumn  guibg=#2D2E27 ctermbg=235
+hi CursorLine   guibg=#2D2E27 ctermbg=235 term=NONE cterm=NONE gui=NONE
+hi CursorColumn guibg=#383a3e ctermbg=236
+hi LineNr       guifg=#8F908A guibg=#2D2E27 ctermfg=243 ctermbg=235 term=NONE cterm=NONE gui=NONE
+hi CursorLineNr guifg=#FD9720 guibg=#2D2E27 ctermfg=208 ctermbg=235 term=NONE cterm=NONE gui=NONE
+hi SignColumn   guibg=#2D2E27 ctermbg=235
+hi NonText      guifg=#575b61 ctermfg=237
+hi SpecialKey   guifg=#575b61 ctermfg=237
+hi Visual       guibg=#575b61 ctermbg=237
+hi Search       guifg=#272822 guibg=#E6DB74 ctermfg=234 ctermbg=186
+hi IncSearch    guifg=#272822 guibg=#FD9720 ctermfg=234 ctermbg=208
+hi MatchParen   guifg=#272822 guibg=#ae81ff ctermfg=234 ctermbg=141
+hi VertSplit    guifg=#64645e guibg=#272822 ctermfg=239 ctermbg=234
+hi StatusLine   guifg=#E8E8E3 guibg=#211F1C ctermfg=252 ctermbg=233 term=NONE cterm=NONE gui=NONE
+hi StatusLineNC guifg=#75715E guibg=#211F1C ctermfg=59 ctermbg=233 term=NONE cterm=NONE gui=NONE
+hi TabLine      guifg=#E8E8E3 guibg=#211F1C ctermfg=252 ctermbg=233 cterm=NONE gui=NONE
+hi TabLineFill  guibg=#211F1C ctermbg=233
+hi TabLineSel   guifg=#E8E8E3 guibg=#2D2E27 ctermfg=252 ctermbg=235 cterm=NONE gui=NONE
+hi Folded       guifg=#75715E guibg=#211F1C ctermfg=59 ctermbg=233
+hi FoldColumn   guibg=#211F1C ctermbg=233
+hi Question     guifg=#E6DB74 ctermfg=186
+hi ModeMsg      guifg=#E6DB74 ctermfg=186
+hi MoreMsg      guifg=#E6DB74 ctermfg=186
+hi ErrorMsg     guifg=#272822 guibg=#e73c50 ctermfg=234 ctermbg=196
+hi WarningMsg   guifg=#e73c50 ctermfg=196
+hi Title        guifg=#E6DB74 ctermfg=186
+hi Directory    guifg=#66d9ef ctermfg=81
 
-" colorscheme
-colorscheme monokai
-" colorscheme retrobox
+" popup menu
+hi Pmenu      guifg=#E8E8E3 guibg=#2D2E27 ctermfg=252 ctermbg=235
+hi PmenuSel   guifg=#E8E8E3 guibg=#383a3e ctermfg=252 ctermbg=236
+hi PmenuSbar  guibg=#2D2E27 ctermbg=235
+hi PmenuThumb guifg=#2D2E27 guibg=#8F908A ctermfg=235 ctermbg=243
 
-" Argwap: settings
-nnoremap <silent> <leader>d :ArgWrap<CR>
-nnoremap <silent> <leader>j :ArgWrap<CR>
-let g:argwrap_tail_comma = 1
-autocmd FileType vim let b:argwrap_line_prefix = '\'
+" diff
+hi DiffAdd    guifg=#d7ffaf guibg=#5f875f ctermfg=193 ctermbg=65
+hi DiffDelete guifg=#272822 guibg=#f75f5f ctermfg=234 ctermbg=167
+hi DiffChange guifg=#d7d7ff guibg=#5f5f87 ctermfg=189 ctermbg=60
+hi DiffText   guifg=#272822 guibg=#66d9ef ctermfg=234 ctermbg=81
+hi diffAdded   guifg=#A6E22D ctermfg=148
+hi diffRemoved guifg=#e73c50 ctermfg=196
 
-" EasyAlign: settings
-" Start interactive EasyAlign in visual mode (e.g. vipea)
-xmap gea <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. eaip)
-nmap gea <Plug>(EasyAlign)
+" generic syntax
+hi Comment    guifg=#75715E ctermfg=59 gui=italic cterm=NONE
+hi Constant   guifg=#ae81ff ctermfg=141
+hi Number     guifg=#ae81ff ctermfg=141
+hi Float      guifg=#ae81ff ctermfg=141
+hi Boolean    guifg=#ae81ff ctermfg=141
+hi Character  guifg=#E6DB74 ctermfg=186
+hi String     guifg=#E6DB74 ctermfg=186
+hi Identifier guifg=#E8E8E3 ctermfg=252 cterm=NONE gui=NONE
+hi Function   guifg=#A6E22D ctermfg=148
+hi Statement  guifg=#66d9ef ctermfg=81 cterm=NONE gui=NONE
+hi Conditional guifg=#F92772 ctermfg=197
+hi Repeat     guifg=#F92772 ctermfg=197
+hi Label      guifg=#ae81ff ctermfg=141
+hi Operator   guifg=#66d9ef ctermfg=81
+hi Keyword    guifg=#66d9ef ctermfg=81
+hi Exception  guifg=#F92772 ctermfg=197
+hi PreProc    guifg=#A6E22D ctermfg=148
+hi Include    guifg=#F92772 ctermfg=197
+hi Define     guifg=#F92772 ctermfg=197
+hi Macro      guifg=#A6E22D ctermfg=148
+hi PreCondit  guifg=#A6E22D ctermfg=148
+hi Type       guifg=#66d9ef ctermfg=81 cterm=NONE gui=NONE
+hi StorageClass guifg=#66d9ef ctermfg=81
+hi Structure  guifg=#A6E22D ctermfg=148
+hi Typedef    guifg=#A6E22D ctermfg=148
+hi Special    guifg=#ae81ff ctermfg=141
+hi SpecialChar guifg=#F92772 ctermfg=197
+hi Delimiter  guifg=#F92772 ctermfg=197
+hi SpecialComment guifg=#66d9ef ctermfg=81
+hi Tag        guifg=#F92772 ctermfg=197
+hi Underlined guifg=#A6E22D ctermfg=148 cterm=underline gui=underline
+hi Ignore     guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+hi Todo       guifg=#FD9720 guibg=NONE ctermfg=208 cterm=bold gui=bold,italic
+hi Error      guifg=#e73c50 guibg=#5f0000 ctermfg=196 ctermbg=52
+hi SpellBad   guifg=NONE guibg=#5f0000 ctermbg=52 cterm=NONE gui=undercurl guisp=#e73c50
+hi SpellCap   guibg=NONE ctermbg=NONE cterm=NONE gui=undercurl guisp=#66d9ef
+hi SpellRare  guibg=NONE ctermbg=NONE cterm=NONE gui=undercurl guisp=#ae81ff
+hi SpellLocal guibg=NONE ctermbg=NONE cterm=NONE gui=undercurl guisp=#A6E22D
 
-" Timelapse: settings
-" map <leader>tl :call TimeLapse() <cr>
+" trailing whitespace
+hi TrailingWhitespace guibg=#e73c50 ctermbg=196
+match TrailingWhitespace /\s\+$/
 
-" Signify: settings
-set updatetime=100
-nnoremap tu :SignifyHunkUndo<CR>
-nnoremap tD :SignifyHunkDiff<CR>
-nnoremap tj <plug>(signify-next-hunk)
-nnoremap tk <plug>(signify-prev-hunk)
-nnoremap ]c <plug>(signify-next-hunk)
-nnoremap [c <plug>(signify-prev-hunk)
-omap ic <plug>(signify-motion-inner-pending)
-xmap ic <plug>(signify-motion-inner-visual)
-omap ac <plug>(signify-motion-outer-pending)
-xmap ac <plug>(signify-motion-outer-visual)
-highlight SignifySignAdd    ctermbg=236 ctermfg=2
-highlight SignifySignChange ctermbg=236 ctermfg=3
-highlight SignifySignDelete ctermbg=236  ctermfg=1
-" ascii \u258D is used. Also try \u258A-F
-" let g:column_sign = '▍'  " \u258D
-" let g:column_sign = '▎'  " \u258E
-let g:column_sign = '▏'  " \u258F
-let g:signify_sign_add = g:column_sign
-let g:signify_sign_delete = g:column_sign
-let g:signify_sign_change = g:column_sign
-let g:signify_sign_show_count = 0
-
-" Codefmt: settings
-augroup autoformat_settings
-    autocmd FileType go AutoFormatBuffer gofmt
-    autocmd FileType json AutoFormatBuffer prettier
-    autocmd FileType html AutoFormatBuffer prettier
-    " autocmd FileType html,css,sass,scss,less AutoFormatBuffer prettier
-    autocmd FileType js,ts AutoFormatBuffer prettier
-augroup END
-
-function! g:FormatBuffer() abort
-    let l:formatters = {
-    \ 'python':    ['ruff', 'isort'],
-    \ }
-    let l:ft = &filetype
-    if !has_key(l:formatters, l:ft)
-        return
-    endif
-    for fmt in l:formatters[l:ft]
-        execute 'FormatCode ' . fmt
-    endfor
-endfunction
-command! -nargs=0 Fmt call g:FormatBuffer()
-
-autocmd BufWritePost *.py call g:FormatBuffer()
-
-
-" Dadbod: settings
-function! GetEnv(var) abort
-    return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
-endfunction
-let g:dbs = {
-\ 'pg': printf(
-    \'postgres://%s:%s@%s:%s/%s',
-    \GetEnv('DB_USERNAME'),
-    \GetEnv('DB_PASSWORD'),
-    \GetEnv('DB_HOST'),
-    \GetEnv('DB_PORT'),
-    \GetEnv('DB_NAME'),
-\),
-\}
-
-" VimTest: settings TODO
-" working:
-nmap <leader>rf :TestFile<CR>
-nmap <leader>rt :TestNearest<CR>
-" working
-let test#strategy = 'vtr'  " run test in tmux and keep pane- working great, but need manual activation
-" let test#strategy = 'vimterminal'
-" let test#strategy = 'spawn'  " bg vim and run tests
-" let test#strategy = 'dispatch'  " bg with dispatch
-" to check:
-" not working:
-" let test#strategy = 'tslime'
-
-" Copilot: settings
-" let g:copilot_workspace_folders = ["~/code/lionsoul-backend", "~/code/moscowliuda-webinar-utils"]
-" imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
-" let g:copilot_no_tab_map = v:true
-
-" VimArpeggio: settings
-" Arpeggio inoremap jk  <Esc>
-call arpeggio#map('i', '', 0, 'jk', '<Esc>')
-
-" Ropevim: settings
-let g:ropevim_enable_shortcuts = 0
-let g:ropevim_autoimport_modules = [
-    \"asyncio",
-    \"collections",
-    \"contextlib",
-    \"dataclasses",
-    \"datetime",
-    \"fastapi",
-    \"functools",
-    \"itertools",
-    \"json",
-    \"logging",
-    \"time",
-    \"os",
-    \"pytest",
-    \"re",
-    \"requests",
-    \"shutil",
-    \"sys",
-    \"typing",
-\]
-nnoremap <leader>i :RopeAutoImport<CR><ESC>:w<CR>
-nnoremap <leader>I :RopeGenerateAutoimportCache<CR>
-
-" Context: settings
-let g:context_enabled = 1
-let g:context_max_height = 2
-let g:context_highlight_border = '<hide>'
-autocmd FileType nerdtree let b:context_enabled = 0
+let g:terminal_ansi_colors = [
+      \ '#272822', '#F92772', '#A6E22D', '#E6DB74',
+      \ '#66d9ef', '#ae81ff', '#a1efe4', '#E8E8E3',
+      \ '#272822', '#F92772', '#A6E22D', '#E6DB74',
+      \ '#66d9ef', '#ae81ff', '#a1efe4', '#E8E8E3',
+      \ ]

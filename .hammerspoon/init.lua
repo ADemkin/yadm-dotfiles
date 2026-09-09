@@ -1,8 +1,8 @@
 require('hs.ipc')
 
-hs.hotkey.bind({ 'alt' }, 'e', function()
-  hs.notify.new({ title = 'Hammerspoon 2', informativeText = 'Hello World' }):send()
-end)
+-- hs.hotkey.bind({ 'alt' }, 'e', function()
+--   hs.notify.new({ title = 'Hammerspoon 2', informativeText = 'Hello World' }):send()
+-- end)
 
 -- auto reload config on change
 local reloader = hs.loadSpoon('ReloadConfiguration')

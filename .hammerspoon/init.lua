@@ -28,7 +28,7 @@ dispatcher.url_patterns = {
     arc,
   },
 }
-dispatcher:start()
+-- dispatcher:start()
 
 -- Toggle Happ VPN (service name: Happ)
 hs.hotkey.bind({ 'cmd', 'shift' }, 'v', function()
@@ -41,6 +41,84 @@ hs.hotkey.bind({ 'cmd', 'shift' }, 'v', function()
   hs.execute("scutil --nc stop 'Happ'")
   hs.alert.show('Happ Off')
 end)
+
+-- Recursively search an AX element tree for the first element matching predicate.
+-- The OpenVPN Connect UI is a WKWebView, so the pin dialog sits ~25 levels
+-- deep in the AX tree (nested divs), not in its own AXWindow/AXSheet.
+local function findAxElement(el, predicate, depth)
+  depth = depth or 0
+  if not el or depth > 40 then
+    return nil
+  end
+  if predicate(el) then
+    return el
+  end
+  for _, child in ipairs(el:attributeValue('AXChildren') or {}) do
+    local found = findAxElement(child, predicate, depth + 1)
+    if found then
+      return found
+    end
+  end
+  return nil
+end
+
+-- Fill OpenVPN's "Enter Pin" dialog from $VPN_CONNECT_PIN and submit it.
+-- Polls briefly since the dialog appears asynchronously after Connect.
+-- Uses synthesized keystrokes (not AXValue) because the field is a
+-- React-controlled input that only updates on real key events.
+local function fillOpenVpnPin(app)
+  local pin = os.getenv('VPN_CONNECT_PIN')
+  if not pin then
+    hs.alert.show('VPN_CONNECT_PIN not set')
+    return
+  end
+
+  local attempts = 0
+  local function tryFill()
+    attempts = attempts + 1
+    local ax = hs.axuielement.applicationElement(app)
+    local win = nil
+    for _, w in ipairs(ax:attributeValue('AXWindows') or {}) do
+      if w:attributeValue('AXTitle') == 'OpenVPN Connect' then
+        win = w
+        break
+      end
+    end
+    win = win or ax
+
+    local field = findAxElement(win, function(el)
+      return el:attributeValue('AXRole') == 'AXTextField' and el:attributeValue('AXTitle') == 'Pin'
+    end)
+
+    if not field then
+      if attempts < 20 then
+        hs.timer.doAfter(0.2, tryFill)
+      else
+        hs.alert.show('OpenVPN pin field not found')
+      end
+      return
+    end
+
+    field:setAttributeValue('AXFocused', true)
+
+    hs.timer.doAfter(0.1, function()
+      hs.eventtap.keyStrokes(pin)
+
+      hs.timer.doAfter(0.15, function()
+        local okButton = findAxElement(win, function(el)
+          return el:attributeValue('AXRole') == 'AXGroup' and el:attributeValue('AXDescription') == 'OK'
+        end)
+        if okButton then
+          okButton:performAction('AXPress')
+        else
+          hs.eventtap.keyStroke({}, 'return')
+        end
+      end)
+    end)
+  end
+
+  tryFill()
+end
 
 -- Toggle OpenVPN Connect (via status bar menu)
 hs.hotkey.bind({ 'cmd', 'shift' }, 'o', function()
@@ -68,6 +146,7 @@ hs.hotkey.bind({ 'cmd', 'shift' }, 'o', function()
       local title = mi:attributeValue('AXTitle') or ''
       if title == 'Connect' then
         mi:performAction('AXPress')
+        fillOpenVpnPin(app)
         hs.alert.show('OpenVPN On')
         return
       elseif title == 'Disconnect' then

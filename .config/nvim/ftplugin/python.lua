@@ -15,3 +15,6 @@ vim.cmd([[
   iabbrev <expr> ifname v:lua.NoCompleteAbbrev("if __name__ == '__main__':\<CR>")
   iabbrev <expr> adef v:lua.NoCompleteAbbrev("async def ")
 ]])
+
+-- stop messing with indentation on `:`
+vim.opt_local.indentkeys:remove('<:>')

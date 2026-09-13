@@ -26,6 +26,7 @@ export PYTHONDONTWRITEBYTECODE=1
 export PYTHONSTARTUP="$HOME/.pythonstartup.py"
 # export PYTHONWARNINGS=ignore
 
+
 # Go
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"

@@ -321,7 +321,6 @@ if [ -f ~/.secrets ]; then
 fi
 
 alias timer="~/code/timer/timer"
-alias set_default_browser="~/bin/set_default_browser.sh"
 
 # completions for brew installed apps
 # installed with docker, etc...
@@ -362,3 +361,6 @@ podlogs() {
 # source $(brew --prefix)/opt/zinit/zinit.zsh
 
 # export UV_OFFLINE=1
+
+# weasyprint
+export DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib"

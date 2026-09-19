@@ -28,11 +28,8 @@ vim.pack.add({ 'https://github.com/folke/lazy.nvim.git' }, { confirm = false })
 
 require('lazy').setup({
   -- Appearance
-  -- require('themes/gruvbox'),
   require('themes/monokai'),
   require('plugins/lualine'),
-  -- require('themes/monokai-night'),
-  -- require('plugins/dim'),
 
   -- lightweight plugins
   require('plugins/tpope'),
@@ -40,15 +37,14 @@ require('lazy').setup({
   require('plugins/tmux'),
   require('plugins/toggleterm'),
   require('plugins/indentline'),
-  -- require('plugins/wilder'), -- maybe this one is replaced by blink.cmp?
   require('plugins/mark'),
   require('plugins/flash'),
   -- require('plugins/colors'),
   require('plugins/readline'),
   require('plugins/quickfix'),
   require('plugins/coverage'),
-  -- require('plugins/autopairs'),
   require('plugins/align'),
+  require('plugins/whichkey'),
 
   -- LSP, lint, format
   require('plugins/lsp'),
@@ -74,27 +70,6 @@ require('lazy').setup({
   require('plugins/csv'),
 
   -- which key - temporary ?
-  {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
-    opts = {
-      delay = 200,
-      triggers = {
-        { '<leader>', mode = { 'n', 'v' } },
-        { 'g', mode = { 'n', 'v' } },
-        { 't', mode = { 'n', 'v' } },
-      },
-    },
-    keys = {
-      {
-        '<leader>?',
-        function()
-          require('which-key').show({ global = false })
-        end,
-        desc = 'Buffer Local Keymaps (which-key)',
-      },
-    },
-  },
 
   -- time tracker
   -- {

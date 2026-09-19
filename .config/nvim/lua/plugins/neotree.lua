@@ -103,6 +103,19 @@ return {
         },
       },
       filesystem = {
+        components = {
+          -- render only dir name on top of neotree
+          name = function(config, node, state)
+            local common = require('neo-tree.sources.common.components')
+            if node:get_depth() == 1 and node.type == 'directory' then
+              return {
+                text = vim.fn.fnamemodify(node.path, ':t'),
+                highlight = 'NeoTreeRootName',
+              }
+            end
+            return common.name(config, node, state)
+          end,
+        },
         filtered_items = {
           visible = false,
           hide_dotfiles = false,
@@ -166,7 +179,7 @@ return {
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', 'tf', ':Neotree reveal<CR>', opts)
     -- vim.keymap.set('n', 'tt', ':Neotree toggle<CR>', opts)
-    vim.keymap.set('n', '<C-s>', ':Neotree toggle<CR>', opts)
+    -- vim.keymap.set('n', '<C-s>', ':Neotree toggle<CR>', opts)
 
     -- try out emacs style bindings
     vim.keymap.set('n', '<C-e><C-e>', ':Neotree toggle<CR>', opts)

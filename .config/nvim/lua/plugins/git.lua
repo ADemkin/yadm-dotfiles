@@ -32,6 +32,8 @@ return {
       { ']h', '<cmd>Gitsigns next_hunk<CR>' },
       { '[h', '<cmd>Gitsigns prev_hunk<CR>' },
       { 'tu', '<cmd>Gitsigns reset_hunk<CR>' },
+      { ']c', '<cmd>Gitsigns next_hunk<CR>' },
+      { '[c', '<cmd>Gitsigns prev_hunk<CR>' },
     },
   },
   -- {

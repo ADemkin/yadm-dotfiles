@@ -65,7 +65,7 @@ require('lazy').setup({
   require('plugins/neotest'),
   require('plugins/markdown'),
   require('plugins/refactoring'),
-  require('plugins/startscreen'),
+  -- require('plugins/startscreen'),
   require('plugins/claude'),
   require('plugins/csv'),
 

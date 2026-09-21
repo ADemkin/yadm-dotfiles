@@ -188,7 +188,7 @@ return {
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fc', builtin.resume, { desc = 'Continue last fuzzy search' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope builtin' })
-    vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols)
+    -- vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols)
     vim.keymap.set('n', '<leader>fg', multigrep, { desc = '[F]ind words and [G]lob' })
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent files' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
@@ -199,6 +199,35 @@ return {
     vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = '[U]ndo tree' })
     vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
     vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]umplist' })
+
+    -- session
+    vim.keymap.set('n', '<leader>fs', function()
+      pickers
+        .new({}, {
+          prompt_title = 'Sessions',
+          finder = finders.new_table({
+            results = require('core.session').list(),
+            entry_maker = function(entry)
+              return {
+                value = entry,
+                display = entry.text,
+                ordinal = entry.text,
+              }
+            end,
+          }),
+          sorter = conf.generic_sorter({}),
+          attach_mappings = function(_, map)
+            actions.select_default:replace(function(bufnr)
+              local entry = action_state.get_selected_entry()
+              actions.close(bufnr)
+              vim.fn.chdir(entry.value.dir)
+              require('core.session').restore()
+            end)
+            return true
+          end,
+        })
+        :find()
+    end, { silent = true, desc = '[F]ind [S]essions' })
 
     -- git
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
@@ -236,9 +265,9 @@ return {
         local cwd = event.data.path
         local name = vim.fn.fnamemodify(cwd, ':t')
         vim.system({ 'tmux', 'rename-window', name }, { detach = true })
-        vim.cmd('Neotree close')
         vim.cmd('bdelete')
-        vim.cmd('Alpha')
+        vim.fn.chdir(cwd)
+        require('core.session').restore()
       end,
     })
   end,

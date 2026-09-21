@@ -2,12 +2,14 @@
 family = "JetBrainsMono Nerd Font"
 # style = "SemiBold"
 # style = "Regular"
+# style = "Light"
 style = "ExtraLight"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
 # style = "Medium"
 # style = "Regular"
+# style = "Light"
 style = "ExtraLight"
 
 [font.glyph_offset]
@@ -16,6 +18,7 @@ y = 0
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
+# style = "Light"
 style = "ExtraLight"
 
 [font.normal]

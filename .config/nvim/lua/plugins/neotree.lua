@@ -177,7 +177,7 @@ return {
     })
 
     local opts = { noremap = true, silent = true }
-    vim.keymap.set('n', 'tf', ':Neotree reveal<CR>', opts)
+    -- vim.keymap.set('n', 'tf', ':Neotree reveal<CR>', opts)
     -- vim.keymap.set('n', 'tt', ':Neotree toggle<CR>', opts)
     -- vim.keymap.set('n', '<C-s>', ':Neotree toggle<CR>', opts)
 
@@ -185,13 +185,13 @@ return {
     vim.keymap.set('n', '<C-e><C-e>', ':Neotree toggle<CR>', opts)
     vim.keymap.set('n', '<C-e><C-f>', ':Neotree reveal<CR>', opts)
 
-    -- vim.api.nvim_create_autocmd('VimEnter', {
-    --   desc = 'Open NeoTree on startup if no files are opened',
-    --   callback = function()
-    --     if vim.fn.argc() == 0 then
-    --       vim.cmd('Neotree reveal')
-    --     end
-    --   end,
-    -- })
+    vim.api.nvim_create_autocmd('VimEnter', {
+      desc = 'Open NeoTree on startup if no files are opened',
+      callback = function()
+        if vim.fn.argc() == 0 then
+          vim.cmd('Neotree reveal')
+        end
+      end,
+    })
   end,
 }

@@ -104,6 +104,11 @@ set wildignore+=*/node_modules/*,*/.git/*,*/dist/*,*/target/*,*/__pycache__/*,*.
 " netrw (built-in file explorer)
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 30
+
+nnoremap <C-e><C-e> :Lexplore<CR>
 
 " Keymaps
 nnoremap <Space> <Nop>
@@ -172,6 +177,9 @@ augroup vimrc
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
   autocmd TerminalWinOpen * setlocal nolist nonumber norelativenumber
+
+  " netrw: l to open/expand tree node, h to collapse tree node / go to parent dir
+  autocmd FileType netrw nmap <buffer> l <CR>
 
   " Help windows open on the right
   autocmd BufWinEnter *.txt if &buftype ==# 'help' | wincmd L | vertical resize 84 | endif

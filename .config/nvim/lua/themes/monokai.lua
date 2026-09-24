@@ -8,6 +8,7 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
+    local colors = require('monokai-pro.colors')
     require('monokai-pro').setup({
       -- background_clear = {
       --   'float_win',
@@ -16,10 +17,17 @@ return {
         'nvim-telescope/telescope.nvim', -- allow override to work
       },
 
+      override_scheme = function(_, palette)
+        return {
+          statusBar = {
+            background = colors.darken(palette.dimmed5, 13),
+          },
+        }
+      end,
+
       -- TODO: f"" make f orange
       ---@type fun(scheme: MonokaiPro.Scheme): table<string, vim.api.keyset.highlight>
       override = function(scheme)
-        local colors = require('monokai-pro.colors')
         -- dumps(scheme)
         local white = { fg = scheme.base.white }
         local orange = { fg = scheme.base.blue } -- yes, orange is blue

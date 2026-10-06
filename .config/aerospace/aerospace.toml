@@ -180,6 +180,12 @@ on-window-detected = [
         run = ['move-node-to-workspace E'],
     },
 
+    # N = Notes
+    {
+        if = 'test %{app-bundle-id} = com.apple.Notes',
+        run = ['move-node-to-workspace N'],
+    },
+
     # catch-all — MUST be last; anything unmatched goes to workspace 1
     # {
     #     if = 'true',
@@ -252,8 +258,8 @@ on-window-detected = [
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
-    alt-m = 'workspace M' # messengers
     alt-p = 'workspace P' # players
+    alt-v = 'workspace V' # vpns
 
     # Switch to workspace and run main app if not running
     alt-c = ['exec-and-forget open -b com.apple.iCal', 'workspace C']
@@ -263,10 +269,9 @@ on-window-detected = [
     alt-u = ['exec-and-forget open -b com.apple.Music', 'workspace U']
     alt-d = ['exec-and-forget open -b com.apple.finder']
     alt-g = ['exec-and-forget open -b ru.keepcoder.Telegram', 'workspace M']
+    alt-m = ['exec-and-forget open -b com.apple.MobileSMS', 'workspace M']
     alt-e = ['exec-and-forget open -b com.apple.mail', 'workspace E']
-
-
-    alt-v = 'workspace V' # vpns
+    alt-n = ['exec-and-forget open -b com.apple.Notes', 'workspace N']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -285,6 +290,7 @@ on-window-detected = [
     alt-shift-s = 'move-node-to-workspace S'
     alt-shift-t = 'move-node-to-workspace T'
     alt-shift-v = 'move-node-to-workspace V'
+    alt-shift-n = 'move-node-to-workspace N'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'

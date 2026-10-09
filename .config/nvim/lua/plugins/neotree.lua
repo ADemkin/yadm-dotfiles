@@ -63,9 +63,11 @@ return {
             conflict = '',
           },
         },
-        symlink_target = {
-          enabled = false,
-        },
+        symlink_target = { enabled = false },
+        file_size = { enabled = false },
+        type = { enabled = false },
+        last_modified = { enabled = false },
+        created = { enabled = false },
       },
       window = {
         position = 'left',
@@ -86,6 +88,7 @@ return {
           ['h'] = 'close_node',
           ['x'] = 'close_all_subnodes',
           ['e'] = 'expand_all_subnodes',
+          ['W'] = 'toggle_auto_expand_width',
           ['a'] = { 'add', config = { show_path = 'relative' } },
           ['d'] = 'delete',
           ['r'] = 'rename',

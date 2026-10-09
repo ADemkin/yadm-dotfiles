@@ -200,6 +200,12 @@ return {
     vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
     vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]umplist' })
 
+    -- test emacs style bindings
+    vim.keymap.set('n', '<c-f><c-f>', builtin.find_files, { desc = '[F]ind [F]iles' })
+    vim.keymap.set('n', '<c-f><c-g>', multigrep, { desc = '[F]ind words and [G]lob' })
+    vim.keymap.set('n', '<c-b>', builtin.buffers, { desc = '[B]uffers' })
+    vim.keymap.set('n', '<c-f><c-p>', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
+
     -- session
     vim.keymap.set('n', '<leader>fs', function()
       pickers

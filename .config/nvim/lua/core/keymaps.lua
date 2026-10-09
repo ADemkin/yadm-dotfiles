@@ -151,3 +151,5 @@ vim.keymap.set('n', '<leader>hi', function()
     print('Syntax group: ' .. (name == '' and 'none' or name))
   end
 end, { desc = 'Show highlight group under cursor' })
+
+vim.keymap.set('n', 'YY', 'm0ggyG`0', opts)

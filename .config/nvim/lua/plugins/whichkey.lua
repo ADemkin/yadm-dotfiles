@@ -2,12 +2,15 @@ return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
   opts = {
-    delay = 200,
-    triggers = {
-      { '<leader>', mode = { 'n', 'v' } },
-      { 'g', mode = { 'n', 'v' } },
-      { 't', mode = { 'n', 'v' } },
-    },
+    delay = 800,
+    -- triggers = {
+    --   { '<leader>', mode = { 'n', 'v' } },
+    --   { 'g', mode = { 'n', 'v' } },
+    --   { 't', mode = { 'n', 'v' } },
+    --   { '[', mode = { 'n' } },
+    --   { ']', mode = { 'n' } },
+    --   { '<C-w>', mode = { 'n' } },
+    -- },
   },
   keys = {
     {

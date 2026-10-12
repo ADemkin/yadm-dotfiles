@@ -112,14 +112,12 @@ on-window-detected = [
     {
         if = 'test %{app-bundle-id} = su.ffg.happ',
         run = [
-            'layout floating',
             'move-node-to-workspace V',
         ],
     },
     {
         if = 'test %{app-bundle-id} = org.openvpn.client.app',
         run = [
-            'layout floating',
             'move-node-to-workspace V',
         ],
     },

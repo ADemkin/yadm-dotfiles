@@ -62,15 +62,25 @@ local function findAxElement(el, predicate, depth)
   return nil
 end
 
--- Fill OpenVPN's "Enter Pin" dialog from $VPN_CONNECT_PIN and submit it.
+-- Read a generic password from the login keychain by service name.
+-- Create the item with: security add-generic-password -a "$USER" -s <service> -w
+-- Items created by the `security` CLI list it as a trusted app, so no prompt.
+local function readKeychain(service)
+  local out, ok = hs.execute("/usr/bin/security find-generic-password -w -s '" .. service .. "'")
+  if not ok then
+    return nil
+  end
+  return (out:gsub('%s+$', ''))
+end
+
+-- Fill OpenVPN's "Enter Pin" dialog from the 'openvpn-pin' keychain item and submit it.
 -- Polls briefly since the dialog appears asynchronously after Connect.
 -- Uses synthesized keystrokes (not AXValue) because the field is a
 -- React-controlled input that only updates on real key events.
 local function fillOpenVpnPin(app)
-  -- local pin = os.getenv('VPN_CONNECT_PIN')
-  local pin = '312671'
-  if not pin then
-    hs.alert.show('VPN_CONNECT_PIN not set')
+  local pin = readKeychain('openvpn-pin')
+  if not pin or pin == '' then
+    hs.alert.show("Keychain item 'openvpn-pin' not found")
     return
   end
 

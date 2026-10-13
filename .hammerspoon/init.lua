@@ -43,8 +43,8 @@ hs.hotkey.bind({ 'cmd', 'shift' }, 'v', function()
 end)
 
 -- Recursively search an AX element tree for the first element matching predicate.
--- The OpenVPN Connect UI is a WKWebView, so the pin dialog sits ~25 levels
--- deep in the AX tree (nested divs), not in its own AXWindow/AXSheet.
+-- The OpenVPN Connect UI is an Electron (Chromium) web view, so the pin dialog
+-- sits ~25 levels deep in the AX tree (nested divs), not in its own AXWindow/AXSheet.
 local function findAxElement(el, predicate, depth)
   depth = depth or 0
   if not el or depth > 40 then
@@ -67,11 +67,17 @@ end
 -- Uses synthesized keystrokes (not AXValue) because the field is a
 -- React-controlled input that only updates on real key events.
 local function fillOpenVpnPin(app)
-  local pin = os.getenv('VPN_CONNECT_PIN')
+  -- local pin = os.getenv('VPN_CONNECT_PIN')
+  local pin = '312671'
   if not pin then
     hs.alert.show('VPN_CONNECT_PIN not set')
     return
   end
+
+  -- Electron exposes its web content to AX only when an assistive client asks
+  -- for it; without this the window holds ~10 empty groups and no pin field.
+  -- Chromium builds the tree asynchronously, which the polling below absorbs.
+  hs.axuielement.applicationElement(app):setAttributeValue('AXManualAccessibility', true)
 
   local attempts = 0
   local function tryFill()
@@ -99,6 +105,8 @@ local function fillOpenVpnPin(app)
       return
     end
 
+    -- keyStrokes go to the frontmost app, so make sure that's OpenVPN
+    app:activate()
     field:setAttributeValue('AXFocused', true)
 
     hs.timer.doAfter(0.1, function()

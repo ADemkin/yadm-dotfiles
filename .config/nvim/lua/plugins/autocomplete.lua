@@ -53,6 +53,9 @@ return {
         -- 'copilot',
       },
       providers = {
+        lsp = {
+          fallbacks = {},
+        },
         lazydev = {
           module = 'lazydev.integrations.blink',
           score_offset = 100,
@@ -65,12 +68,10 @@ return {
         -- },
         buffer = {
           module = 'blink.cmp.sources.buffer',
-          score_offset = -100,
         },
       },
     },
     -- snippets = { preset = 'luasnip' },
-    -- fuzzy = { implementation = 'lua' },
 
     -- Shows a signature help window while you type arguments for a function
     signature = { enabled = true },

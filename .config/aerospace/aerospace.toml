@@ -105,7 +105,6 @@ on-window-detected = [
         if = 'test %{app-bundle-id} = company.thebrowser.Browser',
         run = [
             'move-node-to-workspace A',
-            'fullscreen on --no-outer-gaps',
         ],
     },
     # V = VPNs
@@ -151,7 +150,6 @@ on-window-detected = [
     {
         if = 'test %{app-bundle-id} = com.apple.iCal',
         run = [
-            'layout floating',
             'move-node-to-workspace C',
         ],
     },

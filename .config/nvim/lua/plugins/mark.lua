@@ -9,8 +9,12 @@ return {
   init = function()
     vim.g.mw_no_mappings = 1
     -- Pull colors from monokai-pro at runtime
-    local p = require('monokai-pro').get_palette('classic')
-    local c = require('monokai-pro').get_colors()
+    local ok, monokai = pcall(require, 'monokai-pro')
+    if not ok then
+      return
+    end
+    local p = monokai.get_palette('classic')
+    local c = monokai.get_colors()
 
     vim.g.mwPalettes = {
       monokai = {

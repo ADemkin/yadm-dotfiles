@@ -1,1 +1,1 @@
-vim.bo.filetype = 'htmldjango'
+vim.bo.filetype = 'jinja'

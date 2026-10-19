@@ -1,6 +1,6 @@
 -- htmldjango highlighter is more capable than jinja
-vim.treesitter.language.register('jinja', 'htmldjango')
-vim.treesitter.language.register('html', 'htmldjango')
+-- vim.treesitter.language.register('jinja', 'htmldjango')
+-- vim.treesitter.language.register('html', 'htmldjango')
 
 local ENSURE_INSTALLED_FTS = {
   'lua',
@@ -26,7 +26,6 @@ local ENSURE_INSTALLED_FTS = {
   'tsx',
   'css',
   'html',
-  'htmldjango',
   'jinja',
   'jinja_inline',
   'comment',

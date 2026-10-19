@@ -188,14 +188,14 @@ return {
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
     vim.keymap.set('n', '<leader>fc', builtin.resume, { desc = 'Continue last fuzzy search' })
     vim.keymap.set('n', '<leader>ft', builtin.builtin, { desc = '[F]ind [T]elescope builtin' })
-    -- vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols)
+    vim.keymap.set('n', '<leader>fw', builtin.lsp_document_symbols)
     vim.keymap.set('n', '<leader>fg', multigrep, { desc = '[F]ind words and [G]lob' })
     vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[F]ind [R]ecent files' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
     vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
-    vim.keymap.set('n', '<leader>fo', telescope.extensions.hierarchy.outgoing_calls, { desc = 'LSP [I]ncoming' })
-    vim.keymap.set('n', '<leader>fi', telescope.extensions.hierarchy.incoming_calls, { desc = 'LSP [O]utcoming' })
+    vim.keymap.set('n', '<leader>fo', telescope.extensions.hierarchy.incoming_calls, { desc = 'LSP [I]ncoming' })
+    vim.keymap.set('n', '<leader>fi', telescope.extensions.hierarchy.outgoing_calls, { desc = 'LSP [O]utcoming' })
     vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = '[U]ndo tree' })
     vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
     vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]umplist' })
@@ -237,7 +237,8 @@ return {
 
     -- git
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })
-    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it [B]ranches' })
+    vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = '[G]it Comits' })
+    vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = '[G]it Status' })
 
     -- telescope picker for z=
     local function spell_suggest_telescope()

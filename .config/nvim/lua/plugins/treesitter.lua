@@ -31,6 +31,9 @@ local ENSURE_INSTALLED_FTS = {
   'comment',
   'templ',
 }
+local IGNORED_FTS = {
+  'tmux',
+}
 
 local function ensure_installed(ft)
   local lang = vim.treesitter.language.get_lang(ft)
@@ -66,6 +69,9 @@ return {
       callback = function(args)
         local buf = args.buf
         local ft = vim.bo[buf].filetype
+        if vim.tbl_contains(IGNORED_FTS, ft) then
+          return
+        end
         local lang = ensure_installed(ft)
         if not lang then
           return

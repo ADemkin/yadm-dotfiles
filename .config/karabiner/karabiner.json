@@ -13,6 +13,49 @@
                 },
                 "rules": [
                     {
+                        "description": "F18: hold to convert pointer motion to scroll",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f18",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "scroll_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "scroll_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "scroll_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "modifiers": { "optional": ["any"] } },
+                                "options": {
+                                    "momentum_scroll_enabled": false,
+                                    "speed_multiplier": 1.0
+                                },
+                                "type": "mouse_motion_to_scroll"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Fn + f5/f6 to keyboard brightness down/up",
                         "manipulators": [
                             {
@@ -242,6 +285,15 @@
                         "is_pointing_device": true,
                         "product_id": 10203,
                         "vendor_id": 5824
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 1088,
+                        "vendor_id": 13364
                     },
                     "ignore": false
                 }

@@ -1,8 +1,10 @@
+tap "denisidoro/ezlo", "https://github.com/denisidoro/ezlo"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "janosmiko/tap"
-tap "jurplel/tap"
+tap "jurplel/tap", trusted: { casks: ["instant-space-switcher"] }
+tap "kackerx/tap"
 tap "m99coder/tap", trusted: true
 tap "mediosz/tap"
 tap "nikitabobko/tap", trusted: true
@@ -22,8 +24,12 @@ brew "cmatrix"
 brew "coreutils"
 # Command-line tool for getting & setting the default browser
 brew "defaultbrowser"
+# TIFF library and utilities
+brew "libtiff"
 # Pack, ship and run any application as a lightweight container
 brew "docker", link: false
+# Bash, Zsh and Fish completion for Docker
+brew "docker-completion"
 # Platform keystore credential helper for Docker
 brew "docker-credential-helper"
 # Modern, maintained replacement for ls
@@ -34,6 +40,8 @@ brew "fd"
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Replace zsh completion selection menu with fzf
+brew "fzf-tab"
 # Fast, simple fuzzy text selector with an advanced scoring algorithm
 brew "fzy"
 # GNU compiler collection
@@ -108,8 +116,8 @@ brew "ncdu"
 brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node@20"
-# SSL/TLS VPN implementing OSI layer 2 or 3 secure network extension
-brew "openvpn"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
@@ -118,6 +126,8 @@ brew "php"
 brew "pngcrush"
 # Python package management tool
 brew "poetry"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
 # Object-relational database system
 brew "postgresql@14"
 # Object-relational database system
@@ -174,6 +184,8 @@ brew "watch"
 brew "weasyprint"
 # Internet file retriever
 brew "wget"
+# Extract urls from text
+brew "xurls"
 # Yet Another Dotfiles Manager
 brew "yadm"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
@@ -194,22 +206,16 @@ brew "zsh-syntax-highlighting"
 brew "felixkratz/formulae/sketchybar", trusted: true
 # Lightning Fast Kubernetes navigator - keyboard-focused TUI for managing K8s clusters
 brew "janosmiko/tap/lfk", trusted: true
+# Tmux-style terminal database client for PostgreSQL, MySQL, SQLite and Redis
+brew "kackerx/tap/sqlmux", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
-# VPN client
-cask "amneziavpn"
 # Application uninstaller
 cask "appcleaner"
 # Chromium based browser
 cask "arc"
-# Autonomous multi-session AI coding
-cask "auto-claude"
-# Tool to customise input devices and automate computer systems
-cask "bettertouchtool"
 # Terminal-based AI coding assistant
 cask "claude-code"
-# OpenAI's coding agent that runs in your terminal
-cask "codex"
 # Server and cloud storage browser
 cask "cyberduck"
 # Universal database tool and SQL client
@@ -220,13 +226,9 @@ cask "docker-desktop"
 cask "dropbox"
 # Web browser
 cask "firefox"
-# Screen colour temperature controller
-cask "flux-app"
 cask "font-b612-mono"
-cask "font-hack-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-sketchybar-app-font"
-cask "font-victor-mono"
 cask "font-victor-mono-nerd-font"
 # Update maps and software, sync with Garmin Connect and register your device
 cask "garmin-express"
@@ -240,12 +242,8 @@ cask "handbrake-app"
 cask "homerow"
 # Free and open-source media player
 cask "iina"
-# Native instant workspace switching
-cask "jurplel/tap/instant-space-switcher", trusted: true
 # Menu bar manager
 cask "jordanbaird-ice"
-# Desktop application for JupyterLab
-cask "jupyterlab-app"
 # Keyboard customiser
 cask "karabiner-elements"
 # Discover, download, and run local LLMs
@@ -254,18 +252,12 @@ cask "lm-studio"
 cask "monitorcontrol"
 # Replacement for Docker Desktop
 cask "orbstack"
-# Collaboration platform for API development
-cask "postman"
 # Control your tools with a few keystrokes
 cask "raycast"
 # HTTP proxy
 cask "rockxy"
 # Text editor for code, markup and prose
 cask "sublime-text"
-# SwipeAeroSpace is a tool to switch AeroSpace worksapces by swiping.
-cask "mediosz/tap/swipeaerospace", trusted: true
-# Native GUI tool for relational databases
-cask "tableplus"
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Open-source BitTorrent client
@@ -284,3 +276,4 @@ cargo "grip-grab"
 uv "hatch"
 uv "ruff"
 uv "tox"
+npm "@caveman-ai/cli"

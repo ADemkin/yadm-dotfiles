@@ -42,6 +42,7 @@ return {
   end,
   config = function()
     vim.keymap.set('n', '<Leader>m', '<Plug>MarkSet')
+    vim.keymap.set('n', '<C-m>', '<Plug>MarkSet')
     vim.keymap.set('n', '<C-c>', ':nohl<CR>:MarkClear<CR>', { silent = true })
   end,
 }

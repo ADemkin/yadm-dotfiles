@@ -21,8 +21,10 @@ return {
     require('neo-tree').setup({
       close_if_last_window = true,
       use_popups_for_input = false, -- Use vim's command line for inputs
-      enable_git_status = true,
-      git_status_async = true,
+      enable_git_status = false,
+      git_status_async = false,
+      -- enable_git_status = true,
+      -- git_status_async = true,
       enable_diagnostics = false,
       enable_modified_markers = false,
       open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' },

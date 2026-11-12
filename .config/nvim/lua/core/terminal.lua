@@ -4,7 +4,9 @@ local function get_function_name()
   local MAXSTEPS = 40
   while node do
     steps = steps + 1
-    assert(steps < MAXSTEPS)
+    if steps >= MAXSTEPS then
+      return nil
+    end
     local node_type = node:type()
 
     if
@@ -27,32 +29,28 @@ local function get_function_name()
   return nil
 end
 
-local function get_module_name_and_path()
+local function get_module_path()
   local name = vim.api.nvim_buf_get_name(0)
-  return vim.fn.fnamemodify(name, ':t'), vim.fn.fnamemodify(name, ':.')
+  return vim.fn.fnamemodify(name, ':.')
 end
 
 local function build_pytest_command(module_path, function_name)
   local command = 'pytest'
   if module_path ~= nil then
-    command = command .. ' ' .. module_path
+    command = command .. ' ' .. vim.fn.shellescape(module_path)
   end
   if function_name ~= nil then
-    command = command .. ' -k ' .. function_name
+    command = command .. ' -k ' .. vim.fn.shellescape(function_name)
   end
   return command
 end
 
 local function execute_in_terminal(command)
-  vim.cmd('TermExec cmd="' .. command .. '"')
+  require('toggleterm').exec(command)
 end
 
 local function run_single_test()
-  local module_name, module_path = get_module_name_and_path()
-  -- if not vim.startswith(module_name, 'test_') then
-  --   print('Module is not a test: ' .. module_name)
-  --   return
-  -- end
+  local module_path = get_module_path()
   local function_name = get_function_name()
   if function_name == nil then
     print('Function name not found')
@@ -63,18 +61,14 @@ local function run_single_test()
 end
 
 local function run_module_test()
-  local module_name, module_path = get_module_name_and_path()
-  -- if not vim.startswith(module_name, 'test_') then
-  --   print('Module is not a test: ' .. module_name)
-  --   return
-  -- end
+  local module_path = get_module_path()
   local command = build_pytest_command(module_path)
   execute_in_terminal(command)
 end
 
 local function run_with_python()
-  local _, module_path = get_module_name_and_path()
-  execute_in_terminal('python ' .. module_path)
+  local module_path = get_module_path()
+  execute_in_terminal('python ' .. vim.fn.shellescape(module_path))
 end
 
 return {

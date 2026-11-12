@@ -5,6 +5,7 @@ require('core.ui')
 require('core.indent')
 require('core.events')
 require('core.spell')
+-- require('core.session')
 
 require('core.cycle').setup({
   markdown = {
@@ -57,6 +58,10 @@ require('lazy').setup({
   require('plugins/textobjects'),
   require('plugins/argwrap'),
 
+  -- AI
+  -- require('plugins/claude'),
+  require('plugins/opencode'),
+
   -- Heavyweight plugins
   require('plugins/neotree'),
   require('plugins/breadcrumbs'),
@@ -66,7 +71,6 @@ require('lazy').setup({
   require('plugins/markdown'),
   require('plugins/refactoring'),
   -- require('plugins/startscreen'),
-  require('plugins/claude'),
   require('plugins/csv'),
 }, {
   dev = { path = '~/code' },

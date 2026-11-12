@@ -101,10 +101,6 @@ return {
           end)
 
           local filter = { bufnr = event.buf }
-          -- local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
-          -- if not is_enabled then
-          --   vim.lsp.inlay_hint.enable(true, filter)
-          -- end
 
           vim.keymap.set('n', 'gtt', function()
             local is_enabled = vim.lsp.inlay_hint.is_enabled(filter)
@@ -112,25 +108,6 @@ return {
           end)
         end,
       })
-
-      -- HACK to disable all fucking basedpyright diagnostics
-      -- idea is taken from here:
-      -- https://github.com/m-gail/diagnostic_manipulation.nvim/
-      -- local disabled_sources = { 'basedpyright', 'ruff' }
-      -- local function filter_diagnostics(diagnostics)
-      --   return vim.tbl_filter(function(diagnostic)
-      --     for _, src in ipairs(disabled_sources) do
-      --       if diagnostic.source == src then
-      --         return false
-      --       end
-      --     end
-      --     return true
-      --   end, diagnostics)
-      -- end
-      -- old_set = vim.diagnostic.set
-      -- vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
-      --   old_set(namespace, bufnr, filter_diagnostics(diagnostics), opts)
-      -- end
 
       -- Diagnostic Config
       ---@param opts vim.diagnostic.Opts

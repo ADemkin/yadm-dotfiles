@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.find_venv_path = function(cwd)
   local venv_candidates = { 'venv', '.venv' }

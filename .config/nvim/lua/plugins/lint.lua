@@ -17,7 +17,11 @@ return {
         make = { 'checkmake' },
       }
 
-      vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+      vim.api.nvim_create_autocmd({
+        'BufWritePost',
+        'BufReadPost',
+        'InsertLeave',
+      }, {
         group = vim.api.nvim_create_augroup('NvimLint', { clear = true }),
         callback = function()
           if vim.bo.modifiable then
@@ -29,7 +33,7 @@ return {
       local function toggle_diagnostics()
         local is_enabled = vim.diagnostic.is_enabled()
         vim.diagnostic.enable(not is_enabled)
-        vim.notify('Diagnistics ' .. (not is_enabled and '1' or '0'), vim.log.levels.DEBUG)
+        vim.notify('Diagnistics ' .. (not is_enabled and 'enabled' or 'disabled'), vim.log.levels.DEBUG)
       end
 
       vim.keymap.set('n', 'gtd', toggle_diagnostics)

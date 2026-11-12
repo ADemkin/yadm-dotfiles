@@ -66,7 +66,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- Delete do not replace current register
 vim.keymap.set('n', 'x', '"_x', opts)
 vim.keymap.set('v', 'p', '"_dP', opts)
-vim.keymap.set('n', 'x', '"_x', opts)
 
 -- Open terminal
 -- vim.keymap.set('n', '<leader>t', ':vert terminal<CR>', opts)
@@ -153,4 +152,4 @@ vim.keymap.set('n', '<leader>hi', function()
   end
 end, { desc = 'Show highlight group under cursor' })
 
-vim.keymap.set('n', 'YY', 'm0ggyG`0', opts)
+vim.keymap.set('n', 'YY', 'mzggyG`z', opts)

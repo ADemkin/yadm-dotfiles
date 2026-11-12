@@ -1,24 +1,3 @@
-local function get_ruff_monorepo_args()
-  local cwd = vim.fn.getcwd()
-  local monorepo_match = 'moderation%-detectors'
-  if not string.find(cwd, monorepo_match) then
-    -- vim.notify('Not a monorepo: ' .. cwd, vim.log.levels.DEBUG)
-    return {}
-  end
-  local monorepo_ruff_candidates = {
-    vim.fs.normalize('../moderation-tools/ruff.toml'),
-    vim.fs.normalize('./moderation-tools/ruff.toml'),
-  }
-  for _, candidate in ipairs(monorepo_ruff_candidates) do
-    local candidate_path = cwd .. '/' .. candidate
-    if vim.fn.filereadable(candidate_path) == 1 then
-      -- vim.notify('Using monorepo ruff: ' .. candidate_path, vim.log.levels.DEBUG)
-      return { '--config', candidate_path }
-    end
-  end
-  return {}
-end
-
 local function get_ruff_monorepo_args_by_bufnr(bufnr)
   bufnr = bufnr or 0
 
@@ -90,13 +69,11 @@ return {
         -- allow ruff to use custom monorepo config
         ruff_format = {
           append_args = function(self, ctx)
-            -- return get_ruff_monorepo_args()
             return get_ruff_monorepo_args_by_bufnr(ctx.bufnr)
           end,
         },
         ruff_organize_imports = {
           append_args = function(self, ctx)
-            -- return get_ruff_monorepo_args()
             return get_ruff_monorepo_args_by_bufnr(ctx.bufnr)
           end,
         },

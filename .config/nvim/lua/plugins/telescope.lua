@@ -90,12 +90,7 @@ return {
             { path = '~/code/moderation-detectors/', alias = 'md' },
             { path = '~/.config/', alias = 'config' },
           },
-          -- Directories to be directly used as projects. No subdirectory lookup.
-          -- oneoff_directories = {
-          --   { path = '~/code/moderation-detectors/', alias = 'Moderation Detectors' },
-          -- },
           auto_file_explorer = false,
-          -- file_explorer = 'neotree',
           telescope_opts = {
             layout_config = {
               height = 0.8,
@@ -194,8 +189,8 @@ return {
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<leader>f;', builtin.commands, { desc = 'Commands' })
     vim.keymap.set('n', '<leader>fp', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
-    vim.keymap.set('n', '<leader>fo', telescope.extensions.hierarchy.incoming_calls, { desc = 'LSP [I]ncoming' })
-    vim.keymap.set('n', '<leader>fi', telescope.extensions.hierarchy.outgoing_calls, { desc = 'LSP [O]utcoming' })
+    vim.keymap.set('n', '<leader>fi', telescope.extensions.hierarchy.incoming_calls, { desc = 'LSP [I]ncoming' })
+    vim.keymap.set('n', '<leader>fo', telescope.extensions.hierarchy.outgoing_calls, { desc = 'LSP [O]utcoming' })
     vim.keymap.set('n', '<leader>fu', telescope.extensions.undo.undo, { desc = '[U]ndo tree' })
     vim.keymap.set('n', '<leader>fm', telescope.extensions.messages.messages, { desc = '[M]essages' })
     vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = '[J]umplist' })
@@ -205,35 +200,6 @@ return {
     vim.keymap.set('n', '<c-f><c-g>', multigrep, { desc = '[F]ind words and [G]lob' })
     vim.keymap.set('n', '<c-b>', builtin.buffers, { desc = '[B]uffers' })
     vim.keymap.set('n', '<c-f><c-p>', telescope.extensions.whaler.whaler, { desc = '[P]roject switch' })
-
-    -- session
-    vim.keymap.set('n', '<leader>fs', function()
-      pickers
-        .new({}, {
-          prompt_title = 'Sessions',
-          finder = finders.new_table({
-            results = require('core.session').list(),
-            entry_maker = function(entry)
-              return {
-                value = entry,
-                display = entry.text,
-                ordinal = entry.text,
-              }
-            end,
-          }),
-          sorter = conf.generic_sorter({}),
-          attach_mappings = function(_, map)
-            actions.select_default:replace(function(bufnr)
-              local entry = action_state.get_selected_entry()
-              actions.close(bufnr)
-              vim.fn.chdir(entry.value.dir)
-              require('core.session').restore()
-            end)
-            return true
-          end,
-        })
-        :find()
-    end, { silent = true, desc = '[F]ind [S]essions' })
 
     -- git
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = '[G]it [B]ranches' })

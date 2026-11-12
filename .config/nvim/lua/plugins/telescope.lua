@@ -274,7 +274,6 @@ return {
         vim.system({ 'tmux', 'rename-window', name }, { detach = true })
         vim.cmd('bdelete')
         vim.fn.chdir(cwd)
-        require('core.session').restore()
       end,
     })
   end,

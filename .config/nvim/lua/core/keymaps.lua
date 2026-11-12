@@ -29,7 +29,6 @@ vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 
 -- send raw escape
 vim.keymap.set('t', '<C-]>', '<Esc>', opts)
-vim.keymap.set('t', '<Esc><Esc>', '<Esc>', opts)
 
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(event)
@@ -82,6 +81,7 @@ vim.keymap.del('n', 'grx')
 
 -- Allow Russian layout to control nvim
 vim.opt.langmap = table.concat({
+  -- S is not working for some reason
   'Ë;~',
   'А;F',
   'Б;<',
@@ -104,9 +104,9 @@ vim.opt.langmap = table.concat({
   'У;E',
   'Ф;A',
   'Ц;W',
-  'И;B',
   'Ш;I',
   'Щ;O',
+  -- 'Ы:S',
   'Ь;M',
   'Я;Z',
   'а;f',
@@ -133,6 +133,7 @@ vim.opt.langmap = table.concat({
   'ч;x',
   'ш;i',
   'щ;o',
+  -- 'ы:s',
   'ь;m',
   'ё;`',
 }, ',')

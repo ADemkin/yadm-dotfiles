@@ -1,5 +1,4 @@
 return {
-
   {
     'ThePrimeagen/refactoring.nvim',
     dependencies = {

@@ -13,10 +13,6 @@ return {
       outline_window = {
         position = 'left',
         width = 15,
-        -- auto_width = {
-        --   enabled = true,
-        --   max_width = 40,
-        -- },
         auto_close = true,
         auto_jump = true,
         winhl = 'Normal:OutlineSidebarBg,NormalNC:OutlineSidebarBg,EndOfBuffer:OutlineSidebarEob,CursorLine:NeoTreeCursorLine,WinSeparator:NeoTreeWinSeparator',
@@ -56,18 +52,4 @@ return {
       { '<leader>n', '<cmd>Outline<CR>' },
     },
   },
-  -- {
-  --   'oskarrrrrrr/symbols.nvim',
-  --   config = function()
-  --     local r = require('symbols.recipes')
-  --     require('symbols').setup(r.DefaultFilters, r.AsciiSymbols, {
-  --       sidebar = {
-  --         -- custom settings here
-  --         -- e.g. hide_cursor = false
-  --       },
-  --     })
-  --     vim.keymap.set('n', ',s', '<cmd>Symbols<CR>')
-  --     vim.keymap.set('n', ',S', '<cmd>SymbolsClose<CR>')
-  --   end,
-  -- },
 }

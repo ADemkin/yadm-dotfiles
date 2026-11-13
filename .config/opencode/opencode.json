@@ -1,0 +1,141 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["CLAUDE.md", "**/CLAUDE.md", "../CLAUDE.md"],
+  "provider": {
+    "tns-ai-developer": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "TNS AI Developer",
+      "options": {
+        "baseURL": "https://ur-llm-proxy.wb.ru/v1",
+        "apiKey": "{env:TNS_AI_DEVELOPER_KEY}"
+      },
+      "models": {
+        "glm": {
+          "name": "GLM MAX",
+          "options": { "chat_template_kwargs": { "enable_thinking": true } }
+        },
+        "openai/Qwen3_Coder_Next": { "name": "Qwen3 Coder Next" }
+      }
+    }
+  },
+  "model": "wb/glm5.2",
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
+    { "action": "shell", "resource": "head *", "effect": "allow" },
+    { "action": "shell", "resource": "tail *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "find *", "effect": "allow" },
+    { "action": "shell", "resource": "fd *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "git *", "effect": "allow" },
+    { "action": "shell", "resource": "make *", "effect": "allow" },
+    { "action": "shell", "resource": "just *", "effect": "allow" },
+    { "action": "shell", "resource": "python *", "effect": "allow" },
+    { "action": "shell", "resource": ".venv/bin/python *", "effect": "allow" },
+    { "action": "shell", "resource": "pytest *", "effect": "allow" },
+    { "action": "shell", "resource": "uv *", "effect": "allow" },
+    { "action": "shell", "resource": "docker run *", "effect": "allow" },
+    { "action": "shell", "resource": "echo *", "effect": "allow" },
+    { "action": "shell", "resource": "diff *", "effect": "allow" },
+    { "action": "shell", "resource": "env *", "effect": "allow" },
+    { "action": "shell", "resource": "printenv *", "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "type *", "effect": "allow" },
+    { "action": "shell", "resource": "gh *", "effect": "allow" },
+    { "action": "shell", "resource": "sort *", "effect": "allow" },
+    { "action": "shell", "resource": "curl *", "effect": "allow" },
+    { "action": "shell", "resource": "cp *", "effect": "allow" },
+    { "action": "shell", "resource": "touch *", "effect": "allow" },
+    { "action": "shell", "resource": "sed *", "effect": "allow" },
+    { "action": "shell", "resource": "awk *", "effect": "allow" },
+    { "action": "shell", "resource": "tar *", "effect": "allow" },
+    { "action": "shell", "resource": "uniq *", "effect": "allow" },
+    { "action": "shell", "resource": "cut *", "effect": "allow" },
+    { "action": "shell", "resource": "tr *", "effect": "allow" },
+    { "action": "shell", "resource": "tee *", "effect": "allow" },
+    { "action": "shell", "resource": "xargs *", "effect": "allow" },
+    { "action": "shell", "resource": "ps *", "effect": "allow" },
+    { "action": "shell", "resource": "pgrep *", "effect": "allow" },
+    { "action": "shell", "resource": "opencode *", "effect": "allow" },
+    { "action": "shell", "resource": "git push *", "effect": "deny" },
+    { "action": "shell", "resource": "git remote *", "effect": "deny" },
+    { "action": "shell", "resource": "git fetch *", "effect": "deny" },
+    { "action": "shell", "resource": "git commit *", "effect": "ask" },
+    { "action": "shell", "resource": "rm *", "effect": "ask" },
+    { "action": "shell", "resource": "mv *", "effect": "ask" }
+  ],
+  "mcp": {
+    "wiki": {
+      "type": "http",
+      "url": "https://wiki.wb.ru/api/public/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer ${WIKI_TOKEN}"
+      }
+    },
+    "grafana": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-e",
+        "GRAFANA_URL",
+        "-e",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN",
+        "grafana/mcp-grafana",
+        "-t",
+        "stdio",
+        "--disable-write"
+      ],
+      "env": {
+        "GRAFANA_URL": "https://grafana.wb.ru",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_TOKEN}"
+      }
+    },
+    "gitlab": {
+      "command": "npx",
+      "args": ["-y", "@zereight/mcp-gitlab"],
+      "env": {
+        "GITLAB_API_URL": "https://gitlab-internal.wildberries.ru/api/v4",
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_TOKEN}",
+        "GITLAB_READ_ONLY_MODE": "true"
+      }
+    },
+    "kubernetes": {
+      "command": "npx",
+      "args": ["-y", "kubernetes-mcp-server@latest"]
+    },
+    "wb-tracker": {
+      "type": "http",
+      "url": "http://moderation-ingress-controller.moderation.k8s.tns-stage-el/mcp/wb-tracker",
+      "headers": {
+        "X-Tracker-Login": "${TRACKER_LOGIN}",
+        "X-Tracker-Token": "${TRACKER_TOKEN}"
+      }
+    },
+    "band": {
+      "type": "http",
+      "url": "http://moderation-ingress-controller.moderation.k8s.tns-stage-el/mcp/band",
+      "headers": {
+        "Authorization": "Bearer ${BAND_TOKEN}"
+      }
+    },
+    "testops": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--@purchase:registry=https://nexus-hosted.wb.ru/repository/purchase-npm-public/",
+        "@purchase/testops-mcp@0.5.0",
+        "stdio"
+      ],
+      "env": {
+        "TESTOPS_URL": "https://allure-testops.wb.ru",
+        "TESTOPS_API_TOKEN": "${TESTOPS_TOKEN}",
+        "TESTOPS_DEFAULT_PROJECT_ID": "659"
+      }
+    }
+  }
+}

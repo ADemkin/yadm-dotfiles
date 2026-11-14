@@ -1,0 +1,8 @@
+{
+  "description" : "Based on Built-in.",
+  "entry" : "config.json",
+  "id" : "grey-round",
+  "kind" : "theme",
+  "name" : "Grey Round",
+  "version" : "1.0.0"
+}

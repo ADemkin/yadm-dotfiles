@@ -1,0 +1,306 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Seb-GRAF/StableBar/v0.15.0/stablebar.schema.json",
+  "bar": {
+    "offset": 0,
+    "belowMenuBar": false,
+    "keepWindowsClear": true,
+    "appearance": null,
+    "motion": "none",
+    "popupTransition": "fade",
+    "morphPopups": true,
+    "inlineHoverControls": false,
+    "menuBarRevealDelay": 200,
+    "hideMenuBar": false,
+    "glass": {
+      "enabled": false
+    },
+    "position": "top"
+  },
+  "widgets": [
+    {
+      "id": "apple",
+      "position": "left",
+      "type": "appleMenu",
+      "style": {
+        "borderWidth": 0,
+        "paddingHorizontal": 6,
+        "paddingVertical": 4,
+        "fontSize": 14
+      }
+    },
+    {
+      "id": "workspaces",
+      "position": "left",
+      "type": "workspaces",
+      "workspace": {
+        "windows": false,
+        "magnification": null,
+        "indicator": "background",
+        "indicatorStyle": {
+          "placement": "cell",
+          "background": "@token.textMuted",
+          "offsetY": 0
+        },
+        "appStyle": {
+          "fontSize": 17,
+          "foreground": "@token.textMuted"
+        },
+        "style": {
+          "height": 22,
+          "paddingHorizontal": 6,
+          "fontSize": 12,
+          "foreground": "@token.text"
+        }
+      },
+      "style": {
+        "states": {
+          "hover": {
+            "background": null
+          }
+        },
+        "fontName": "system",
+        "paddingVertical": 2,
+        "paddingHorizontal": 2,
+        "borderWidth": 0
+      },
+      "display": [
+        "builtIn",
+        "monitor",
+        "vertical"
+      ]
+    },
+    {
+      "id": "app-menu",
+      "position": "left",
+      "type": "appMenu",
+      "expandOnHover": false,
+      "popupBackground": "@token.surfaceRaised",
+      "display": [
+        "vertical"
+      ]
+    },
+    {
+      "id": "meeting",
+      "layout": {
+        "children": [
+          {
+            "source": "icon",
+            "type": "symbol"
+          },
+          {
+            "field": "text",
+            "type": "field"
+          },
+          {
+            "field": "start",
+            "hideWhenEmpty": "start",
+            "role": "secondary",
+            "type": "field"
+          }
+        ],
+        "type": "row"
+      },
+      "popup": {
+        "layout": {
+          "children": [
+            {
+              "role": "heading",
+              "text": "Today",
+              "type": "text"
+            },
+            {
+              "row": {
+                "children": [
+                  {
+                    "field": "start",
+                    "role": "key",
+                    "style": {
+                      "width": 56
+                    },
+                    "type": "field"
+                  },
+                  {
+                    "field": "title",
+                    "role": "primary",
+                    "type": "field"
+                  }
+                ],
+                "openField": "link",
+                "type": "row"
+              },
+              "source": "today",
+              "type": "list"
+            },
+            {
+              "role": "separator",
+              "type": "divider"
+            },
+            {
+              "open": "com.apple.iCal",
+              "role": "button",
+              "text": "Calendar",
+              "type": "text"
+            }
+          ],
+          "type": "column"
+        },
+        "style": {
+          "width": 320
+        },
+        "openOnHover": true
+      },
+      "position": "right",
+      "type": "calendar",
+      "display": [
+        "builtIn",
+        "monitor",
+        "vertical"
+      ],
+      "icon": ""
+    },
+    {
+      "id": "sound",
+      "type": "audio",
+      "position": "right",
+      "display": [
+        "monitor",
+        "vertical"
+      ]
+    },
+    {
+      "details": true,
+      "id": "battery",
+      "position": "right",
+      "type": "battery",
+      "layout": null
+    },
+    {
+      "id": "widget-58701978",
+      "position": "right",
+      "type": "inputSource",
+      "display": "all",
+      "icon": ""
+    },
+    {
+      "format": "EEE d MMM  HH:mm",
+      "id": "clock",
+      "onClick": "open -a Calendar",
+      "position": "right",
+      "type": "clock"
+    },
+    {
+      "id": "menu-bar-items",
+      "position": "right",
+      "type": "menuBarItems",
+      "shown": [
+        {
+          "app": "com.apple.controlcenter",
+          "item": "com.apple.menuextra.controlcenter"
+        }
+      ],
+      "hidden": [
+        {
+          "app": "com.apple.controlcenter",
+          "item": "com.apple.menuextra.sound"
+        },
+        {
+          "app": "com.apple.controlcenter",
+          "item": "com.apple.menuextra.battery"
+        },
+        {
+          "app": "com.apple.TextInputMenuAgent"
+        },
+        {
+          "app": "timeow-mac_arm64"
+        },
+        {
+          "app": "bobko.aerospace"
+        },
+        {
+          "app": "com.jordanbaird.Ice"
+        },
+        {
+          "app": "com.apple.weather.menu"
+        },
+        "symbol",
+        {
+          "app": "com.apple.controlcenter",
+          "item": "com.apple.menuextra.clock"
+        }
+      ],
+      "display": [
+        "monitor",
+        "vertical"
+      ]
+    },
+    {
+      "id": "widget-6f7392b2",
+      "position": "notchRight",
+      "type": "privacy",
+      "hideWhenIdle": true
+    }
+  ],
+  "packages": [
+    {
+      "enabled": true,
+      "id": "now-playing",
+      "settings": {
+        "barWidth": 160
+      },
+      "version": "1.2.2"
+    },
+    {
+      "enabled": true,
+      "id": "weather",
+      "settings": {
+        "location": "",
+        "units": "metric"
+      },
+      "version": "1.0.3"
+    }
+  ],
+  "widgetOrder": [
+    "apple",
+    "workspaces",
+    "app-menu",
+    "weather",
+    "meeting",
+    "sound",
+    "battery",
+    "widget-58701978",
+    "clock",
+    "menu-bar-items",
+    "widget-6f7392b2",
+    "now-playing"
+  ],
+  "widgetOverrides": {
+    "now-playing": {
+      "enabled": true,
+      "position": "center",
+      "display": "all"
+    },
+    "weather": {
+      "enabled": true,
+      "position": "right",
+      "display": "all",
+      "popup": {
+        "openOnHover": true
+      },
+      "icon": ""
+    }
+  },
+  "workspaceSource": "aerospace",
+  "theme": {
+    "id": "grey-round",
+    "version": "1.0.0"
+  },
+  "screens": {
+    "monitor": {
+      "bar": {
+        "belowMenuBar": true,
+        "margin": 0,
+        "offset": 0
+      }
+    }
+  }
+}

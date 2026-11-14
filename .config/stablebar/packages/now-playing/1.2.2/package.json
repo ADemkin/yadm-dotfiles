@@ -1,0 +1,16 @@
+{
+  "id": "now-playing",
+  "name": "Now playing",
+  "version": "1.2.2",
+  "description": "Shows the playing or paused track from Music or Spotify with its artwork and bouncing bars while it plays, and a popup with seeking, volume, shuffle, repeat and favorites.",
+  "author": "Seb-GRAF",
+  "repository": "https://github.com/Seb-GRAF/stablebar-packages",
+  "minimumVersion": "0.5.0",
+  "entry": "config.json",
+  "screenshot": "preview.png",
+  "permissions": ["automation"],
+  "hosts": ["i.scdn.co"],
+  "settings": {
+    "barWidth": { "type": "number", "title": "Maximum title width in the bar", "default": 160 }
+  }
+}

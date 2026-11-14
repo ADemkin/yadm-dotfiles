@@ -1,0 +1,231 @@
+{
+  "tokens": {
+    "text": { "light": "#1f2329", "dark": "#e6e9ef" },
+    "textMuted": { "light": "#5f6773", "dark": "#9aa3b0" },
+    "surface": { "light": "#f4f5f7ed", "dark": "#23272eee" },
+    "surfaceRaised": { "light": "#ffffff", "dark": "#323842" },
+    "accent": { "light": "#3a6ea5", "dark": "#5b8ac4" },
+    "track": { "light": "#1f232926", "dark": "#e6e9ef26" }
+  },
+  "providers": {
+    "now-playing": {
+      "type": "stream",
+      "command": "osascript -l JavaScript \"$PACKAGE_DIR/scripts/now-playing.js\"",
+      "interval": 2
+    }
+  },
+  "widgets": [
+    {
+      "id": "now-playing",
+      "type": "provider",
+      "provider": "now-playing",
+      "position": "left",
+      "transition": "fade",
+      "layout": {
+        "type": "row",
+        "style": { "spacing": 6 },
+        "children": [
+          { "type": "image", "source": "artwork", "fit": "fill", "style": { "width": 16, "height": 16, "cornerRadius": 3 } },
+          { "type": "field", "field": "line", "scrollSpeed": 20, "transition": "fade", "style": { "maxWidth": "@setting.barWidth" } },
+          { "type": "equalizer", "source": "playing" }
+        ]
+      },
+      "popup": {
+        "dismissOnAction": false,
+        "style": { "width": 330, "paddingHorizontal": 18, "paddingVertical": 16, "spacing": 14 },
+        "layout": {
+          "type": "column",
+          "children": [
+            {
+              "type": "row",
+              "openField": "app",
+              "style": { "spacing": 6, "foreground": "@token.textMuted" },
+              "children": [
+                { "type": "image", "source": "appIcon", "style": { "width": 16, "height": 16, "cornerRadius": 0 } },
+                { "type": "field", "field": "source", "style": { "fontSize": 11, "fontWeight": "medium" } },
+                { "type": "symbol", "name": "arrow.up.forward", "alignment": "trailing", "style": { "width": 16, "iconSize": 10 } }
+              ]
+            },
+            {
+              "type": "row",
+              "style": { "spacing": 14 },
+              "children": [
+                {
+                  "type": "image",
+                  "source": "artwork",
+                  "fit": "fill",
+                  "openField": "app",
+                  "style": { "width": 72, "height": 72, "cornerRadius": 6, "background": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "column",
+                  "style": { "spacing": 3 },
+                  "children": [
+                    {
+                      "type": "field",
+                      "field": "title",
+                      "scrollSpeed": 24,
+                      "transition": "fade",
+                      "style": { "width": 166, "fontSize": 14, "fontWeight": "semibold" }
+                    },
+                    { "type": "field", "field": "artist", "hideWhenEmpty": "artist", "transition": "fade", "style": { "fontSize": 12 } },
+                    {
+                      "type": "field",
+                      "field": "album",
+                      "hideWhenEmpty": "album",
+                      "transition": "fade",
+                      "style": { "fontSize": 12, "foreground": "@token.textMuted" }
+                    }
+                  ]
+                },
+                {
+                  "type": "symbol",
+                  "source": "favorite",
+                  "hideWhenEmpty": "favorite",
+                  "alignment": "center",
+                  "transition": "fade",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" favorite",
+                  "style": { "width": 28, "height": 28, "iconSize": 14, "cornerRadius": 14, "hoverBackground": "@token.surfaceRaised" }
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "hideWhenEmpty": "duration",
+              "style": { "spacing": 5 },
+              "children": [
+                {
+                  "type": "progress",
+                  "source": "progress",
+                  "height": 4,
+                  "animation": { "duration": 1, "curve": "linear" },
+                  "style": { "accent": "@token.text", "background": "@token.track", "cornerRadius": 2 }
+                },
+                {
+                  "type": "row",
+                  "style": { "fontSize": 10, "foreground": "@token.textMuted" },
+                  "children": [
+                    { "type": "field", "field": "elapsed" },
+                    { "type": "field", "field": "duration", "alignment": "trailing" }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "row",
+              "alignment": "center",
+              "style": { "spacing": 8 },
+              "children": [
+                {
+                  "type": "symbol",
+                  "name": "shuffle",
+                  "hideWhenEmpty": "shuffleOff",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" shuffle",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "foreground": "@token.textMuted", "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "name": "shuffle",
+                  "hideWhenEmpty": "shuffleOn",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" shuffle",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "foreground": "@token.accent", "background": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "name": "gobackward.15",
+                  "hideWhenEmpty": "duration",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" back",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "name": "backward.fill",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" \"previous track\"",
+                  "style": { "width": 36, "height": 32, "iconSize": 15, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "source": "control",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" playpause",
+                  "style": {
+                    "width": 42,
+                    "height": 42,
+                    "iconSize": 17,
+                    "cornerRadius": 21,
+                    "foreground": "@token.surface",
+                    "background": "@token.text",
+                    "states": { "hover": { "opacity": 0.8 } }
+                  }
+                },
+                {
+                  "type": "symbol",
+                  "name": "forward.fill",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" \"next track\"",
+                  "style": { "width": 36, "height": 32, "iconSize": 15, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "name": "goforward.15",
+                  "hideWhenEmpty": "duration",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" forward",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "name": "repeat",
+                  "hideWhenEmpty": "repeatOff",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" repeat",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "foreground": "@token.textMuted", "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "symbol",
+                  "source": "repeatSymbol",
+                  "hideWhenEmpty": "repeatOn",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" repeat",
+                  "style": { "width": 28, "height": 28, "iconSize": 12, "cornerRadius": 8, "foreground": "@token.accent", "background": "@token.surfaceRaised" }
+                }
+              ]
+            },
+            {
+              "type": "row",
+              "hideWhenEmpty": "volume",
+              "style": { "spacing": 6, "foreground": "@token.textMuted" },
+              "children": [
+                {
+                  "type": "symbol",
+                  "name": "speaker.fill",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" quieter",
+                  "style": { "width": 28, "height": 28, "iconSize": 11, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                },
+                {
+                  "type": "progress",
+                  "source": "volume",
+                  "height": 4,
+                  "animation": { "duration": 0.2, "curve": "easeOut" },
+                  "style": { "accent": "@token.textMuted", "background": "@token.track", "cornerRadius": 2 }
+                },
+                {
+                  "type": "symbol",
+                  "name": "speaker.wave.3.fill",
+                  "alignment": "center",
+                  "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" louder",
+                  "style": { "width": 28, "height": 28, "iconSize": 11, "cornerRadius": 8, "hoverBackground": "@token.surfaceRaised" }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

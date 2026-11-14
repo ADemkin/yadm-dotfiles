@@ -1,0 +1,97 @@
+{
+  "bar" : {
+    "height" : 40,
+    "inset" : 12,
+    "spacing" : 8,
+    "style" : {
+      "background" : {
+        "dark" : "#11111b00",
+        "light" : "#dce0e8ee"
+      }
+    }
+  },
+  "defaults" : {
+    "accent" : "@token.accent",
+    "accentText" : {
+      "dark" : "#1e1e2e",
+      "light" : "#eff1f5"
+    },
+    "background" : "@token.surface",
+    "borderColor" : null,
+    "cornerRadius" : 14,
+    "fontName" : "JetBrainsMonoNL Nerd Font",
+    "fontSize" : 12,
+    "fontWeight" : "light",
+    "foreground" : "@token.text",
+    "hoverBackground" : "@token.surfaceRaised",
+    "paddingHorizontal" : 8,
+    "paddingVertical" : 3,
+    "shadowColor" : null
+  },
+  "popupDefaults" : {
+    "background" : "@token.surface",
+    "borderColor" : "@token.hairline",
+    "fontWeight" : "light",
+    "shadowColor" : {
+      "dark" : "#00000066",
+      "light" : "#4c4f6926"
+    }
+  },
+  "tokens" : {
+    "accent" : {
+      "dark" : "#565656ff",
+      "light" : "#007affff"
+    },
+    "critical" : {
+      "dark" : "#f38ba8",
+      "light" : "#d20f39"
+    },
+    "hairline" : {
+      "dark" : "#cdd6f41f",
+      "light" : "#4c4f691f"
+    },
+    "surface" : {
+      "dark" : "#2c2e28ff",
+      "light" : "#eff1f5ff"
+    },
+    "surfaceRaised" : {
+      "dark" : "#3f4139ff",
+      "light" : "#ccd0daff"
+    },
+    "text" : {
+      "dark" : "#cdd6f4",
+      "light" : "#4c4f69"
+    },
+    "textMuted" : {
+      "dark" : "#a6adc8",
+      "light" : "#6c6f85"
+    },
+    "track" : {
+      "dark" : "#585b7000",
+      "light" : "#bcc0ccff"
+    },
+    "warning" : {
+      "dark" : "#fab387",
+      "light" : "#c64f00"
+    }
+  },
+  "widgets" : [
+
+  ],
+  "workspaceDefaults" : {
+    "indicator" : "background",
+    "style" : {
+      "cornerRadius" : 14,
+      "foreground" : "@token.textMuted",
+      "states" : {
+        "focused" : {
+          "background" : "@token.accent",
+          "foreground" : {
+            "dark" : "#1e1e2e",
+            "light" : "#eff1f5"
+          }
+        }
+      }
+    }
+  }
+}

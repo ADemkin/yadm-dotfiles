@@ -1,0 +1,8 @@
+{
+  "description" : "Based on Catppuccin.",
+  "entry" : "config.json",
+  "id" : "monokai-round",
+  "kind" : "theme",
+  "name" : "Monokai Round",
+  "version" : "1.0.0"
+}

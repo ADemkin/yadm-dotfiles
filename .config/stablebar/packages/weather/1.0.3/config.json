@@ -1,0 +1,42 @@
+{
+  "tokens": {
+    "textMuted": { "light": "#5f6773", "dark": "#9aa3b0" }
+  },
+  "widgets": [
+    {
+      "id": "weather",
+      "type": "script",
+      "position": "right",
+      "command": "\"$PACKAGE_DIR/scripts/weather.sh\"",
+      "interval": 1800,
+      "timeout": 15,
+      "icon": "cloud.sun",
+      "environment": {
+        "LOCATION": "@setting.location",
+        "UNITS": "@setting.units"
+      },
+      "popup": {
+        "style": { "width": 260, "paddingHorizontal": 18, "paddingVertical": 16, "spacing": 8 },
+        "layout": {
+          "type": "column",
+          "children": [
+            { "type": "field", "field": "place", "style": { "fontWeight": "bold", "fontSize": 15 } },
+            { "type": "field", "field": "condition", "style": { "foreground": "@token.textMuted" } },
+            { "type": "divider" },
+            {
+              "type": "list",
+              "source": "details",
+              "row": {
+                "type": "row",
+                "children": [
+                  { "type": "field", "field": "label", "style": { "foreground": "@token.textMuted" } },
+                  { "type": "field", "field": "value", "alignment": "trailing" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

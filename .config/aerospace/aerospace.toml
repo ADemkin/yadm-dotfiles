@@ -67,7 +67,12 @@ gaps.inner.horizontal = 4
 gaps.inner.vertical =   4
 gaps.outer.left =       0
 gaps.outer.bottom =     0
-gaps.outer.top =        0
+# gaps.outer.top = 0
+# leave space for custom bar
+gaps.outer.top = [
+    { monitor."built-in" = 0 },
+    32,
+]
 gaps.outer.right =      0
 
 exec.inherit-env-vars = true
@@ -80,7 +85,7 @@ on-window-detected = [
         if = 'test %{app-bundle-id} = org.alacritty',
         run = [
             'move-node-to-workspace T',
-            'fullscreen on --no-outer-gaps',
+            'fullscreen on',
         ],
         check-further-callbacks = false,
     },

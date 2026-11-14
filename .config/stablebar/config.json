@@ -14,7 +14,16 @@
     "glass": {
       "enabled": false
     },
-    "position": "top"
+    "position": "top",
+    "style": {
+      "states": {
+        "mode.service": {
+          "borderEdges": "bottom",
+          "borderColor": "@token.warning",
+          "borderWidth": 2
+        }
+      }
+    }
   },
   "widgets": [
     {
@@ -33,7 +42,7 @@
       "position": "left",
       "type": "workspaces",
       "workspace": {
-        "windows": false,
+        "windows": true,
         "magnification": null,
         "indicator": "background",
         "indicatorStyle": {
@@ -50,7 +59,9 @@
           "paddingHorizontal": 6,
           "fontSize": 12,
           "foreground": "@token.text"
-        }
+        },
+        "badges": "count",
+        "focusedWindowStyle": null
       },
       "style": {
         "states": {
@@ -61,13 +72,15 @@
         "fontName": "system",
         "paddingVertical": 2,
         "paddingHorizontal": 2,
-        "borderWidth": 0
+        "borderWidth": 0,
+        "accent": "@token.accent"
       },
       "display": [
         "builtIn",
         "monitor",
         "vertical"
-      ]
+      ],
+      "tooltipBackground": "@token.surfaceRaised"
     },
     {
       "id": "app-menu",
@@ -214,9 +227,6 @@
           "app": "timeow-mac_arm64"
         },
         {
-          "app": "bobko.aerospace"
-        },
-        {
           "app": "com.jordanbaird.Ice"
         },
         {
@@ -226,6 +236,9 @@
         {
           "app": "com.apple.controlcenter",
           "item": "com.apple.menuextra.clock"
+        },
+        {
+          "app": "bobko.aerospace"
         }
       ],
       "display": [
@@ -302,5 +315,8 @@
         "offset": 0
       }
     }
+  },
+  "modeAliases": {
+    "service": "service"
   }
 }

@@ -3,7 +3,7 @@
   "bar": {
     "offset": 0,
     "belowMenuBar": false,
-    "keepWindowsClear": true,
+    "keepWindowsClear": false,
     "appearance": null,
     "motion": "none",
     "popupTransition": "fade",
@@ -32,8 +32,8 @@
       "type": "appleMenu",
       "style": {
         "borderWidth": 0,
-        "paddingHorizontal": 6,
-        "paddingVertical": 4,
+        "paddingHorizontal": 8,
+        "paddingVertical": 6,
         "fontSize": 14
       }
     },
@@ -70,10 +70,11 @@
           }
         },
         "fontName": "system",
-        "paddingVertical": 2,
+        "paddingVertical": 3,
         "paddingHorizontal": 2,
         "borderWidth": 0,
-        "accent": "@token.accent"
+        "accent": "@token.accent",
+        "fontSize": 14
       },
       "display": [
         "builtIn",
@@ -86,9 +87,11 @@
       "id": "app-menu",
       "position": "left",
       "type": "appMenu",
-      "expandOnHover": false,
+      "expandOnHover": true,
       "popupBackground": "@token.surfaceRaised",
       "display": [
+        "builtIn",
+        "monitor",
         "vertical"
       ]
     },
@@ -176,7 +179,6 @@
       "type": "audio",
       "position": "right",
       "display": [
-        "monitor",
         "vertical"
       ]
     },
@@ -242,7 +244,6 @@
         }
       ],
       "display": [
-        "monitor",
         "vertical"
       ]
     },
@@ -295,7 +296,11 @@
     "weather": {
       "enabled": true,
       "position": "right",
-      "display": "all",
+      "display": [
+        "builtIn",
+        "monitor",
+        "vertical"
+      ],
       "popup": {
         "openOnHover": true
       },
@@ -308,11 +313,50 @@
     "version": "1.0.0"
   },
   "screens": {
+    "laptop": {
+      "layout": {
+        "center": [
+          "now-playing"
+        ],
+        "left": [
+          "apple",
+          "workspaces",
+          "app-menu"
+        ],
+        "notchLeft": [],
+        "notchRight": [
+          "widget-6f7392b2"
+        ],
+        "right": [
+          "weather",
+          "meeting",
+          "battery",
+          "widget-58701978",
+          "clock"
+        ]
+      }
+    },
     "monitor": {
-      "bar": {
-        "belowMenuBar": true,
-        "margin": 0,
-        "offset": 0
+      "layout": {
+        "center": [
+          "now-playing"
+        ],
+        "left": [
+          "apple",
+          "workspaces",
+          "app-menu"
+        ],
+        "notchLeft": [],
+        "notchRight": [
+          "widget-6f7392b2"
+        ],
+        "right": [
+          "weather",
+          "meeting",
+          "battery",
+          "widget-58701978",
+          "clock"
+        ]
       }
     }
   },

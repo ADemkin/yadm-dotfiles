@@ -96,8 +96,8 @@ on-window-detected = [
     {
         if = 'test %{app-bundle-id} = com.apple.Safari',
         run = [
-            'layout accordion',
             'move-node-to-workspace S',
+            'layout accordion',
         ],
     },
     # A = Arc
@@ -112,12 +112,14 @@ on-window-detected = [
         if = 'test %{app-bundle-id} = su.ffg.happ',
         run = [
             'move-node-to-workspace V',
+            'layout tiling',
         ],
     },
     {
         if = 'test %{app-bundle-id} = org.openvpn.client.app',
         run = [
             'move-node-to-workspace V',
+            'layout tiling',
         ],
     },
     # M = Messengers

@@ -5,7 +5,6 @@ require('core.ui')
 require('core.indent')
 require('core.events')
 require('core.spell')
--- require('core.session')
 
 require('core.cycle').setup({
   markdown = {

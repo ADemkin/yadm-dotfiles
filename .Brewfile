@@ -1,4 +1,5 @@
-tap "denisidoro/ezlo", "https://github.com/denisidoro/ezlo"
+tap "anomalyco/tap"
+tap "denisidoro/ezlo", "https://github.com/denisidoro/ezlo", trusted: { formulae: ["ezlo"] }
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "homebrew/bundle"
 tap "homebrew/services"
@@ -6,8 +7,9 @@ tap "janosmiko/tap"
 tap "jurplel/tap", trusted: { casks: ["instant-space-switcher"] }
 tap "kackerx/tap"
 tap "m99coder/tap", trusted: true
-tap "mediosz/tap"
+tap "mediosz/tap", trusted: true
 tap "nikitabobko/tap", trusted: true
+tap "seb-graf/tap"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -86,8 +88,6 @@ brew "jq"
 brew "node"
 # JavaScript, CSS and HTML unobfuscator and beautifier
 brew "js-beautify"
-# Interactive environments for writing and running code
-brew "jupyterlab"
 # Handy way to save and run project-specific commands
 brew "just"
 # Kubernetes CLI To Manage Your Clusters In Style!
@@ -202,11 +202,13 @@ brew "zoxide"
 brew "zsh"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
+# OpenCode V2 - the AI coding agent for the terminal
+brew "anomalyco/tap/opencode-v2", trusted: true
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar", trusted: true
 # Lightning Fast Kubernetes navigator - keyboard-focused TUI for managing K8s clusters
 brew "janosmiko/tap/lfk", trusted: true
-# Tmux-style terminal database client for PostgreSQL, MySQL, SQLite and Redis
+# Tmux-style terminal database client for PostgreSQL, MySQL, SQLite, SQL Server and Redis
 brew "kackerx/tap/sqlmux", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
@@ -256,6 +258,8 @@ cask "orbstack"
 cask "raycast"
 # HTTP proxy
 cask "rockxy"
+# Native, configurable menu bar
+cask "seb-graf/tap/stablebar", trusted: true
 # Text editor for code, markup and prose
 cask "sublime-text"
 # Messaging app with a focus on speed and security
@@ -269,7 +273,9 @@ cask "zoom"
 # Indoor cycling game
 cask "zwift"
 go "github.com/kisielk/errcheck"
+go "golang.org/x/lint/golint"
 go "golang.org/x/tools/gopls"
+go "honnef.co/go/tools/cmd/staticcheck"
 go "golang.org/x/website/tour"
 go "github.com/gravitational/teleport/tool/tsh"
 cargo "grip-grab"

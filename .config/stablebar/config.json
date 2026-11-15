@@ -25,6 +25,7 @@
       }
     }
   },
+  "includes": ["sketchybar-app-font.json"],
   "widgets": [
     {
       "id": "apple",
@@ -50,10 +51,6 @@
           "background": "@token.textMuted",
           "offsetY": 0
         },
-        "appStyle": {
-          "fontSize": 17,
-          "foreground": "@token.textMuted"
-        },
         "style": {
           "height": 22,
           "paddingHorizontal": 6,
@@ -61,7 +58,12 @@
           "foreground": "@token.text"
         },
         "badges": "count",
-        "focusedWindowStyle": null
+        "focusedWindowStyle": null,
+        "appGlyphs": "@token.appGlyphs",
+        "appStyle": {
+          "fontName": "sketchybar-app-font",
+          "fontSize": 14
+        }
       },
       "style": {
         "states": {
@@ -76,11 +78,7 @@
         "accent": "@token.accent",
         "fontSize": 14
       },
-      "display": [
-        "builtIn",
-        "monitor",
-        "vertical"
-      ],
+      "display": ["builtIn", "monitor", "vertical"],
       "tooltipBackground": "@token.surfaceRaised"
     },
     {
@@ -89,11 +87,10 @@
       "type": "appMenu",
       "expandOnHover": true,
       "popupBackground": "@token.surfaceRaised",
-      "display": [
-        "builtIn",
-        "monitor",
-        "vertical"
-      ]
+      "display": ["builtIn", "monitor", "vertical"],
+      "style": {
+        "fontWeight": "regular"
+      }
     },
     {
       "id": "meeting",
@@ -167,20 +164,14 @@
       },
       "position": "right",
       "type": "calendar",
-      "display": [
-        "builtIn",
-        "monitor",
-        "vertical"
-      ],
+      "display": ["builtIn", "monitor", "vertical"],
       "icon": ""
     },
     {
       "id": "sound",
       "type": "audio",
       "position": "right",
-      "display": [
-        "vertical"
-      ]
+      "display": ["vertical"]
     },
     {
       "details": true,
@@ -243,9 +234,7 @@
           "app": "bobko.aerospace"
         }
       ],
-      "display": [
-        "vertical"
-      ]
+      "display": ["vertical"]
     },
     {
       "id": "widget-6f7392b2",
@@ -296,11 +285,7 @@
     "weather": {
       "enabled": true,
       "position": "right",
-      "display": [
-        "builtIn",
-        "monitor",
-        "vertical"
-      ],
+      "display": ["builtIn", "monitor", "vertical"],
       "popup": {
         "openOnHover": true
       },
@@ -308,59 +293,31 @@
     }
   },
   "workspaceSource": "aerospace",
-  "theme": {
-    "id": "grey-round",
-    "version": "1.0.0"
-  },
   "screens": {
     "laptop": {
       "layout": {
-        "center": [
-          "now-playing"
-        ],
-        "left": [
-          "apple",
-          "workspaces",
-          "app-menu"
-        ],
+        "center": ["now-playing"],
+        "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
-        "notchRight": [
-          "widget-6f7392b2"
-        ],
-        "right": [
-          "weather",
-          "meeting",
-          "battery",
-          "widget-58701978",
-          "clock"
-        ]
+        "notchRight": ["widget-6f7392b2"],
+        "right": ["weather", "meeting", "battery", "widget-58701978", "clock"]
       }
     },
     "monitor": {
       "layout": {
-        "center": [
-          "now-playing"
-        ],
-        "left": [
-          "apple",
-          "workspaces",
-          "app-menu"
-        ],
+        "center": ["now-playing"],
+        "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
-        "notchRight": [
-          "widget-6f7392b2"
-        ],
-        "right": [
-          "weather",
-          "meeting",
-          "battery",
-          "widget-58701978",
-          "clock"
-        ]
+        "notchRight": ["widget-6f7392b2"],
+        "right": ["weather", "meeting", "battery", "widget-58701978", "clock"]
       }
     }
   },
   "modeAliases": {
     "service": "service"
+  },
+  "theme": {
+    "id": "grey-round",
+    "version": "1.0.0"
   }
 }

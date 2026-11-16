@@ -48,23 +48,24 @@ return {
         },
         name = {
           trailing_slash = false,
-          use_git_status_colors = true,
+          -- use_git_status_colors = true,
           highlight = 'NeoTreeFileName',
         },
-        git_status = {
-          symbols = {
-            -- highlight only
-            added = '',
-            deleted = '',
-            modified = '',
-            renamed = '',
-            untracked = '',
-            ignored = '',
-            unstaged = '',
-            staged = '',
-            conflict = '',
-          },
-        },
+        git_status = { enabled = false },
+        -- git_status = {
+        --   symbols = {
+        --     -- highlight only
+        --     added = '',
+        --     deleted = '',
+        --     modified = '',
+        --     renamed = '',
+        --     untracked = '',
+        --     ignored = '',
+        --     unstaged = '',
+        --     staged = '',
+        --     conflict = '',
+        --   },
+        -- },
         symlink_target = { enabled = false },
         file_size = { enabled = false },
         type = { enabled = false },
@@ -101,10 +102,10 @@ return {
           -- ['<'] = 'prev_source',
           -- ['>'] = 'next_source',
           ['i'] = 'show_file_details',
-          ['<C-n>'] = 'next_git_modified',
-          ['<C-p>'] = 'prev_git_modified',
-          ['tj'] = 'next_git_modified',
-          ['tk'] = 'prev_git_modified',
+          -- ['<C-p>'] = 'prev_git_modified',
+          -- ['<C-n>'] = 'next_git_modified',
+          -- ['tj'] = 'next_git_modified',
+          -- ['tk'] = 'prev_git_modified',
         },
       },
       filesystem = {
@@ -124,7 +125,8 @@ return {
         filtered_items = {
           visible = false,
           hide_dotfiles = false,
-          hide_gitignored = true,
+          -- hide_gitignored = true,
+          hide_gitignored = false, -- it adds huge lag in monorepo
           hide_by_name = {
             'thumbs.db',
             'node_modules',

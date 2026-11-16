@@ -6,7 +6,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "TNS AI Developer",
       "options": {
-        "baseURL": "https://ur-llm-proxy.wb.ru/v1",
+        "baseURL": "{env:TNS_AI_DEVELOPER_URL}",
         "apiKey": "{env:TNS_AI_DEVELOPER_KEY}"
       },
       "models": {
@@ -45,6 +45,7 @@
     { "action": "shell", "resource": "which *", "effect": "allow" },
     { "action": "shell", "resource": "type *", "effect": "allow" },
     { "action": "shell", "resource": "gh *", "effect": "allow" },
+    { "action": "shell", "resource": "kubectl *", "effect": "allow" },
     { "action": "shell", "resource": "sort *", "effect": "allow" },
     { "action": "shell", "resource": "curl *", "effect": "allow" },
     { "action": "shell", "resource": "cp *", "effect": "allow" },
@@ -54,88 +55,24 @@
     { "action": "shell", "resource": "tar *", "effect": "allow" },
     { "action": "shell", "resource": "uniq *", "effect": "allow" },
     { "action": "shell", "resource": "cut *", "effect": "allow" },
+    { "action": "shell", "resource": "jq *", "effect": "allow" },
+    { "action": "shell", "resource": "yq *", "effect": "allow" },
+    { "action": "shell", "resource": "man *", "effect": "allow" },
     { "action": "shell", "resource": "tr *", "effect": "allow" },
     { "action": "shell", "resource": "tee *", "effect": "allow" },
     { "action": "shell", "resource": "xargs *", "effect": "allow" },
     { "action": "shell", "resource": "ps *", "effect": "allow" },
     { "action": "shell", "resource": "pgrep *", "effect": "allow" },
     { "action": "shell", "resource": "opencode *", "effect": "allow" },
+    { "action": "shell", "resource": "git clean *", "effect": "ask" },
+    { "action": "shell", "resource": "git reset *", "effect": "ask" },
+    { "action": "shell", "resource": "git rebase *", "effect": "ask" },
+    { "action": "shell", "resource": "git restore *", "effect": "ask" },
+    { "action": "shell", "resource": "git branch -D *", "effect": "ask" },
     { "action": "shell", "resource": "git push *", "effect": "deny" },
-    { "action": "shell", "resource": "git remote *", "effect": "deny" },
-    { "action": "shell", "resource": "git fetch *", "effect": "deny" },
+    { "action": "shell", "resource": "git remote *", "effect": "ask" },
     { "action": "shell", "resource": "git commit *", "effect": "ask" },
     { "action": "shell", "resource": "rm *", "effect": "ask" },
     { "action": "shell", "resource": "mv *", "effect": "ask" }
-  ],
-  "mcp": {
-    "wiki": {
-      "type": "http",
-      "url": "https://wiki.wb.ru/api/public/v1/mcp",
-      "headers": {
-        "Authorization": "Bearer ${WIKI_TOKEN}"
-      }
-    },
-    "grafana": {
-      "command": "docker",
-      "args": [
-        "run",
-        "--rm",
-        "-i",
-        "-e",
-        "GRAFANA_URL",
-        "-e",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN",
-        "grafana/mcp-grafana",
-        "-t",
-        "stdio",
-        "--disable-write"
-      ],
-      "env": {
-        "GRAFANA_URL": "https://grafana.wb.ru",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_TOKEN}"
-      }
-    },
-    "gitlab": {
-      "command": "npx",
-      "args": ["-y", "@zereight/mcp-gitlab"],
-      "env": {
-        "GITLAB_API_URL": "https://gitlab-internal.wildberries.ru/api/v4",
-        "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_TOKEN}",
-        "GITLAB_READ_ONLY_MODE": "true"
-      }
-    },
-    "kubernetes": {
-      "command": "npx",
-      "args": ["-y", "kubernetes-mcp-server@latest"]
-    },
-    "wb-tracker": {
-      "type": "http",
-      "url": "http://moderation-ingress-controller.moderation.k8s.tns-stage-el/mcp/wb-tracker",
-      "headers": {
-        "X-Tracker-Login": "${TRACKER_LOGIN}",
-        "X-Tracker-Token": "${TRACKER_TOKEN}"
-      }
-    },
-    "band": {
-      "type": "http",
-      "url": "http://moderation-ingress-controller.moderation.k8s.tns-stage-el/mcp/band",
-      "headers": {
-        "Authorization": "Bearer ${BAND_TOKEN}"
-      }
-    },
-    "testops": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "--@purchase:registry=https://nexus-hosted.wb.ru/repository/purchase-npm-public/",
-        "@purchase/testops-mcp@0.5.0",
-        "stdio"
-      ],
-      "env": {
-        "TESTOPS_URL": "https://allure-testops.wb.ru",
-        "TESTOPS_API_TOKEN": "${TESTOPS_TOKEN}",
-        "TESTOPS_DEFAULT_PROJECT_ID": "659"
-      }
-    }
-  }
+  ]
 }

@@ -14,16 +14,7 @@
     "glass": {
       "enabled": false
     },
-    "position": "top",
-    "style": {
-      "states": {
-        "mode.service": {
-          "borderEdges": "bottom",
-          "borderColor": "@token.warning",
-          "borderWidth": 2
-        }
-      }
-    }
+    "position": "top"
   },
   "includes": ["sketchybar-app-font.json"],
   "widgets": [
@@ -77,7 +68,8 @@
         "paddingHorizontal": 2,
         "borderWidth": 0,
         "accent": "@token.accent",
-        "fontSize": 14
+        "fontSize": 14,
+        "borderColor": "@token.critical"
       },
       "display": ["builtIn", "monitor", "vertical"],
       "tooltipBackground": "@token.surfaceRaised"
@@ -169,12 +161,6 @@
       "icon": ""
     },
     {
-      "id": "sound",
-      "type": "audio",
-      "position": "right",
-      "display": ["vertical"]
-    },
-    {
       "details": true,
       "id": "battery",
       "position": "right",
@@ -194,48 +180,6 @@
       "onClick": "open -a Calendar",
       "position": "right",
       "type": "clock"
-    },
-    {
-      "id": "menu-bar-items",
-      "position": "right",
-      "type": "menuBarItems",
-      "shown": [
-        {
-          "app": "com.apple.controlcenter",
-          "item": "com.apple.menuextra.controlcenter"
-        }
-      ],
-      "hidden": [
-        {
-          "app": "com.apple.controlcenter",
-          "item": "com.apple.menuextra.sound"
-        },
-        {
-          "app": "com.apple.controlcenter",
-          "item": "com.apple.menuextra.battery"
-        },
-        {
-          "app": "com.apple.TextInputMenuAgent"
-        },
-        {
-          "app": "timeow-mac_arm64"
-        },
-        {
-          "app": "com.jordanbaird.Ice"
-        },
-        {
-          "app": "com.apple.weather.menu"
-        },
-        "symbol",
-        {
-          "app": "com.apple.controlcenter",
-          "item": "com.apple.menuextra.clock"
-        },
-        {
-          "app": "bobko.aerospace"
-        }
-      ],
-      "display": ["vertical"]
     },
     {
       "id": "widget-6f7392b2",
@@ -268,11 +212,9 @@
     "workspaces",
     "app-menu",
     "meeting",
-    "sound",
     "battery",
     "widget-58701978",
     "clock",
-    "menu-bar-items",
     "widget-6f7392b2",
     "now-playing"
   ],
@@ -291,7 +233,7 @@
         "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
         "notchRight": ["widget-6f7392b2"],
-        "right": ["meeting","sound","battery","widget-58701978","clock"]
+        "right": ["meeting","battery","widget-58701978","clock"]
       }
     },
     "monitor": {
@@ -308,7 +250,7 @@
     "service": "service"
   },
   "theme": {
-    "id": "grey-round",
+    "id": "macos-like-round",
     "version": "1.0.0"
   }
 }

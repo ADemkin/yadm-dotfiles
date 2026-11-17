@@ -115,6 +115,7 @@ alias grh="git reset --hard"
 alias gcm="git checkout origin/main"
 alias gcb="git checkout -b"
 alias gch="git checkout"
+alias yg="yadm graph"
 
 # More complex grep
 GREP=$(which grep)
@@ -347,6 +348,9 @@ alias tshlogout="tsh17 logout --user=demkin.anton"
 alias tshaxc="tsh17 kube login k8s.antifraud-xc && kubectl config set-context --current --namespace=behavior-analysis"
 alias tshrxs="tsh17 kube login k8s.reputation-xs && kubectl config set-context --current --namespace=behavior-analysis"
 alias tshael="tsh17 kube login k8s.antifraud-el && kubectl config set-context --current --namespace=behavior-analysis"
+
+alias tshxca="tsh17 kube login k8s.tns-ml-platform-xc-a && kubectl config set-context --current --namespace=moderation"
+alias tshxsa="tsh17 kube login k8s.tns-ml-platform-xs-a && kubectl config set-context --current --namespace=moderation"
 
 podlogs() {
     kubectl -n moderation logs $@

@@ -1,0 +1,8 @@
+{
+  "description" : "Based on Grey Round.",
+  "entry" : "config.json",
+  "id" : "macos-like-round",
+  "kind" : "theme",
+  "name" : "macOS-like round",
+  "version" : "1.0.0"
+}

@@ -1,0 +1,112 @@
+{
+  "bar" : {
+    "height" : 32,
+    "spacing" : 4,
+    "style" : {
+      "borderColor" : "#000000ff",
+      "borderWidth" : 0,
+      "cornerRadius" : 0,
+      "states" : {
+        "mode.service" : {
+          "borderColor" : "@token.warning",
+          "borderEdges" : "bottom",
+          "borderWidth" : 2
+        }
+      }
+    }
+  },
+  "defaults" : {
+    "accent" : "@token.accent",
+    "background" : "@token.surface",
+    "borderColor" : {
+      "dark" : "#ffffff00",
+      "light" : "#ffffffb3"
+    },
+    "cornerRadius" : 14,
+    "fontName" : "system",
+    "fontSize" : 14,
+    "fontWeight" : "regular",
+    "foreground" : "@token.text",
+    "hoverBackground" : "@token.surfaceRaised",
+    "paddingVertical" : 6,
+    "shadowColor" : {
+      "dark" : "#00000040",
+      "light" : "#00000014"
+    }
+  },
+  "popupDefaults" : {
+    "cornerRadius" : 14,
+    "fontSize" : 14,
+    "fontWeight" : "regular"
+  },
+  "roles" : {
+    "button" : {
+
+    },
+    "heading" : {
+
+    },
+    "key" : {
+
+    },
+    "meter" : {
+
+    },
+    "primary" : {
+
+    },
+    "secondary" : {
+
+    },
+    "separator" : {
+
+    },
+    "time" : {
+
+    },
+    "value" : {
+
+    }
+  },
+  "tokens" : {
+    "accent" : {
+      "dark" : "#fefff92f",
+      "light" : "#007affff"
+    },
+    "critical" : {
+      "dark" : "#ff6961",
+      "light" : "#d70015"
+    },
+    "hairline" : {
+      "dark" : "#ffffff1f",
+      "light" : "#1d1d1f1f"
+    },
+    "surface" : {
+      "dark" : "#242620ff",
+      "light" : "#eff1f5ff"
+    },
+    "surfaceRaised" : {
+      "dark" : "#444444ff",
+      "light" : "#ccd0daff"
+    },
+    "text" : {
+      "dark" : "#f5f5f7",
+      "light" : "#1d1d1f"
+    },
+    "textMuted" : {
+      "dark" : "#a1a1a6ff",
+      "light" : "#6e6e73ff"
+    },
+    "track" : {
+      "dark" : "#f5f5f726",
+      "light" : "#1d1d1f26"
+    },
+    "warning" : {
+      "dark" : "#ffb340",
+      "light" : "#c93400"
+    }
+  },
+  "widgets" : [
+
+  ]
+}

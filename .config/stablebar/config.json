@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Seb-GRAF/StableBar/v0.15.0/stablebar.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Seb-GRAF/StableBar/v0.17.0/stablebar.schema.json",
   "bar": {
     "offset": 0,
     "belowMenuBar": false,
@@ -62,7 +62,8 @@
         "appGlyphs": "@token.appGlyphs",
         "appStyle": {
           "fontName": "sketchybar-app-font",
-          "fontSize": 14
+          "fontSize": 14,
+          "foreground": "@token.text"
         }
       },
       "style": {
@@ -253,7 +254,7 @@
       "version": "1.2.2"
     },
     {
-      "enabled": true,
+      "enabled": false,
       "id": "weather",
       "settings": {
         "location": "",
@@ -266,7 +267,6 @@
     "apple",
     "workspaces",
     "app-menu",
-    "weather",
     "meeting",
     "sound",
     "battery",
@@ -281,15 +281,6 @@
       "enabled": true,
       "position": "center",
       "display": "all"
-    },
-    "weather": {
-      "enabled": true,
-      "position": "right",
-      "display": ["builtIn", "monitor", "vertical"],
-      "popup": {
-        "openOnHover": true
-      },
-      "icon": ""
     }
   },
   "workspaceSource": "aerospace",
@@ -300,7 +291,7 @@
         "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
         "notchRight": ["widget-6f7392b2"],
-        "right": ["weather", "meeting", "battery", "widget-58701978", "clock"]
+        "right": ["meeting","sound","battery","widget-58701978","clock"]
       }
     },
     "monitor": {
@@ -309,7 +300,7 @@
         "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
         "notchRight": ["widget-6f7392b2"],
-        "right": ["weather", "meeting", "battery", "widget-58701978", "clock"]
+        "right": ["meeting","battery","widget-58701978","clock"]
       }
     }
   },

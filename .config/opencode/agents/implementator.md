@@ -3,8 +3,7 @@ description: TDD implementator. Writes failing tests first (red), implements the
 mode: all
 color: "#859900"
 permissions:
-  # shell allows first — hard denies come LAST (last matching rule wins)
-  # tests, lint, typecheck, builds
+  # allows first — tests/lint/typecheck/builds; hard denies LAST (last matching rule wins)
   - action: shell
     resource: "pytest *"
     effect: allow
@@ -38,10 +37,7 @@ permissions:
   - action: shell
     resource: "go build *"
     effect: allow
-  # git: deny every subcommand, then re-open the four read-only forms —
-  # one rule catches every mutating subcommand typed as the command word;
-  # assignment-prefixed, env-wrapped, or absolute-path git invocations
-  # follow the global config (same residual as the tee/rm/sudo denies below)
+  # deny every git subcommand, then re-open the four read-only forms (env-wrapped or absolute-path git follows the global config)
   - action: shell
     resource: "git *"
     effect: deny
@@ -58,9 +54,7 @@ permissions:
   - action: shell
     resource: "git show *"
     effect: allow
-  # --output writes a file without ">" — denied in both flag positions for
-  # every allowed diff-family command (status has no --output). The git *
-  # deny above cannot catch these: the four allows after it override it.
+  # --output writes a file without ">" — placed after the git allows (last match wins)
   - action: shell
     resource: "git diff --output*"
     effect: deny
@@ -79,10 +73,8 @@ permissions:
   - action: shell
     resource: "git show * --output*"
     effect: deny
-  # subagent launches: deny all, allow the two read-only helpers — mode: all
-  # shares one list, so this holds in worker mode too (nested read-only help
-  # is fine). question stays allowed for primary mode; as a worker the Brief
-  # rule (stop and report, don't guess) governs instead of a permission.
+  # deny-all subagents, re-open the two read-only helpers (one list for both modes);
+  # question stays allowed for primary mode — as a worker the Brief rule governs
   - action: subagent
     resource: "*"
     effect: deny
@@ -92,10 +84,8 @@ permissions:
   - action: subagent
     resource: "reviewer"
     effect: allow
-  # hard denies LAST so they override every allow above;
-  # ">*" catches every write redirect: >, >>, 2>, 2>>, &>, >|, and 2>&1.
-  # pipelines are split per segment — no resource ever contains " | " —
-  # so the tee write vector is denied segment-shaped instead
+  # hard denies LAST — ">*" denies every write redirect (>, >>, 2>, 2>>, &>, >|, and 2>&1);
+  # pipelines split per segment, so "tee" is denied segment-shaped below
   - action: shell
     resource: "*>*"
     effect: deny
@@ -108,9 +98,7 @@ permissions:
   - action: shell
     resource: "sudo *"
     effect: deny
-  # an interior tab stays raw in the resource but is plain whitespace to the
-  # shell — it evades every space-anchored deny above while the allows still
-  # match; nothing legitimate contains a literal tab, so deny the whole class
+  # interior tab: plain whitespace to the shell, raw in the resource — evades space-anchored denies
   - action: shell
     resource: "*\t*"
     effect: deny
@@ -126,9 +114,8 @@ You implement code changes with strict test-first discipline.
 ## Before writing anything
 
 1. Read project instructions (CLAUDE.md / AGENTS.md) and follow everything they demand: lint config, import rules, test style, logging, pydantic-across-boundaries.
-2. Study existing tests for this area (fixtures, factories, mocks, markers) and reuse their patterns — never invent a parallel test style.
-3. Copy the house pattern: check how sibling modules solve the same problem.
-4. Re-read target files fresh before editing — the user and other workers may have changed them. Tests another worker (e.g. the tester) added are part of the merged state: build on them; if one seems wrong, say so in your report — never silently edit or delete it.
+2. Study existing tests and sibling modules for this area; reuse the house patterns (fixtures, factories, mocks, markers, structure) — never invent a parallel style.
+3. Re-read target files fresh before editing — the user and other workers may have changed them. Tests another worker (e.g. the tester) added are part of the merged state: build on them; if one seems wrong, say so in your report — never silently edit or delete it.
 
 ## TDD loop
 

@@ -26,8 +26,7 @@ permissions:
   - action: subagent
     resource: "tester"
     effect: allow
-  # no arbitrary shell — read-only git for state, gate commands for verification
-  # a pattern ending in " *" also matches the bare command, so "pytest *" runs bare "pytest" too
+  # no arbitrary shell — read-only git + gate commands ("X *" also matches the bare command)
   - action: shell
     resource: "*"
     effect: deny
@@ -43,8 +42,7 @@ permissions:
   - action: shell
     resource: "git show *"
     effect: allow
-  # --output writes a file without ">" — denied in both flag positions for
-  # every allowed diff-family command (status has no --output)
+  # --output writes a file without ">" — both flag positions (status has none)
   - action: shell
     resource: "git diff --output*"
     effect: deny
@@ -75,8 +73,7 @@ permissions:
   - action: shell
     resource: "uv run pytest *"
     effect: allow
-  # bare forms only: make treats every extra argument as another goal,
-  # so any argument after the target falls to the blanket deny
+  # bare forms only — any extra argument (goal or VAR=value assignment) → blanket deny
   - action: shell
     resource: "make test"
     effect: allow
@@ -92,8 +89,7 @@ permissions:
   - action: shell
     resource: "ruff check *"
     effect: allow
-  # --fix / --add-noqa / --add-ignore mutate files — both flag positions,
-  # after the allow above
+  # source mutators — both flag positions, after the allow
   - action: shell
     resource: "ruff check --fix*"
     effect: deny
@@ -112,22 +108,14 @@ permissions:
   - action: shell
     resource: "ruff check * --add-ignore*"
     effect: deny
-  # -o/--output-file write the report to an arbitrary file (no ">") — both
-  # flag positions and the attached -oVALUE spelling (--output-format stays
-  # allowed: double-dash); pyrefly-scoped siblings live in the deny block
-  # below; RUFF_OUTPUT_FILE / RUFF_CACHE_DIR env = the assignment-prefix
-  # residual
+  # -o/--output-file write the report anywhere; --output-format stays allowed (double-dash)
   - action: shell
     resource: "ruff check -o*"
     effect: deny
   - action: shell
     resource: "ruff check * -o*"
     effect: deny
-  # --config accepts inline TOML settings overrides (--config "fix = true")
-  # — reaches fix/unsafe-fixes with no " --fix" token; a legit --config
-  # <file.toml> is denied too: report the exact command instead; forwarded
-  # through just recipes = the same residual as the short -o forms; path
-  # args containing "--config" = the *--*-class collateral
+  # --config inline-TOML overrides reach fix/unsafe-fixes with no " --fix" token
   - action: shell
     resource: "ruff check *--config*"
     effect: deny
@@ -149,13 +137,15 @@ permissions:
   - action: shell
     resource: "go test *"
     effect: allow
-  # -c/-o compile and write binaries — both flag positions, -o= and -c=
-  # forms too (-count/-cover unaffected: no space after -c)
+  # -c/-o compile and write binaries; -count/-cover unaffected
   - action: shell
     resource: "go test -c *"
     effect: deny
   - action: shell
     resource: "go test * -c *"
+    effect: deny
+  - action: shell
+    resource: "go test * -c"
     effect: deny
   - action: shell
     resource: "go test *-c=*"
@@ -172,8 +162,7 @@ permissions:
   - action: shell
     resource: "go test * -o=*"
     effect: deny
-  # -exec runs the test binary via an arbitrary program — both flag
-  # positions, -exec= form too
+  # -exec runs the test binary via an arbitrary program
   - action: shell
     resource: "go test -exec *"
     effect: deny
@@ -189,20 +178,14 @@ permissions:
   - action: shell
     resource: "go vet *"
     effect: allow
-  # go reduces "--x" to "-x" when parsing flags, so the single-dash denies
-  # above miss the double-dash spelling — deny it outright (collateral: the
-  # "--" terminator and paths containing "--")
+  # go parses "--x" as "-x" — deny the double-dash spelling outright
   - action: shell
     resource: "go test *--*"
     effect: deny
   - action: shell
     resource: "go vet *--*"
     effect: deny
-  # -toolexec routes every toolchain invocation through an arbitrary program
-  # (go test and go vet both accept it); -vettool swaps the vet analysis tool;
-  # -fix applies vet fixes and rewrites source — leading-"*" covers wrapper
-  # forms and both flag positions (" --fix" does not contain " -fix", so the
-  # double-dash mutators above are unaffected)
+  # program-exec / vet-fix flags; leading-"*" covers wrappers (" --fix" does not contain " -fix")
   - action: shell
     resource: "* -toolexec*"
     effect: deny
@@ -212,15 +195,36 @@ permissions:
   - action: shell
     resource: "* -fix*"
     effect: deny
-  # -extld appears inside -ldflags values (quote- or =-joined) or as a
-  # separate argument — the space-free shape covers every spelling (and
-  # -extldflags); no allowed surface contains "-extld"
+  # gc/asm/cgo/linker flag values carry compiler/linker flags like -o=/path — output lands at an attacker-chosen path
+  - action: shell
+    resource: "* -gcflags*"
+    effect: deny
+  - action: shell
+    resource: "* --gcflags*"
+    effect: deny
+  - action: shell
+    resource: "* -asmflags*"
+    effect: deny
+  - action: shell
+    resource: "* --asmflags*"
+    effect: deny
+  - action: shell
+    resource: "* -gccgoflags*"
+    effect: deny
+  - action: shell
+    resource: "* --gccgoflags*"
+    effect: deny
+  - action: shell
+    resource: "* -ldflags*"
+    effect: deny
+  - action: shell
+    resource: "* --ldflags*"
+    effect: deny
+  # -extld rides inside -ldflags values — space-free covers every spelling
   - action: shell
     resource: "*-extld*"
     effect: deny
-  # -mod=mod and -modfile direct go to rewrite go.mod/go.sum — broad forms
-  # also close just-forwarded spellings (no allowed surface contains them
-  # outside go)
+  # -mod=mod/-modfile rewrite go.mod/go.sum; broad forms close just-forwarded single-dash spellings
   - action: shell
     resource: "* -mod=mod*"
     effect: deny
@@ -228,9 +232,6 @@ permissions:
     resource: "* -modfile*"
     effect: deny
   # undocumented cmd-go debug flags write attacker-chosen files
-  # (-debug-actiongraph, -debug-runtime-trace, -debug-trace) — go-scoped
-  # flag-position pair; just-forwarded forms stay allowed (the
-  # just-forwarding residual)
   - action: shell
     resource: "go test -debug-*"
     effect: deny
@@ -243,8 +244,7 @@ permissions:
   - action: shell
     resource: "go vet * -debug-*"
     effect: deny
-  # file-writing flags — one leading-"*" rule covers every wrapper form
-  # (pytest runners, just recipes forwarding args) and both flag positions
+  # pytest file-writing flags — leading-"*" covers wrappers and both flag positions
   - action: shell
     resource: "* --basetemp*"
     effect: deny
@@ -257,41 +257,29 @@ permissions:
   - action: shell
     resource: "* --html*"
     effect: deny
-  # --log-file writes/truncates an arbitrary file; -o log_file=… enables the
-  # same write through the ini fallback — space-free covers attached and
-  # --override-ini spellings
+  # --log-file writes an arbitrary file; -o log_file=… reaches the same ini fallback
   - action: shell
     resource: "* --log-file*"
     effect: deny
   - action: shell
     resource: "*log_file=*"
     effect: deny
-  # pytest cache plugin writes fixed-name cache files (CACHEDIR.TAG,
-  # v/cache/lastfailed, v/cache/nodeids) to the ini cache_dir path —
-  # same ini-fallback class as log_file
+  # pytest cache_dir ini write — same class as log_file
   - action: shell
     resource: "*cache_dir=*"
     effect: deny
-  # ruff --cache-dir relocates its cache the same way — space-free also
-  # catches the inline-TOML override (--config "cache-dir = …", no
-  # " --cache-dir" token in the raw resource); RUFF_CACHE_DIR env = the
-  # assignment-prefix residual; path args containing "cache-dir" = the
-  # *--*-class collateral
+  # ruff --cache-dir — space-free also catches the inline-TOML "--config" spelling
   - action: shell
     resource: "*cache-dir*"
     effect: deny
-  # --rootdir <existing-dir> re-roots the cache path (.pytest_cache lands
-  # under the chosen directory) — residual: -c/--config-file relocates
-  # rootpath too but needs a pre-existing loadable config file
+  # --rootdir re-roots the pytest cache path
   - action: shell
     resource: "* --rootdir*"
     effect: deny
   - action: shell
     resource: "* --cov*"
     effect: deny
-  # third-party pytest plugin writers (live only when the plugin is installed)
-  # — enumeration bounded here: further plugin flags = the accepted residual
-  # (plugin import itself is the repo-code-execution class)
+  # third-party pytest plugin writers — bounded; plugin import itself is the repo-code-execution class
   - action: shell
     resource: "* --json-report*"
     effect: deny
@@ -313,9 +301,7 @@ permissions:
   - action: shell
     resource: "* --md*"
     effect: deny
-  # pytest -o addopts=… prepends the value to argv (pytest source: getini
-  # "addopts") — space-free because no space precedes the flag inside the
-  # value (cost: the legit bare "addopts=" suppression idiom is denied too)
+  # -o addopts=… prepends the value to argv — space-free (legit bare "addopts=" denied too)
   - action: shell
     resource: "*addopts=*"
     effect: deny
@@ -340,9 +326,7 @@ permissions:
   - action: shell
     resource: "* -outputdir*"
     effect: deny
-  # test.-prefixed aliases of the go profile flags above (cmd-go registers
-  # and forwards them, before and after the package list) plus the Go 1.25
-  # bare -artifacts spelling
+  # test.-prefixed aliases of the go profile flags above + the bare -artifacts spelling
   - action: shell
     resource: "* -test.coverprofile*"
     effect: deny
@@ -367,18 +351,58 @@ permissions:
   - action: shell
     resource: "* -test.artifacts*"
     effect: deny
-  # -test.gocoverdir is NOT a registered alias — cmd-go forwards it raw to
-  # the test binary, which writes coverage files there
+  # -test.gocoverdir is NOT a registered alias — forwarded raw to the test binary
   - action: shell
     resource: "* -test.gocoverdir*"
     effect: deny
   - action: shell
     resource: "* -artifacts*"
     effect: deny
-  # mutators forwarded through just recipes — the ruff-check-scoped guards
-  # above cannot catch them (residual: just-forwarded go -c/-o collide with
-  # pytest's legit -c/--override-ini and stay allowed; forwarded
-  # -mod=mod/-modfile are denied by the broad mod rules above)
+  # double-dash spellings of the go mutator family above — cmd-go reduces "--x" to "-x",
+  # so just-forwarded forms need their own rules; quote-glued spellings → the blankets at the end
+  - action: shell
+    resource: "* --toolexec*"
+    effect: deny
+  - action: shell
+    resource: "* --vettool*"
+    effect: deny
+  - action: shell
+    resource: "* --exec*"
+    effect: deny
+  - action: shell
+    resource: "* --mod=mod*"
+    effect: deny
+  - action: shell
+    resource: "* --modfile*"
+    effect: deny
+  - action: shell
+    resource: "* --coverprofile*"
+    effect: deny
+  - action: shell
+    resource: "* --cpuprofile*"
+    effect: deny
+  - action: shell
+    resource: "* --memprofile*"
+    effect: deny
+  - action: shell
+    resource: "* --blockprofile*"
+    effect: deny
+  - action: shell
+    resource: "* --mutexprofile*"
+    effect: deny
+  - action: shell
+    resource: "* --trace*"
+    effect: deny
+  - action: shell
+    resource: "* --outputdir*"
+    effect: deny
+  - action: shell
+    resource: "* --artifacts*"
+    effect: deny
+  - action: shell
+    resource: "* --test.*"
+    effect: deny
+  # mutators forwarded through just recipes — the ruff-check-scoped guards above cannot catch them
   - action: shell
     resource: "* --fix*"
     effect: deny
@@ -388,12 +412,11 @@ permissions:
   - action: shell
     resource: "* --add-ignore*"
     effect: deny
-  # just-forwarded go test -exec (pytest has no -exec; -c/-o residual above)
+  # just-forwarded go test -exec (pytest has no -exec)
   - action: shell
     resource: "* -exec*"
     effect: deny
   # pyrefly check mutators — suppression-comment and baseline writes
-  # ("pyrefly suppress" as a subcommand is blanket-denied above)
   - action: shell
     resource: "* --suppress-errors*"
     effect: deny
@@ -406,13 +429,7 @@ permissions:
   - action: shell
     resource: "* --prune-baseline*"
     effect: deny
-  # environment-probing flags execute arbitrary programs (the go
-  # -exec/-toolexec class): --python-interpreter-path spawns the binary,
-  # --fallback-python-interpreter-name resolves via which and spawns it,
-  # --script-command runs an arbitrary command on PEP 723 scripts;
-  # --conda-environment needs no rule (spawns the fixed conda binary);
-  # collateral: legit venv selection (--python-interpreter-path
-  # .venv/bin/python) is denied too — report the exact command instead
+  # environment-probing flags execute arbitrary programs; --conda-environment needs no rule (fixed conda binary)
   - action: shell
     resource: "* --python-interpreter-path*"
     effect: deny
@@ -422,19 +439,14 @@ permissions:
   - action: shell
     resource: "* --script-command*"
     effect: deny
-  # pyrefly -o/--output write diagnostics to an arbitrary file (no ">") —
-  # pyrefly-scoped because pytest's legit -o shares the short form; both
-  # flag positions and the attached -oVALUE spelling (--output-format stays
-  # allowed: double-dash)
+  # pyrefly -o/--output write diagnostics to an arbitrary file — pytest's legit -o forbids a broad rule
   - action: shell
     resource: "pyrefly check -o*"
     effect: deny
   - action: shell
     resource: "pyrefly check * -o*"
     effect: deny
-  # pyrefly/ruff/just-forwarded output writers — arbitrary-file diagnostics
-  # and reports (no ">"); --output-format stays allowed (stdout only);
-  # short -o via just stays allowed (collides with pytest's legit -o)
+  # pyrefly/ruff/just-forwarded output writers; --output-format stays allowed (stdout only)
   - action: shell
     resource: "* --output *"
     effect: deny
@@ -453,41 +465,45 @@ permissions:
   - action: shell
     resource: "* --dependency-graph*"
     effect: deny
-  # denies after the allows: ">*" catches write redirects the allows would admit
-  # (>, >>, 2>, 2>>, &>, >|, and 2>&1 — nothing legitimate needs one; the
-  # harness captures output) — the lead never writes files. Pipelines are
-  # split per segment, so a "tee" segment falls to the blanket deny above.
+  # denies write redirects the allows would admit (>, >>, 2>, 2>>, &>, >|, and 2>&1 — none legit)
   - action: shell
     resource: "*>*"
     effect: deny
-  # an interior tab stays raw in the resource but is plain whitespace to the
-  # shell — it evades every space-anchored deny above while the allows still
-  # match; nothing legitimate contains a literal tab, so deny the whole class
+  # interior tab: plain whitespace to the shell, raw in the resource — evades space-anchored denies
   - action: shell
     resource: "*\t*"
     effect: deny
-  # empty adjacent quote pairs splice out in the shell but stay verbatim in
-  # the resource — they defeat every substring deny above (log_fi''le=x
-  # reaches pytest as log_file=x); nothing legitimate contains one;
-  # NON-EMPTY fragments (log_fi"le=, $'…') splice identically and stay
-  # allowed, as do backslash splices (log_file\=x) — the env-prefix-class
-  # residual
+  # empty quote pairs splice out in the shell but stay verbatim in the resource
+  # (log_fi''le=x → log_file=x); non-empty fragments/backslashes stay allowed
   - action: shell
     resource: "*''*"
     effect: deny
   - action: shell
     resource: "*\"\"*"
     effect: deny
-  # brace expansion composes words in the shell but stays verbatim in the
-  # resource (log_fi{le=/x,} reaches pytest as log_file=/x) — deny the
-  # signature; accepted collateral: {n,m} regex quantifiers (go test
-  # -run/-bench) and brace pathspecs (pytest tests/{a,b}, ruff check
-  # src/*.{py,pyi}, git pathspecs)
+  # brace expansion composes words in the shell but stays verbatim in the resource
+  # (log_fi{le=/x,} → log_file=/x); {n,m} regex + brace pathspecs = accepted collateral
   - action: shell
     resource: "*{*,*}*"
     effect: deny
   - action: shell
     resource: "*{,*}*"
+    effect: deny
+  # brace sequence expansion ({e..e} → e) composes words with no comma — same class as the comma rules
+  - action: shell
+    resource: "*{*..*"
+    effect: deny
+  # shell parameter expansion ($u, ${u}) composes flag text too — verbatim in the resource, expanded only by the shell
+  - action: shell
+    resource: "*$*"
+    effect: deny
+  # a quote glued to a flag dash shells out clean but stays verbatim in the resource
+  # (git log "--output=/x") — evades every space-anchored deny; deny the whole class
+  - action: shell
+    resource: "*\"-*"
+    effect: deny
+  - action: shell
+    resource: "*'-*"
     effect: deny
 ---
 
@@ -501,9 +517,9 @@ High-stakes (drives `reviewer-qwen` and `tester`): new modules, parsing/protocol
 - **`implementator`** — one TDD task per launch: red → green → lint → self-review, edits left uncommitted.
 - **`reviewer`** — after each implementation round, on exactly that round's changes, including any tests the `tester` added. `CRITICAL`/`MAJOR` findings become a new `implementator` brief; `MINOR`/`NIT` are reported, not chased. If the same `CRITICAL`/`MAJOR` finding survives two fix rounds, stop patching: escalate to the user to revert the piece, then re-implement differently on the clean base — never a third attempt.
 - **`reviewer-qwen`** — second opinion on high-stakes changes, or when the user says "double review". Same target as `reviewer`; run in parallel. Merge findings: both report it → fix; one reports it → verify in the code yourself. Name both reviewers in your report.
-- **`tester`** — adversarial second pass, only on high-stakes rounds. Launch AFTER `implementator` finishes that round — never in parallel with it. The brief carries the SPEC (intended behavior, known edge cases, where tests live), never the implementation diff. Spec-vs-code mismatches it reports become `implementator` briefs or user escalations.
+- **`tester`** — adversarial second pass, only on high-stakes rounds. The brief carries the SPEC (intended behavior, known edge cases, where tests live), never the implementation diff. Spec-vs-code mismatches it reports become `implementator` briefs or user escalations.
 
-Never launch a subagent without a brief (next section). Rounds are strictly sequential: `implementator` → `tester` (if launched) → reviewers. Never run a writer while anyone else touches the same tree; only the two reviewers may run in parallel. Never run the same subagent on overlapping work in parallel.
+Never launch a subagent without a brief (next section). Rounds are strictly sequential: `implementator` → `tester` (if launched) → reviewers. Never run a writer while anyone else touches the same tree; only the two reviewers may run in parallel.
 
 ## Briefs are self-contained
 
@@ -535,7 +551,7 @@ After a worker reports success, verify yourself: `git status`/`git diff` plus th
 
 ## Shell discipline
 
-Your shell is read-only: git inspection and gates only. Never commit, push, stash, reset, clean, or rebase — the user commits. If you are about to type an edit, you are doing a worker's job.
+Your shell is read-only: git inspection and gates only. Never commit, push, stash, reset, clean, or rebase — the user commits.
 
 ## Reporting to the user
 

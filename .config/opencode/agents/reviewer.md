@@ -28,11 +28,7 @@ permissions:
   - action: shell
     resource: "git show *"
     effect: allow
-  # --output writes a file without ">" — denied in both flag positions for
-  # every allowed diff-family command (status has no --output); ">*" then
-  # denies redirects the git allows would otherwise admit
-  # (>, >>, 2>, 2>>, &>, >|, and 2>&1 — nothing legitimate needs one; pipeline
-  # segments like "tee x" fall to the blanket deny above)
+  # --output writes a file without ">" — both flag positions (status has none)
   - action: shell
     resource: "git diff --output*"
     effect: deny
@@ -51,37 +47,45 @@ permissions:
   - action: shell
     resource: "git show * --output*"
     effect: deny
+  # denies write redirects the allows would admit (>, >>, 2>, 2>>, &>, >|, and 2>&1 — none legit)
   - action: shell
     resource: "*>*"
     effect: deny
-  # an interior tab stays raw in the resource but is plain whitespace to the
-  # shell — it evades every space-anchored deny above while the allows still
-  # match; nothing legitimate contains a literal tab, so deny the whole class
+  # interior tab: plain whitespace to the shell, raw in the resource — evades space-anchored denies
   - action: shell
     resource: "*\t*"
     effect: deny
-  # empty adjacent quote pairs splice out in the shell but stay verbatim in
-  # the resource — they defeat every substring deny above (log_fi''le=x
-  # reaches pytest as log_file=x); nothing legitimate contains one;
-  # NON-EMPTY fragments (log_fi"le=, $'…') splice identically and stay
-  # allowed, as do backslash splices (log_file\=x) — the env-prefix-class
-  # residual
+  # empty quote pairs splice out in the shell but stay verbatim in the resource
+  # (log_fi''le=x → log_file=x); non-empty fragments/backslashes stay allowed
   - action: shell
     resource: "*''*"
     effect: deny
   - action: shell
     resource: "*\"\"*"
     effect: deny
-  # brace expansion composes words in the shell but stays verbatim in the
-  # resource (log_fi{le=/x,} reaches pytest as log_file=/x) — deny the
-  # signature; accepted collateral: {n,m} regex quantifiers (go test
-  # -run/-bench) and brace pathspecs (pytest tests/{a,b}, ruff check
-  # src/*.{py,pyi}, git pathspecs)
+  # brace expansion composes words in the shell but stays verbatim in the resource
+  # (log_fi{le=/x,} → log_file=/x); {n,m} regex + brace pathspecs = accepted collateral
   - action: shell
     resource: "*{*,*}*"
     effect: deny
   - action: shell
     resource: "*{,*}*"
+    effect: deny
+  # brace sequence expansion ({e..e} → e) composes words with no comma — same class as the comma rules
+  - action: shell
+    resource: "*{*..*"
+    effect: deny
+  # shell parameter expansion ($u, ${u}) composes flag text too — verbatim in the resource, expanded only by the shell
+  - action: shell
+    resource: "*$*"
+    effect: deny
+  # a quote glued to a flag dash shells out clean but stays verbatim in the resource
+  # (git log "--output=/x") — evades every space-anchored deny; deny the whole class
+  - action: shell
+    resource: "*\"-*"
+    effect: deny
+  - action: shell
+    resource: "*'-*"
     effect: deny
 ---
 

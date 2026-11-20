@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Seb-GRAF/StableBar/v0.17.0/stablebar.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Seb-GRAF/StableBar/v0.18.0/stablebar.schema.json",
   "bar": {
     "offset": 0,
     "belowMenuBar": false,
@@ -205,12 +205,24 @@
         "units": "metric"
       },
       "version": "1.0.3"
+    },
+    {
+      "enabled": true,
+      "id": "amphetamine",
+      "settings": {
+        "barDisplay": "status",
+        "clickAction": "toggle",
+        "displaySleep": "allow",
+        "duration": "60"
+      },
+      "version": "1.2.2"
     }
   ],
   "widgetOrder": [
     "apple",
     "workspaces",
     "app-menu",
+    "amphetamine",
     "meeting",
     "battery",
     "widget-58701978",
@@ -223,6 +235,11 @@
       "enabled": true,
       "position": "center",
       "display": "all"
+    },
+    "amphetamine": {
+      "enabled": true,
+      "position": "left",
+      "display": "all"
     }
   },
   "workspaceSource": "aerospace",
@@ -233,7 +250,7 @@
         "left": ["apple", "workspaces", "app-menu"],
         "notchLeft": [],
         "notchRight": ["widget-6f7392b2"],
-        "right": ["meeting","battery","widget-58701978","clock"]
+        "right": ["amphetamine","meeting","battery","widget-58701978","clock"]
       }
     },
     "monitor": {

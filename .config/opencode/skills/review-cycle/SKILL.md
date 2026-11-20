@@ -18,129 +18,39 @@ A loop that hardens changes to a stated bar; it ends on a count, never on a feel
 
 ## Parameters and definitions
 
-- **N** — clean rounds required to finish. Default `3`; a positive integer; the user may set another.
-- **Round** — one reviewer launch + every fix it causes + one full gate run.
-  A superseded round (see "While the reviewer runs") runs no gates and resets
-  the counter; a no-verdict launch (see "Process the verdict") keeps the
-  counter it entered with.
-- **Finding** — an in-scope issue reported in the `[SEVERITY] path:line` format,
-  at any severity (CRITICAL, MAJOR, MINOR, NIT). A NIT counts. A `[SEVERITY]`
-  line naming a location outside the Scope (typically a "Noticed elsewhere"
-  item) is an out-of-scope observation: not a finding — no counter reset, no
-  fix mandate; carried to the final report's residual risks.
-- **Clean round** — zero findings in the verdict and nothing in scope changed
-  after the reviewer read the tree (no queued work, no gate fix, no user
-  commit or edit, no scope change).
-- **Counter** — consecutive clean rounds. Starts at `0` in a fresh cycle;
-  the latest per-round report restores it on resume. Any finding, post-read
-  in-scope change, scope change, or superseded round resets it to `0`.
-- **Gates** — the project's full verification commands (format check, lint,
-  typecheck, tests). Discover them from project instructions (CLAUDE.md,
-  AGENTS.md, Makefile); never invent them; find none — ask the user before starting.
-- **Scope** — what the loop covers: the changes the user named, or the whole
-  working-tree diff if none named. Non-repo or non-code target: every `git status`/`git diff`
-  step below becomes a fresh full re-read, and the review dimensions adapt.
+- **N** — clean rounds required to finish. Default `3`; a positive integer; user may set another.
+- **Round** — one reviewer launch + every fix it causes + one full gate run. A superseded round (see "While the reviewer runs") runs no gates and resets the counter; a no-verdict launch (see "Process the verdict") keeps the counter it entered with.
+- **Finding** — in-scope issue reported in the `[SEVERITY] path:line` format, at any severity (CRITICAL, MAJOR, MINOR, NIT). A NIT counts. A `[SEVERITY]` line naming a location outside the Scope (typically a "Noticed elsewhere" item) is an out-of-scope observation: not a finding — no counter reset, no fix mandate; carried to the final report's residual risks.
+- **Clean round** — zero findings in the verdict and nothing in scope changed after the reviewer read the tree (no queued work, no gate fix, no user commit or edit, no scope change).
+- **Counter** — consecutive clean rounds. Starts at `0` in a fresh cycle; the latest per-round report restores it on resume. Any finding, post-read in-scope change, scope change, or superseded round resets it to `0`.
+- **Gates** — the project's full verification commands (format check, lint, typecheck, tests). Discover from project instructions (CLAUDE.md, AGENTS.md, Makefile); never invent them; find none — ask the user before starting.
+- **Scope** — what the loop covers: the changes the user named, or the whole working-tree diff if none named. Non-repo or non-code target: every `git status`/`git diff` step below becomes a fresh full re-read, and the review dimensions adapt.
 
 ## Before round 1
 
 1. Discover the gates; list them to the user.
-2. Pre-clean, only if the user asked for it: one-shot reviews with the
-   `reviewer` subagent — direct calls, not Rounds — fixing every finding and
-   running the full gates after each fixing pass, until a pass reports zero
-   findings (count corrected to the listed in-scope items, per the
-   count-correction rule) or the user says to start the cycle. Brief each pass
-   like a round-1 brief — first line
-   "Pre-clean pass {k} of a review-fix loop on {project/branch}." (never
-   "Round {n}"), "Changes since last pass" (the fixes from pass k-1; "none"
-   on pass 1 unless in-scope work already entered it), no target-bar clause,
-   no Round history line. Passes are not Rounds: the counter stays `0` until
-   round 1, and nothing enters the round history, the trajectory, or the
-   per-round reports; their fixes go to the round-1 brief's "Changes since
-   last round", their findings to the final total's pre-clean plus-clause,
-   their "Noticed elsewhere" items to its residual risks. Resolve failures
-   inline: a no-verdict pass (two-launch bound)
-   relaunches with the same {k} — only resolved passes advance `{k}` —
-   and after two consecutive failed launches stop and
-   ask (retry, change the launch setup, stop, or skip the remaining pre-clean
-   and start the cycle at step 3; a retry or setup change resets the consecutive-failed-launch count); a
-   gate failure goes to the user (fix, waiver recorded as an Owner decision,
-   or stop before the cycle starts); a user-approved wontfix becomes an Owner decision
-   and a settled reviewer question a Verified fact — both carried into the remaining
-   pass briefs and every round brief; an unsettled question goes to the user; its
-   answer enters every brief's Owner decisions; in-scope work or a scope change
-   waits for a running pass to resolve, then lands before the next pass — or
-   before round 1's launch, if the pre-clean has ended — in the next brief's changes
-   list, a scope change updating the remaining passes' scope. On a user stop before round
-   1 — during pre-cleaning or any later step of this phase — deliver the
-   final report's stop variant ("Cycle stopped by user before round 1.") and
-   discard a still-running pass's verdict (let it finish, do not act on it);
-   a "start the cycle" landing mid-pass resolves the pass first. An
-   interruption routes through "Resuming an interrupted loop"; a fresh cycle
-   does not re-run a pre-clean of the same or an overlapping scope that
-   already completed or that a user stop or the skip option ended — it asks
-   whether to pre-clean again.
-3. Run the full gates once for a baseline. On a failure covered by a recorded waiver,
-   mark it "FAIL (waived)" and continue; otherwise ask the user whether to proceed;
-   record a yes as a waiver in every brief's Owner decisions; a no is a user stop before round 1.
-4. Run `git status` and `git diff`; note the user's parallel edits and
-   uncommitted work — in scope, never overwritten (non-repo: see "Scope").
+2. Pre-clean, only if the user asked for it: one-shot reviews with the `reviewer` subagent — direct calls, not Rounds — fixing every finding and running the full gates after each fixing pass, until a pass reports zero findings (count corrected to the listed in-scope items, per the count-correction rule) or the user says to start the cycle. Brief each pass like a round-1 brief — first line "Pre-clean pass {k} of a review-fix loop on {project/branch}." (never "Round {n}"), "Changes since last pass" (the fixes from pass k-1; "none" on pass 1 unless in-scope work already entered it), no target-bar clause, no Round history line. Passes are not Rounds: the counter stays `0` until round 1, and nothing enters the round history, the trajectory, or the per-round reports; their fixes go to the round-1 brief's "Changes since last round", their findings to the final total's pre-clean plus-clause, their "Noticed elsewhere" items to its residual risks. Resolve failures inline: a no-verdict pass (two-launch bound) relaunches with the same {k} — only resolved passes advance `{k}` — and after two consecutive failed launches stop and ask (retry, change the launch setup, stop, or skip the remaining pre-clean and start the cycle at step 3; a retry or setup change resets the consecutive-failed-launch count); a gate failure goes to the user (fix, waiver recorded as an Owner decision, or stop before the cycle starts); a user-approved wontfix becomes an Owner decision and a settled reviewer question a Verified fact — both carried into the remaining pass briefs and every round brief; an unsettled question goes to the user; its answer enters every brief's Owner decisions; in-scope work or a scope change waits for a running pass to resolve, then lands before the next pass — or before round 1's launch, if the pre-clean has ended — in the next brief's changes list, a scope change updating the remaining passes' scope. On a user stop before round 1 — during pre-cleaning or any later step of this phase — deliver the final report's stop variant ("Cycle stopped by user before round 1.") and discard a still-running pass's verdict (let it finish, do not act on it); a "start the cycle" landing mid-pass resolves the pass first. An interruption routes through "Resuming an interrupted loop"; a fresh cycle does not re-run a pre-clean of the same or an overlapping scope that already completed or that a user stop or the skip option ended — it asks whether to pre-clean again.
+3. Run the full gates once for a baseline. A failure covered by a recorded waiver: mark it "FAIL (waived)" and continue; otherwise ask the user whether to proceed; record a yes as a waiver in every brief's Owner decisions; a no is a user stop before round 1.
+4. Run `git status` and `git diff`; note the user's parallel edits and uncommitted work — in scope, never overwritten (non-repo: see "Scope").
 5. Re-read every file in scope, again every round — the user edits in parallel and may commit mid-loop.
-6. State scope, gates, N, gate baseline — first line "Before round 1: scope …,
-   gates …, N …, baseline …", the exact line the recovery routes match — then
-   start round 1.
+6. State scope, gates, N, gate baseline — first line "Before round 1: scope …, gates …, N …, baseline …", the exact line the recovery routes match — then start round 1.
 
 ## Resuming an interrupted loop
 
-Identify the cycle to resume: the latest one in the session for the
-requested scope; no match — say so and ask whether to start a fresh one.
-Recover the state from that cycle's latest per-round report (matched by
-scope — never another cycle's report); if none exists yet, from the "Before
-round 1" statement and the latest brief, with the counter at `0`; if the
-session history is gone, ask the user for the latest report — without it,
-start a fresh cycle. Interruption alone never resets the counter; the standing
-reset rule (the Counter definition) still applies to post-read changes. Then
-re-scan the session for
-user requests enqueued before the interruption and not yet done — in-scope
-work (implement before continuing), scope changes (update the scope, reset
-the counter), N changes, stops, second-cycle requests (never started
-mid-loop) — and handle them per the loop's rules (Before round 1, Each
-round, Finish).
+Identify the cycle to resume: the latest one in the session for the requested scope; no match — say so and ask whether to start a fresh one. Recover the state from that cycle's latest per-round report (matched by scope — never another cycle's report); none exists yet: from the "Before round 1" statement and the latest brief, with the counter at `0`; session history gone: ask the user for the latest report — without it, start a fresh cycle. Interruption alone never resets the counter; the standing reset rule (the Counter definition) still applies to post-read changes. Then re-scan the session for user requests enqueued before the interruption and not yet done — in-scope work (implement before continuing), scope changes (update the scope, reset the counter), N changes, stops, second-cycle requests (never started mid-loop) — and handle them per the loop's rules (Before round 1, Each round, Finish).
 
-A round reviewer with no per-round report yet — launched before the
-interruption, running or finished: process its verdict per "Process the
-verdict" only if `git status`/`git diff` and fresh re-reads — compared
-against the recovered Scope and any "Delta since review" line — establish
-that nothing in scope changed after its read; otherwise supersede it (see
-"While the reviewer runs") and start the next round at step 1 (Prepare). A
-pass reviewer: resolve the pass per "Before round 1". A delivered final
-report's stop marker means the cycle stays stopped (an explicit later
-request starts a fresh cycle at "Before round 1"); its completion marker
-means the cycle is finished: continuing with a raised N resumes at step 1
-(Prepare), keeping the counter unless an in-scope change landed after the
-last reviewer read; any other request starts a fresh cycle. A terminal
-round report without a delivered final report: redo the Finish checks,
-then deliver the final report or continue per their outcome. A report
-parked on Next: "Paused — awaiting user decision" is resolved by
-re-presenting the decision — or, if the report already records a
-`Decision:` line, by acting on it per "Process the verdict" (step 2, or
-the no-verdict rule). Anything this section does not cover: ask the user.
+A round reviewer with no per-round report yet — launched before the interruption, running or finished: process its verdict per "Process the verdict" only if `git status`/`git diff` and fresh re-reads — compared against the recovered Scope and any "Delta since review" line — establish that nothing in scope changed after its read; otherwise supersede it (see "While the reviewer runs") and start the next round at step 1 (Prepare). A pass reviewer: resolve the pass per "Before round 1". A delivered final report's stop marker means the cycle stays stopped (an explicit later request starts a fresh cycle at "Before round 1"); its completion marker means the cycle is finished: continuing with a raised N resumes at step 1 (Prepare), keeping the counter unless an in-scope change landed after the last reviewer read; any other request starts a fresh cycle. A terminal round report without a delivered final report: redo the Finish checks, then deliver the final report or continue per their outcome. A report parked on Next: "Paused — awaiting user decision" is resolved by re-presenting the decision — or, if the report already records a `Decision:` line, by acting on it per "Process the verdict" (step 2, or the no-verdict rule). Anything this section does not cover: ask the user.
 
 ## Each round
 
 ### 1. Prepare
 
 - Re-run `git status` and `git diff`; re-read the files in scope.
-- **Drift audit** — re-scan the session for user requests not yet done;
-  report anything found before launching. Implement in-scope items at once
-  (they enter "changes since last round") or enqueue them for verdict step 1
-  if deferred; a scope change updates the scope for the next brief and resets
-  the counter; a second-cycle request is enqueued or answered, never started
-  mid-loop.
+- **Drift audit** — re-scan the session for user requests not yet done; report anything found before launching. Implement in-scope items at once (they enter "changes since last round") or enqueue them for verdict step 1 if deferred; a scope change updates the scope for the next brief and resets the counter; a second-cycle request is enqueued or answered, never started mid-loop.
 
 ### 2. Launch one reviewer
 
-- Build the brief from the template below and launch the `reviewer` subagent
-  in the background with it — one live verdict at a time; say so.
+- Build the brief from the template below and launch the `reviewer` subagent in the background with it — one live verdict at a time; say so.
 
 ### 3. While the reviewer runs
 
@@ -155,81 +65,26 @@ Never mutate files in the running reviewer's scope.
 | Change to the review's scope itself | Send a follow-up message to the reviewer's background session (its sessionID), or fold into the next brief — folding (no redirect) supersedes the running verdict; record the round per the report template's superseded variant. |
 | Request to start another review cycle | Enqueue or answer — never start one mid-loop (the Prepare drift-audit rule). |
 
-Between rounds and during a pause, implement in-scope requests at once, before
-the next launch; the change resets the counter to `0` and enters the next
-brief's "changes since last round" — the same after a processed verdict but
-before the round report, with the gates rerun over the merged state. Never
-hard-kill a running reviewer — redirect it, or supersede its verdict. If the
-user commits or edits the tree mid-round, the next brief carries that delta.
+Between rounds and during a pause, implement in-scope requests at once, before the next launch; the change resets the counter to `0` and enters the next brief's "changes since last round" — the same after a processed verdict but before the round report, with the gates rerun over the merged state. Never hard-kill a running reviewer — redirect it, or supersede its verdict. User commits or edits the tree mid-round: the next brief carries that delta.
 
 ### 4. Process the verdict
 
-A launch that returns no message ending with the "FINDINGS: {count}" verdict
-line — subagent error, timeout, or a reply without the line — has no verdict:
-do not update the counter, record the round per the report template's
-superseded variant, and start the next round at step 1 (Prepare). After two
-consecutive no-verdict launches, record the round per the superseded variant
-but with Next: "Paused — awaiting user decision", then stop and ask whether
-to retry, change the launch setup, or abort; a retry or change-setup outcome
-starts the next round at step 1 (Prepare) — for a setup change, apply it
-first — and resets the consecutive no-verdict count; an abort outcome
-delivers the final report's stop variant per "Finish".
+A launch returning no message ending with the "FINDINGS: {count}" verdict line — subagent error, timeout, or a reply without the line — has no verdict: do not update the counter, record the round per the report template's superseded variant, and start the next round at step 1 (Prepare). After two consecutive no-verdict launches, record the round per the superseded variant but with Next: "Paused — awaiting user decision", then stop and ask whether to retry, change the launch setup, or abort; a retry or change-setup outcome starts the next round at step 1 (Prepare) — for a setup change, apply it first — and resets the consecutive no-verdict count; an abort outcome delivers the final report's stop variant per "Finish".
 
-The listed [SEVERITY] items are authoritative: a "FINDINGS:" count that disagrees
-with them is corrected to the count of listed in-scope items (the count-correction rule).
+The listed [SEVERITY] items are authoritative: a "FINDINGS:" count disagreeing with them is corrected to the count of listed in-scope items (the count-correction rule).
 
-1. Fix every finding and implement all queued in-scope work — now, before the
-   gates. Only exception: a user-approved wontfix — record it in every brief's
-   Owner decisions. A reviewer question that a file read or harness check settles
-   becomes a Verified fact in every brief; an unsettled question goes to the user;
-   its answer enters every brief's Owner decisions.
-2. Run the full gates over the merged state. A failure covered by a recorded
-   waiver, or by an Owner decision that mandates the failing state: mark it
-   "FAIL (waived)" and continue. Otherwise: if the cause is outside this
-   loop's edits, pause; otherwise fix and rerun, pausing only if the rerun
-   fails again. To pause:
-   write the round report first — gate FAIL, Next: "Paused — awaiting user
-   decision" — then stop and ask; record the user's decision (fix, waiver,
-   stop) in every brief's Owner decisions and append `Decision: {outcome}` to
-   the paused report. A stop outcome delivers the final report's stop variant
-   per "Finish" and ends the cycle. A fix or waiver outcome then resumes this
-   step — for a fix, implement it first — rerunning the gates.
-3. A round is clean only if it meets the "Clean round" definition. Whatever
-   changed in scope becomes the next brief's "changes since last round".
-4. Update the counter — `+1` on a clean round, `0` otherwise — then report the
-   round with that value (template below) and start the next round at step 1
-   (Prepare), unless the counter reached N.
+1. Fix every finding and implement all queued in-scope work — now, before the gates. Only exception: a user-approved wontfix — record it in every brief's Owner decisions. A reviewer question that a file read or harness check settles becomes a Verified fact in every brief; an unsettled question goes to the user; its answer enters every brief's Owner decisions.
+2. Run the full gates over the merged state. A failure covered by a recorded waiver, or by an Owner decision that mandates the failing state: mark it "FAIL (waived)" and continue. Otherwise: cause outside this loop's edits — pause; otherwise fix and rerun, pausing only if the rerun fails again. To pause: write the round report first — gate FAIL, Next: "Paused — awaiting user decision" — then stop and ask; record the user's decision (fix, waiver, stop) in every brief's Owner decisions and append `Decision: {outcome}` to the paused report. A stop outcome delivers the final report's stop variant per "Finish" and ends the cycle. A fix or waiver outcome then resumes this step — for a fix, implement it first — rerunning the gates.
+3. A round is clean only if it meets the "Clean round" definition. Whatever changed in scope becomes the next brief's "changes since last round".
+4. Update the counter — `+1` on a clean round, `0` otherwise — then report the round with that value (template below) and start the next round at step 1 (Prepare), unless the counter reached N.
 
 ### 5. Finish
 
-When the counter reaches N, re-run `git status` and `git diff` and re-read the
-files in scope — any post-read in-scope change or scope change resets the
-counter to `0` and the loop continues at step 1 (Prepare) (non-repo: fresh
-re-reads, see "Scope"). Then run one more drift audit and list anything pending.
-Work and second-cycle requests: record them in the final report's drift-audit
-line (do not act on them here), then deliver the final report (template below).
-A pending scope-change request is not record-only: it updates the scope, resets the counter per the Counter
-definition, and the loop continues at step 1 (Prepare). The user may change N or stop
-the loop at any moment: an N change takes effect at the next counter check and
-is recorded in the next brief and round report; an N change observed before
-the final report is delivered takes effect immediately — if it raised N above
-the counter, do not deliver and continue at step 1 (Prepare). On a stop,
-deliver the same report with the stop variant's first line and discard a
-still-running reviewer's verdict — let it finish, do not act on it. A
-background subagent delegated under "While the reviewer runs" is left to
-finish and is not awaited, at stop and at finish alike.
+When the counter reaches N, re-run `git status` and `git diff` and re-read the files in scope — any post-read in-scope change or scope change resets the counter to `0` and the loop continues at step 1 (Prepare) (non-repo: fresh re-reads, see "Scope"). Then run one more drift audit and list anything pending. Work and second-cycle requests: record them in the final report's drift-audit line (do not act on them here), then deliver the final report (template below). A pending scope-change request is not record-only: it updates the scope, resets the counter per the Counter definition, and the loop continues at step 1 (Prepare). The user may change N or stop the loop at any moment: an N change takes effect at the next counter check and is recorded in the next brief and round report; an N change observed before the final report is delivered takes effect immediately — it raised N above the counter: do not deliver, continue at step 1 (Prepare). On a stop, deliver the same report with the stop variant's first line and discard a still-running reviewer's verdict — let it finish, do not act on it. A background subagent delegated under "While the reviewer runs" is left to finish and is not awaited, at stop and at finish alike.
 
 ## Reviewer brief template
 
-Fill every brace except the Output section's `{count}`, which the reviewer
-fills; delete nothing (pass briefs deviate per "Before round 1"). Cumulative sections grow each round. On round 1
-there is no last round: summarize the changes under review in "Changes
-since last round" (non-repo targets: the target's current content), and
-write "none yet" in empty cumulative sections — except that a fresh cycle
-whose scope overlaps a prior cycle in the same session seeds its Owner
-decisions and Verified facts from the latest such cycle's per-round reports
-or latest brief, and a pass-1 brief seeds the same way, so standing
-wontfixes and settled questions carry over.
+Fill every brace except the Output section's `{count}`, which the reviewer fills; delete nothing (pass briefs deviate per "Before round 1"). Cumulative sections grow each round. On round 1 there is no last round: summarize the changes under review in "Changes since last round" (non-repo targets: the target's current content), and write "none yet" in empty cumulative sections — except that a fresh cycle whose scope overlaps a prior cycle in the same session seeds its Owner decisions and Verified facts from the latest such cycle's per-round reports or latest brief, and a pass-1 brief seeds the same way, so standing wontfixes and settled questions carry over.
 
 ```
 Round {n} of a review-fix loop on {project/branch}; target bar: {N} clean rounds.

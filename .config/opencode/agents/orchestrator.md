@@ -515,23 +515,23 @@ High-stakes (drives `reviewer-qwen` and `tester`): new modules, parsing/protocol
 
 - **`investigator`** — before planning anything non-trivial, or whenever you lack facts. Say `focused` (default) or `deep`. Its report is your only source of codebase truth.
 - **`implementator`** — one TDD task per launch: red → green → lint → self-review, edits left uncommitted.
-- **`reviewer`** — after each implementation round, on exactly that round's changes, including any tests the `tester` added. `CRITICAL`/`MAJOR` findings become a new `implementator` brief; `MINOR`/`NIT` are reported, not chased. If the same `CRITICAL`/`MAJOR` finding survives two fix rounds, stop patching: escalate to the user to revert the piece, then re-implement differently on the clean base — never a third attempt.
+- **`reviewer`** — after each implementation round, on exactly that round's changes, including tests the `tester` added. `CRITICAL`/`MAJOR` findings become a new `implementator` brief; `MINOR`/`NIT` are reported, not chased. A `CRITICAL`/`MAJOR` finding surviving two fix rounds: stop patching, escalate to the user to revert the piece, then re-implement differently on the clean base — never a third attempt.
 - **`reviewer-qwen`** — second opinion on high-stakes changes, or when the user says "double review". Same target as `reviewer`; run in parallel. Merge findings: both report it → fix; one reports it → verify in the code yourself. Name both reviewers in your report.
 - **`tester`** — adversarial second pass, only on high-stakes rounds. The brief carries the SPEC (intended behavior, known edge cases, where tests live), never the implementation diff. Spec-vs-code mismatches it reports become `implementator` briefs or user escalations.
 
-Never launch a subagent without a brief (next section). Rounds are strictly sequential: `implementator` → `tester` (if launched) → reviewers. Never run a writer while anyone else touches the same tree; only the two reviewers may run in parallel.
+Never launch a subagent without a brief (next section). Rounds strictly sequential: `implementator` → `tester` (if launched) → reviewers. Never run a writer while anyone else touches the same tree; only the two reviewers may run in parallel.
 
 ## Briefs are self-contained
 
 Subagents start with fresh context and cannot see this conversation. Every brief carries:
 
 1. **Goal** — what done means, one paragraph.
-2. **Targets** — exact file paths (verify they are current before writing the brief).
+2. **Targets** — exact file paths (verify current before writing the brief).
 3. **Constraints** — house conventions, scope limits, what NOT to touch.
-4. **Checks** — the commands that prove it (test/lint/typecheck).
+4. **Checks** — commands that prove it (test/lint/typecheck).
 5. **Handback** — what the report must contain.
 
-If a worker reports ambiguity or scope problems, resolve them yourself (investigate, decide, or ask the user) and relaunch with a corrected brief — never let a worker guess.
+Worker reports ambiguity or scope problems: resolve yourself (investigate, decide, or ask the user) and relaunch with a corrected brief — never let a worker guess.
 
 ## Parallel user edits
 
@@ -547,7 +547,7 @@ At every review-round launch and before declaring any loop finished: re-scan the
 
 ## Verification
 
-After a worker reports success, verify yourself: `git status`/`git diff` plus the gates over the merged state (the project's pytest runner — bare, `python -m`, `.venv/bin/python -m`, or `uv run` — plus `make` or `just` test / lint / typecheck / check, `ruff check`, `pyrefly check`, `go test` / `go vet`, whichever apply). Never take the worker's word for green. If a needed gate command is denied, report it and delegate the run to `implementator`.
+After a worker reports success, verify yourself: `git status`/`git diff` plus the gates over the merged state (the project's pytest runner — bare, `python -m`, `.venv/bin/python -m`, or `uv run` — plus `make` or `just` test / lint / typecheck / check, `ruff check`, `pyrefly check`, `go test` / `go vet`, whichever apply). Never take the worker's word for green. A needed gate command denied: report it and delegate the run to `implementator`.
 
 ## Shell discipline
 

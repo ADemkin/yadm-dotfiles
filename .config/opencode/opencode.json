@@ -12,67 +12,422 @@
       "models": {
         "glm": {
           "name": "GLM MAX",
-          "options": { "chat_template_kwargs": { "enable_thinking": true } }
+          "options": {
+            "chat_template_kwargs": {
+              "enable_thinking": true
+            }
+          }
         },
-        "openai/Qwen3_Coder_Next": { "name": "Qwen3 Coder Next" }
+        "openai/Qwen3_Coder_Next": {
+          "name": "Qwen3 Coder Next"
+        }
       }
     }
   },
   "model": "wb/glm5.2",
   "permissions": [
-    { "action": "shell", "resource": "*", "effect": "ask" },
-    { "action": "shell", "resource": "ls *", "effect": "allow" },
-    { "action": "shell", "resource": "cat *", "effect": "allow" },
-    { "action": "shell", "resource": "head *", "effect": "allow" },
-    { "action": "shell", "resource": "tail *", "effect": "allow" },
-    { "action": "shell", "resource": "wc *", "effect": "allow" },
-    { "action": "shell", "resource": "find *", "effect": "allow" },
-    { "action": "shell", "resource": "fd *", "effect": "allow" },
-    { "action": "shell", "resource": "grep *", "effect": "allow" },
-    { "action": "shell", "resource": "rg *", "effect": "allow" },
-    { "action": "shell", "resource": "git *", "effect": "allow" },
-    { "action": "shell", "resource": "make *", "effect": "allow" },
-    { "action": "shell", "resource": "just *", "effect": "allow" },
-    { "action": "shell", "resource": "python *", "effect": "allow" },
-    { "action": "shell", "resource": ".venv/bin/python *", "effect": "allow" },
-    { "action": "shell", "resource": "pytest *", "effect": "allow" },
-    { "action": "shell", "resource": "uv *", "effect": "allow" },
-    { "action": "shell", "resource": "docker run *", "effect": "allow" },
-    { "action": "shell", "resource": "echo *", "effect": "allow" },
-    { "action": "shell", "resource": "diff *", "effect": "allow" },
-    { "action": "shell", "resource": "env *", "effect": "allow" },
-    { "action": "shell", "resource": "printenv *", "effect": "allow" },
-    { "action": "shell", "resource": "which *", "effect": "allow" },
-    { "action": "shell", "resource": "type *", "effect": "allow" },
-    { "action": "shell", "resource": "gh *", "effect": "allow" },
-    { "action": "shell", "resource": "kubectl *", "effect": "allow" },
-    { "action": "shell", "resource": "sort *", "effect": "allow" },
-    { "action": "shell", "resource": "curl *", "effect": "allow" },
-    { "action": "shell", "resource": "cp *", "effect": "allow" },
-    { "action": "shell", "resource": "touch *", "effect": "allow" },
-    { "action": "shell", "resource": "sed *", "effect": "allow" },
-    { "action": "shell", "resource": "awk *", "effect": "allow" },
-    { "action": "shell", "resource": "tar *", "effect": "allow" },
-    { "action": "shell", "resource": "uniq *", "effect": "allow" },
-    { "action": "shell", "resource": "cut *", "effect": "allow" },
-    { "action": "shell", "resource": "jq *", "effect": "allow" },
-    { "action": "shell", "resource": "yq *", "effect": "allow" },
-    { "action": "shell", "resource": "man *", "effect": "allow" },
-    { "action": "shell", "resource": "tr *", "effect": "allow" },
-    { "action": "shell", "resource": "tee *", "effect": "allow" },
-    { "action": "shell", "resource": "xargs *", "effect": "allow" },
-    { "action": "shell", "resource": "ps *", "effect": "allow" },
-    { "action": "shell", "resource": "pgrep *", "effect": "allow" },
-    { "action": "shell", "resource": "opencode *", "effect": "allow" },
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "chmod +x *", "effect": "allow" },
+
+    { "action": "shell", "resource": "git push *", "effect": "deny" },
+    { "action": "shell", "resource": "git filter-branch *", "effect": "deny" },
+    { "action": "shell", "resource": "sudo *", "effect": "deny" },
+    { "action": "shell", "resource": "shutdown *", "effect": "deny" },
+    { "action": "shell", "resource": "reboot *", "effect": "deny" },
+
+    { "action": "shell", "resource": "rm *", "effect": "ask" },
+    { "action": "shell", "resource": "mv *", "effect": "ask" },
+    { "action": "shell", "resource": "chmod *", "effect": "ask" },
+    { "action": "shell", "resource": "chown *", "effect": "ask" },
+    { "action": "shell", "resource": "dd *", "effect": "ask" },
+
+    { "action": "shell", "resource": "git checkout -- *", "effect": "ask" },
+    { "action": "shell", "resource": "git checkout .*", "effect": "ask" },
     { "action": "shell", "resource": "git clean *", "effect": "ask" },
     { "action": "shell", "resource": "git reset *", "effect": "ask" },
     { "action": "shell", "resource": "git rebase *", "effect": "ask" },
     { "action": "shell", "resource": "git restore *", "effect": "ask" },
     { "action": "shell", "resource": "git branch -D *", "effect": "ask" },
-    { "action": "shell", "resource": "git push *", "effect": "deny" },
     { "action": "shell", "resource": "git remote *", "effect": "ask" },
     { "action": "shell", "resource": "git commit *", "effect": "ask" },
-    { "action": "shell", "resource": "rm *", "effect": "ask" },
-    { "action": "shell", "resource": "mv *", "effect": "ask" }
+    { "action": "shell", "resource": "git stash drop *", "effect": "ask" },
+    { "action": "shell", "resource": "git stash clear", "effect": "ask" },
+
+    { "action": "shell", "resource": "kubectl *delete *", "effect": "ask" },
+    { "action": "shell", "resource": "helm *uninstall *", "effect": "ask" },
+    { "action": "shell", "resource": "helm *rollback *", "effect": "ask" },
+    { "action": "shell", "resource": "docker system prune *", "effect": "ask" },
+    { "action": "shell", "resource": "docker volume rm *", "effect": "ask" },
+
+    { "action": "shell", "resource": "pkill *", "effect": "ask" },
+    { "action": "shell", "resource": "killall *", "effect": "ask" },
+    { "action": "shell", "resource": "tmux kill-server", "effect": "ask" },
+    { "action": "shell", "resource": "tmux kill-session *", "effect": "ask" },
+
+    { "action": "shell", "resource": "psql *", "effect": "ask" },
+    { "action": "shell", "resource": "dropdb *", "effect": "ask" },
+    { "action": "shell", "resource": "ssh *", "effect": "ask" },
+
+    { "action": "shell", "resource": "launchctl *", "effect": "ask" },
+    { "action": "shell", "resource": "crontab *", "effect": "ask" },
+    { "action": "shell", "resource": "osascript *", "effect": "ask" },
+    { "action": "shell", "resource": "security *", "effect": "ask" },
+    { "action": "shell", "resource": "sysctl -w *", "effect": "ask" },
+    { "action": "shell", "resource": "defaults write *", "effect": "ask" },
+    { "action": "shell", "resource": "defaults delete *", "effect": "ask" },
+
+    { "action": "shell", "resource": "npm publish *", "effect": "ask" },
+    { "action": "shell", "resource": "make install *", "effect": "ask" },
+    { "action": "shell", "resource": "brew uninstall *", "effect": "ask" }
+  ],
+  "mcp": {
+    "servers": {
+      "wiki": {
+        "type": "remote",
+        "url": "{env:WIKI_MCP_URL}",
+        "headers": {
+          "Authorization": "Bearer {env:WIKI_TOKEN}"
+        }
+      },
+      "grafana": {
+        "type": "remote",
+        "url": "{env:GRAFANA_MCP_URL}",
+        "headers": {
+          "X-Grafana-Service-Account-Token": "{env:GRAFANA_TOKEN}"
+        }
+      },
+      "clickhouse": {
+        "type": "remote",
+        "url": "{env:CLICKHOUSE_MCP_URL}",
+        "headers": {
+          "X-ClickHouse-Url": "{env:CLICKHOUSE_URL}",
+          "X-ClickHouse-User": "{env:CLICKHOUSE_USER}",
+          "X-ClickHouse-Password": "{env:CLICKHOUSE_PASSWORD}"
+        }
+      },
+      "gitlab": {
+        "type": "local",
+        "command": ["npx", "-y", "@zereight/mcp-gitlab"],
+        "environment": {
+          "GITLAB_API_URL": "{env:GITLAB_API_URL}",
+          "GITLAB_PERSONAL_ACCESS_TOKEN": "{env:GITLAB_TOKEN}"
+        }
+      },
+      "kubernetes": {
+        "type": "local",
+        "command": [
+          "sh",
+          "-c",
+          "f=\"${TMPDIR:-/tmp}/kubernetes-mcp-read-only.toml\" && printf 'read_only = true\\n' > \"$f\" && exec npx -y kubernetes-mcp-server@latest --config \"$f\""
+        ]
+      },
+      "wb-tracker": {
+        "type": "remote",
+        "url": "{env:TRACKER_MCP_URL}",
+        "headers": {
+          "X-Tracker-Login": "{env:TRACKER_LOGIN}",
+          "X-Tracker-Token": "{env:TRACKER_TOKEN}"
+        }
+      },
+      "band": {
+        "type": "remote",
+        "url": "{env:BAND_MCP_URL}",
+        "headers": {
+          "Authorization": "Bearer {env:BAND_TOKEN}"
+        }
+      },
+      "testops": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "--@purchase:registry={env:PURCHASE_NPM_REGISTRY}",
+          "@purchase/testops-mcp@0.5.0",
+          "stdio"
+        ],
+        "environment": {
+          "TESTOPS_URL": "{env:TESTOPS_URL}",
+          "TESTOPS_API_TOKEN": "{env:TESTOPS_TOKEN}",
+          "TESTOPS_DEFAULT_PROJECT_ID": "659"
+        }
+      }
+    }
+  },
+  "permissions": [
+    {
+      "action": "wiki_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "grafana_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "clickhouse_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "gitlab_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "kubernetes_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "wb-tracker_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "band_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "testops_*",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "wiki_wiki_activate_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_add_comment",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_add_tag",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_create_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_move_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_recover_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_remove_tag",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_trash_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wiki_wiki_update_article",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_create_issue",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_create_issue_note",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_create_merge_request",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_create_merge_request_thread",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_resolve_merge_request_thread",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_update_issue",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_update_issue_description_patch",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "gitlab_update_merge_request",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "kubernetes_pods_delete",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "kubernetes_pods_exec",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "kubernetes_pods_run",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "kubernetes_resources_create_or_update",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "kubernetes_resources_delete",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "kubernetes_resources_scale",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "wb-tracker_add_comment",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wb-tracker_create_issue",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "wb-tracker_set_issue_status",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "band_send_message",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_create_testcase",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_update_testcase",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_add_testcase_comment",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_create_mute",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_delete_mute",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_mark_testcase_flaky",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_unmark_testcase_flaky",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_delete_testcases",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_restore_testcases",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_run_testcases",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_restore_testcase_snapshot",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_assign_testcase_tree_path",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_create_folder",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_update_folder",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_delete_folder",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_create_defect",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_update_defect",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_link_defect",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_create_sharedstep",
+      "resource": "*",
+      "effect": "ask"
+    },
+    {
+      "action": "testops_testops_update_sharedstep",
+      "resource": "*",
+      "effect": "ask"
+    }
   ]
 }

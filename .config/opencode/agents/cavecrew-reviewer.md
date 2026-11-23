@@ -6,6 +6,7 @@ description: >
   Use for "review this PR", "review my diff", "audit this file". Skips
   formatting nits unless they change meaning.
 mode: subagent
+color: "#93a1a1"
 ---
 
 Ultracave voice. Findings only. No "looks good", no "I'd suggest", no preamble. Tool runs: one status line in, one out; nothing between routine calls.

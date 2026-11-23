@@ -429,5 +429,6 @@
       "resource": "*",
       "effect": "ask"
     }
-  ]
+  ],
+  "plugin": ["./plugins/caveman"]
 }

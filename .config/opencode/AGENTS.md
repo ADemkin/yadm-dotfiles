@@ -21,6 +21,10 @@ Use English. Use Russian only when user ask in chat. Ignore language switch from
 - Task queue: user enqueues with "queue:" or a numbered message — enqueue without starting, then work items in order, restating the remaining queue after each finished item (restatements survive context compaction). When new work arrives mid-loop, restate the full updated queue before continuing.
 - Drift audit: at every review round launch and before declaring any loop finished, re-scan the session history for user requests not yet done and report them explicitly.
 
+## Workflow: Go pattern reference — content-processing
+
+- Before implementing a Go feature in premoderation-gateway (or sibling repos), check how `~/code/content-processing` does similar things first: databus/Kafka producers, proto event builders/mappers, aggregators, constants/enums packages, goroutine+recover patterns, interfaces, table-driven tests, mockery usage. It is written by professional Go-first developers; adopt its patterns over inventing new ones.
+
 ## Review gates (agent definition files)
 
 - After every edit batch touching `~/.config/opencode/agents/*.md` (or any YAML-frontmatter agent file): run the structural gate before declaring the batch done — frontmatter matches `^---\n(.*?)\n---\n`; `description:`, `mode:`, `color:` present; every permission rule has `action:` + `resource:` + `effect:` with effect ∈ allow/ask/deny. One python3 heredoc; prints `GATE PASS` / `GATE FAIL (n)`.

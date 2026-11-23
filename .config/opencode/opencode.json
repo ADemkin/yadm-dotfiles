@@ -24,7 +24,7 @@
       }
     }
   },
-  "model": "wb/glm5.2",
+  "model": "tns-ai-developer/glm",
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "allow" },
     { "action": "shell", "resource": "chmod +x *", "effect": "allow" },

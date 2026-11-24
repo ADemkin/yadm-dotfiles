@@ -67,7 +67,7 @@ return {
         select_win = 'NeoTreeRootName',
         skipped = 'DiagnosticUnnecessary',
         target = 'NeoTreeDirectoryIcon',
-        test = 'NeoTreeNormal',
+        test = 'Comment',
         unknown = 'DiagnosticInfo',
         watching = 'DiagnosticWarn',
       },

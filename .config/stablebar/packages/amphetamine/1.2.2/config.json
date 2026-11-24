@@ -1,0 +1,97 @@
+{
+  "tokens": {"surfaceRaised": {"light": "#ffffff", "dark": "#36383c"}, "textMuted": {"light": "#6e6e73", "dark": "#a1a1a6"}},
+  "widgets": [
+    {
+      "id": "amphetamine",
+      "type": "script",
+      "position": "right",
+      "command": "\"$PACKAGE_DIR/scripts/session.sh\"",
+      "interval": 5,
+      "tooltip": "Amphetamine session controls",
+      "transition": "numeric",
+      "animation": {"curve": "easeOut", "duration": 0.22},
+      "environment": {
+        "DURATION": "@setting.duration",
+        "DISPLAY_SLEEP": "@setting.displaySleep",
+        "BAR_DISPLAY": "@setting.barDisplay",
+        "CLICK_ACTION": "@setting.clickAction"
+      },
+      "popup": {
+        "openOnHover": false,
+        "dismissOnAction": false,
+        "animation": {"curve": "easeOut", "duration": 0.22},
+        "style": {"width": 280, "paddingHorizontal": 12, "paddingVertical": 12, "spacing": 6},
+        "layout": {
+          "type": "column",
+          "children": [
+            {
+              "type": "text",
+              "text": "Amphetamine",
+              "style": {"fontWeight": "bold", "fontSize": 15, "paddingHorizontal": 8, "paddingVertical": 4}
+            },
+            {
+              "type": "field",
+              "field": "status",
+              "transition": "fade",
+              "style": {"foreground": "@token.textMuted", "paddingHorizontal": 8, "paddingVertical": 4}
+            },
+            {
+              "type": "slider",
+              "title": "Duration (minutes)",
+              "source": "duration",
+              "min": 15,
+              "max": 240,
+              "step": 15,
+              "endStop": {"value": 0, "label": "∞"},
+              "onChange": "\"$PACKAGE_DIR/scripts/control.sh\" duration",
+              "style": {"paddingHorizontal": 8, "paddingVertical": 6}
+            },
+            {
+              "type": "row",
+              "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" timed",
+              "animation": {"curve": "easeOut", "duration": 0.22},
+              "style": {
+                "paddingHorizontal": 8,
+                "paddingVertical": 9,
+                "spacing": 10,
+                "cornerRadius": 8,
+                "hoverBackground": "@token.surfaceRaised"
+              },
+              "children": [{"type": "symbol", "source": "timedIcon", "style": {"width": 18}}, {"type": "field", "field": "timedLabel"}]
+            },
+            {
+              "type": "row",
+              "onClick": "\"$PACKAGE_DIR/scripts/control.sh\" stop",
+              "animation": {"curve": "easeOut", "duration": 0.22},
+              "style": {
+                "paddingHorizontal": 8,
+                "paddingVertical": 9,
+                "spacing": 10,
+                "cornerRadius": 8,
+                "hoverBackground": "@token.surfaceRaised"
+              },
+              "children": [{"type": "symbol", "name": "stop.circle", "style": {"width": 18}}, {"type": "text", "text": "End session"}]
+            }
+          ]
+        }
+      },
+      "hoverLayout": {
+        "type": "row",
+        "children": [
+          {
+            "type": "slider",
+            "title": "Duration (minutes)",
+            "source": "duration",
+            "min": 15,
+            "max": 240,
+            "step": 15,
+            "endStop": {"value": 0, "label": "∞"},
+            "onChange": "\"$PACKAGE_DIR/scripts/control.sh\" duration",
+            "style": {"width": 160}
+          },
+          {"type": "field", "field": "durationLabel", "alignment": "center", "style": {"width": 38}}
+        ]
+      }
+    }
+  ]
+}

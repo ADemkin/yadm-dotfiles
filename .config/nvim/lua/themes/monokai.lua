@@ -64,6 +64,7 @@ return {
           LspReferenceWrite = { fg = scheme.base.blue },
           LspInlayHint = { bg = 'NONE' },
           DiagnosticUnnecessary = { link = 'Comment' },
+          DiagnosticOk = green,
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,

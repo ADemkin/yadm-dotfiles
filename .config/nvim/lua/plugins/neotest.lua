@@ -1,29 +1,24 @@
-vim.api.nvim_create_autocmd('DirChanged', {
-  desc = 'Reload neotest',
-  pattern = '*',
-  callback = function()
-    if not package.loaded['neotest'] then
-      return
-    end
-    require('neotest').output_panel.close()
-    require('neotest').summary.close()
-    require('lazy').reload({ plugins = {
-      'neotest',
-      'neotest-python',
-      'neotest-go',
-    } })
-  end,
-})
-
 return {
   'nvim-neotest/neotest',
   commands = { 'Neotest' },
   dependencies = {
     'nvim-neotest/neotest-python',
-    'nvim-neotest/neotest-go',
+    {
+      'fredrikaverpil/neotest-golang',
+      version = '*',
+      build = function()
+        vim.system({ 'go', 'install', 'gotest.tools/gotestsum@latest' }):wait()
+      end,
+    },
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
+    {
+      'nvim-treesitter/nvim-treesitter',
+      branch = 'main',
+      build = function()
+        vim.cmd(':TSUpdate go')
+      end,
+    },
   },
   config = function()
     vim.api.nvim_create_autocmd('FileType', {
@@ -51,11 +46,8 @@ return {
       },
       adapters = {
         require('neotest-python'),
-        require('neotest-go')({
-          experimental = {
-            test_table = true,
-          },
-          args = { '-count=1', '-timeout=60s' },
+        require('neotest-golang')({
+          runner = 'gotestsum',
         }),
       },
       highlights = {

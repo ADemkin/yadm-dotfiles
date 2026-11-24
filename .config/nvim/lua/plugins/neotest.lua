@@ -28,6 +28,7 @@ return {
       end,
     })
 
+    --- @type neotest.Config
     require('neotest').setup({
       summary = {
         mappings = {
@@ -64,7 +65,7 @@ return {
         passed = 'DiagnosticOk',
         running = 'DiagnosticWarn',
         select_win = 'NeoTreeRootName',
-        skipped = 'DiagnosticHint',
+        skipped = 'DiagnosticUnnecessary',
         target = 'NeoTreeDirectoryIcon',
         test = 'NeoTreeNormal',
         unknown = 'DiagnosticInfo',
@@ -110,7 +111,7 @@ return {
       desc = 'Run nearest test',
     },
     {
-      'tm',
+      'tf',
       function()
         require('neotest').run.run(vim.fn.expand('%'))
       end,

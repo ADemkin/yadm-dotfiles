@@ -65,6 +65,8 @@ return {
           LspInlayHint = { bg = 'NONE' },
           DiagnosticUnnecessary = { link = 'Comment' },
           DiagnosticOk = green,
+          DiagnosticVirtualTextOk = green,
+          DiagnosticSignOk = green,
           ['@punctuation.bracket'] = white,
           ['@constructor'] = white,
           ['@constant'] = white,

@@ -104,7 +104,12 @@ return {
           -- ['@lsp.type.class.python'] = {},
           -- go
           ['@constant.builtin.go'] = purple,
-          ['@keyword.function.go'] = aqua,
+          ['@lsp.typemod.method.definition.go'] = green,
+          -- ['@keyword.function.go'] = aqua,
+          ['@keyword.function.go'] = white,
+          ['@lsp.type.method.go'] = white,
+          -- ['@lsp.type.type.go'] = aqua,
+          ['@lsp.type.parameter.go'] = orange,
           -- lua
           ['@comment.documentation.lua'] = white,
           ['@lsp.type.comment.lua'] = {},

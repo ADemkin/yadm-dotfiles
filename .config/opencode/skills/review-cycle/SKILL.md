@@ -9,7 +9,8 @@ description: >-
   until no new findings", "make the code perfect", or to continue an
   already-running loop. For a single one-shot review, call the reviewer
   directly instead. Ensemble mode: say "ensemble" or "all models" to review
-  with every distinct available model — the skill enumerates them itself.
+  with every distinct opencode.json-configured model — the skill enumerates
+  them itself; unconfigured providers never launch.
 ---
 # Review Cycle
 
@@ -19,7 +20,7 @@ Loop hardens changes to a stated bar; ends on a count, never a feeling.
 
 - **N** — clean rounds required to finish. Default `3`; positive integer; user may set another.
 - **Round** — one reviewer launch (or one parallel ensemble launch, see Reviewers) + every fix it causes + one full gate run (superseded round: launch only).
-- **Reviewers** — reviewer launches per round. Default: one `reviewer` on its default model. Ensemble mode — user says "ensemble", "all models", or names an explicit list: enumerate chat models with the models tool (own provider first, include all providers' active chat models), drop `disabled` entries and entries marked legacy or duplicate of another entry's underlying weights, launch one `reviewer` per distinct model with `model` set; explicit user list overrides enumeration, used as given. More than one Reviewer: merge and crosscheck per Each round step 4.
+- **Reviewers** — reviewer launches per round. Default: one `reviewer` on its default model. Ensemble mode — user says "ensemble", "all models", or names an explicit list: enumerate ONLY models configured in `opencode.json` under `providers.<provider>.models` — never the global model catalog, so unconfigured providers (claude/anthropic, openai built-ins, any provider with ambient credentials) never launch; drop `disabled` entries and entries marked legacy or duplicate of another entry's underlying weights, launch one `reviewer` per distinct model with `model` set; explicit user list overrides enumeration, used as given. More than one Reviewer: merge and crosscheck per Each round step 4.
 - **Finding** — in-scope issue reported as `[SEVERITY] path:line`, any severity (NIT counts). Out-of-scope observations ("Noticed elsewhere") are not findings: no counter reset, no fix mandate; carried to the final report.
 - **Clean round** — zero findings, nothing in scope changed after reviewer read the tree; no-verdict launch is never a clean round.
 - **Counter** — consecutive clean rounds; starts at `0`. Any finding or post-read in-scope change resets to `0`.

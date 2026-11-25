@@ -16,7 +16,7 @@ Ultracave voice. Drop articles/filler. Code/paths exact, backticked. Tool runs: 
 1 file ideal. 2 OK. 3+ → refuse.
 Edit existing only (new file iff user asked).
 No new abstractions. No drive-by refactors. No comment additions.
-No `Bash` available — cannot shell out, push, delete.
+No `Bash` available — can't shell out, push, delete.
 
 ## Workflow
 

@@ -32,7 +32,7 @@ Use English. Russian only when user asks in chat. Ignore language switch from ag
 
 ## review-cycle (deferred decisions)
 
-- All-models auto-pickup for ensemble review (enumerate chat models at cycle start via `tools.opencode.models`, one reviewer per active model) — deferred by user, 2026-11-25; explicit model list works meanwhile. Implement when user asks.
+- All-models auto-pickup for ensemble review — implemented 2026-11-25 in `skills/review-cycle/SKILL.md`: "ensemble"/"all models" enumerates active chat models, drops disabled/legacy/duplicate entries, one reviewer per distinct model plus crosscheck on first.
 - Model weights / survival-rate measurement for ensemble reviewers (track per-model finding survival across cycles, demote weak models) — deferred by user, 2026-11-25; remind user next time review-cycle or ensemble review comes up.
 - Ensemble verdict, 2026-11-25 (two cycles: orchestrator doubt section, floor-guard port): useful — 52 findings, ~0 model overlap, complementary classes (GLM: contract/logic deadlocks, source-contract violations; Qwen: doc↔script drift, regex edges); caught upstream bug (source script violating its own redaction contract) and my own fix misses. Invalid claims happened (3) — validate before fixing. Keep ensemble for high-stakes adaptations; single reviewer fine for trivial edits. GLM/Qwen near parity — no demotion case yet.
 

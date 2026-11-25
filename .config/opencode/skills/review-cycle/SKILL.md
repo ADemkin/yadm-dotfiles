@@ -8,42 +8,43 @@ description: >-
   review cycle", "review the changes/branch until clean", "repeat reviews
   until no new findings", "make the code perfect", or to continue an
   already-running loop. For a single one-shot review, call the reviewer
-  directly instead.
+  directly instead. Ensemble mode: say "ensemble" or "all models" to review
+  with every distinct available model — the skill enumerates them itself.
 ---
 # Review Cycle
 
-Loop hardens changes to a stated bar. Ends on a count, never on a feeling.
+Loop hardens changes to a stated bar; ends on a count, never a feeling.
 
 ## Parameters and definitions
 
-- **N** — clean rounds to finish. Default `3`; positive integer; user may set another.
-- **Round** — one reviewer launch (or one parallel ensemble launch, see Reviewers) + fixes it causes + one full gate run (superseded round: launch only).
-- **Reviewers** — reviewer launches per round. Default: one `reviewer` on its default model. User may name an explicit model list: look up each exact `providerID/modelID` with the models tool, launch one `reviewer` per model with `model` set — only on explicit request. More than one Reviewer: merge and crosscheck per Each round step 4.
-- **Finding** — in-scope issue reported as `[SEVERITY] path:line`, any severity (NIT counts). Out-of-scope observations ("Noticed elsewhere") are not findings: no counter reset, no fix mandate; carried to final report.
-- **Clean round** — zero findings, and nothing in scope changed after reviewer read the tree; a no-verdict launch is never a clean round.
-- **Counter** — consecutive clean rounds; starts at `0`. Any finding or post-read in-scope change resets it to `0`.
-- **Gates** — project's full verification commands (format check, lint, typecheck, tests). Discover from project instructions (CLAUDE.md, AGENTS.md, Makefile); never invent. Find none: infer candidates from project markers (e.g. `stylua.toml`/`.luacheckrc` → stylua + luacheck; `go.mod` → `go test ./...`; `package.json` → `npm test`; `pyproject.toml` → ruff + pytest), propose list to user, run on approval; no marker → ask user before starting. Plus floor-guard whenever target is a git repo with code in scope: `node ~/.config/opencode/skills/floor-guard/floor-guard.mjs` (default base `origin/main`; pass `--base <ref>` when it doesn't exist) — exit 0 clean / 1 violations (fix before proceeding; a user-approved exception routes through the project's tracked exceptions) / 2 could not run (report, never read as clean).
-- **Scope** — what the loop covers: changes the user named, or whole working-tree diff if none named. Non-repo or non-code target: every `git status`/`git diff` step below becomes a fresh full re-read, and review dimensions adapt.
+- **N** — clean rounds required to finish. Default `3`; positive integer; user may set another.
+- **Round** — one reviewer launch (or one parallel ensemble launch, see Reviewers) + every fix it causes + one full gate run (superseded round: launch only).
+- **Reviewers** — reviewer launches per round. Default: one `reviewer` on its default model. Ensemble mode — user says "ensemble", "all models", or names an explicit list: enumerate chat models with the models tool (own provider first, include all providers' active chat models), drop `disabled` entries and entries marked legacy or duplicate of another entry's underlying weights, launch one `reviewer` per distinct model with `model` set; explicit user list overrides enumeration, used as given. More than one Reviewer: merge and crosscheck per Each round step 4.
+- **Finding** — in-scope issue reported as `[SEVERITY] path:line`, any severity (NIT counts). Out-of-scope observations ("Noticed elsewhere") are not findings: no counter reset, no fix mandate; carried to the final report.
+- **Clean round** — zero findings, nothing in scope changed after reviewer read the tree; no-verdict launch is never a clean round.
+- **Counter** — consecutive clean rounds; starts at `0`. Any finding or post-read in-scope change resets to `0`.
+- **Gates** — project's full verification commands (format check, lint, typecheck, tests). Discover from project instructions (CLAUDE.md, AGENTS.md, Makefile); never invent. Find none: infer candidates from project markers (e.g. `stylua.toml`/`.luacheckrc` → stylua + luacheck; `go.mod` → `go test ./...`; `package.json` → `npm test`; `pyproject.toml` → ruff + pytest), propose list to user, run on approval; no marker → ask user before starting. Plus floor-guard whenever target is git repo with code in scope: `node ~/.config/opencode/skills/floor-guard/floor-guard.mjs` (default base `origin/main`; pass `--base <ref>` when it doesn't exist) — exit 0 clean / 1 violations (fix before proceeding; user-approved exception routes through project's tracked exceptions) / 2 could not run (report, never read as clean).
+- **Scope** — what loop covers: changes user named, or whole working-tree diff if none named. Non-repo or non-code target: every `git status`/`git diff` step below becomes fresh full re-read, and review dimensions adapt.
 
 ## Before round 1
 
-1. Discover gates; list them to the user.
-2. Global workflow rules apply throughout the loop: `git status`/`git diff` plus fresh re-read of every in-scope file before each round and gate run — user edits in parallel, may commit mid-loop; in-scope work is never overwritten (non-repo: fresh full re-reads, see Scope). Task queue and drift audit per global rules; loop-specific: in-scope drift-audit items are implemented and enter the next brief's "changes since last round".
-3. Run full gates once for a baseline. Failure: pause and ask — fix first (then re-run full gates), or waive; a user-approved waiver is recorded in every brief's Owner decisions and marked "FAIL (waived)" in per-round reports.
+1. Discover gates; list them to user.
+2. Global workflow rules apply throughout loop: `git status`/`git diff` plus fresh re-read of every in-scope file before each round and gate run — user edits in parallel, may commit mid-loop; in-scope work never overwritten (non-repo: fresh full re-reads, see Scope). Task queue and drift audit per global rules; loop-specific: in-scope drift-audit items are implemented and enter next brief's "changes since last round".
+3. Run full gates once for baseline. Failure: pause and ask — fix first (then re-run full gates), or waive; user-approved waiver recorded in every brief's Owner decisions, marked "FAIL (waived)" in per-round reports.
 4. State scope, gates, N, gate baseline — first line "Before round 1: scope …, gates …, N …, baseline …" — then start round 1.
 
-Loop interrupted? Recover state from latest per-round report for this scope (counter included); none exists — start fresh cycle. Ambiguous: ask user.
+Interrupted loop? Recover state from latest per-round report for this scope (counter included); none exists — start fresh cycle. Anything ambiguous: ask user.
 
 ## Each round
 
 ### 1. Prepare
 
 - Fresh `git status`/`git diff` and in-scope re-reads (global workflow rules, Before round 1 step 2).
-- **Drift audit** — re-scan session for user requests not yet done; implement in-scope items now (they enter "changes since last round"); anything that cannot be implemented before launch: report it, implement it before next launch.
+- **Drift audit** — re-scan session for user requests not yet done; implement in-scope items now (they enter "changes since last round"); anything not implementable before launch: report it, implement before next launch.
 
 ### 2. Launch the reviewers
 
-Build brief from template below. One Reviewer: launch the `reviewer` subagent in background with it — one live verdict at a time. Multiple Reviewers: add independence line to brief, launch one background `reviewer` per model with `model` set, process verdicts only after every launch of the round has returned.
+Build brief from template below. One Reviewer: launch `reviewer` subagent in background with it — one live verdict at a time. Multiple Reviewers: add independence line to brief, launch one background `reviewer` per model with `model` set, process verdicts only after every launch of the round has returned.
 
 ### 3. While the reviewers run
 
@@ -51,25 +52,25 @@ Never mutate files in running reviewers' scope. Questions: answer immediately. I
 
 ### 4. Merge and crosscheck (multiple Reviewers only)
 
-One Reviewer: skip to step 5. Multiple Reviewers: merge verdicts — findings from different reviewers with same `path:line` and substantially the same problem are one finding, tagged with the models that reported it; the rest stay separate. Then crosscheck: launch one more `reviewer` on the first model of the list (or the default model) with merged list and same scope; it confirms or refutes every finding against the code with evidence and adds no new findings. Refuted: dismissed — next brief's Verified facts, no fix, no counter effect. Surviving merged list is the round's findings and enters step 5. A no-verdict launch contributes no findings and is recorded in the round report; if every launch of the round returned no verdict, the round is superseded per step 5 item 5.
+One Reviewer: skip to step 5. Multiple Reviewers: merge verdicts — findings from different reviewers with same `path:line` and substantially same problem are one finding, tagged with models that reported it; rest stay separate. Then crosscheck: launch one more `reviewer` on first model of list (or default model) with merged list and same scope; it confirms or refutes every finding against code with evidence, adds no new findings. Refuted: dismissed — next brief's Verified facts, no fix, no counter effect. Surviving merged list is round's findings, enters step 5. No-verdict launch contributes no findings, recorded in round report; every launch of round returned no verdict — round superseded per step 5 item 5.
 
 ### 5. Process the verdict
 
-Listed `[SEVERITY]` items are authoritative: a "FINDINGS:" count disagreeing with them is corrected to the count of listed in-scope items.
+Listed `[SEVERITY]` items are authoritative: "FINDINGS:" count disagreeing with them is corrected to count of listed in-scope items.
 
-1. Fix every finding and implement all queued in-scope work — now, before the gates. Only exception: a user-approved wontfix — record it in every brief's Owner decisions. A finding proven inapplicable (e.g., shadowed permissions, already-correct behavior): no fix — record it as dismissed in next brief's Verified facts. A finding surviving two fix rounds: pause and ask the user — wontfix, revert and re-implement, or continue. A reviewer question that a file read settles becomes a Verified fact in every brief; an unsettled question goes to the user.
-2. Run full gates over merged state. A user-approved waived failure: mark "FAIL (waived)" and continue. Otherwise fix and rerun; pause and ask the user only if the rerun fails again or the cause lies outside this loop's edits.
-3. Whatever changed in scope becomes the next brief's "changes since last round".
-4. Update counter — `+1` on clean round, `0` otherwise (verdict rounds; a no-verdict round follows item 5) — report the round (template below), start next round at Prepare, unless counter reached N.
-5. Every launch of the round returned no verdict (subagent error, timeout, or a reply without the "FINDINGS:" line — with one Reviewer, any no-verdict launch is this case): counter unchanged unless a post-read in-scope change resets it to `0`, record the round as superseded, start next round at Prepare. After two consecutive superseded rounds, stop and ask whether to retry or abort.
+1. Fix every finding, implement all queued in-scope work — now, before gates. Only exception: user-approved wontfix — record in every brief's Owner decisions. Finding proven inapplicable (e.g., shadowed permissions, already-correct behavior): no fix — record as dismissed in next brief's Verified facts. Finding surviving two fix rounds: pause and ask user — wontfix, revert and re-implement, or continue. Reviewer question settled by a file read: Verified fact in every brief; unsettled question goes to user.
+2. Run full gates over merged state. User-approved waived failure: mark "FAIL (waived)", continue. Otherwise fix and rerun; pause and ask user only if rerun fails again or cause lies outside this loop's edits.
+3. Whatever changed in scope becomes next brief's "changes since last round".
+4. Update counter — `+1` on clean round, `0` otherwise (verdict rounds; no-verdict round follows item 5) — report round (template below), start next round at Prepare, unless counter reached N.
+5. Every launch of round returned no verdict (subagent error, timeout, or reply without "FINDINGS:" line — with one Reviewer, any no-verdict launch is this case): counter unchanged unless post-read in-scope change resets it to `0`, record round as superseded, start next round at Prepare. After two consecutive superseded rounds, stop and ask whether to retry or abort.
 
 ## Finish
 
-Counter reaches N: re-run `git status` and `git diff` and re-read files in scope — any post-read in-scope change resets the counter to `0` and the loop continues at Prepare. Then run one more drift audit and deliver the final report (template below); record pending work in it, do not act on it. User may change N or stop the loop at any moment: an N change takes effect at the next counter check; on a stop, deliver the same report with first line "Cycle stopped by user" and discard still-running reviewers' verdicts.
+Counter reaches N: re-run `git status` and `git diff`, re-read files in scope — any post-read in-scope change resets counter to `0`, loop continues at Prepare. Then run one more drift audit, deliver final report (template below); record pending work in it, do not act on it. User may change N or stop loop at any moment: N change takes effect at next counter check; on stop, deliver same report with first line "Cycle stopped by user", discard still-running reviewers' verdicts.
 
 ## Reviewer brief template
 
-Fill every brace except the Output section's `{count}`, which the reviewer fills. Cumulative sections grow each round; on round 1 summarize the changes under review in "Changes since last round" and write "none yet" in empty cumulative sections.
+Fill every brace except Output section's `{count}`, which reviewer fills. Cumulative sections grow each round; on round 1 summarize changes under review in "Changes since last round", write "none yet" in empty cumulative sections.
 
 ```
 Round {n} of a review-fix loop on {project/branch}; target bar: {N} clean rounds.

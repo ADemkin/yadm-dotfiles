@@ -36,7 +36,7 @@
       }
     }
   },
-  "model": "tns-ai-developer/glm-52-max",
+  "model": "tns-ai-developer/glm-53-flash",
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "allow" },
     { "action": "shell", "resource": "chmod +x *", "effect": "allow" },
@@ -442,10 +442,6 @@
       "effect": "ask"
     }
   ],
-  "plugin": [
-    "./plugins/caveman"
-  ],
-  "plugins": [
-    "@tarquinen/opencode-dcp@latest"
-  ]
+  "plugin": ["./plugins/caveman"],
+  "plugins": ["@tarquinen/opencode-dcp@latest"]
 }

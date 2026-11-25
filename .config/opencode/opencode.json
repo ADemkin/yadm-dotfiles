@@ -430,5 +430,10 @@
       "effect": "ask"
     }
   ],
-  "plugin": ["./plugins/caveman"]
+  "plugin": [
+    "./plugins/caveman"
+  ],
+  "plugins": [
+    "@tarquinen/opencode-dcp@latest"
+  ]
 }

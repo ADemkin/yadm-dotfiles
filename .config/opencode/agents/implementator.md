@@ -59,6 +59,52 @@ permissions:
   - action: shell
     resource: "git show * --output*"
     effect: deny
+  # composition classes: the git "X *" allows admit these whole-line commands — composed/expanded only by the shell, verbatim in the resource
+  - action: shell
+    resource: "*;*"
+    effect: deny
+  - action: shell
+    resource: "*&*"
+    effect: deny
+  - action: shell
+    resource: "*|*"
+    effect: deny
+  - action: shell
+    resource: "*`*"
+    effect: deny
+  - action: shell
+    resource: "*(*"
+    effect: deny
+  - action: shell
+    resource: "*\t*"
+    effect: deny
+  - action: shell
+    resource: "*\n*"
+    effect: deny
+  - action: shell
+    resource: "*$*"
+    effect: deny
+  - action: shell
+    resource: "*\"*"
+    effect: deny
+  - action: shell
+    resource: "*'*"
+    effect: deny
+  - action: shell
+    resource: "*\\*"
+    effect: deny
+  - action: shell
+    resource: "*{*,*}*"
+    effect: deny
+  - action: shell
+    resource: "*{*..*"
+    effect: deny
+  - action: shell
+    resource: "*[*"
+    effect: deny
+  - action: shell
+    resource: "*--ext-diff*"
+    effect: deny
   # deny-all subagents, re-open the two read-only helpers (one list for both modes);
   # question stays allowed for primary mode — as a worker the Brief rule governs
   - action: subagent

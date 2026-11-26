@@ -59,13 +59,12 @@ permissions:
   - action: shell
     resource: "*\t*"
     effect: deny
-  # empty quote pairs splice out in the shell but stay verbatim in the resource
-  # (log_fi''le=x → log_file=x); non-empty fragments/backslashes stay allowed
+  # any quote splices flag text in the shell but stays verbatim in the resource (--out"put=/x, log_fi''le=x, git log "--output=/x"); quoted pathspecs = accepted collateral
   - action: shell
-    resource: "*''*"
+    resource: "*\"*"
     effect: deny
   - action: shell
-    resource: "*\"\"*"
+    resource: "*'*"
     effect: deny
   # brace expansion composes words in the shell but stays verbatim in the resource
   # (log_fi{le=/x,} → log_file=/x); {n,m} regex + brace pathspecs = accepted collateral
@@ -83,13 +82,41 @@ permissions:
   - action: shell
     resource: "*$*"
     effect: deny
-  # a quote glued to a flag dash shells out clean but stays verbatim in the resource
-  # (git log "--output=/x") — evades every space-anchored deny; deny the whole class
+  # denies pipes, command substitution, and any parenthesis the git allows would admit (| tee, `cmd`, <(cmd), =(cmd) — none legit; >( is caught by "*>*")
   - action: shell
-    resource: "*\"-*"
+    resource: "*|*"
     effect: deny
   - action: shell
-    resource: "*'-*"
+    resource: "*`*"
+    effect: deny
+  - action: shell
+    resource: "*(*"
+    effect: deny
+  # command separators compose a second command the allow admits (git log; rm, git diff && rm, git show & rm) — verbatim in the resource
+  - action: shell
+    resource: "*;*"
+    effect: deny
+  - action: shell
+    resource: "*&*"
+    effect: deny
+  - action: shell
+    resource: "*\n*"
+    effect: deny
+  # --ext-diff runs user-configured external diff drivers (log/show opt-in — inherent residual)
+  - action: shell
+    resource: "*--ext-diff*"
+    effect: deny
+  # no writable short flag exists in the allowed command set; future-proofing — space-anchored so --oneline/--name-only never match
+  - action: shell
+    resource: "* -o*"
+    effect: deny
+  # a bracket char-class composes option text in the shell but stays verbatim in the resource ([-]-output=/x → --output=/x); pathspec char classes = accepted collateral
+  - action: shell
+    resource: "*[*"
+    effect: deny
+  # a backslash vanishes in the shell but stays verbatim in the resource (\-\-output=/x → --output=/x) — evades every space-anchored deny; deny the whole class
+  - action: shell
+    resource: "*\\*"
     effect: deny
 ---
 Read-only codebase investigator: map, trace, explain code; never change anything. Caller (agent or user) reads final message.

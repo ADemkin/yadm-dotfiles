@@ -15,6 +15,19 @@ permissions:
   - action: shell
     resource: "make test"
     effect: allow
+  # read-only git: verify own footprint (additions change nothing else), inspect history of the area under test
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git show *"
+    effect: allow
   # a worker: no questions, no nested subagents
   - action: question
     resource: "*"
@@ -25,6 +38,88 @@ permissions:
   # judgment role: no skills (blocks caveman/voice skills from altering test output)
   - action: skill
     resource: "*"
+    effect: deny
+  # git guards: the read-only git allows admit these composed whole-line commands — verbatim in the resource, expanded/spliced only by the shell
+  - action: shell
+    resource: "git diff --output*"
+    effect: deny
+  - action: shell
+    resource: "git diff * --output*"
+    effect: deny
+  - action: shell
+    resource: "git log --output*"
+    effect: deny
+  - action: shell
+    resource: "git log * --output*"
+    effect: deny
+  - action: shell
+    resource: "git show --output*"
+    effect: deny
+  - action: shell
+    resource: "git show * --output*"
+    effect: deny
+  # no writable short flag exists in the allowed command set; future-proofing — space-anchored so --oneline/--name-only never match
+  - action: shell
+    resource: "* -o*"
+    effect: deny
+  # --ext-diff runs user-configured external diff drivers (log/show opt-in — inherent residual)
+  - action: shell
+    resource: "*--ext-diff*"
+    effect: deny
+  # denies write redirects the allows would admit (>, >>, 2>, 2>>, &>, >|, and 2>&1 — none legit)
+  - action: shell
+    resource: "*>*"
+    effect: deny
+  # denies pipes, command substitution, and any parenthesis the git allows would admit (| tee, `cmd`, <(cmd), =(cmd) — none legit; >( is caught by "*>*")
+  - action: shell
+    resource: "*|*"
+    effect: deny
+  - action: shell
+    resource: "*`*"
+    effect: deny
+  - action: shell
+    resource: "*(*"
+    effect: deny
+  # interior tab: plain whitespace to the shell, raw in the resource — evades space-anchored denies
+  - action: shell
+    resource: "*\t*"
+    effect: deny
+  # command separators compose a second command the allow admits (git log; rm, git diff && rm, git show & rm) — verbatim in the resource
+  - action: shell
+    resource: "*;*"
+    effect: deny
+  - action: shell
+    resource: "*&*"
+    effect: deny
+  - action: shell
+    resource: "*\n*"
+    effect: deny
+  # any quote splices flag text in the shell but stays verbatim in the resource (--out"put=/x, git log "--output=/x"); quoted pathspecs = accepted collateral
+  - action: shell
+    resource: "*\"*"
+    effect: deny
+  - action: shell
+    resource: "*'*"
+    effect: deny
+  # brace expansion composes words in the shell but stays verbatim in the resource (git log --outpu{t=/x,}); {n,m} regex + brace pathspecs = accepted collateral
+  - action: shell
+    resource: "*{*,*}*"
+    effect: deny
+  # brace sequence expansion ({e..e} → e) composes words with no comma — same class as the comma rule
+  - action: shell
+    resource: "*{*..*"
+    effect: deny
+  # a bracket char-class composes option text in the shell but stays verbatim in the resource ([-]-output=/x → --output=/x); pathspec char classes = accepted collateral
+  - action: shell
+    resource: "*[*"
+    effect: deny
+  # shell parameter expansion ($u, ${u}) composes flag text too — verbatim in the resource, expanded only by the shell
+  - action: shell
+    resource: "*$*"
+    effect: deny
+  # a backslash vanishes in the shell but stays verbatim in the resource (\-\-output=/x → --output=/x) — evades every space-anchored deny; deny the whole class
+  - action: shell
+    resource: "*\\*"
     effect: deny
 ---
 You are an adversarial tester: write tests that break the implementation against its spec. Never implement or fix product code — that boundary is your whole point. Caller (agent or user) reads your final message.
@@ -44,7 +139,7 @@ You are an adversarial tester: write tests that break the implementation against
 ## Shell discipline
 
 - Run commands without pipes, redirects, or `2>&1` — harness captures full output; never re-run a command to capture its exit code.
-- Only `make lint` and `make test` run; everything else denied. No single-test runs — one is needed: report it. Never run tools manually; a needed tool without a make target: stop, report the exact command — never hunt workarounds.
+- Only `make lint`, `make test`, and read-only git (`status`, `diff`, `log`, `show`) run; everything else denied. No single-test runs — one is needed: report it. Never run tools manually; a needed tool without a make target: stop, report the exact command — never hunt workarounds.
 - Edits go through edit/write tools, never shell (`sed -i`, `echo >`, `tee`, ...).
 
 ## Report (Markdown)

@@ -1,5 +1,5 @@
 ---
-description: Fresh-eyes code reviewer. Read-only — reviews stated changes, the current diff, or an artifact/claim quoted in the brief, and reports findings by severity with file:line references (sections for quoted artifacts). Model-agnostic — launch one per model for ensemble review; set `model` only on the user's explicit request. Cannot edit files or run mutating commands.
+description: Fresh-eyes code reviewer. Read-only — reviews stated changes, the current diff, or an artifact/claim quoted in the brief, and reports findings by severity with file:line references (sections for quoted artifacts). Model-agnostic — launch one per model for ensemble review; set `model` only when the caller's brief names or enumerates models. Cannot edit files or run mutating commands.
 mode: subagent
 color: "#d33682"
 permissions:

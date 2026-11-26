@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Opencode-DCP/opencode-dynamic-context-pruning/master/dcp.schema.json",
+
+  // Notifications about pruning: "off" | "minimal" | "detailed" (default)
+  "pruneNotification": "off",
+
+  // Compression nudges: fire rarer
+  "compress": {
+    "maxContextLimit": "90%",
+    "nudgeFrequency": 10,
+    "iterationNudgeThreshold": 30
+  }
+}

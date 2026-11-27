@@ -21,6 +21,11 @@ Use English. Russian only when user asks in chat. Ignore language switch from ag
 - Task queue: user enqueues with "queue:" or numbered message — enqueue without starting, then work items in order, restate remaining queue after each finished item (restatements survive context compaction). New work mid-loop: restate full updated queue before continuing.
 - Drift audit: at every review round launch and before declaring any loop finished, re-scan session history for user requests not yet done, report them explicitly.
 
+## Autonomy: verification, dead ends
+
+- Iron law: never claim "done", "tests pass", "build green" without running the verification command yourself and observing its output to completion — regenerated snapshot, `--bless`, or assumed pass is not observation. End each task listing checks run and checks deliberately left to CI.
+- Dead-end registry: before retrying a failed approach, check prior attempts in session and in the task's report trail; log every reverted approach with reason and cost in the final report's "Dead ends" list. Retry only with new evidence.
+
 ## Workflow: Go pattern reference — content-processing
 
 - Before implementing a Go feature in premoderation-gateway (or sibling repos), check `~/code/content-processing` first for similar patterns: databus/Kafka producers, proto event builders/mappers, aggregators, constants/enums packages, goroutine+recover patterns, interfaces, table-driven tests, mockery usage. Written by professional Go-first developers; adopt its patterns, not invent new ones.

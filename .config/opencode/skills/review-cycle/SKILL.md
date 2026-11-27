@@ -33,6 +33,7 @@ Loop hardens changes to a stated bar; ends on a count, never a feeling.
 2. Global workflow rules apply throughout loop: `git status`/`git diff` plus fresh re-read of every in-scope file before each round and gate run — user edits in parallel, may commit mid-loop; in-scope work never overwritten (non-repo: fresh full re-reads, see Scope). Task queue and drift audit per global rules; loop-specific: in-scope drift-audit items are implemented and enter next brief's "changes since last round".
 3. Run full gates once for baseline. Failure: pause and ask — fix first (then re-run full gates), or waive; user-approved waiver recorded in every brief's Owner decisions, marked "FAIL (waived)" in per-round reports.
 4. State scope, gates, N, gate baseline — first line "Before round 1: scope …, gates …, N …, baseline …" — then start round 1.
+5. Unattended mode — user said "unattended" (or "autonomous", "run without me"): never pause mid-loop; at every pause-and-ask point in this skill apply the conservative default — skip and record rather than guess, except where continuing would mean unverifiable work (baseline or repeated gate failure): there stop the loop and deliver the final report. Record every would-be question as a blocked item (what blocked, what you needed, what you tried, default applied) in the round report, continue; the final report lists all blocked items.
 
 Interrupted loop? Recover state from latest per-round report for this scope (counter included); none exists — start fresh cycle. Anything ambiguous: ask user.
 
@@ -63,7 +64,8 @@ Listed `[SEVERITY]` items are authoritative: "FINDINGS:" count disagreeing with 
 2. Run full gates over merged state. User-approved waived failure: mark "FAIL (waived)", continue. Otherwise fix and rerun; pause and ask user only if rerun fails again or cause lies outside this loop's edits.
 3. Whatever changed in scope becomes next brief's "changes since last round".
 4. Update counter — `+1` on clean round, `0` otherwise (verdict rounds; no-verdict round follows item 5) — report round (template below), start next round at Prepare, unless counter reached N.
-5. Every launch of round returned no verdict (subagent error, timeout, or reply without "FINDINGS:" line — with one Reviewer, any no-verdict launch is this case): counter unchanged unless post-read in-scope change resets it to `0`, record round as superseded, start next round at Prepare. After two consecutive superseded rounds, stop and ask whether to retry or abort.
+5. Every launch of round returned no verdict (subagent error, timeout, or reply without "FINDINGS:" line — with one Reviewer, any no-verdict launch is this case): counter unchanged unless post-read in-scope change resets it to `0`, record round as superseded, start next round at Prepare. After two consecutive superseded rounds, stop and ask whether to retry or abort (unattended mode: record blocked item, one retry, then stop loop with final report).
+6. Stall tracking — a round whose findings did not shrink (same or more, or repeats of already-fixed areas) is a stall: stalls +1, a round with fewer findings -1 (floor 0). At 3 stalls: re-plan — condense Verified facts and Owner decisions into a minimal ledger, restart rounds with "fresh eyes after re-plan" line added to the brief. 15 total rounds (hard cap): stop the loop, deliver the final report with unresolved findings listed as residue. Never stop silently.
 
 ## Finish
 

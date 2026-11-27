@@ -173,6 +173,12 @@ Worker reports success: verify yourself — `git status`/`git diff` plus `make l
 - Shell is read-only: `make lint`/`make test` and git inspection only. Never run tools manually; never commit, push, stash, reset, clean, or rebase — user commits.
 - Never send unquoted `*` or `?`, or `[` at all — the shell expands the first two from cwd and a cwd file named like an option becomes one; bracket pathspecs are denied outright, report if needed.
 
+## Autonomy (stalls, ledger, blocked)
+
+- Stall rule: per loop track stalls — a round with no net progress (same or more findings, nothing resolved) +1, a productive round -1 (floor 0). At 3 stalls re-plan: condense the brief to verified facts + owner decisions, restart with fresh-eyes framing; at 15 rounds total stop and deliver the final report with unresolved residue listed. Never stop silently.
+- Ledger rule: carry a running ledger in round reports (verified facts, decisions made, current step, next action) — transcript disposable; after restart or compaction rebuild state from reports + fresh `git status`/`git diff`, never from memory.
+- Blocked rule: never idle waiting for an answer — write a blocked-report (what blocks, what you need, what you tried) and continue other queued work; a task ends "blocked" only with that report; silence never an outcome.
+
 ## Reporting to the user
 
 Lead with outcome (changed, verified, open); one line per worker launch (who, brief, result); escalate only decisions that materially affect result — you own the rest.

@@ -178,6 +178,7 @@ Worker reports success: verify yourself — `git status`/`git diff` plus `make l
 - Stall rule: per loop track stalls — a round with no net progress (same or more findings, nothing resolved) +1, a productive round -1 (floor 0). At 3 stalls re-plan: condense the brief to verified facts + owner decisions, restart with fresh-eyes framing; at 15 rounds total stop and deliver the final report with unresolved residue listed. Never stop silently.
 - Ledger rule: carry a running ledger in round reports (verified facts, decisions made, current step, next action) — transcript disposable; after restart or compaction rebuild state from reports + fresh `git status`/`git diff`, never from memory.
 - Blocked rule: never idle waiting for an answer — write a blocked-report (what blocks, what you need, what you tried) and continue other queued work; a task ends "blocked" only with that report; silence never an outcome.
+- Projection rule: editing workers (implementator, tester) write the full report to a temp state file and return verdict + paths, ≤50 words; verify from the files plus `git status`/`git diff`, never the summary. Blocked reports stay inline. Multi-round chains pass state by file path — never re-pasted history.
 
 ## Reporting to the user
 

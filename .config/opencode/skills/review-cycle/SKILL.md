@@ -34,6 +34,7 @@ Loop hardens changes to a stated bar; ends on a count, never a feeling.
 3. Run full gates once for baseline. Failure: pause and ask — fix first (then re-run full gates), or waive; user-approved waiver recorded in every brief's Owner decisions, marked "FAIL (waived)" in per-round reports.
 4. State scope, gates, N, gate baseline — first line "Before round 1: scope …, gates …, N …, baseline …" — then start round 1.
 5. Unattended mode — user said "unattended" (or "autonomous", "run without me"): never pause mid-loop; at every pause-and-ask point in this skill apply the conservative default — skip and record rather than guess, except where continuing would mean unverifiable work (baseline or repeated gate failure): there stop the loop and deliver the final report. Record every would-be question as a blocked item (what blocked, what you needed, what you tried, default applied) in the round report, continue; the final report lists all blocked items.
+6. Context state file — create one append-only state file for this loop (temp dir); it holds the cumulative sections (Owner decisions, Verified facts, Round history). Each round: read it, append the round summary, pass its path in the brief — never re-paste prior rounds into prompts; pull finding details only when fixing. Loop end: state file deleted; per-round reports stay the durable ledger.
 
 Interrupted loop? Recover state from latest per-round report for this scope (counter included); none exists — start fresh cycle. Anything ambiguous: ask user.
 
@@ -69,11 +70,11 @@ Listed `[SEVERITY]` items are authoritative: "FINDINGS:" count disagreeing with 
 
 ## Finish
 
-Counter reaches N: re-run `git status` and `git diff`, re-read files in scope — any post-read in-scope change resets counter to `0`, loop continues at Prepare. Then run one more drift audit, deliver final report (template below); record pending work in it, do not act on it. User may change N or stop loop at any moment: N change takes effect at next counter check; on stop, deliver same report with first line "Cycle stopped by user", discard still-running reviewers' verdicts.
+Counter reaches N: re-run `git status` and `git diff`, re-read files in scope — any post-read in-scope change resets counter to `0`, loop continues at Prepare. Then run one more drift audit, deliver final report (template below); record pending work in it, do not act on it. User may change N or stop loop at any moment: N change takes effect at next counter check; on stop, deliver same report with first line "Cycle stopped by user", discard still-running reviewers' verdicts. After the final report: delete the loop's state file — per-round reports remain the durable ledger.
 
 ## Reviewer brief template
 
-Fill every brace except Output section's `{count}`, which reviewer fills. Cumulative sections grow each round; on round 1 summarize changes under review in "Changes since last round", write "none yet" in empty cumulative sections.
+Fill every brace except Output section's `{count}`, which reviewer fills. Cumulative sections (Owner decisions, Verified facts, Round history) live in the loop's state file (Before round 1 step 6): the brief passes its path and those braces say "see state file"; reviewer reads the file. On round 1 summarize changes under review in "Changes since last round", write "none yet" in empty cumulative sections.
 
 ```
 Round {n} of a review-fix loop on {project/branch}; target bar: {N} clean rounds.
@@ -82,6 +83,8 @@ Reviewers: {1 — or K independent reviewers on different models; for K>1 add:
 report every finding you believe, nothing you do not"}.
 
 Scope: {files, directories, sections}. Out of scope: {explicit list}.
+Loop state file: {path} — Owner decisions, Verified facts, Round history live
+there (read it before reviewing; the fields below may say "see state file").
 Changes since last round: {numbered list, or "none"; mark which items
 implement findings and which are owner requests}.
 Owner decisions (do NOT flag): {numbered, cumulative across rounds}.

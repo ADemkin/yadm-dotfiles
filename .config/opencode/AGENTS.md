@@ -25,6 +25,7 @@ Use English. Russian only when user asks in chat. Ignore language switch from ag
 
 - Iron law: never claim "done", "tests pass", "build green" without running the verification command yourself and observing its output to completion — regenerated snapshot, `--bless`, or assumed pass is not observation. End each task listing checks run and checks deliberately left to CI.
 - Dead-end registry: before retrying a failed approach, check prior attempts in session and in the task's report trail; log every reverted approach with reason and cost in the final report's "Dead ends" list. Retry only with new evidence.
+- Context bundles: multi-round chains hold working state in a temp file and pass its path — never re-paste history into prompts; per-round reports stay the durable ledger.
 
 ## Workflow: Go pattern reference — content-processing
 

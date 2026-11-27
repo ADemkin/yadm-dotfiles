@@ -11,12 +11,6 @@
         "apiKey": "{env:TNS_AI_DEVELOPER_KEY}"
       },
       "models": {
-        "glm": {
-          "name": "GLM 5.3 Flash [legacy]"
-        },
-        "glm-max": {
-          "name": "GLM 5.2 [legacy]"
-        },
         "glm-53-flash": {
           "modelID": "glm",
           "name": "GLM 5.3 Flash",
